@@ -11,10 +11,11 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.services.gmail.GmailScopes;
 
 import java.io.IOException;
-import java.util.List;
 
 import static com.google.api.client.http.ByteArrayContent.fromString;
+import static java.util.Arrays.asList;
 
+// TODO: 10/10/2022 SAVE OR SEE HOW TO STORE CREDS TO AVOID EVERYTIME THE LOGIN SCREEN AND SEE HOW TO REFRESH TOKEN EVENTUALLY 
 public abstract class GoogleManager {
 
     public static final String DEFAULT_CALLBACK_PATH = "/Callback";
@@ -63,23 +64,6 @@ public abstract class GoogleManager {
         this(clientId, clientSecret, userId, accessType, approvalPrompt, port, host, DEFAULT_CALLBACK_PATH);
     }
 
-    public String sendGetRequest(String endpoint) throws IOException {
-        GenericUrl requestUrl = new GenericUrl(endpoint);
-        HttpRequest request = netHttpTransport.createRequestFactory(credential).buildGetRequest(requestUrl);
-        request.getHeaders().setContentType("application/json");
-        return request.execute().parseAsString();
-    }
-
-    public String sendPostRequest(String endpoint, String bodyParams) throws IOException {
-        GenericUrl requestUrl = new GenericUrl(endpoint);
-        if (bodyParams == null)
-            bodyParams = "";
-        HttpRequest request = netHttpTransport.createRequestFactory(credential).buildPostRequest(requestUrl,
-                fromString(null, bodyParams));
-        request.getHeaders().setContentType("application/json");
-        return request.execute().parseAsString();
-    }
-
     public boolean changeProject(String clientId, String clientSecret, String userId, String accessType,
                                  String approvalPrompt, int port, String host, String callBackPath) {
         try {
@@ -91,9 +75,8 @@ public abstract class GoogleManager {
             }
             if (!callBackPath.contains("/"))
                 callBackPath = "/" + callBackPath;
-            // TODO: 09/10/2022 CHECK IF CAN BE TRANSFORMED ARRAYS.ASLIST() AFTER BUILD A BETA VERSION OF LIBRARY
             authCodeFlow = new GoogleAuthorizationCodeFlow.Builder(netHttpTransport, gsonFactory, clientId, clientSecret,
-                    List.of(GmailScopes.MAIL_GOOGLE_COM))
+                    asList(GmailScopes.MAIL_GOOGLE_COM))
                     .setAccessType(accessType)
                     .setApprovalPrompt(approvalPrompt)
                     .build();
@@ -134,6 +117,23 @@ public abstract class GoogleManager {
     public boolean changeProject(String clientId, String clientSecret, String userId, String accessType,
                                  String approvalPrompt, String host, int port) {
         return changeProject(clientId, clientSecret, userId, accessType, approvalPrompt, port, host, DEFAULT_CALLBACK_PATH);
+    }
+
+    public String sendGetRequest(String endpoint) throws IOException {
+        GenericUrl requestUrl = new GenericUrl(endpoint);
+        HttpRequest request = netHttpTransport.createRequestFactory(credential).buildGetRequest(requestUrl);
+        request.getHeaders().setContentType("application/json");
+        return request.execute().parseAsString();
+    }
+
+    public String sendPostRequest(String endpoint, String bodyParams) throws IOException {
+        GenericUrl requestUrl = new GenericUrl(endpoint);
+        if (bodyParams == null)
+            bodyParams = "";
+        HttpRequest request = netHttpTransport.createRequestFactory(credential).buildPostRequest(requestUrl,
+                fromString(null, bodyParams));
+        request.getHeaders().setContentType("application/json");
+        return request.execute().parseAsString();
     }
 
     public String getClientId() {
