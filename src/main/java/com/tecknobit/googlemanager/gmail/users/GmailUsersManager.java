@@ -44,11 +44,15 @@ public class GmailUsersManager extends GmailManager {
     public <T> T getProfile(ReturnFormat returnFormat) throws IOException {
         String response = sendGetRequest(USERS_ENDPOINT + userId + "/profile");
         // TODO: 09/10/2022 CHECK IF CAN BE TRANSFORMED AFTER BUILD A BETA VERSION OF LIBRARY
-        return switch (returnFormat) {
-            case STRING -> (T) response;
-            case JSON -> (T) new JSONObject(response);
-            case LIBRARY_OBJECT -> (T) new Profile(new JSONObject(response));
-        };
+        switch (returnFormat) {
+            case STRING:
+                return (T) response;
+            case JSON:
+                return (T) new JSONObject(response);
+            case LIBRARY_OBJECT:
+                return (T) new Profile(new JSONObject(response));
+        }
+        return null;
     }
 
     public boolean stop() {
