@@ -15,7 +15,12 @@ public class GmailManager extends GoogleManager {
     /**
      * {@code GMAIL_BASE_ENDPOINT} is a constant that indicates base {@code Gmail}'s endpoint to work for the API requests
      **/
-    public static final String GMAIL_BASE_ENDPOINT = "https://gmail.googleapis.com";
+    public static final String GMAIL_BASE_ENDPOINT = "https://gmail.googleapis.com/gmail/v1/users/";
+
+    /**
+     * {@code GMAIL_UPLOAD_BASE_ENDPOINT} is a constant that indicates base upload {@code Gmail}'s endpoint to work for the API requests
+     **/
+    public static final String GMAIL_UPLOAD_BASE_ENDPOINT = "https://gmail.googleapis.com/upload/gmail/v1/users/";
 
     /**
      * Constructor to init a {@link GmailManager}
@@ -109,7 +114,7 @@ public class GmailManager extends GoogleManager {
      **/
     @Override
     public String sendGetRequest(String endpoint) throws IOException {
-        return super.sendGetRequest(GMAIL_BASE_ENDPOINT + endpoint);
+        return super.sendGetRequest(GMAIL_BASE_ENDPOINT + userId + "/" + endpoint);
     }
 
     /**
@@ -122,7 +127,19 @@ public class GmailManager extends GoogleManager {
      **/
     @Override
     public String sendPostRequest(String endpoint, String bodyParams) throws IOException {
-        return super.sendPostRequest(GMAIL_BASE_ENDPOINT + endpoint, bodyParams);
+        return super.sendPostRequest(GMAIL_BASE_ENDPOINT + userId + "/" + endpoint, bodyParams);
+    }
+
+    /**
+     * Method to send a media upload POST request
+     *
+     * @param endpoint:   endpoint to make the request
+     * @param bodyParams: body payload for the POST request
+     * @return response of the request in JSON format as {@link String}
+     * @throws IOException when request have been go wrong
+     **/
+    public String sendUploadRequest(String endpoint, String bodyParams) throws IOException {
+        return super.sendPostRequest(GMAIL_UPLOAD_BASE_ENDPOINT + userId + "/" + endpoint, bodyParams);
     }
 
 }

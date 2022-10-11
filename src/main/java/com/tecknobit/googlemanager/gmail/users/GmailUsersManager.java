@@ -22,11 +22,6 @@ import static java.util.Arrays.asList;
 public class GmailUsersManager extends GmailManager {
 
     /**
-     * {@code USERS_ENDPOINT} is a constant that indicates base {@code Gmail}'s users endpoint to work for the API requests
-     **/
-    public static final String USERS_ENDPOINT = "/gmail/v1/users/";
-
-    /**
      * Constructor to init a {@link GmailUsersManager}
      *
      * @param clientId:       client identifier value
@@ -159,7 +154,6 @@ public class GmailUsersManager extends GmailManager {
             sendPostRequest("stop", null);
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -243,31 +237,6 @@ public class GmailUsersManager extends GmailManager {
     public <T> T watch(String[] labelIds, String labelFilterAction, String topicName,
                        ReturnFormat format) throws IOException {
         return watch(asList(labelIds), labelFilterAction, topicName, format);
-    }
-
-    /**
-     * Method to send a GET request
-     *
-     * @param endpoint: endpoint to make the request
-     * @return response of the request in JSON format as {@link String}
-     * @throws IOException when request have been go wrong
-     **/
-    @Override
-    public String sendGetRequest(String endpoint) throws IOException {
-        return super.sendGetRequest(USERS_ENDPOINT + userId + "/" + endpoint);
-    }
-
-    /**
-     * Method to send a POST request
-     *
-     * @param endpoint:   endpoint to make the request
-     * @param bodyParams: body payload for the POST request
-     * @return response of the request in JSON format as {@link String}
-     * @throws IOException when request have been go wrong
-     **/
-    @Override
-    public String sendPostRequest(String endpoint, String bodyParams) throws IOException {
-        return super.sendPostRequest(USERS_ENDPOINT + userId + "/" + endpoint, bodyParams);
     }
 
 }

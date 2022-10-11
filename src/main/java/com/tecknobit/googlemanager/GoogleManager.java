@@ -15,7 +15,7 @@ import java.io.IOException;
 import static com.google.api.client.http.ByteArrayContent.fromString;
 import static java.util.Arrays.asList;
 
-// TODO: 10/10/2022 SAVE OR SEE HOW TO STORE CREDS TO AVOID EVERYTIME THE LOGIN SCREEN AND SEE HOW TO REFRESH TOKEN EVENTUALLY
+// TODO: 10/10/2022 SAVE OR SEE HOW TO STORE CREDS TO AVOID EVERYTIME THE LOGIN SCREEN AND SEE HOW TO REFRESH TOKEN EVENTUALLY SEE FOR A GET ERROR RESPONSE METHOD
 
 /**
  * The {@code GoogleManager} class is useful to manage all Google's API services giving basic methods
@@ -244,7 +244,6 @@ public abstract class GoogleManager {
             this.host = host;
             this.callBackPath = callBackPath;
         } catch (IOException e) {
-            e.printStackTrace();
             return false;
         }
         return true;
