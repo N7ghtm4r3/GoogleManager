@@ -7,6 +7,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static com.google.common.io.BaseEncoding.base64Url;
+
 public class MessagePart {
 
     private final String partId;
@@ -80,6 +82,14 @@ public class MessagePart {
 
     public static class Header {
 
+        public static final String To = "To";
+        public static final String From = "From";
+        public static final String Cc = "Cc";
+        public static final String Bcc = "Bcc";
+        public static final String IN_REPLY_TO = "In-Reply-To";
+        public static final String SUBJECT = "Subject";
+        public static final String REFERENCES = "References";
+
         private final String name;
         private final String value;
 
@@ -116,12 +126,14 @@ public class MessagePart {
 
         private final String attachmentId;
         private final int size;
-        private final String data;
+        private String data;
+        private boolean dataEncoded;
 
         public MessagePartBody(String attachmentId, int size, String data) {
             this.attachmentId = attachmentId;
             this.size = size;
             this.data = data;
+            dataEncoded = false;
         }
 
         public MessagePartBody(JSONObject jMessagePartBody) {
@@ -129,6 +141,7 @@ public class MessagePart {
             attachmentId = hMessagePartBody.getString("attachmentId");
             size = hMessagePartBody.getInt("size");
             data = hMessagePartBody.getString("data");
+            dataEncoded = false;
         }
 
         public String getAttachmentId() {
@@ -141,6 +154,20 @@ public class MessagePart {
 
         public String getData() {
             return data;
+        }
+
+        public void encodeData() {
+            if (!dataEncoded) {
+                data = base64Url().omitPadding().encode(data.getBytes());
+                dataEncoded = true;
+            }
+        }
+
+        public void decodeData() {
+            if (dataEncoded) {
+                data = new String(base64Url().omitPadding().decode(data));
+                dataEncoded = false;
+            }
         }
 
         @Override

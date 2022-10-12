@@ -1,10 +1,10 @@
 package com.tecknobit.googlemanager.gmail.users;
 
-import com.tecknobit.apimanager.Manager.APIRequest;
+import com.google.api.services.gmail.model.WatchRequest;
+import com.google.api.services.gmail.model.WatchResponse;
 import com.tecknobit.googlemanager.gmail.GmailManager;
 import com.tecknobit.googlemanager.gmail.users.records.Profile;
 import com.tecknobit.googlemanager.gmail.users.records.PushNotificationWatch;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -32,76 +32,81 @@ public class GmailUsersManager extends GmailManager {
      * @param port:           port used in the auth operations
      * @param host:           host used in the auth operations
      * @param callBackPath:   callback path used in the auth operations
+     * @param applicationName: name of application to give at the project
      * @throws IOException when auth request have been go wrong
      **/
     public GmailUsersManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
-                             int port, String host, String callBackPath) throws IOException {
-        super(clientId, clientSecret, userId, accessType, approvalPrompt, port, host, callBackPath);
+                             int port, String host, String callBackPath, String applicationName) throws IOException {
+        super(clientId, clientSecret, userId, accessType, approvalPrompt, port, host, callBackPath, applicationName);
     }
 
     /**
      * Constructor to init a {@link GmailUsersManager}
      *
-     * @param clientId:       client identifier value
-     * @param clientSecret:   client secret value
-     * @param userId:         used to identifier a user -> me to use an authenticated user
-     * @param accessType:     access type used in the auth operations
-     * @param approvalPrompt: approval prompt type used in the auth operations
+     * @param clientId:        client identifier value
+     * @param clientSecret:    client secret value
+     * @param userId:          used to identifier a user -> me to use an authenticated user
+     * @param accessType:      access type used in the auth operations
+     * @param approvalPrompt:  approval prompt type used in the auth operations
+     * @param applicationName: name of application to give at the project
      * @throws IOException when auth request have been go wrong
      **/
-    public GmailUsersManager(String clientId, String clientSecret, String userId, String accessType,
-                             String approvalPrompt) throws IOException {
-        super(clientId, clientSecret, userId, accessType, approvalPrompt);
+    public GmailUsersManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
+                             String applicationName) throws IOException {
+        super(clientId, clientSecret, userId, accessType, approvalPrompt, applicationName);
     }
 
     /**
      * Constructor to init a {@link GmailUsersManager}
      *
-     * @param clientId:       client identifier value
-     * @param clientSecret:   client secret value
-     * @param userId:         used to identifier a user -> me to use an authenticated user
-     * @param accessType:     access type used in the auth operations
-     * @param approvalPrompt: approval prompt type used in the auth operations
-     * @param port:           port used in the auth operations
+     * @param clientId:        client identifier value
+     * @param clientSecret:    client secret value
+     * @param userId:          used to identifier a user -> me to use an authenticated user
+     * @param accessType:      access type used in the auth operations
+     * @param approvalPrompt:  approval prompt type used in the auth operations
+     * @param port:            port used in the auth operations
+     * @param applicationName: name of application to give at the project
      * @throws IOException when auth request have been go wrong
      **/
-    public GmailUsersManager(String clientId, String clientSecret, String userId, String accessType,
-                             String approvalPrompt, int port) throws IOException {
-        super(clientId, clientSecret, userId, accessType, approvalPrompt, port);
+    public GmailUsersManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
+                             int port, String applicationName) throws IOException {
+        super(clientId, clientSecret, userId, accessType, approvalPrompt, port, applicationName);
     }
 
     /**
      * Constructor to init a {@link GmailUsersManager}
      *
-     * @param clientId:       client identifier value
-     * @param clientSecret:   client secret value
-     * @param userId:         used to identifier a user -> me to use an authenticated user
-     * @param accessType:     access type used in the auth operations
-     * @param approvalPrompt: approval prompt type used in the auth operations
-     * @param port:           port used in the auth operations
-     * @param callBackPath:   callback path used in the auth operations
+     * @param clientId:        client identifier value
+     * @param clientSecret:    client secret value
+     * @param userId:          used to identifier a user -> me to use an authenticated user
+     * @param accessType:      access type used in the auth operations
+     * @param approvalPrompt:  approval prompt type used in the auth operations
+     * @param port:            port used in the auth operations
+     * @param callBackPath:    callback path used in the auth operations
+     * @param applicationName: name of application to give at the project
      * @throws IOException when auth request have been go wrong
      **/
-    public GmailUsersManager(String clientId, String clientSecret, String userId, String accessType,
-                             String approvalPrompt, int port, String callBackPath) throws IOException {
-        super(clientId, clientSecret, userId, accessType, approvalPrompt, port, callBackPath);
+    public GmailUsersManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
+                             int port, String callBackPath, String applicationName) throws IOException {
+        super(clientId, clientSecret, userId, accessType, approvalPrompt, port, callBackPath, applicationName);
     }
 
     /**
      * Constructor to init a {@link GmailUsersManager}
      *
-     * @param clientId:       client identifier value
-     * @param clientSecret:   client secret value
-     * @param userId:         used to identifier a user -> me to use an authenticated user
-     * @param accessType:     access type used in the auth operations
-     * @param approvalPrompt: approval prompt type used in the auth operations
-     * @param port:           port used in the auth operations
-     * @param host:           host used in the auth operations
+     * @param clientId:        client identifier value
+     * @param clientSecret:    client secret value
+     * @param userId:          used to identifier a user -> me to use an authenticated user
+     * @param accessType:      access type used in the auth operations
+     * @param approvalPrompt:  approval prompt type used in the auth operations
+     * @param port:            port used in the auth operations
+     * @param host:            host used in the auth operations
+     * @param applicationName: name of application to give at the project
      * @throws IOException when auth request have been go wrong
      **/
-    public GmailUsersManager(String clientId, String clientSecret, String userId, String accessType,
-                             String approvalPrompt, String host, int port) throws IOException {
-        super(clientId, clientSecret, userId, accessType, approvalPrompt, host, port);
+    public GmailUsersManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
+                             String host, int port, String applicationName) throws IOException {
+        super(clientId, clientSecret, userId, accessType, approvalPrompt, host, port, applicationName);
     }
 
     /**
@@ -129,14 +134,18 @@ public class GmailUsersManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T getProfile(ReturnFormat format) throws IOException {
-        String response = sendGetRequest("profile");
+        com.google.api.services.gmail.model.Profile profile = gmail.users().getProfile(userId).execute();
         switch (format) {
             case JSON:
-                return (T) new JSONObject(response);
+                return (T) new JSONObject(profile);
             case LIBRARY_OBJECT:
-                return (T) new Profile(new JSONObject(response));
+                return (T) new Profile(profile.getEmailAddress(),
+                        profile.getMessagesTotal(),
+                        profile.getThreadsTotal(),
+                        profile.getHistoryId()
+                );
             default:
-                return (T) response;
+                return (T) profile.toString();
         }
     }
 
@@ -151,7 +160,7 @@ public class GmailUsersManager extends GmailManager {
      **/
     public boolean stop() {
         try {
-            sendPostRequest("stop", null);
+            gmail.users().stop(userId);
             return true;
         } catch (IOException e) {
             return false;
@@ -190,18 +199,18 @@ public class GmailUsersManager extends GmailManager {
      **/
     public <T> T watch(Collection<String> labelIds, String labelFilterAction, String topicName,
                        ReturnFormat format) throws IOException {
-        APIRequest.Params body = new APIRequest.Params();
-        body.addParam("labelIds", new JSONArray(labelIds));
-        body.addParam("labelFilterAction", labelFilterAction);
-        body.addParam("topicName", topicName);
-        String response = sendPostRequest("watch", body.createJSONPayload().toString());
+        WatchRequest watchRequest = new WatchRequest();
+        watchRequest.setLabelIds(labelIds.stream().toList());
+        watchRequest.setLabelFilterAction(labelFilterAction);
+        watchRequest.setTopicName(topicName);
+        WatchResponse watch = gmail.users().watch(userId, watchRequest).execute();
         switch (format) {
             case JSON:
-                return (T) new JSONObject(response);
+                return (T) new JSONObject(watch);
             case LIBRARY_OBJECT:
-                return (T) new PushNotificationWatch(new JSONObject(response));
+                return (T) new PushNotificationWatch(watch.getHistoryId(), watch.getExpiration());
             default:
-                return (T) response;
+                return (T) watch.toString();
         }
     }
 

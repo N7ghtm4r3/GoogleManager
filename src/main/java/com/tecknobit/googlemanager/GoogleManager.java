@@ -4,18 +4,16 @@ import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.services.gmail.GmailScopes;
 
 import java.io.IOException;
 
-import static com.google.api.client.http.ByteArrayContent.fromString;
 import static java.util.Arrays.asList;
 
 // TODO: 10/10/2022 SAVE OR SEE HOW TO STORE CREDS TO AVOID EVERYTIME THE LOGIN SCREEN AND SEE HOW TO REFRESH TOKEN EVENTUALLY SEE FOR A GET ERROR RESPONSE METHOD
+// TODO: 12/10/2022 WARN USER ABOUT DEFAULT VALUE RETURNED IF NOT EXIST IN DOCU STRING FOR GETTERS
 
 /**
  * The {@code GoogleManager} class is useful to manage all Google's API services giving basic methods
@@ -318,38 +316,6 @@ public abstract class GoogleManager {
     public boolean changeProject(String clientId, String clientSecret, String userId, String accessType,
                                  String approvalPrompt, String host, int port) {
         return changeProject(clientId, clientSecret, userId, accessType, approvalPrompt, port, host, DEFAULT_CALLBACK_PATH);
-    }
-
-    /**
-     * Method to send a GET request
-     *
-     * @param endpoint: endpoint to make the request
-     * @return response of the request in JSON format as {@link String}
-     * @throws IOException when request have been go wrong
-     **/
-    public String sendGetRequest(String endpoint) throws IOException {
-        GenericUrl requestUrl = new GenericUrl(endpoint);
-        HttpRequest request = netHttpTransport.createRequestFactory(credential).buildGetRequest(requestUrl);
-        request.getHeaders().setContentType("application/json");
-        return request.execute().parseAsString();
-    }
-
-    /**
-     * Method to send a POST request
-     *
-     * @param endpoint:   endpoint to make the request
-     * @param bodyParams: body payload for the POST request
-     * @return response of the request in JSON format as {@link String}
-     * @throws IOException when request have been go wrong
-     **/
-    public String sendPostRequest(String endpoint, String bodyParams) throws IOException {
-        GenericUrl requestUrl = new GenericUrl(endpoint);
-        if (bodyParams == null)
-            bodyParams = "";
-        HttpRequest request = netHttpTransport.createRequestFactory(credential).buildPostRequest(requestUrl,
-                fromString(null, bodyParams));
-        request.getHeaders().setContentType("application/json");
-        return request.execute().parseAsString();
     }
 
     /**

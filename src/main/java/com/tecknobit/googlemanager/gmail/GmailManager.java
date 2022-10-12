@@ -1,5 +1,6 @@
 package com.tecknobit.googlemanager.gmail;
 
+import com.google.api.services.gmail.Gmail;
 import com.tecknobit.googlemanager.GoogleManager;
 
 import java.io.IOException;
@@ -13,14 +14,9 @@ import java.io.IOException;
 public class GmailManager extends GoogleManager {
 
     /**
-     * {@code GMAIL_BASE_ENDPOINT} is a constant that indicates base {@code Gmail}'s endpoint to work for the API requests
+     * {@code gmail} is the instance for {@link Gmail}'s service
      **/
-    public static final String GMAIL_BASE_ENDPOINT = "https://gmail.googleapis.com/gmail/v1/users/";
-
-    /**
-     * {@code GMAIL_UPLOAD_BASE_ENDPOINT} is a constant that indicates base upload {@code Gmail}'s endpoint to work for the API requests
-     **/
-    public static final String GMAIL_UPLOAD_BASE_ENDPOINT = "https://gmail.googleapis.com/upload/gmail/v1/users/";
+    protected final Gmail gmail;
 
     /**
      * Constructor to init a {@link GmailManager}
@@ -33,113 +29,86 @@ public class GmailManager extends GoogleManager {
      * @param port:           port used in the auth operations
      * @param host:           host used in the auth operations
      * @param callBackPath:   callback path used in the auth operations
+     * @param applicationName: name of application to give at the project
      * @throws IOException when auth request have been go wrong
      **/
     public GmailManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
-                        int port, String host, String callBackPath) throws IOException {
+                        int port, String host, String callBackPath, String applicationName) throws IOException {
         super(clientId, clientSecret, userId, accessType, approvalPrompt, port, host, callBackPath);
+        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName).build();
     }
 
     /**
      * Constructor to init a {@link GmailManager}
      *
-     * @param clientId:       client identifier value
-     * @param clientSecret:   client secret value
-     * @param userId:         used to identifier a user -> me to use an authenticated user
-     * @param accessType:     access type used in the auth operations
-     * @param approvalPrompt: approval prompt type used in the auth operations
+     * @param clientId:        client identifier value
+     * @param clientSecret:    client secret value
+     * @param userId:          used to identifier a user -> me to use an authenticated user
+     * @param accessType:      access type used in the auth operations
+     * @param approvalPrompt:  approval prompt type used in the auth operations
+     * @param applicationName: name of application to give at the project
      * @throws IOException when auth request have been go wrong
      **/
     public GmailManager(String clientId, String clientSecret, String userId, String accessType,
-                        String approvalPrompt) throws IOException {
+                        String approvalPrompt, String applicationName) throws IOException {
         super(clientId, clientSecret, userId, accessType, approvalPrompt);
+        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName).build();
     }
 
     /**
      * Constructor to init a {@link GmailManager}
      *
-     * @param clientId:       client identifier value
-     * @param clientSecret:   client secret value
-     * @param userId:         used to identifier a user -> me to use an authenticated user
-     * @param accessType:     access type used in the auth operations
-     * @param approvalPrompt: approval prompt type used in the auth operations
-     * @param port:           port used in the auth operations
+     * @param clientId:        client identifier value
+     * @param clientSecret:    client secret value
+     * @param userId:          used to identifier a user -> me to use an authenticated user
+     * @param accessType:      access type used in the auth operations
+     * @param approvalPrompt:  approval prompt type used in the auth operations
+     * @param port:            port used in the auth operations
+     * @param applicationName: name of application to give at the project
      * @throws IOException when auth request have been go wrong
      **/
     public GmailManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
-                        int port) throws IOException {
+                        int port, String applicationName) throws IOException {
         super(clientId, clientSecret, userId, accessType, approvalPrompt, port);
+        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName).build();
     }
 
     /**
      * Constructor to init a {@link GmailManager}
      *
-     * @param clientId:       client identifier value
-     * @param clientSecret:   client secret value
-     * @param userId:         used to identifier a user -> me to use an authenticated user
-     * @param accessType:     access type used in the auth operations
-     * @param approvalPrompt: approval prompt type used in the auth operations
-     * @param port:           port used in the auth operations
-     * @param callBackPath:   callback path used in the auth operations
+     * @param clientId:        client identifier value
+     * @param clientSecret:    client secret value
+     * @param userId:          used to identifier a user -> me to use an authenticated user
+     * @param accessType:      access type used in the auth operations
+     * @param approvalPrompt:  approval prompt type used in the auth operations
+     * @param port:            port used in the auth operations
+     * @param callBackPath:    callback path used in the auth operations
+     * @param applicationName: name of application to give at the project
      * @throws IOException when auth request have been go wrong
      **/
     public GmailManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
-                        int port, String callBackPath) throws IOException {
+                        int port, String callBackPath, String applicationName) throws IOException {
         super(clientId, clientSecret, userId, accessType, approvalPrompt, port, callBackPath);
+        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName).build();
     }
 
     /**
      * Constructor to init a {@link GmailManager}
      *
-     * @param clientId:       client identifier value
-     * @param clientSecret:   client secret value
-     * @param userId:         used to identifier a user -> me to use an authenticated user
-     * @param accessType:     access type used in the auth operations
-     * @param approvalPrompt: approval prompt type used in the auth operations
-     * @param port:           port used in the auth operations
-     * @param host:           host used in the auth operations
+     * @param clientId:        client identifier value
+     * @param clientSecret:    client secret value
+     * @param userId:          used to identifier a user -> me to use an authenticated user
+     * @param accessType:      access type used in the auth operations
+     * @param approvalPrompt:  approval prompt type used in the auth operations
+     * @param port:            port used in the auth operations
+     * @param host:            host used in the auth operations
+     * @param applicationName: name of application to give at the project
      * @throws IOException when auth request have been go wrong
      **/
     public GmailManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
-                        String host, int port) throws IOException {
+                        String host, int port, String applicationName) throws IOException {
         super(clientId, clientSecret, userId, accessType, approvalPrompt, host, port);
-    }
-
-    /**
-     * Method to send a GET request
-     *
-     * @param endpoint: endpoint to make the request
-     * @return response of the request in JSON format as {@link String}
-     * @throws IOException when request have been go wrong
-     **/
-    @Override
-    public String sendGetRequest(String endpoint) throws IOException {
-        return super.sendGetRequest(GMAIL_BASE_ENDPOINT + userId + "/" + endpoint);
-    }
-
-    /**
-     * Method to send a POST request
-     *
-     * @param endpoint:   endpoint to make the request
-     * @param bodyParams: body payload for the POST request
-     * @return response of the request in JSON format as {@link String}
-     * @throws IOException when request have been go wrong
-     **/
-    @Override
-    public String sendPostRequest(String endpoint, String bodyParams) throws IOException {
-        return super.sendPostRequest(GMAIL_BASE_ENDPOINT + userId + "/" + endpoint, bodyParams);
-    }
-
-    /**
-     * Method to send a media upload POST request
-     *
-     * @param endpoint:   endpoint to make the request
-     * @param bodyParams: body payload for the POST request
-     * @return response of the request in JSON format as {@link String}
-     * @throws IOException when request have been go wrong
-     **/
-    public String sendUploadRequest(String endpoint, String bodyParams) throws IOException {
-        return super.sendPostRequest(GMAIL_UPLOAD_BASE_ENDPOINT + userId + "/" + endpoint, bodyParams);
+        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName).build();
     }
 
 }

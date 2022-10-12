@@ -2,6 +2,8 @@ package com.tecknobit.googlemanager.gmail.users.records;
 
 import org.json.JSONObject;
 
+import java.math.BigInteger;
+
 /**
  * The {@code PushNotificationWatch} class is useful to format a Gmail's push notification watch
  *
@@ -24,7 +26,7 @@ public class PushNotificationWatch {
     /**
      * {@code historyId} is the ID of the mailbox's current history record
      **/
-    private final String historyId;
+    private final BigInteger historyId;
 
     /**
      * {@code expiration} when Gmail will stop sending notifications for mailbox updates (epoch millis). Call watch again before this time to renew the watch
@@ -37,7 +39,7 @@ public class PushNotificationWatch {
      * @param historyId:  the ID of the mailbox's current history record
      * @param expiration: when Gmail will stop sending notifications for mailbox updates (epoch millis). Call watch again before this time to renew the watch
      **/
-    public PushNotificationWatch(String historyId, long expiration) {
+    public PushNotificationWatch(BigInteger historyId, long expiration) {
         this.historyId = historyId;
         this.expiration = expiration;
     }
@@ -48,7 +50,7 @@ public class PushNotificationWatch {
      * @param jPushNotification: {@code "push notification watch"} details as {@link JSONObject}
      **/
     public PushNotificationWatch(JSONObject jPushNotification) {
-        historyId = jPushNotification.getString("historyId");
+        historyId = jPushNotification.getBigInteger("historyId");
         expiration = jPushNotification.getLong("expiration");
     }
 
@@ -58,7 +60,7 @@ public class PushNotificationWatch {
      *
      * @return {@link #historyId} instance as {@link String}
      **/
-    public String getHistoryId() {
+    public BigInteger getHistoryId() {
         return historyId;
     }
 

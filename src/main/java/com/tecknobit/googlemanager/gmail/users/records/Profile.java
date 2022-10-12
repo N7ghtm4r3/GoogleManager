@@ -2,6 +2,8 @@ package com.tecknobit.googlemanager.gmail.users.records;
 
 import org.json.JSONObject;
 
+import java.math.BigInteger;
+
 /**
  * The {@code Profile} class is useful to format a Gmail's profile
  *
@@ -28,16 +30,18 @@ public class Profile {
 
     /**
      * {@code historyId} is the ID of the mailbox's current history record
-     * **/
-    private final String historyId;
+     **/
+    private final BigInteger historyId;
 
-    /** Constructor to init a {@link Profile}
-     * @param emailAddress: the user's email address
+    /**
+     * Constructor to init a {@link Profile}
+     *
+     * @param emailAddress:  the user's email address
      * @param messagesTotal: the total number of messages in the mailbox
-     * @param threadsTotal: the total number of threads in the mailbox
-     * @param historyId: the ID of the mailbox's current history record
-     * **/
-    public Profile(String emailAddress, int messagesTotal, int threadsTotal, String historyId) {
+     * @param threadsTotal:  the total number of threads in the mailbox
+     * @param historyId:     the ID of the mailbox's current history record
+     **/
+    public Profile(String emailAddress, int messagesTotal, int threadsTotal, BigInteger historyId) {
         this.emailAddress = emailAddress;
         this.messagesTotal = messagesTotal;
         this.threadsTotal = threadsTotal;
@@ -51,7 +55,7 @@ public class Profile {
         emailAddress = jProfile.getString("emailAddress");
         messagesTotal = jProfile.getInt("messagesTotal");
         threadsTotal = jProfile.getInt("threadsTotal");
-        historyId = jProfile.getString("historyId");
+        historyId = jProfile.getBigInteger("historyId");
     }
 
     /** Method to get {@link #emailAddress} instance <br>
@@ -78,11 +82,13 @@ public class Profile {
         return threadsTotal;
     }
 
-    /** Method to get {@link #historyId} instance <br>
+    /**
+     * Method to get {@link #historyId} instance <br>
      * Any params required
+     *
      * @return {@link #historyId} instance as {@link String}
-     * **/
-    public String getHistoryId() {
+     **/
+    public BigInteger getHistoryId() {
         return historyId;
     }
 
