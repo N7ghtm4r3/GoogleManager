@@ -13,6 +13,24 @@ import java.io.IOException;
  **/
 public class GmailManager extends GoogleManager {
 
+    public static final String APPLICATION_ATOM_XML_MIME_TYPE = "application/atom+xml";
+    public static final String APPLICATION_FORM_URLENCODED_MIME_TYPE = "application/x-www-form-urlencoded";
+    public static final String APPLICATION_JSON_MIME_TYPE = "application/json";
+    public static final String APPLICATION_OCTET_STREAM_MIME_TYPE = "application/octet-stream";
+    public static final String APPLICATION_SVG_XML_MIME_TYPE = "application/svg+xml";
+    public static final String APPLICATION_XHTML_XML_MIME_TYPE = "application/xhtml+xml";
+    public static final String APPLICATION_XML_MIME_TYPE = "application/xml";
+    public static final String MEDIA_TYPE_WILDCARD_MIME_TYPE = "*";
+    public static final String MULTIPART_FORM_DATA_MIME_TYPE = "multipart/form-data";
+    public static final String TEXT_HTML_MIME_TYPE = "text/html";
+    public static final String TEXT_PLAIN_MIME_TYPE = "text/plain";
+    public static final String TEXT_XML_MIME_TYPE = "text/xml";
+    public static final String WILDCARD_MIME_TYPE = "*/*";
+    public static final String MINIMAL_FORMAT = "minimal";
+    public static final String FULL_FORMAT = "full";
+    public static final String RAW_FORMAT = "raw";
+    public static final String METADATA_FORMAT = "metadata";
+
     /**
      * {@code gmail} is the instance for {@link Gmail}'s service
      **/

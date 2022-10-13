@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collection;
 
 import static com.google.common.io.BaseEncoding.base64Url;
@@ -33,13 +34,12 @@ public class Draft {
     private final String snippet;
     private final BigInteger historyId;
     private final long internalDate;
-    private final MessagePart payload;
+    private final Message payload;
     private final int sizeEstimate;
     private String raw;
-    private boolean alreadyEncoded;
 
     public Draft(String id, String threadId, ArrayList<String> labelIds, String snippet, BigInteger historyId,
-                 long internalDate, MessagePart payload, int sizeEstimate, String raw) {
+                 long internalDate, Message payload, int sizeEstimate, String raw) {
         this.id = id;
         this.threadId = threadId;
         this.labelIds = labelIds;
@@ -49,24 +49,22 @@ public class Draft {
         this.payload = payload;
         this.sizeEstimate = sizeEstimate;
         this.raw = raw;
-        alreadyEncoded = false;
     }
 
     public Draft(JSONObject jDraft) {
         JsonHelper hDraft = new JsonHelper(jDraft);
-        id = hDraft.getString("id");
-        threadId = hDraft.getString("threadId");
+        id = hDraft.getString("id", null);
+        threadId = hDraft.getString("threadId", null);
         JSONArray jLabelIds = hDraft.getJSONArray("labelIds", new JSONArray());
         labelIds = new ArrayList<>();
         for (int j = 0; j < jLabelIds.length(); j++)
             labelIds.add(jLabelIds.getString(j));
-        snippet = hDraft.getString("snippet");
-        historyId = hDraft.getBigInteger("historyId");
-        internalDate = hDraft.getLong("internalDate");
-        payload = new MessagePart(hDraft.getJSONObject("payload", new JSONObject()));
-        sizeEstimate = hDraft.getInt("sizeEstimate");
-        raw = hDraft.getString("raw");
-        alreadyEncoded = false;
+        snippet = hDraft.getString("snippet", null);
+        historyId = hDraft.getBigInteger("historyId", BigInteger.valueOf(0));
+        internalDate = hDraft.getLong("internalDate", 0);
+        payload = new Message(hDraft.getJSONObject("payload", new JSONObject()));
+        sizeEstimate = hDraft.getInt("sizeEstimate", 0);
+        raw = hDraft.getString("raw", null);
     }
 
     public String getId() {
@@ -93,7 +91,7 @@ public class Draft {
         return internalDate;
     }
 
-    public MessagePart getPayload() {
+    public Message getPayload() {
         return payload;
     }
 
@@ -106,16 +104,17 @@ public class Draft {
     }
 
     public void encodeRaw() {
-        if (!alreadyEncoded) {
+        try {
+            Base64.getUrlDecoder().decode(raw);
+        } catch (IllegalArgumentException e) {
             raw = base64Url().omitPadding().encode(raw.getBytes());
-            alreadyEncoded = true;
         }
     }
 
     public void decodeRaw() {
-        if (alreadyEncoded) {
-            raw = new String(base64Url().omitPadding().decode(raw));
-            alreadyEncoded = false;
+        try {
+            raw = new String(Base64.getUrlDecoder().decode(raw));
+        } catch (IllegalArgumentException ignored) {
         }
     }
 

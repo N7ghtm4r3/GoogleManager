@@ -9,39 +9,39 @@ import java.util.Collection;
 
 import static com.google.common.io.BaseEncoding.base64Url;
 
-public class MessagePart {
+public class Message {
 
     private final String partId;
     private final String mineType;
     private final String fileName;
     private final ArrayList<Header> headers;
-    private final MessagePartBody messagePartBody;
-    private final ArrayList<MessagePart> parts;
+    private final MessageBody messageBody;
+    private final ArrayList<Message> parts;
 
-    public MessagePart(String partId, String mineType, String fileName, ArrayList<Header> headers,
-                       MessagePartBody messagePartBody, ArrayList<MessagePart> parts) {
+    public Message(String partId, String mineType, String fileName, ArrayList<Header> headers,
+                   MessageBody messageBody, ArrayList<Message> parts) {
         this.partId = partId;
         this.mineType = mineType;
         this.fileName = fileName;
         this.headers = headers;
-        this.messagePartBody = messagePartBody;
+        this.messageBody = messageBody;
         this.parts = parts;
     }
 
-    public MessagePart(JSONObject jMessagePart) {
+    public Message(JSONObject jMessagePart) {
         JsonHelper hMessagePart = new JsonHelper(jMessagePart);
-        partId = hMessagePart.getString("partId");
-        mineType = hMessagePart.getString("mimeType");
-        fileName = hMessagePart.getString("filename");
+        partId = hMessagePart.getString("partId", null);
+        mineType = hMessagePart.getString("mimeType", null);
+        fileName = hMessagePart.getString("filename", null);
         JSONArray jHeaders = hMessagePart.getJSONArray("headers", new JSONArray());
         headers = new ArrayList<>();
         for (int j = 0; j < jHeaders.length(); j++)
             headers.add(new Header(jHeaders.getJSONObject(j)));
-        messagePartBody = new MessagePartBody(hMessagePart.getJSONObject("body", new JSONObject()));
+        messageBody = new MessageBody(hMessagePart.getJSONObject("body", new JSONObject()));
         JSONArray jParts = hMessagePart.getJSONArray("parts", new JSONArray());
         parts = new ArrayList<>();
         for (int j = 0; j < jParts.length(); j++)
-            parts.add(new MessagePart(jParts.getJSONObject(j)));
+            parts.add(new Message(jParts.getJSONObject(j)));
     }
 
     public String getPartId() {
@@ -60,22 +60,22 @@ public class MessagePart {
         return headers;
     }
 
-    public MessagePartBody getMessagePartBody() {
-        return messagePartBody;
+    public MessageBody getMessagePartBody() {
+        return messageBody;
     }
 
-    public Collection<MessagePart> getParts() {
+    public Collection<Message> getParts() {
         return parts;
     }
 
     @Override
     public String toString() {
-        return "MessagePart{" +
+        return "Message{" +
                 "partId='" + partId + '\'' +
                 ", mineType='" + mineType + '\'' +
                 ", fileName='" + fileName + '\'' +
                 ", headers=" + headers +
-                ", messagePartBody=" + messagePartBody +
+                ", messageBody=" + messageBody +
                 ", parts=" + parts +
                 '}';
     }
@@ -122,25 +122,25 @@ public class MessagePart {
 
     }
 
-    public static class MessagePartBody {
+    public static class MessageBody {
 
         private final String attachmentId;
         private final int size;
         private String data;
         private boolean dataEncoded;
 
-        public MessagePartBody(String attachmentId, int size, String data) {
+        public MessageBody(String attachmentId, int size, String data) {
             this.attachmentId = attachmentId;
             this.size = size;
             this.data = data;
             dataEncoded = false;
         }
 
-        public MessagePartBody(JSONObject jMessagePartBody) {
+        public MessageBody(JSONObject jMessagePartBody) {
             JsonHelper hMessagePartBody = new JsonHelper(jMessagePartBody);
-            attachmentId = hMessagePartBody.getString("attachmentId");
-            size = hMessagePartBody.getInt("size");
-            data = hMessagePartBody.getString("data");
+            attachmentId = hMessagePartBody.getString("attachmentId", null);
+            size = hMessagePartBody.getInt("size", 0);
+            data = hMessagePartBody.getString("data", null);
             dataEncoded = false;
         }
 
@@ -172,7 +172,7 @@ public class MessagePart {
 
         @Override
         public String toString() {
-            return "MessagePartBody{" +
+            return "MessageBody{" +
                     "attachmentId='" + attachmentId + '\'' +
                     ", size=" + size +
                     ", data='" + data + '\'' +
