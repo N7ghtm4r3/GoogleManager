@@ -4,28 +4,45 @@ import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collection;
 
 import static com.google.common.io.BaseEncoding.base64Url;
 
 public class Message {
 
+    private final String threadId;
+    private final ArrayList<String> labelIds;
+    private final String snippet;
+    private final BigInteger historyId;
+    private final long internalDate;
     private final String partId;
     private final String mineType;
     private final String fileName;
     private final ArrayList<Header> headers;
     private final MessageBody messageBody;
     private final ArrayList<Message> parts;
+    private final int sizeEstimate;
+    private String raw;
 
-    public Message(String partId, String mineType, String fileName, ArrayList<Header> headers,
-                   MessageBody messageBody, ArrayList<Message> parts) {
+    public Message(String partId, String mineType, String fileName, ArrayList<Header> headers, MessageBody messageBody,
+                   ArrayList<Message> parts, String threadId, ArrayList<String> labelIds, String snippet,
+                   BigInteger historyId, long internalDate, int sizeEstimate, String raw) {
         this.partId = partId;
         this.mineType = mineType;
         this.fileName = fileName;
         this.headers = headers;
         this.messageBody = messageBody;
         this.parts = parts;
+        this.threadId = threadId;
+        this.labelIds = labelIds;
+        this.snippet = snippet;
+        this.historyId = historyId;
+        this.internalDate = internalDate;
+        this.sizeEstimate = sizeEstimate;
+        this.raw = raw;
     }
 
     public Message(JSONObject jMessagePart) {
@@ -42,6 +59,36 @@ public class Message {
         parts = new ArrayList<>();
         for (int j = 0; j < jParts.length(); j++)
             parts.add(new Message(jParts.getJSONObject(j)));
+        threadId = hMessagePart.getString("threadId", null);
+        JSONArray jLabelIds = hMessagePart.getJSONArray("labelIds", new JSONArray());
+        labelIds = new ArrayList<>();
+        for (int j = 0; j < jLabelIds.length(); j++)
+            labelIds.add(jLabelIds.getString(j));
+        snippet = hMessagePart.getString("snippet", null);
+        historyId = hMessagePart.getBigInteger("historyId", BigInteger.valueOf(0));
+        internalDate = hMessagePart.getLong("internalDate", 0);
+        sizeEstimate = hMessagePart.getInt("sizeEstimate", 0);
+        raw = hMessagePart.getString("raw", null);
+    }
+
+    public String getThreadId() {
+        return threadId;
+    }
+
+    public Collection<String> getLabelIds() {
+        return labelIds;
+    }
+
+    public String getSnippet() {
+        return snippet;
+    }
+
+    public BigInteger getHistoryId() {
+        return historyId;
+    }
+
+    public long getInternalDate() {
+        return internalDate;
     }
 
     public String getPartId() {
@@ -60,7 +107,7 @@ public class Message {
         return headers;
     }
 
-    public MessageBody getMessagePartBody() {
+    public MessageBody getMessageBody() {
         return messageBody;
     }
 
@@ -68,16 +115,32 @@ public class Message {
         return parts;
     }
 
+    public int getSizeEstimate() {
+        return sizeEstimate;
+    }
+
+    public String getRaw() {
+        return raw;
+    }
+
+    public void encodeRaw() {
+        try {
+            Base64.getUrlDecoder().decode(raw);
+        } catch (IllegalArgumentException e) {
+            raw = base64Url().omitPadding().encode(raw.getBytes());
+        }
+    }
+
+    public void decodeRaw() {
+        try {
+            raw = new String(Base64.getUrlDecoder().decode(raw));
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
     @Override
     public String toString() {
-        return "Message{" +
-                "partId='" + partId + '\'' +
-                ", mineType='" + mineType + '\'' +
-                ", fileName='" + fileName + '\'' +
-                ", headers=" + headers +
-                ", messageBody=" + messageBody +
-                ", parts=" + parts +
-                '}';
+        return new JSONObject(this).toString();
     }
 
     public static class Header {

@@ -149,7 +149,7 @@ public class GmailDraftsManager extends GmailManager {
         mimeBodyPart.setFileName(file.getName());
         multipart.addBodyPart(mimeBodyPart);
         email.setContent(multipart);
-        return createDraft(email, format);
+        return createDraft(email, format, true);
     }
 
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText,
@@ -167,8 +167,8 @@ public class GmailDraftsManager extends GmailManager {
         return createDraftWithFiles(toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT);
     }
 
-    public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files, String mimeType,
-                                      ReturnFormat format) throws Exception {
+    public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
+                                      String mimeType, ReturnFormat format) throws Exception {
         MimeMessage email = createMimeMessage(toEmailAddress, subject);
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
         mimeBodyPart.setContent(emailText, mimeType);
@@ -181,7 +181,7 @@ public class GmailDraftsManager extends GmailManager {
             multipart.addBodyPart(mimeBodyPart);
         }
         email.setContent(multipart);
-        return createDraft(email, format);
+        return createDraft(email, format, true);
     }
 
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText,
@@ -213,7 +213,7 @@ public class GmailDraftsManager extends GmailManager {
             multipart.addBodyPart(mimeBodyPart);
         }
         email.setContent(multipart);
-        return createDraft(email, format);
+        return createDraft(email, format, true);
     }
 
     public Draft createMetadataDraft(String toEmailAddress, String subject, String emailText) throws Exception {
@@ -224,7 +224,7 @@ public class GmailDraftsManager extends GmailManager {
                                      ReturnFormat format) throws Exception {
         MimeMessage email = createMimeMessage(toEmailAddress, subject);
         email.setText(emailText);
-        return createDraft(email, format);
+        return createDraft(email, format, true);
     }
 
     private MimeMessage createMimeMessage(String toEmailAddress, String subject) throws Exception {
@@ -235,7 +235,7 @@ public class GmailDraftsManager extends GmailManager {
         return mime;
     }
 
-    private <T> T createDraft(MimeMessage email, ReturnFormat format) throws Exception {
+    private <T> T createDraft(MimeMessage email, ReturnFormat format, boolean sendCreateRequest) throws Exception {
         com.google.api.services.gmail.model.Draft draft = new com.google.api.services.gmail.model.Draft();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         email.writeTo(buffer);
@@ -244,7 +244,8 @@ public class GmailDraftsManager extends GmailManager {
         Message message = new Message();
         message.setRaw(encodedEmail);
         draft.setMessage(message);
-        draft = gmail.users().drafts().create(userId, draft).execute();
+        if (sendCreateRequest)
+            draft = gmail.drafts().create(userId, draft).execute();
         switch (format) {
             case JSON:
                 return (T) new JSONObject(draft);
@@ -257,7 +258,7 @@ public class GmailDraftsManager extends GmailManager {
 
     public boolean deleteDraft(String draftId) {
         try {
-            gmail.users().drafts().delete(userId, draftId).execute();
+            gmail.drafts().delete(userId, draftId).execute();
             return true;
         } catch (IOException e) {
             return false;
@@ -277,7 +278,7 @@ public class GmailDraftsManager extends GmailManager {
     }
 
     public <T> T getDraft(String draftId, String responseFormat, ReturnFormat format) throws IOException {
-        Gmail.Users.Drafts.Get getDraft = gmail.users().drafts().get(userId, draftId);
+        Gmail.Users.Drafts.Get getDraft = gmail.drafts().get(userId, draftId);
         if (responseFormat != null)
             getDraft.setFormat(responseFormat);
         com.google.api.services.gmail.model.Draft draft = getDraft.execute();
@@ -296,7 +297,7 @@ public class GmailDraftsManager extends GmailManager {
     }
 
     public <T> T getDraftsList(boolean includeSpamTrash, ReturnFormat format) throws IOException {
-        return getDraftsList(gmail.users().drafts().list(userId).setIncludeSpamTrash(includeSpamTrash).execute(), format);
+        return getDraftsList(gmail.drafts().list(userId).setIncludeSpamTrash(includeSpamTrash).execute(), format);
     }
 
     public Drafts getDraftsList(boolean includeSpamTrash, int maxResults) throws IOException {
@@ -304,7 +305,7 @@ public class GmailDraftsManager extends GmailManager {
     }
 
     public <T> T getDraftsList(boolean includeSpamTrash, int maxResults, ReturnFormat format) throws IOException {
-        return getDraftsList(gmail.users().drafts().list(userId).setIncludeSpamTrash(includeSpamTrash)
+        return getDraftsList(gmail.drafts().list(userId).setIncludeSpamTrash(includeSpamTrash)
                 .setMaxResults((long) maxResults)
                 .execute(), format);
     }
@@ -314,7 +315,7 @@ public class GmailDraftsManager extends GmailManager {
     }
 
     public <T> T getDraftsList(boolean includeSpamTrash, String pageToken, ReturnFormat format) throws IOException {
-        return getDraftsList(gmail.users().drafts().list(userId)
+        return getDraftsList(gmail.drafts().list(userId)
                 .setIncludeSpamTrash(includeSpamTrash)
                 .setPageToken(pageToken)
                 .execute(), format);
@@ -325,7 +326,7 @@ public class GmailDraftsManager extends GmailManager {
     }
 
     public <T> T getDraftsList(String q, boolean includeSpamTrash, ReturnFormat format) throws IOException {
-        return getDraftsList(gmail.users().drafts().list(userId)
+        return getDraftsList(gmail.drafts().list(userId)
                 .setQ(q)
                 .setIncludeSpamTrash(includeSpamTrash)
                 .execute(), format);
@@ -337,7 +338,7 @@ public class GmailDraftsManager extends GmailManager {
 
     public <T> T getDraftsList(boolean includeSpamTrash, int maxResults, String pageToken,
                                ReturnFormat format) throws IOException {
-        return getDraftsList(gmail.users().drafts().list(userId).setIncludeSpamTrash(includeSpamTrash)
+        return getDraftsList(gmail.drafts().list(userId).setIncludeSpamTrash(includeSpamTrash)
                 .setMaxResults((long) maxResults)
                 .setPageToken(pageToken)
                 .execute(), format);
@@ -349,7 +350,7 @@ public class GmailDraftsManager extends GmailManager {
 
     public <T> T getDraftsList(boolean includeSpamTrash, String q, int maxResults,
                                ReturnFormat format) throws IOException {
-        return getDraftsList(gmail.users().drafts().list(userId).setIncludeSpamTrash(includeSpamTrash)
+        return getDraftsList(gmail.drafts().list(userId).setIncludeSpamTrash(includeSpamTrash)
                 .setQ(q)
                 .setMaxResults((long) maxResults)
                 .execute(), format);
@@ -361,7 +362,7 @@ public class GmailDraftsManager extends GmailManager {
 
     public <T> T getDraftsList(boolean includeSpamTrash, String pageToken, String q,
                                ReturnFormat format) throws IOException {
-        return getDraftsList(gmail.users().drafts().list(userId).setIncludeSpamTrash(includeSpamTrash)
+        return getDraftsList(gmail.drafts().list(userId).setIncludeSpamTrash(includeSpamTrash)
                 .setPageToken(pageToken)
                 .setQ(q)
                 .execute(), format);
@@ -374,7 +375,7 @@ public class GmailDraftsManager extends GmailManager {
 
     public <T> T getDraftsList(boolean includeSpamTrash, int maxResults, String pageToken,
                                String q, ReturnFormat format) throws IOException {
-        return getDraftsList(gmail.users().drafts().list(userId).setIncludeSpamTrash(includeSpamTrash)
+        return getDraftsList(gmail.drafts().list(userId).setIncludeSpamTrash(includeSpamTrash)
                 .setMaxResults((long) maxResults)
                 .setPageToken(pageToken)
                 .setQ(q)
@@ -392,20 +393,40 @@ public class GmailDraftsManager extends GmailManager {
         }
     }
 
-    public com.tecknobit.googlemanager.gmail.drafts.records.Message sendDraft() {
-        return sendDraft(LIBRARY_OBJECT);
+    public com.tecknobit.googlemanager.gmail.drafts.records.Message sendDraft(String draftId) throws IOException {
+        return sendDraft(draftId, LIBRARY_OBJECT);
     }
 
-    public <T> T sendDraft(ReturnFormat format) {
-        // gmail.users().drafts().se
+    public <T> T sendDraft(String draftId, ReturnFormat format) throws IOException {
+        Gmail.Users.Drafts drafts = gmail.drafts();
+        com.google.api.services.gmail.model.Draft draft = drafts.get(userId, draftId).execute();
+        Message message = drafts.send(userId, draft).execute();
         switch (format) {
             case JSON:
-                return;
+                return (T) new JSONObject(message);
             case LIBRARY_OBJECT:
-                return;
+                return (T) new com.tecknobit.googlemanager.gmail.drafts.records.Message(new JSONObject(message));
             default:
-                return;
+                return (T) message.toString();
         }
     }
+
+    public com.tecknobit.googlemanager.gmail.drafts.records.Message sendDraft(Draft draft) throws IOException {
+        return sendDraft(draft, LIBRARY_OBJECT);
+    }
+
+    public <T> T sendDraft(Draft draft, ReturnFormat format) throws IOException {
+        return sendDraft(draft.getId(), format);
+    }
+
+    //String toEmailAddress, String subject, String emailText, File[] files
+    /*
+    public Draft updateDraftToEmailAddress(String draftId, String newToEmailAddress) throws IOException {
+        com.google.api.services.gmail.model.Draft draft = gmail.drafts().get(userId, draftId).execute();
+    }
+
+    private Draft updateDraft(com.google.api.services.gmail.model.Draft draft, ReturnFormat format) {
+
+    }*/
 
 }

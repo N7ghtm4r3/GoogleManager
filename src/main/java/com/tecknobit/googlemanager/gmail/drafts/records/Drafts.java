@@ -1,5 +1,6 @@
 package com.tecknobit.googlemanager.gmail.drafts.records;
 
+import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -18,12 +19,13 @@ public class Drafts {
     }
 
     public Drafts(JSONObject jDrafts) {
+        JsonHelper hDrafts = new JsonHelper(jDrafts);
         drafts = new ArrayList<>();
-        JSONArray jDraftsList = jDrafts.getJSONArray("drafts");
+        JSONArray jDraftsList = hDrafts.getJSONArray("drafts", new JSONArray());
         for (int j = 0; j < jDraftsList.length(); j++)
             drafts.add(new Draft(jDraftsList.getJSONObject(j)));
-        nextPageToken = jDrafts.getString("nextPageToken");
-        resultSizeEstimate = jDrafts.getInt("resultSizeEstimate");
+        nextPageToken = hDrafts.getString("nextPageToken", null);
+        resultSizeEstimate = hDrafts.getInt("resultSizeEstimate", 0);
     }
 
     public ArrayList<Draft> getDrafts() {

@@ -134,7 +134,7 @@ public class GmailUsersManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T getProfile(ReturnFormat format) throws IOException {
-        com.google.api.services.gmail.model.Profile profile = gmail.users().getProfile(userId).execute();
+        com.google.api.services.gmail.model.Profile profile = gmail.getProfile(userId).execute();
         switch (format) {
             case JSON:
                 return (T) new JSONObject(profile);
@@ -160,7 +160,7 @@ public class GmailUsersManager extends GmailManager {
      **/
     public boolean stop() {
         try {
-            gmail.users().stop(userId);
+            gmail.stop(userId);
             return true;
         } catch (IOException e) {
             return false;
@@ -203,7 +203,7 @@ public class GmailUsersManager extends GmailManager {
         watchRequest.setLabelIds(labelIds.stream().toList());
         watchRequest.setLabelFilterAction(labelFilterAction);
         watchRequest.setTopicName(topicName);
-        WatchResponse watch = gmail.users().watch(userId, watchRequest).execute();
+        WatchResponse watch = gmail.watch(userId, watchRequest).execute();
         switch (format) {
             case JSON:
                 return (T) new JSONObject(watch);

@@ -34,7 +34,7 @@ public class GmailManager extends GoogleManager {
     /**
      * {@code gmail} is the instance for {@link Gmail}'s service
      **/
-    protected final Gmail gmail;
+    protected final Gmail.Users gmail;
 
     /**
      * Constructor to init a {@link GmailManager}
@@ -53,7 +53,8 @@ public class GmailManager extends GoogleManager {
     public GmailManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                         int port, String host, String callBackPath, String applicationName) throws IOException {
         super(clientId, clientSecret, userId, accessType, approvalPrompt, port, host, callBackPath);
-        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName).build();
+        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName)
+                .build().users();
     }
 
     /**
@@ -70,7 +71,8 @@ public class GmailManager extends GoogleManager {
     public GmailManager(String clientId, String clientSecret, String userId, String accessType,
                         String approvalPrompt, String applicationName) throws IOException {
         super(clientId, clientSecret, userId, accessType, approvalPrompt);
-        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName).build();
+        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName)
+                .build().users();
     }
 
     /**
@@ -88,7 +90,8 @@ public class GmailManager extends GoogleManager {
     public GmailManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                         int port, String applicationName) throws IOException {
         super(clientId, clientSecret, userId, accessType, approvalPrompt, port);
-        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName).build();
+        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName)
+                .build().users();
     }
 
     /**
@@ -107,7 +110,8 @@ public class GmailManager extends GoogleManager {
     public GmailManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                         int port, String callBackPath, String applicationName) throws IOException {
         super(clientId, clientSecret, userId, accessType, approvalPrompt, port, callBackPath);
-        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName).build();
+        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName)
+                .build().users();
     }
 
     /**
@@ -126,7 +130,8 @@ public class GmailManager extends GoogleManager {
     public GmailManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                         String host, int port, String applicationName) throws IOException {
         super(clientId, clientSecret, userId, accessType, approvalPrompt, host, port);
-        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName).build();
+        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName)
+                .build().users();
     }
 
 }

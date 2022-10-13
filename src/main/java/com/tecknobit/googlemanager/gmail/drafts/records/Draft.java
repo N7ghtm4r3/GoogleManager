@@ -1,15 +1,7 @@
 package com.tecknobit.googlemanager.gmail.drafts.records;
 
 import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Collection;
-
-import static com.google.common.io.BaseEncoding.base64Url;
 
 public class Draft {
 
@@ -29,93 +21,29 @@ public class Draft {
     public static final String UNREAD_LABEL = "UNREAD";
     public static final String UNWANTED_LABEL = "UNWANTED";
     private final String id;
-    private final String threadId;
-    private final ArrayList<String> labelIds;
-    private final String snippet;
-    private final BigInteger historyId;
-    private final long internalDate;
-    private final Message payload;
-    private final int sizeEstimate;
-    private String raw;
+    private final Message message;
 
-    public Draft(String id, String threadId, ArrayList<String> labelIds, String snippet, BigInteger historyId,
-                 long internalDate, Message payload, int sizeEstimate, String raw) {
+    public Draft(String id, Message message) {
         this.id = id;
-        this.threadId = threadId;
-        this.labelIds = labelIds;
-        this.snippet = snippet;
-        this.historyId = historyId;
-        this.internalDate = internalDate;
-        this.payload = payload;
-        this.sizeEstimate = sizeEstimate;
-        this.raw = raw;
+        this.message = message;
     }
 
     public Draft(JSONObject jDraft) {
         JsonHelper hDraft = new JsonHelper(jDraft);
         id = hDraft.getString("id", null);
-        threadId = hDraft.getString("threadId", null);
-        JSONArray jLabelIds = hDraft.getJSONArray("labelIds", new JSONArray());
-        labelIds = new ArrayList<>();
-        for (int j = 0; j < jLabelIds.length(); j++)
-            labelIds.add(jLabelIds.getString(j));
-        snippet = hDraft.getString("snippet", null);
-        historyId = hDraft.getBigInteger("historyId", BigInteger.valueOf(0));
-        internalDate = hDraft.getLong("internalDate", 0);
-        payload = new Message(hDraft.getJSONObject("payload", new JSONObject()));
-        sizeEstimate = hDraft.getInt("sizeEstimate", 0);
-        raw = hDraft.getString("raw", null);
+        JSONObject jMessage = hDraft.getJSONObject("payload", null);
+        if (jMessage != null)
+            message = new Message(jMessage);
+        else
+            message = new Message(hDraft.getJSONObject("message", null));
     }
 
     public String getId() {
         return id;
     }
 
-    public String getThreadId() {
-        return threadId;
-    }
-
-    public Collection<String> getLabelIds() {
-        return labelIds;
-    }
-
-    public String getSnippet() {
-        return snippet;
-    }
-
-    public BigInteger getHistoryId() {
-        return historyId;
-    }
-
-    public long getInternalDate() {
-        return internalDate;
-    }
-
-    public Message getPayload() {
-        return payload;
-    }
-
-    public int getSizeEstimate() {
-        return sizeEstimate;
-    }
-
-    public String getRaw() {
-        return raw;
-    }
-
-    public void encodeRaw() {
-        try {
-            Base64.getUrlDecoder().decode(raw);
-        } catch (IllegalArgumentException e) {
-            raw = base64Url().omitPadding().encode(raw.getBytes());
-        }
-    }
-
-    public void decodeRaw() {
-        try {
-            raw = new String(Base64.getUrlDecoder().decode(raw));
-        } catch (IllegalArgumentException ignored) {
-        }
+    public Message getMessage() {
+        return message;
     }
 
     @Override
