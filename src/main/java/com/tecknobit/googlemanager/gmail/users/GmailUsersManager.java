@@ -153,7 +153,7 @@ public class GmailUsersManager extends GmailManager {
      * Method to stop receiving push notifications for the given user mailbox <br>
      * Any params required
      *
-     * @return result of the stop request -> {@code true} is successful, {@code false} if not successful
+     * @return result of the stop request -> {@code "true"} is successful, {@code "false"} if not successful
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users/stop">
      * users.stop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library

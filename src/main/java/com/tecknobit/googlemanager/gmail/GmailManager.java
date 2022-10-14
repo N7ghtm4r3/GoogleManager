@@ -13,22 +13,97 @@ import java.io.IOException;
  **/
 public class GmailManager extends GoogleManager {
 
+    /**
+     * {@code APPLICATION_ATOM_XML_MIME_TYPE} is a constant for application/atom+xml mime type
+     **/
     public static final String APPLICATION_ATOM_XML_MIME_TYPE = "application/atom+xml";
+
+    /**
+     * {@code APPLICATION_FORM_URLENCODED_MIME_TYPE} is a constant for application/x-www-form-urlencoded mime type
+     **/
     public static final String APPLICATION_FORM_URLENCODED_MIME_TYPE = "application/x-www-form-urlencoded";
+
+    /**
+     * {@code APPLICATION_JSON_MIME_TYPE} is a constant for application/json mime type
+     **/
     public static final String APPLICATION_JSON_MIME_TYPE = "application/json";
+
+    /**
+     * {@code APPLICATION_OCTET_STREAM_MIME_TYPE} is a constant for application/octet-stream mime type
+     **/
     public static final String APPLICATION_OCTET_STREAM_MIME_TYPE = "application/octet-stream";
+
+    /**
+     * {@code APPLICATION_SVG_XML_MIME_TYPE} is a constant for application/svg+xml mime type
+     **/
     public static final String APPLICATION_SVG_XML_MIME_TYPE = "application/svg+xml";
+
+    /**
+     * {@code APPLICATION_XHTML_XML_MIME_TYPE} is a constant for application/xhtml+xml mime type
+     **/
     public static final String APPLICATION_XHTML_XML_MIME_TYPE = "application/xhtml+xml";
+
+    /**
+     * {@code APPLICATION_XML_MIME_TYPE} is a constant for "application/xml mime type
+     **/
     public static final String APPLICATION_XML_MIME_TYPE = "application/xml";
+
+    /**
+     * {@code MEDIA_TYPE_WILDCARD_MIME_TYPE} is a constant for * mime type
+     **/
     public static final String MEDIA_TYPE_WILDCARD_MIME_TYPE = "*";
+
+    /**
+     * {@code MULTIPART_FORM_DATA_MIME_TYPE} is a constant for multipart/form-data mime type
+     **/
     public static final String MULTIPART_FORM_DATA_MIME_TYPE = "multipart/form-data";
+
+    /**
+     * {@code TEXT_HTML_MIME_TYPE} is a constant for text/html mime type
+     **/
     public static final String TEXT_HTML_MIME_TYPE = "text/html";
+
+    /**
+     * {@code TEXT_PLAIN_MIME_TYPE} is a constant for text/plain mime type
+     **/
     public static final String TEXT_PLAIN_MIME_TYPE = "text/plain";
+
+    /**
+     * {@code TEXT_XML_MIME_TYPE} is a constant for text/xml mime type
+     **/
     public static final String TEXT_XML_MIME_TYPE = "text/xml";
+
+    /**
+     * {@code WILDCARD_MIME_TYPE} is a constant for wildcard mime type
+     **/
     public static final String WILDCARD_MIME_TYPE = "*/*";
+
+    /**
+     * {@code MINIMAL_FORMAT} is a constant for minimal format type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/Format">format</a>
+     **/
     public static final String MINIMAL_FORMAT = "minimal";
+
+    /**
+     * {@code FULL_FORMAT} is a constant for full format type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/Format">format</a>
+     **/
     public static final String FULL_FORMAT = "full";
+
+    /**
+     * {@code RAW_FORMAT} is a constant for raw format type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/Format">format</a>
+     **/
     public static final String RAW_FORMAT = "raw";
+
+    /**
+     * {@code METADATA_FORMAT} is a constant for metadata format type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/Format">format</a>
+     **/
     public static final String METADATA_FORMAT = "metadata";
 
     /**

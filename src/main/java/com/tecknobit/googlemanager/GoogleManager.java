@@ -203,18 +203,20 @@ public abstract class GoogleManager {
         this(clientId, clientSecret, userId, accessType, approvalPrompt, port, host, DEFAULT_CALLBACK_PATH);
     }
 
-    /** Method to change a project to work on with {@code GoogleManager}'s library during runtime usage.
-     * @param clientId: client identifier value
-     * @param clientSecret: client secret value
-     * @param userId: used to identifier a user -> me to use an authenticated user
-     * @param accessType: access type used in the auth operations
+    /**
+     * Method to change a project to work on with {@code GoogleManager}'s library during runtime usage.
+     *
+     * @param clientId:       client identifier value
+     * @param clientSecret:   client secret value
+     * @param userId:         used to identifier a user -> me to use an authenticated user
+     * @param accessType:     access type used in the auth operations
      * @param approvalPrompt: approval prompt type used in the auth operations
-     * @param port: port used in the auth operations
-     * @param host: host used in the auth operations
-     * @param callBackPath: callback path used in the auth operations
-     * @return result of change -> {@code true} is successful, {@code false} if not successful
+     * @param port:           port used in the auth operations
+     * @param host:           host used in the auth operations
+     * @param callBackPath:   callback path used in the auth operations
+     * @return result of change -> {@code "true"} is successful, {@code "false"} if not successful
      * @apiNote throws {@link IOException} when some params are not correct or auth request have been go wrong
-     * **/
+     **/
     public boolean changeProject(String clientId, String clientSecret, String userId, String accessType,
                                  String approvalPrompt, int port, String host, String callBackPath) {
         try {
@@ -255,7 +257,7 @@ public abstract class GoogleManager {
      * @param userId:         used to identifier a user -> me to use an authenticated user
      * @param accessType:     access type used in the auth operations
      * @param approvalPrompt: approval prompt type used in the auth operations
-     * @return result of change -> {@code true} is successful, {@code false} if not successful
+     * @return result of change -> {@code "true"} is successful, {@code "false"} if not successful
      * @apiNote throws {@link IOException} when some params are not correct or auth request have been go wrong
      **/
     public boolean changeProject(String clientId, String clientSecret, String userId, String accessType,
@@ -273,7 +275,7 @@ public abstract class GoogleManager {
      * @param accessType:     access type used in the auth operations
      * @param approvalPrompt: approval prompt type used in the auth operations
      * @param port:           port used in the auth operations
-     * @return result of change -> {@code true} is successful, {@code false} if not successful
+     * @return result of change -> {@code "true"} is successful, {@code "false"} if not successful
      * @apiNote throws {@link IOException} when some params are not correct or auth request have been go wrong
      **/
     public boolean changeProject(String clientId, String clientSecret, String userId, String accessType,
@@ -292,7 +294,7 @@ public abstract class GoogleManager {
      * @param approvalPrompt: approval prompt type used in the auth operations
      * @param port:           port used in the auth operations
      * @param callBackPath:   callback path used in the auth operations
-     * @return result of change -> {@code true} is successful, {@code false} if not successful
+     * @return result of change -> {@code "true"} is successful, {@code "false"} if not successful
      * @apiNote throws {@link IOException} when some params are not correct or auth request have been go wrong
      **/
     public boolean changeProject(String clientId, String clientSecret, String userId, String accessType,
@@ -310,7 +312,7 @@ public abstract class GoogleManager {
      * @param approvalPrompt: approval prompt type used in the auth operations
      * @param port:           port used in the auth operations
      * @param host:           host used in the auth operations
-     * @return result of change -> {@code true} is successful, {@code false} if not successful
+     * @return result of change -> {@code "true"} is successful, {@code "false"} if not successful
      * @apiNote throws {@link IOException} when some params are not correct or auth request have been go wrong
      **/
     public boolean changeProject(String clientId, String clientSecret, String userId, String accessType,
