@@ -5,6 +5,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * The {@code Draft} class is useful to format a Gmail's drafts list
@@ -61,9 +62,9 @@ public class Drafts {
      * Method to get {@link #drafts} instance <br>
      * Any params required
      *
-     * @return {@link #drafts} instance as {@link String}
+     * @return {@link #drafts} instance as {@link Collection} of {@link Draft}
      **/
-    public ArrayList<Draft> getDrafts() {
+    public Collection<Draft> getDrafts() {
         return drafts;
     }
 
@@ -116,11 +117,7 @@ public class Drafts {
      */
     @Override
     public String toString() {
-        return "Drafts{" +
-                "drafts=" + drafts +
-                ", nextPageToken='" + nextPageToken + '\'' +
-                ", resultSizeEstimate=" + resultSizeEstimate +
-                '}';
+        return new JSONObject(this).toString();
     }
 
 }

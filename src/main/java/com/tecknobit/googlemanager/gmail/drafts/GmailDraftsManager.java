@@ -35,6 +35,7 @@ import static com.tecknobit.googlemanager.gmail.drafts.records.Message.Header.To
  * @author N7ghtm4r3 - Tecknobit
  * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts">Gmail drafts</a>
  **/
+// TODO: 15/10/2022 WHEN ATTACHMENTS ENDPOINT IS CREATED IMPLEMENT UPDATE WITH AUTO FILE FETCHER
 public class GmailDraftsManager extends GmailManager {
 
     /**

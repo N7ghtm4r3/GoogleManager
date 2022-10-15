@@ -82,10 +82,7 @@ public class PushNotificationWatch {
      */
     @Override
     public String toString() {
-        return "PushNotificationWatch{" +
-                "historyId='" + historyId + '\'' +
-                ", expiration='" + expiration + '\'' +
-                '}';
+        return new JSONObject(this).toString();
     }
 
 }

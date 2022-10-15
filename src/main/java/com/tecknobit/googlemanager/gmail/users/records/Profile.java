@@ -99,12 +99,7 @@ public class Profile {
      */
     @Override
     public String toString() {
-        return "Profile{" +
-                "emailAddress='" + emailAddress + '\'' +
-                ", messagesTotal=" + messagesTotal +
-                ", threadsTotal=" + threadsTotal +
-                ", historyId='" + historyId + '\'' +
-                '}';
+        return new JSONObject(this).toString();
     }
 
 }
