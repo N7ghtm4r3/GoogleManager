@@ -778,7 +778,7 @@ public class GmailHistoryManager extends GmailManager {
     private <T> T getHistoryList(ListHistoryResponse listHistoryResponse, ReturnFormat format) {
         switch (format) {
             case JSON:
-                return (T) new JSONObject(listHistoryResponse.toString());
+                return (T) new JSONObject(listHistoryResponse);
             case LIBRARY_OBJECT:
                 return (T) new HistoryList(new JSONObject(listHistoryResponse.toString()));
             default:

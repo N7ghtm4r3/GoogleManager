@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * The {@code Label} class is useful to format a Gmail's label
+ * The {@code LabelAction} class is useful to format a Gmail's label action
  *
  * @author N7ghtm4r3 - Tecknobit
  * @apiNote see the official documentation at:
@@ -22,7 +22,7 @@ import java.util.Collection;
  *     </li>
  * </ul>
  **/
-public class Label {
+public class LabelAction {
 
     /**
      * {@code message} message
@@ -35,22 +35,22 @@ public class Label {
     private final ArrayList<String> labelIds;
 
     /**
-     * Constructor to init a {@link Label}
+     * Constructor to init a {@link LabelAction}
      *
      * @param message:  message
      * @param labelIds: label IDs from the message
      **/
-    public Label(Message message, ArrayList<String> labelIds) {
+    public LabelAction(Message message, ArrayList<String> labelIds) {
         this.message = message;
         this.labelIds = labelIds;
     }
 
     /**
-     * Constructor to init a {@link Label}
+     * Constructor to init a {@link LabelAction}
      *
      * @param jLabel: {@code "label"} details as {@link JSONObject}
      **/
-    public Label(JSONObject jLabel) {
+    public LabelAction(JSONObject jLabel) {
         JsonHelper hLabel = new JsonHelper(jLabel);
         message = new Message(hLabel.getJSONObject("message"));
         JSONArray jLabelIds = hLabel.getJSONArray("labelIds", new JSONArray());

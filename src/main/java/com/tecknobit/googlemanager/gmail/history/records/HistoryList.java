@@ -39,12 +39,12 @@ public class HistoryList {
     /**
      * {@code labelsAdded} labels added to messages in this history record
      **/
-    private final ArrayList<Label> labelsAdded;
+    private final ArrayList<LabelAction> labelsAdded;
 
     /**
      * {@code labelsRemoved} labels removed from messages in this history record
      **/
-    private final ArrayList<Label> labelsRemoved;
+    private final ArrayList<LabelAction> labelsRemoved;
 
     /**
      * Constructor to init a {@link HistoryList}
@@ -57,8 +57,8 @@ public class HistoryList {
      * @param labelsRemoved:   labels removed from messages in this history record
      **/
     public HistoryList(String id, ArrayList<Message> messages, ArrayList<Message> messagesAdded,
-                       ArrayList<Message> messagesDeleted, ArrayList<Label> labelsAdded,
-                       ArrayList<Label> labelsRemoved) {
+                       ArrayList<Message> messagesDeleted, ArrayList<LabelAction> labelsAdded,
+                       ArrayList<LabelAction> labelsRemoved) {
         this.id = id;
         this.messages = messages;
         this.messagesAdded = messagesAdded;
@@ -107,14 +107,14 @@ public class HistoryList {
      *
      * @param list:    list from create the labels list in {@link JSONArray} format
      * @param keyList: key of the list from fetch labels
-     * @return list of labels as {@link ArrayList} of {@link Label} custom object
+     * @return list of labels as {@link ArrayList} of {@link LabelAction} custom object
      **/
-    private ArrayList<Label> loadLabelsList(JSONArray list, String keyList) {
+    private ArrayList<LabelAction> loadLabelsList(JSONArray list, String keyList) {
         if (list == null)
             list = new JSONArray();
-        ArrayList<Label> labels = new ArrayList<>();
+        ArrayList<LabelAction> labels = new ArrayList<>();
         for (int j = 0; j < list.length(); j++)
-            labels.add(new Label(list.getJSONObject(j)));
+            labels.add(new LabelAction(list.getJSONObject(j)));
         return labels;
     }
 
@@ -225,9 +225,9 @@ public class HistoryList {
      * Method to get {@link #labelsAdded} instance <br>
      * Any params required
      *
-     * @return {@link #labelsAdded} instance as {@link Collection} of {@link Label}
+     * @return {@link #labelsAdded} instance as {@link Collection} of {@link LabelAction}
      **/
-    public Collection<Label> getLabelsAdded() {
+    public Collection<LabelAction> getLabelsAdded() {
         return labelsAdded;
     }
 
@@ -237,7 +237,7 @@ public class HistoryList {
      * @param label : label added to add
      * @apiNote only if the entry is not present in the {@link #labelsAdded} list will be inserted
      **/
-    public void addLabelAdded(Label label) {
+    public void addLabelAdded(LabelAction label) {
         if (!labelsAdded.contains(label))
             labelsAdded.add(label);
     }
@@ -248,7 +248,7 @@ public class HistoryList {
      * @param labelAddedToRemove : label added to remove
      * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
      **/
-    public boolean removeLabelAdded(Label labelAddedToRemove) {
+    public boolean removeLabelAdded(LabelAction labelAddedToRemove) {
         return labelsAdded.remove(labelAddedToRemove);
     }
 
@@ -256,9 +256,9 @@ public class HistoryList {
      * Method to get {@link #labelsRemoved} instance <br>
      * Any params required
      *
-     * @return {@link #labelsRemoved} instance as {@link Collection} of {@link Label}
+     * @return {@link #labelsRemoved} instance as {@link Collection} of {@link LabelAction}
      **/
-    public Collection<Label> getLabelsRemoved() {
+    public Collection<LabelAction> getLabelsRemoved() {
         return labelsRemoved;
     }
 
@@ -268,7 +268,7 @@ public class HistoryList {
      * @param label : label removed to add
      * @apiNote only if the entry is not present in the {@link #labelsAdded} list will be inserted
      **/
-    public void addLabelRemoved(Label label) {
+    public void addLabelRemoved(LabelAction label) {
         if (!labelsRemoved.contains(label))
             labelsRemoved.add(label);
     }
@@ -279,7 +279,7 @@ public class HistoryList {
      * @param labelAddedToRemove : label removed to remove
      * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
      **/
-    public boolean removeLabelRemoved(Label labelAddedToRemove) {
+    public boolean removeLabelRemoved(LabelAction labelAddedToRemove) {
         return labelsRemoved.remove(labelAddedToRemove);
     }
 
