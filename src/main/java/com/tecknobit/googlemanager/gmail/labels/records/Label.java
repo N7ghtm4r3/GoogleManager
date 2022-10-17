@@ -3,19 +3,83 @@ package com.tecknobit.googlemanager.gmail.labels.records;
 import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
 import org.json.JSONObject;
 
+import static com.tecknobit.googlemanager.gmail.labels.records.Label.LabelColor.AllowedColor.valueOf;
+import static com.tecknobit.googlemanager.gmail.labels.records.Label.LabelListVisibility.labelShow;
+import static com.tecknobit.googlemanager.gmail.labels.records.Label.MessageListVisibility.show;
+
+/**
+ * The {@code Label} class is useful to format a Gmail's label
+ *
+ * @author N7ghtm4r3 - Tecknobit
+ * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels#Label">Label</a>
+ **/
 public class Label {
 
+    /**
+     * {@code id} the immutable ID of the label
+     **/
     private final String id;
+
+    /**
+     * {@code name} the display name of the label
+     **/
     private final String name;
+
+    /**
+     * {@code messageListVisibility} the visibility of messages with this label in the message list in the Gmail web interface
+     **/
     private final MessageListVisibility messageListVisibility;
+
+    /**
+     * {@code labelListVisibility} the visibility of the label in the label list in the Gmail web interface
+     **/
     private final LabelListVisibility labelListVisibility;
+
+    /**
+     * {@code type} the owner type for the label. User labels are created by the user and can be modified and deleted
+     * by the user and can be applied to any message or thread. System labels are internally created and cannot be added, modified, or deleted
+     **/
     private final LabelType type;
+
+    /**
+     * {@code messagesTotal} the total number of messages with the label
+     **/
     private final int messagesTotal;
+
+    /**
+     * {@code messagesUnread} the number of unread messages with the label
+     **/
     private final int messagesUnread;
+
+    /**
+     * {@code threadsTotal} the total number of threads with the label
+     **/
     private final int threadsTotal;
+
+    /**
+     * {@code threadsUnread} the number of unread threads with the label
+     **/
     private final int threadsUnread;
+
+    /**
+     * {@code color} the color to assign to the label. Color is only available for labels that have their type set to user
+     **/
     private final LabelColor color;
 
+    /**
+     * Constructor to init a {@link Label}
+     *
+     * @param id:                    the immutable ID of the label
+     * @param name:                  the display name of the label
+     * @param messageListVisibility: the visibility of messages with this label in the message list in the Gmail web interface
+     * @param labelListVisibility:   the visibility of the label in the label list in the Gmail web interface
+     * @param type:                  the owner type for the label
+     * @param messagesTotal:         the total number of messages with the label
+     * @param messagesUnread:        the number of unread messages with the label
+     * @param threadsTotal:          the total number of threads with the label
+     * @param threadsUnread:         the number of unread threads with the label
+     * @param color:                 the color to assign to the label. Color is only available for labels that have their type set to user
+     **/
     public Label(String id, String name, MessageListVisibility messageListVisibility, LabelListVisibility labelListVisibility,
                  LabelType type, int messagesTotal, int messagesUnread, int threadsTotal, int threadsUnread, LabelColor color) {
         this.id = id;
@@ -30,12 +94,41 @@ public class Label {
         this.color = color;
     }
 
+    /**
+     * Constructor to init a {@link Label}
+     *
+     * @param name:                  the display name of the label
+     * @param messageListVisibility: the visibility of messages with this label in the message list in the Gmail web interface
+     * @param labelListVisibility:   the visibility of the label in the label list in the Gmail web interface
+     **/
+    public Label(String name, MessageListVisibility messageListVisibility, LabelListVisibility labelListVisibility) {
+        this(null, name, messageListVisibility, labelListVisibility, null, 0, 0, 0, 0, null);
+    }
+
+    /**
+     * Constructor to init a {@link Label}
+     *
+     * @param name:                  the display name of the label
+     * @param messageListVisibility: the visibility of messages with this label in the message list in the Gmail web interface
+     * @param labelListVisibility:   the visibility of the label in the label list in the Gmail web interface
+     * @param color:                 the color to assign to the label. Color is only available for labels that have their type set to user
+     **/
+    public Label(String name, MessageListVisibility messageListVisibility, LabelListVisibility labelListVisibility,
+                 LabelColor color) {
+        this(null, name, messageListVisibility, labelListVisibility, null, 0, 0, 0, 0, color);
+    }
+
+    /**
+     * Constructor to init a {@link Label}
+     *
+     * @param jLabel: {@code "label"} details as {@link JSONObject}
+     **/
     public Label(JSONObject jLabel) {
         JsonHelper hLabel = new JsonHelper(jLabel);
         id = jLabel.getString("id");
         name = jLabel.getString("name");
-        messageListVisibility = MessageListVisibility.valueOf(jLabel.getString("messageListVisibility"));
-        labelListVisibility = LabelListVisibility.valueOf(jLabel.getString("labelListVisibility"));
+        messageListVisibility = MessageListVisibility.valueOf(hLabel.getString("messageListVisibility", show.name()));
+        labelListVisibility = LabelListVisibility.valueOf(hLabel.getString("labelListVisibility", labelShow.name()));
         type = LabelType.valueOf(hLabel.getString("type", LabelType.user.name()));
         messagesTotal = hLabel.getInt("messagesTotal", 0);
         messagesUnread = hLabel.getInt("messagesUnread", 0);
@@ -44,77 +137,186 @@ public class Label {
         color = new LabelColor(hLabel.getJSONObject("color"));
     }
 
+    /**
+     * Method to get {@link #id} instance <br>
+     * Any params required
+     *
+     * @return {@link #id} instance as {@link String}
+     **/
     public String getId() {
         return id;
     }
 
+    /**
+     * Method to get {@link #name} instance <br>
+     * Any params required
+     *
+     * @return {@link #name} instance as {@link String}
+     **/
     public String getName() {
         return name;
     }
 
+    /**
+     * Method to get {@link #messageListVisibility} instance <br>
+     * Any params required
+     *
+     * @return {@link #messageListVisibility} instance as {@link MessageListVisibility}
+     **/
     public MessageListVisibility getMessageListVisibility() {
         return messageListVisibility;
     }
 
+    /**
+     * Method to get {@link #labelListVisibility} instance <br>
+     * Any params required
+     *
+     * @return {@link #labelListVisibility} instance as {@link LabelListVisibility}
+     **/
     public LabelListVisibility getLabelListVisibility() {
         return labelListVisibility;
     }
 
+    /**
+     * Method to get {@link #type} instance <br>
+     * Any params required
+     *
+     * @return {@link #type} instance as {@link LabelType}
+     **/
     public LabelType getType() {
         return type;
     }
 
+    /**
+     * Method to get {@link #messagesTotal} instance <br>
+     * Any params required
+     *
+     * @return {@link #messagesTotal} instance as int
+     **/
     public int getMessagesTotal() {
         return messagesTotal;
     }
 
+    /**
+     * Method to get {@link #messagesUnread} instance <br>
+     * Any params required
+     *
+     * @return {@link #messagesUnread} instance as int
+     **/
     public int getMessagesUnread() {
         return messagesUnread;
     }
 
+    /**
+     * Method to get {@link #threadsTotal} instance <br>
+     * Any params required
+     *
+     * @return {@link #threadsTotal} instance as int
+     **/
     public int getThreadsTotal() {
         return threadsTotal;
     }
 
+    /**
+     * Method to get {@link #threadsUnread} instance <br>
+     * Any params required
+     *
+     * @return {@link #threadsUnread} instance as int
+     **/
     public int getThreadsUnread() {
         return threadsUnread;
     }
 
+    /**
+     * Method to get {@link #color} instance <br>
+     * Any params required
+     *
+     * @return {@link #color} instance as {@link LabelColor}
+     **/
     public LabelColor getColor() {
         return color;
     }
 
+    /**
+     * Returns a string representation of the object <br>
+     * Any params required
+     *
+     * @return a string representation of the object as {@link String}
+     */
     @Override
     public String toString() {
         return new JSONObject(this).toString();
     }
 
+    /**
+     * {@code MessageListVisibility} the messages visibilities available for messages with this label in the message list in the Gmail web interface
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels#messagelistvisibility">
+     * Messages visibilities</a>
+     **/
     public enum MessageListVisibility {
         show,
         hide
     }
 
+    /**
+     * {@code LabelListVisibility} the list of visibilities available for visibility of the label in the label list in the Gmail web interface
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels#labellistvisibility">
+     * Label list visibilities</a>
+     **/
     public enum LabelListVisibility {
         labelShow,
         labelShowIfUnread,
         labelHide
     }
 
+    /**
+     * {@code LabelType} the label types available for the owner for the label
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels#type">Label types</a>
+     **/
     public enum LabelType {
         system,
         user
     }
 
+    /**
+     * The {@code LabelColor} class is useful to format a Gmail's label color object for {@link Label}
+     *
+     * @author N7ghtm4r3 - Tecknobit
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels#Color">Label color</a>
+     **/
     public static class LabelColor {
 
+        /**
+         * {@code textColor} the text color of the label, represented as hex string
+         **/
         private final AllowedColor textColor;
+
+        /**
+         * {@code backgroundColor} the background color represented as hex string
+         **/
         private final AllowedColor backgroundColor;
 
+        /**
+         * Constructor to init a {@link LabelColor}
+         *
+         * @param textColor:       the text color of the label, represented as hex string
+         * @param backgroundColor: the background color represented as hex string
+         **/
         public LabelColor(AllowedColor textColor, AllowedColor backgroundColor) {
             this.textColor = textColor;
             this.backgroundColor = backgroundColor;
         }
 
+        /**
+         * Constructor to init a {@link LabelColor}
+         *
+         * @param textColor:       the text color of the label, represented as hex string
+         * @param backgroundColor: the background color represented as hex string
+         * @throws IllegalArgumentException when colors inserted are not allowed, so not present in {@link AllowedColor} enum
+         **/
         public LabelColor(String textColor, String backgroundColor) throws IllegalArgumentException {
             char firstCharText = textColor.charAt(0);
             char firstCharBackground = backgroundColor.charAt(0);
@@ -122,41 +324,82 @@ public class Label {
                 textColor = "_" + textColor;
             if (firstCharBackground != '_' && firstCharBackground != '#')
                 backgroundColor = "_" + backgroundColor;
-            this.textColor = AllowedColor.valueOf(textColor.replace("#", "_"));
-            this.backgroundColor = AllowedColor.valueOf(backgroundColor.replace("#", "_"));
+            this.textColor = valueOf(textColor.replace("#", "_"));
+            this.backgroundColor = valueOf(backgroundColor.replace("#", "_"));
         }
 
+        /**
+         * Constructor to init a {@link LabelColor}
+         *
+         * @param jLabelColor: {@code "label colors"} details as {@link JSONObject}
+         * @throws IllegalArgumentException when colors inserted are not allowed, so not present in {@link AllowedColor} enum
+         **/
         public LabelColor(JSONObject jLabelColor) throws IllegalArgumentException {
             if (jLabelColor == null) {
                 textColor = AllowedColor._000000;
                 backgroundColor = AllowedColor._000000;
             } else {
-                textColor = AllowedColor.valueOf(jLabelColor.getString("textColor"));
-                backgroundColor = AllowedColor.valueOf(jLabelColor.getString("backgroundColor"));
+                textColor = valueOf(jLabelColor.getString("textColor").replace("#", "_"));
+                backgroundColor = valueOf(jLabelColor.getString("backgroundColor").replace("#", "_"));
             }
         }
 
+        /**
+         * Method to get {@link #textColor} instance <br>
+         * Any params required
+         *
+         * @return {@link #textColor} instance as {@link AllowedColor}
+         **/
         public AllowedColor getTextColor() {
             return textColor;
         }
 
+        /**
+         * Method to get {@link #textColor} instance <br>
+         * Any params required
+         *
+         * @return {@link #textColor} instance as {@link String}
+         **/
         public String getTextColorHex() {
             return textColor.color;
         }
 
+        /**
+         * Method to get {@link #backgroundColor} instance <br>
+         * Any params required
+         *
+         * @return {@link #backgroundColor} instance as {@link AllowedColor}
+         **/
         public AllowedColor getBackgroundColor() {
             return backgroundColor;
         }
 
+        /**
+         * Method to get {@link #backgroundColor} instance <br>
+         * Any params required
+         *
+         * @return {@link #backgroundColor} instance as {@link String}
+         **/
         public String getBackgroundColorHex() {
             return backgroundColor.color;
         }
 
+        /**
+         * Returns a string representation of the object <br>
+         * Any params required
+         *
+         * @return a string representation of the object as {@link String}
+         */
         @Override
         public String toString() {
             return new JSONObject(this).toString();
         }
 
+        /**
+         * {@code AllowedColor} the list of colors available
+         *
+         * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels#color">Allowed colors</a>
+         **/
         public enum AllowedColor {
             _000000("#000000"), _434343("#434343"), _666666("#666666"), _999999("#999999"),
             _cccccc("#cccccc"), _efefef("#efefef"), _f3f3f3("#f3f3f3"), _ffffff("#ffffff"),
@@ -185,12 +428,26 @@ public class Label {
             _662e37("#662e37"), _ebdbde("#ebdbde"), _cca6ac("#cca6ac"), _094228("#094228"),
             _42d692("#42d692"), _16a765("#16a765");
 
+            /**
+             * {@code color} the color represented as hex string
+             **/
             private final String color;
 
+            /**
+             * Constructor to init a {@link LabelColor}
+             *
+             * @param color: the color represented as hex string
+             **/
             AllowedColor(final String color) {
                 this.color = color;
             }
 
+            /**
+             * Method to get {@link #color} instance <br>
+             * Any params required
+             *
+             * @return {@link #color} instance as hex {@link String}
+             **/
             @Override
             public String toString() {
                 return color;
