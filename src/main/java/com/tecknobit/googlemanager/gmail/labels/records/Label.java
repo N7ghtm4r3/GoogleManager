@@ -16,6 +16,111 @@ import static com.tecknobit.googlemanager.gmail.labels.records.Label.MessageList
 public class Label {
 
     /**
+     * {@code CHAT_LABEL} is a constant for chat label type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list?apix=true#try-it">labels</a>
+     **/
+    public static final String CHAT_LABEL = "CHAT";
+
+    /**
+     * {@code SENT_LABEL} is a constant for sent label type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list?apix=true#try-it">labels</a>
+     **/
+    public static final String SENT_LABEL = "SENT";
+
+    /**
+     * {@code INBOX_LABEL} is a constant for inbox label type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list?apix=true#try-it">labels</a>
+     **/
+    public static final String INBOX_LABEL = "INBOX";
+
+    /**
+     * {@code IMPORTANT_LABEL} is a constant for important label type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list?apix=true#try-it">labels</a>
+     **/
+    public static final String IMPORTANT_LABEL = "IMPORTANT";
+
+    /**
+     * {@code TRASH_LABEL} is a constant for trash label type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list?apix=true#try-it">labels</a>
+     **/
+    public static final String TRASH_LABEL = "TRASH";
+
+    /**
+     * {@code DRAFT_LABEL} is a constant for draft label type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list?apix=true#try-it">labels</a>
+     **/
+    public static final String DRAFT_LABEL = "DRAFT";
+
+    /**
+     * {@code SPAM_LABEL} is a constant for spam label type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list?apix=true#try-it">labels</a>
+     **/
+    public static final String SPAM_LABEL = "SPAM";
+
+    /**
+     * {@code CATEGORY_FORUMS_LABEL} is a constant for category forums label type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list?apix=true#try-it">labels</a>
+     **/
+    public static final String CATEGORY_FORUMS_LABEL = "CATEGORY_FORUMS";
+
+    /**
+     * {@code CATEGORY_UPDATES_LABEL} is a constant for category updates label type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list?apix=true#try-it">labels</a>
+     **/
+    public static final String CATEGORY_UPDATES_LABEL = "CATEGORY_UPDATES";
+
+    /**
+     * {@code CATEGORY_PERSONAL_LABEL} is a constant for category personal label type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list?apix=true#try-it">labels</a>
+     **/
+    public static final String CATEGORY_PERSONAL_LABEL = "CATEGORY_PERSONAL";
+
+    /**
+     * {@code CATEGORY_PROMOTIONS_LABEL} is a constant for category promotions label type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list?apix=true#try-it">labels</a>
+     **/
+    public static final String CATEGORY_PROMOTIONS_LABEL = "CATEGORY_PROMOTIONS";
+
+    /**
+     * {@code CATEGORY_SOCIAL_LABEL} is a constant for category social label type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list?apix=true#try-it">labels</a>
+     **/
+    public static final String CATEGORY_SOCIAL_LABEL = "CATEGORY_SOCIAL";
+
+    /**
+     * {@code STARRED_LABEL} is a constant for starred label type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list?apix=true#try-it">labels</a>
+     **/
+    public static final String STARRED_LABEL = "STARRED";
+
+    /**
+     * {@code UNREAD_LABEL} is a constant for unread label type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list?apix=true#try-it">labels</a>
+     **/
+    public static final String UNREAD_LABEL = "UNREAD";
+
+    /**
+     * {@code UNWANTED_LABEL} is a constant for unwanted label type
+     *
+     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list?apix=true#try-it">labels</a>
+     **/
+    public static final String UNWANTED_LABEL = "UNWANTED";
+
+    /**
      * {@code id} the immutable ID of the label
      **/
     private final String id;
@@ -401,6 +506,7 @@ public class Label {
          * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels#color">Allowed colors</a>
          **/
         public enum AllowedColor {
+
             _000000("#000000"), _434343("#434343"), _666666("#666666"), _999999("#999999"),
             _cccccc("#cccccc"), _efefef("#efefef"), _f3f3f3("#f3f3f3"), _ffffff("#ffffff"),
             _fb4c2f("#fb4c2f"), _ffad47("#ffad47"), _fad165("#fad165"), _16a766("#16a766"),

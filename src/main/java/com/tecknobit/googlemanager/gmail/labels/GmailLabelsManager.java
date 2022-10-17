@@ -1,5 +1,6 @@
 package com.tecknobit.googlemanager.gmail.labels;
 
+import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.LabelColor;
 import com.google.api.services.gmail.model.ListLabelsResponse;
 import com.tecknobit.googlemanager.gmail.GmailManager;
@@ -23,6 +24,11 @@ import static com.tecknobit.googlemanager.gmail.labels.records.Label.LabelColor.
  * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels">Gmail labels</a>
  **/
 public class GmailLabelsManager extends GmailManager {
+
+    /**
+     * {@code labels} is the instance for {@link Gmail.Users.Labels}'s service
+     **/
+    private final Gmail.Users.Labels labels = gmail.labels();
 
     /**
      * Constructor to init a {@link GmailLabelsManager}
@@ -174,7 +180,7 @@ public class GmailLabelsManager extends GmailManager {
      **/
     public <T> T createLabel(String name, MessageListVisibility messageListVisibility,
                              LabelListVisibility labelListVisibility, ReturnFormat format) throws IOException {
-        com.google.api.services.gmail.model.Label responseLabel = gmail.labels().create(userId, assembleLabel(name,
+        com.google.api.services.gmail.model.Label responseLabel = labels.create(userId, assembleLabel(name,
                 messageListVisibility, labelListVisibility)).execute();
         switch (format) {
             case JSON:
@@ -262,7 +268,7 @@ public class GmailLabelsManager extends GmailManager {
                 labelListVisibility);
         requestLabel.setColor(new LabelColor().setTextColor(textColor.toString())
                 .setBackgroundColor(backgroundColor.toString()));
-        com.google.api.services.gmail.model.Label responseLabel = gmail.labels().create(userId, requestLabel).execute();
+        com.google.api.services.gmail.model.Label responseLabel = labels.create(userId, requestLabel).execute();
         switch (format) {
             case JSON:
                 return (T) new JSONObject(responseLabel).toString();
@@ -315,7 +321,7 @@ public class GmailLabelsManager extends GmailManager {
      **/
     public boolean deleteLabel(String labelId) {
         try {
-            gmail.labels().delete(userId, labelId).execute();
+            labels.delete(userId, labelId).execute();
             return true;
         } catch (IOException e) {
             return false;
@@ -373,7 +379,7 @@ public class GmailLabelsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T getLabel(String labelId, ReturnFormat format) throws IOException {
-        com.google.api.services.gmail.model.Label label = gmail.labels().get(userId, labelId).execute();
+        com.google.api.services.gmail.model.Label label = labels.get(userId, labelId).execute();
         switch (format) {
             case JSON:
                 return (T) new JSONObject(label);
@@ -407,7 +413,7 @@ public class GmailLabelsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T getLabelsList(ReturnFormat format) throws IOException {
-        ListLabelsResponse list = gmail.labels().list(userId).execute();
+        ListLabelsResponse list = labels.list(userId).execute();
         switch (format) {
             case JSON:
                 return (T) new JSONArray(list.getLabels());
@@ -758,7 +764,7 @@ public class GmailLabelsManager extends GmailManager {
      **/
     private <T> T changeLabel(String labelId, com.google.api.services.gmail.model.Label label,
                               ReturnFormat format) throws IOException {
-        label = gmail.labels().patch(userId, labelId, label).execute();
+        label = labels.patch(userId, labelId, label).execute();
         switch (format) {
             case JSON:
                 return (T) new JSONObject(label);

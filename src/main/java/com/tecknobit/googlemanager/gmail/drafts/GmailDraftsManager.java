@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.Properties;
 
 import static com.tecknobit.googlemanager.GoogleManager.ReturnFormat.LIBRARY_OBJECT;
+import static com.tecknobit.googlemanager.gmail.GmailManager.ResponseFormat.FULL_FORMAT;
 import static com.tecknobit.googlemanager.gmail.drafts.records.Message.Header.SUBJECT;
 import static com.tecknobit.googlemanager.gmail.drafts.records.Message.Header.To;
 
@@ -37,6 +38,11 @@ import static com.tecknobit.googlemanager.gmail.drafts.records.Message.Header.To
  **/
 // TODO: 15/10/2022 WHEN ATTACHMENTS ENDPOINT IS CREATED IMPLEMENT UPDATE WITH AUTO FILE FETCHER
 public class GmailDraftsManager extends GmailManager {
+
+    /**
+     * {@code drafts} is the instance for {@link Gmail.Users.Drafts}'s service
+     **/
+    private final Gmail.Users.Drafts drafts = gmail.drafts();
 
     /**
      * Constructor to init a {@link GmailDraftsManager}
@@ -480,7 +486,7 @@ public class GmailDraftsManager extends GmailManager {
         message.setRaw(encodedEmail);
         draft.setMessage(message);
         if (sendCreateResponse) {
-            draft = gmail.drafts().create(userId, draft).execute();
+            draft = drafts.create(userId, draft).execute();
             switch (format) {
                 case JSON:
                     return (T) new JSONObject(draft);
@@ -504,7 +510,7 @@ public class GmailDraftsManager extends GmailManager {
      **/
     public boolean deleteDraft(String draftId) {
         try {
-            gmail.drafts().delete(userId, draftId).execute();
+            drafts.delete(userId, draftId).execute();
             return true;
         } catch (IOException e) {
             return false;
@@ -548,7 +554,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
-    public Draft getDraft(String draftId, String responseFormat) throws IOException {
+    public Draft getDraft(String draftId, ResponseFormat responseFormat) throws IOException {
         return getDraft(draftId, responseFormat, LIBRARY_OBJECT);
     }
 
@@ -563,10 +569,10 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
-    public <T> T getDraft(String draftId, String responseFormat, ReturnFormat format) throws IOException {
-        Gmail.Users.Drafts.Get getDraft = gmail.drafts().get(userId, draftId);
+    public <T> T getDraft(String draftId, ResponseFormat responseFormat, ReturnFormat format) throws IOException {
+        Gmail.Users.Drafts.Get getDraft = drafts.get(userId, draftId);
         if (responseFormat != null)
-            getDraft.setFormat(responseFormat);
+            getDraft.setFormat(responseFormat.toString());
         com.google.api.services.gmail.model.Draft draft = getDraft.execute();
         switch (format) {
             case JSON:
@@ -602,7 +608,7 @@ public class GmailDraftsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T getDraftsList(boolean includeSpamTrash, ReturnFormat format) throws IOException {
-        return getDraftsList(gmail.drafts().list(userId).setIncludeSpamTrash(includeSpamTrash).execute(), format);
+        return getDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash).execute(), format);
     }
 
     /**
@@ -631,7 +637,7 @@ public class GmailDraftsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T getDraftsList(boolean includeSpamTrash, int maxResults, ReturnFormat format) throws IOException {
-        return getDraftsList(gmail.drafts().list(userId).setIncludeSpamTrash(includeSpamTrash)
+        return getDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash)
                 .setMaxResults((long) maxResults)
                 .execute(), format);
     }
@@ -662,7 +668,7 @@ public class GmailDraftsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T getDraftsList(boolean includeSpamTrash, String pageToken, ReturnFormat format) throws IOException {
-        return getDraftsList(gmail.drafts().list(userId)
+        return getDraftsList(drafts.list(userId)
                 .setIncludeSpamTrash(includeSpamTrash)
                 .setPageToken(pageToken)
                 .execute(), format);
@@ -696,7 +702,7 @@ public class GmailDraftsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T getDraftsList(String q, boolean includeSpamTrash, ReturnFormat format) throws IOException {
-        return getDraftsList(gmail.drafts().list(userId)
+        return getDraftsList(drafts.list(userId)
                 .setQ(q)
                 .setIncludeSpamTrash(includeSpamTrash)
                 .execute(), format);
@@ -731,7 +737,7 @@ public class GmailDraftsManager extends GmailManager {
      **/
     public <T> T getDraftsList(boolean includeSpamTrash, int maxResults, String pageToken,
                                ReturnFormat format) throws IOException {
-        return getDraftsList(gmail.drafts().list(userId).setIncludeSpamTrash(includeSpamTrash)
+        return getDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash)
                 .setMaxResults((long) maxResults)
                 .setPageToken(pageToken)
                 .execute(), format);
@@ -768,7 +774,7 @@ public class GmailDraftsManager extends GmailManager {
      **/
     public <T> T getDraftsList(boolean includeSpamTrash, String q, int maxResults,
                                ReturnFormat format) throws IOException {
-        return getDraftsList(gmail.drafts().list(userId).setIncludeSpamTrash(includeSpamTrash)
+        return getDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash)
                 .setQ(q)
                 .setMaxResults((long) maxResults)
                 .execute(), format);
@@ -805,7 +811,7 @@ public class GmailDraftsManager extends GmailManager {
      **/
     public <T> T getDraftsList(boolean includeSpamTrash, String pageToken, String q,
                                ReturnFormat format) throws IOException {
-        return getDraftsList(gmail.drafts().list(userId).setIncludeSpamTrash(includeSpamTrash)
+        return getDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash)
                 .setPageToken(pageToken)
                 .setQ(q)
                 .execute(), format);
@@ -845,7 +851,7 @@ public class GmailDraftsManager extends GmailManager {
      **/
     public <T> T getDraftsList(boolean includeSpamTrash, int maxResults, String pageToken,
                                String q, ReturnFormat format) throws IOException {
-        return getDraftsList(gmail.drafts().list(userId).setIncludeSpamTrash(includeSpamTrash)
+        return getDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash)
                 .setMaxResults((long) maxResults)
                 .setPageToken(pageToken)
                 .setQ(q)
@@ -894,7 +900,6 @@ public class GmailDraftsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T sendDraft(String draftId, ReturnFormat format) throws IOException {
-        Gmail.Users.Drafts drafts = gmail.drafts();
         com.google.api.services.gmail.model.Draft draft = drafts.get(userId, draftId).execute();
         com.google.api.services.gmail.model.Message message = drafts.send(userId, draft).execute();
         switch (format) {
@@ -1720,8 +1725,8 @@ public class GmailDraftsManager extends GmailManager {
      * @return header value as {@link String}
      **/
     private String getHeaderValue(String draftId, String headerKeySearched) throws IOException {
-        com.google.api.services.gmail.model.Draft draft = gmail.drafts().get(userId, draftId)
-                .setFormat(FULL_FORMAT).execute();
+        com.google.api.services.gmail.model.Draft draft = drafts.get(userId, draftId)
+                .setFormat(FULL_FORMAT.toString()).execute();
         for (MessagePartHeader messagePartHeader : draft.getMessage().getPayload().getHeaders())
             if (messagePartHeader.getName().equals(headerKeySearched))
                 return messagePartHeader.getValue();
@@ -1737,7 +1742,7 @@ public class GmailDraftsManager extends GmailManager {
      **/
     private <T> T updateDraft(com.google.api.services.gmail.model.Draft draftToReplace, String draftId,
                               ReturnFormat format) throws IOException {
-        com.google.api.services.gmail.model.Draft draftUpdated = gmail.drafts().update(userId, draftId,
+        com.google.api.services.gmail.model.Draft draftUpdated = drafts.update(userId, draftId,
                 draftToReplace).execute();
         switch (format) {
             case JSON:

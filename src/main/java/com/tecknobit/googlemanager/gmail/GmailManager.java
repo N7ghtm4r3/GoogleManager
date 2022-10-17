@@ -79,32 +79,58 @@ public class GmailManager extends GoogleManager {
     public static final String WILDCARD_MIME_TYPE = "*/*";
 
     /**
-     * {@code MINIMAL_FORMAT} is a constant for minimal format type
+     * {@code ResponseFormat} the list of formats available
      *
      * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/Format">format</a>
      **/
-    public static final String MINIMAL_FORMAT = "minimal";
+    public enum ResponseFormat {
 
-    /**
-     * {@code FULL_FORMAT} is a constant for full format type
-     *
-     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/Format">format</a>
-     **/
-    public static final String FULL_FORMAT = "full";
+        /**
+         * {@code MINIMAL_FORMAT} is a constant for minimal format type
+         **/
+        MINIMAL_FORMAT("minimal"),
 
-    /**
-     * {@code RAW_FORMAT} is a constant for raw format type
-     *
-     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/Format">format</a>
-     **/
-    public static final String RAW_FORMAT = "raw";
+        /**
+         * {@code FULL_FORMAT} is a constant for full format type
+         **/
+        FULL_FORMAT("full"),
 
-    /**
-     * {@code METADATA_FORMAT} is a constant for metadata format type
-     *
-     * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/Format">format</a>
-     **/
-    public static final String METADATA_FORMAT = "metadata";
+        /**
+         * {@code RAW_FORMAT} is a constant for raw format type
+         **/
+        RAW_FORMAT("raw"),
+
+        /**
+         * {@code METADATA_FORMAT} is a constant for metadata format type
+         **/
+        METADATA_FORMAT("metadata");
+
+        /**
+         * {@code format} the format type for the responses
+         **/
+        private final String format;
+
+        /**
+         * Constructor to init a {@link ResponseFormat}
+         *
+         * @param format: the color represented as hex string
+         **/
+        ResponseFormat(final String format) {
+            this.format = format;
+        }
+
+        /**
+         * Method to get {@link #format} instance <br>
+         * Any params required
+         *
+         * @return {@link #format} instance as hex {@link String}
+         **/
+        @Override
+        public String toString() {
+            return format;
+        }
+
+    }
 
     /**
      * {@code gmail} is the instance for {@link Gmail}'s service

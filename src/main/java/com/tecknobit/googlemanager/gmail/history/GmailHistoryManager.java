@@ -1,5 +1,6 @@
 package com.tecknobit.googlemanager.gmail.history;
 
+import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.ListHistoryResponse;
 import com.tecknobit.googlemanager.gmail.GmailManager;
 import com.tecknobit.googlemanager.gmail.history.records.HistoryList;
@@ -47,6 +48,11 @@ public class GmailHistoryManager extends GmailManager {
      * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list#HistoryType">history types</a>
      **/
     public static final String LABEL_REMOVED_HISTORY_TYPE = "labelRemoved";
+
+    /**
+     * {@code history} is the instance for {@link Gmail.Users.History}'s service
+     **/
+    private final Gmail.Users.History history = gmail.history();
 
     /**
      * Constructor to init a {@link GmailHistoryManager}
@@ -162,7 +168,7 @@ public class GmailHistoryManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T getHistoryList(long startHistoryId, ReturnFormat format) throws IOException {
-        return getHistoryList(gmail.history().list(userId).setStartHistoryId(valueOf(startHistoryId)).execute(), format);
+        return getHistoryList(history.list(userId).setStartHistoryId(valueOf(startHistoryId)).execute(), format);
     }
 
     /**
@@ -193,7 +199,7 @@ public class GmailHistoryManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T getHistoryList(long startHistoryId, int maxResults, ReturnFormat format) throws IOException {
-        ListHistoryResponse listHistoryResponse = gmail.history().list(userId).setStartHistoryId(valueOf(startHistoryId))
+        ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setMaxResults((long) maxResults)
                 .execute();
         return getHistoryList(listHistoryResponse, format);
@@ -227,7 +233,7 @@ public class GmailHistoryManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T getHistoryList(long startHistoryId, String pageToken, ReturnFormat format) throws IOException {
-        ListHistoryResponse listHistoryResponse = gmail.history().list(userId).setStartHistoryId(valueOf(startHistoryId))
+        ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setPageToken(pageToken)
                 .execute();
         return getHistoryList(listHistoryResponse, format);
@@ -261,7 +267,7 @@ public class GmailHistoryManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T getHistoryList(String labelId, long startHistoryId, ReturnFormat format) throws IOException {
-        ListHistoryResponse listHistoryResponse = gmail.history().list(userId).setStartHistoryId(valueOf(startHistoryId))
+        ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setLabelId(labelId)
                 .execute();
         return getHistoryList(listHistoryResponse, format);
@@ -295,7 +301,7 @@ public class GmailHistoryManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T getHistoryList(long startHistoryId, String[] historyTypes, ReturnFormat format) throws IOException {
-        ListHistoryResponse listHistoryResponse = gmail.history().list(userId).setStartHistoryId(valueOf(startHistoryId))
+        ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setHistoryTypes(stream(historyTypes).toList())
                 .execute();
         return getHistoryList(listHistoryResponse, format);
@@ -330,7 +336,7 @@ public class GmailHistoryManager extends GmailManager {
      **/
     public <T> T getHistoryList(long startHistoryId, Collection<String> historyTypes,
                                 ReturnFormat format) throws IOException {
-        ListHistoryResponse listHistoryResponse = gmail.history().list(userId).setStartHistoryId(valueOf(startHistoryId))
+        ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setHistoryTypes(historyTypes.stream().toList())
                 .execute();
         return getHistoryList(listHistoryResponse, format);
@@ -367,7 +373,7 @@ public class GmailHistoryManager extends GmailManager {
      **/
     public <T> T getHistoryList(long startHistoryId, int maxResults, String pageToken,
                                 ReturnFormat format) throws IOException {
-        ListHistoryResponse listHistoryResponse = gmail.history().list(userId).setStartHistoryId(valueOf(startHistoryId))
+        ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setMaxResults((long) maxResults)
                 .setPageToken(pageToken)
                 .execute();
@@ -405,7 +411,7 @@ public class GmailHistoryManager extends GmailManager {
      **/
     public <T> T getHistoryList(long startHistoryId, String labelId, int maxResults,
                                 ReturnFormat format) throws IOException {
-        ListHistoryResponse listHistoryResponse = gmail.history().list(userId).setStartHistoryId(valueOf(startHistoryId))
+        ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setMaxResults((long) maxResults)
                 .setLabelId(labelId)
                 .execute();
@@ -443,7 +449,7 @@ public class GmailHistoryManager extends GmailManager {
      **/
     public <T> T getHistoryList(long startHistoryId, int maxResults, String[] historyTypes,
                                 ReturnFormat format) throws IOException {
-        ListHistoryResponse listHistoryResponse = gmail.history().list(userId).setStartHistoryId(valueOf(startHistoryId))
+        ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setMaxResults((long) maxResults)
                 .setHistoryTypes(stream(historyTypes).toList())
                 .execute();
@@ -481,7 +487,7 @@ public class GmailHistoryManager extends GmailManager {
      **/
     public <T> T getHistoryList(long startHistoryId, int maxResults, Collection<String> historyTypes,
                                 ReturnFormat format) throws IOException {
-        ListHistoryResponse listHistoryResponse = gmail.history().list(userId).setStartHistoryId(valueOf(startHistoryId))
+        ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setMaxResults((long) maxResults)
                 .setHistoryTypes(historyTypes.stream().toList())
                 .execute();
@@ -519,7 +525,7 @@ public class GmailHistoryManager extends GmailManager {
      **/
     public <T> T getHistoryList(long startHistoryId, String pageToken, String labelId,
                                 ReturnFormat format) throws IOException {
-        ListHistoryResponse listHistoryResponse = gmail.history().list(userId).setStartHistoryId(valueOf(startHistoryId))
+        ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setPageToken(pageToken)
                 .setLabelId(labelId)
                 .execute();
@@ -557,7 +563,7 @@ public class GmailHistoryManager extends GmailManager {
      **/
     public <T> T getHistoryList(long startHistoryId, String pageToken, String[] historyTypes,
                                 ReturnFormat format) throws IOException {
-        ListHistoryResponse listHistoryResponse = gmail.history().list(userId).setStartHistoryId(valueOf(startHistoryId))
+        ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setPageToken(pageToken)
                 .setHistoryTypes(stream(historyTypes).toList())
                 .execute();
@@ -595,7 +601,7 @@ public class GmailHistoryManager extends GmailManager {
      **/
     public <T> T getHistoryList(long startHistoryId, String pageToken, Collection<String> historyTypes,
                                 ReturnFormat format) throws IOException {
-        ListHistoryResponse listHistoryResponse = gmail.history().list(userId).setStartHistoryId(valueOf(startHistoryId))
+        ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setPageToken(pageToken)
                 .setHistoryTypes(historyTypes.stream().toList())
                 .execute();
@@ -633,7 +639,7 @@ public class GmailHistoryManager extends GmailManager {
      **/
     public <T> T getHistoryList(String labelId, long startHistoryId, String[] historyTypes,
                                 ReturnFormat format) throws IOException {
-        ListHistoryResponse listHistoryResponse = gmail.history().list(userId).setStartHistoryId(valueOf(startHistoryId))
+        ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setLabelId(labelId)
                 .setHistoryTypes(stream(historyTypes).toList())
                 .execute();
@@ -671,7 +677,7 @@ public class GmailHistoryManager extends GmailManager {
      **/
     public <T> T getHistoryList(String labelId, long startHistoryId, Collection<String> historyTypes,
                                 ReturnFormat format) throws IOException {
-        ListHistoryResponse listHistoryResponse = gmail.history().list(userId).setStartHistoryId(valueOf(startHistoryId))
+        ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setLabelId(labelId)
                 .setHistoryTypes(historyTypes.stream().toList())
                 .execute();
@@ -714,7 +720,7 @@ public class GmailHistoryManager extends GmailManager {
      **/
     public <T> T getHistoryList(long startHistoryId, int maxResults, String pageToken, String labelId,
                                 String[] historyTypes, ReturnFormat format) throws IOException {
-        ListHistoryResponse listHistoryResponse = gmail.history().list(userId).setStartHistoryId(valueOf(startHistoryId))
+        ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setMaxResults((long) maxResults)
                 .setPageToken(pageToken)
                 .setLabelId(labelId)
@@ -759,7 +765,7 @@ public class GmailHistoryManager extends GmailManager {
      **/
     public <T> T getHistoryList(long startHistoryId, int maxResults, String pageToken, String labelId,
                                 Collection<String> historyTypes, ReturnFormat format) throws IOException {
-        ListHistoryResponse listHistoryResponse = gmail.history().list(userId).setStartHistoryId(valueOf(startHistoryId))
+        ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setMaxResults((long) maxResults)
                 .setPageToken(pageToken)
                 .setLabelId(labelId)
