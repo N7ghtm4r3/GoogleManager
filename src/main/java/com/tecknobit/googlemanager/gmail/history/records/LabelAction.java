@@ -1,7 +1,7 @@
 package com.tecknobit.googlemanager.gmail.history.records;
 
 import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
-import com.tecknobit.googlemanager.gmail.drafts.records.Message;
+import com.tecknobit.googlemanager.gmail.records.Message;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

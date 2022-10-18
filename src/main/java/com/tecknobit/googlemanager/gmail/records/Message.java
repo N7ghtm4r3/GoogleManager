@@ -1,4 +1,4 @@
-package com.tecknobit.googlemanager.gmail.drafts.records;
+package com.tecknobit.googlemanager.gmail.records;
 
 import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
 import org.json.JSONArray;

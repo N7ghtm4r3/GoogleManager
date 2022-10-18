@@ -4,9 +4,10 @@ import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.BatchDeleteMessagesRequest;
 import com.google.api.services.gmail.model.BatchModifyMessagesRequest;
 import com.tecknobit.googlemanager.gmail.GmailManager;
-import com.tecknobit.googlemanager.gmail.drafts.records.Message;
+import com.tecknobit.googlemanager.gmail.records.Message;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 
@@ -21,11 +22,6 @@ import static java.util.Arrays.stream;
  * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages">Gmail messages</a>
  **/
 public class GmailMessagesManager extends GmailManager {
-
-    public Message importMessage(String to, String subject, String contentMessage, boolean neverMarkSpam,
-                                 boolean processForCalendar, boolean deleted) throws Exception {
-        return importMessage(to, subject, contentMessage, neverMarkSpam, processForCalendar, deleted, LIBRARY_OBJECT);
-    }
 
     /**
      * {@code messages} is the instance for {@link Gmail.Users.Messages}'s service
@@ -186,7 +182,6 @@ public class GmailMessagesManager extends GmailManager {
         return getMessage(messageId, stream(metadataHeaders).toList(), format);
     }
 
-
     public Message getMessage(String messageId, Collection<String> metadataHeaders) throws IOException {
         return getMessage(messageId, metadataHeaders, LIBRARY_OBJECT);
     }
@@ -208,45 +203,32 @@ public class GmailMessagesManager extends GmailManager {
         }
     }
 
-    public <T> T importMessage(String to, String subject, String contentMessage, boolean neverMarkSpam,
-                               boolean processForCalendar, boolean deleted, ReturnFormat format) throws Exception {
-        return importMessage(messages.gmailImport(userId, createMessage("", to, subject, contentMessage))
-                .setNeverMarkSpam(neverMarkSpam)
-                .setProcessForCalendar(processForCalendar)
-                .setDeleted(deleted)
-                .execute(), format);
-    }
-
-    public Message importMessage(String to, String subject, String contentMessage, boolean neverMarkSpam,
-                                 boolean processForCalendar, boolean deleted,
-                                 InternalDateSource internalDateSource) throws Exception {
-        return importMessage(to, subject, contentMessage, neverMarkSpam, processForCalendar, deleted,
-                internalDateSource, LIBRARY_OBJECT);
-    }
-
-    // TODO: 18/10/2022 MAKE METHODS FOR FILE IMPORTS AND CHECK GMAILMANAGER METHOD IF MAKE RETURN MESSAGE OR MIME LIKE NOW 
-    /*
-    public Message importMessageWithFile(String to, String subject, String contentMessage, boolean neverMarkSpam,
-                                         boolean processForCalendar, boolean deleted, File file) throws Exception {
-        return importMessageWithFile(to, subject, contentMessage, neverMarkSpam, processForCalendar, deleted, file,
+    public Message importMessage(String toEmailAddress, String subject, String contentMessage, boolean neverMarkSpam,
+                                 boolean processForCalendar, boolean deleted) throws Exception {
+        return importMessage(toEmailAddress, subject, contentMessage, neverMarkSpam, processForCalendar, deleted,
                 LIBRARY_OBJECT);
     }
 
-    public <T> T importMessageWithFile(String to, String subject, String contentMessage, boolean neverMarkSpam,
-                                       boolean processForCalendar, boolean deleted, File file,
-                                       ReturnFormat format) throws Exception {
-        return importMessage(messages.gmailImport(userId, createMessage(createMessageWithFile(to, subject, contentMessage, file,
-                        TEXT_PLAIN_MIME_TYPE)))
+    public <T> T importMessage(String toEmailAddress, String subject, String contentMessage, boolean neverMarkSpam,
+                               boolean processForCalendar, boolean deleted, ReturnFormat format) throws Exception {
+        return returnMessage(messages.gmailImport(userId, createMessage(toEmailAddress, subject, contentMessage))
                 .setNeverMarkSpam(neverMarkSpam)
                 .setProcessForCalendar(processForCalendar)
                 .setDeleted(deleted)
                 .execute(), format);
-    }*/
+    }
 
-    public <T> T importMessage(String to, String subject, String contentMessage, boolean neverMarkSpam,
+    public Message importMessage(String toEmailAddress, String subject, String contentMessage, boolean neverMarkSpam,
+                                 boolean processForCalendar, boolean deleted,
+                                 InternalDateSource internalDateSource) throws Exception {
+        return importMessage(toEmailAddress, subject, contentMessage, neverMarkSpam, processForCalendar, deleted,
+                internalDateSource, LIBRARY_OBJECT);
+    }
+
+    public <T> T importMessage(String toEmailAddress, String subject, String contentMessage, boolean neverMarkSpam,
                                boolean processForCalendar, boolean deleted, InternalDateSource internalDateSource,
                                ReturnFormat format) throws Exception {
-        return importMessage(messages.gmailImport(userId, createMessage("", to, subject, contentMessage))
+        return returnMessage(messages.gmailImport(userId, createMessage(toEmailAddress, subject, contentMessage))
                 .setNeverMarkSpam(neverMarkSpam)
                 .setProcessForCalendar(processForCalendar)
                 .setDeleted(deleted)
@@ -254,7 +236,204 @@ public class GmailMessagesManager extends GmailManager {
                 .execute(), format);
     }
 
-    private <T> T importMessage(com.google.api.services.gmail.model.Message message, ReturnFormat format) {
+    public Message importMessageWithFile(String toEmailAddress, String subject, String contentMessage,
+                                         boolean neverMarkSpam, boolean processForCalendar, boolean deleted,
+                                         File file) throws Exception {
+        return importMessageWithFile(toEmailAddress, subject, contentMessage, neverMarkSpam, processForCalendar, deleted,
+                file, LIBRARY_OBJECT);
+    }
+
+    public <T> T importMessageWithFile(String toEmailAddress, String subject, String contentMessage,
+                                       boolean neverMarkSpam, boolean processForCalendar, boolean deleted, File file,
+                                       ReturnFormat format) throws Exception {
+        return returnMessage(messages.gmailImport(userId, createMessageWithFile(toEmailAddress, subject, contentMessage,
+                        file, TEXT_PLAIN_MIME_TYPE))
+                .setNeverMarkSpam(neverMarkSpam)
+                .setProcessForCalendar(processForCalendar)
+                .setDeleted(deleted)
+                .execute(), format);
+    }
+
+    public Message importMessageWithFile(String toEmailAddress, String subject, String contentMessage,
+                                         boolean neverMarkSpam, boolean processForCalendar, boolean deleted, File file,
+                                         InternalDateSource internalDateSource) throws Exception {
+        return importMessageWithFile(toEmailAddress, subject, contentMessage, neverMarkSpam, processForCalendar, deleted,
+                file, internalDateSource, LIBRARY_OBJECT);
+    }
+
+    public <T> T importMessageWithFile(String toEmailAddress, String subject, String contentMessage, boolean neverMarkSpam,
+                                       boolean processForCalendar, boolean deleted, File file,
+                                       InternalDateSource internalDateSource, ReturnFormat format) throws Exception {
+        return returnMessage(messages.gmailImport(userId, createMessageWithFile(toEmailAddress, subject, contentMessage,
+                        file, TEXT_PLAIN_MIME_TYPE))
+                .setInternalDateSource(internalDateSource.toString())
+                .setNeverMarkSpam(neverMarkSpam)
+                .setProcessForCalendar(processForCalendar)
+                .setDeleted(deleted)
+                .execute(), format);
+    }
+
+    public Message importMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean neverMarkSpam,
+                                          boolean processForCalendar, boolean deleted, File[] files) throws Exception {
+        return importMessageWithFiles(toEmailAddress, subject, contentMessage, neverMarkSpam, processForCalendar, deleted,
+                files, LIBRARY_OBJECT);
+    }
+
+    public <T> T importMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean neverMarkSpam,
+                                        boolean processForCalendar, boolean deleted, File[] files,
+                                        ReturnFormat format) throws Exception {
+        return returnMessage(messages.gmailImport(userId, createMessageWithFiles(toEmailAddress, subject, contentMessage,
+                        files, TEXT_PLAIN_MIME_TYPE))
+                .setNeverMarkSpam(neverMarkSpam)
+                .setProcessForCalendar(processForCalendar)
+                .setDeleted(deleted)
+                .execute(), format);
+    }
+
+    public Message importMessageWithFiles(String toEmailAddress, String subject, String contentMessage,
+                                          boolean neverMarkSpam, boolean processForCalendar, boolean deleted,
+                                          File[] files, InternalDateSource internalDateSource) throws Exception {
+        return importMessageWithFiles(toEmailAddress, subject, contentMessage, neverMarkSpam, processForCalendar, deleted,
+                files, internalDateSource, LIBRARY_OBJECT);
+    }
+
+    public <T> T importMessageWithFiles(String toEmailAddress, String subject, String contentMessage,
+                                        boolean neverMarkSpam, boolean processForCalendar, boolean deleted, File[] files,
+                                        InternalDateSource internalDateSource, ReturnFormat format) throws Exception {
+        return returnMessage(messages.gmailImport(userId, createMessageWithFiles(toEmailAddress, subject, contentMessage,
+                        files, TEXT_PLAIN_MIME_TYPE))
+                .setInternalDateSource(internalDateSource.toString())
+                .setNeverMarkSpam(neverMarkSpam)
+                .setProcessForCalendar(processForCalendar)
+                .setDeleted(deleted)
+                .execute(), format);
+    }
+
+    public Message importMessageWithFiles(String toEmailAddress, String subject, String contentMessage,
+                                          boolean neverMarkSpam, boolean processForCalendar, boolean deleted,
+                                          Collection<File> files) throws Exception {
+        return importMessageWithFiles(toEmailAddress, subject, contentMessage, neverMarkSpam, processForCalendar, deleted,
+                files.toArray(new File[0]), LIBRARY_OBJECT);
+    }
+
+    public <T> T importMessageWithFiles(String toEmailAddress, String subject, String contentMessage,
+                                        boolean neverMarkSpam, boolean processForCalendar, boolean deleted,
+                                        Collection<File> files, ReturnFormat format) throws Exception {
+        return importMessageWithFiles(toEmailAddress, subject, contentMessage, neverMarkSpam, processForCalendar, deleted,
+                files.toArray(new File[0]), format);
+    }
+
+    public Message importMessageWithFiles(String toEmailAddress, String subject, String contentMessage,
+                                          boolean neverMarkSpam, boolean processForCalendar, boolean deleted,
+                                          Collection<File> files, InternalDateSource internalDateSource) throws Exception {
+        return importMessageWithFiles(toEmailAddress, subject, contentMessage, neverMarkSpam, processForCalendar, deleted,
+                files.toArray(new File[0]), internalDateSource, LIBRARY_OBJECT);
+    }
+
+    public <T> T importMessageWithFiles(String toEmailAddress, String subject, String contentMessage,
+                                        boolean neverMarkSpam, boolean processForCalendar, boolean deleted,
+                                        Collection<File> files, InternalDateSource internalDateSource,
+                                        ReturnFormat format) throws Exception {
+        return importMessageWithFiles(toEmailAddress, subject, contentMessage, neverMarkSpam, processForCalendar, deleted,
+                files.toArray(new File[0]), internalDateSource, format);
+    }
+
+    public Message insertMessage(String toEmailAddress, String subject, String contentMessage,
+                                 boolean deleted) throws Exception {
+        return insertMessage(toEmailAddress, subject, contentMessage, deleted, LIBRARY_OBJECT);
+    }
+
+    public <T> T insertMessage(String toEmailAddress, String subject, String contentMessage, boolean deleted,
+                               ReturnFormat format) throws Exception {
+        return returnMessage(messages.insert(userId, createMessage(toEmailAddress, subject, contentMessage))
+                .setDeleted(deleted).execute(), format);
+    }
+
+    public Message insertMessage(String toEmailAddress, String subject, String contentMessage,
+                                 boolean deleted, InternalDateSource internalDateSource) throws Exception {
+        return insertMessage(toEmailAddress, subject, contentMessage, deleted, internalDateSource, LIBRARY_OBJECT);
+    }
+
+    public <T> T insertMessage(String toEmailAddress, String subject, String contentMessage, boolean deleted,
+                               InternalDateSource internalDateSource, ReturnFormat format) throws Exception {
+        return returnMessage(messages.insert(userId, createMessage(toEmailAddress, subject, contentMessage))
+                .setDeleted(deleted).setInternalDateSource(internalDateSource.toString()).execute(), format);
+    }
+
+    public Message insertMessageWithFile(String toEmailAddress, String subject, String contentMessage,
+                                         boolean deleted, File file) throws Exception {
+        return insertMessageWithFile(toEmailAddress, subject, contentMessage, deleted, file, LIBRARY_OBJECT);
+    }
+
+    public <T> T insertMessageWithFile(String toEmailAddress, String subject, String contentMessage, boolean deleted,
+                                       File file, ReturnFormat format) throws Exception {
+        return returnMessage(messages.insert(userId, createMessageWithFile(toEmailAddress, subject, contentMessage, file,
+                TEXT_PLAIN_MIME_TYPE)).setDeleted(deleted).execute(), format);
+    }
+
+    public Message insertMessageWithFile(String toEmailAddress, String subject, String contentMessage, boolean deleted,
+                                         InternalDateSource internalDateSource, File file) throws Exception {
+        return insertMessageWithFile(toEmailAddress, subject, contentMessage, deleted, internalDateSource, file,
+                LIBRARY_OBJECT);
+    }
+
+    public <T> T insertMessageWithFile(String toEmailAddress, String subject, String contentMessage, boolean deleted,
+                                       InternalDateSource internalDateSource, File file, ReturnFormat format) throws Exception {
+        return returnMessage(messages.insert(userId, createMessageWithFile(toEmailAddress, subject, contentMessage, file,
+                        TEXT_PLAIN_MIME_TYPE)).setDeleted(deleted).setInternalDateSource(internalDateSource.toString()).execute(),
+                format);
+    }
+
+    public Message insertMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean deleted,
+                                          File[] files) throws Exception {
+        return insertMessageWithFiles(toEmailAddress, subject, contentMessage, deleted, files, LIBRARY_OBJECT);
+    }
+
+    public <T> T insertMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean deleted,
+                                        File[] files, ReturnFormat format) throws Exception {
+        return returnMessage(messages.insert(userId, createMessageWithFiles(toEmailAddress, subject, contentMessage, files,
+                TEXT_PLAIN_MIME_TYPE)).setDeleted(deleted).execute(), format);
+    }
+
+    public Message insertMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean deleted,
+                                          InternalDateSource internalDateSource, File[] files) throws Exception {
+        return insertMessageWithFiles(toEmailAddress, subject, contentMessage, deleted, internalDateSource, files,
+                LIBRARY_OBJECT);
+    }
+
+    public <T> T insertMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean deleted,
+                                        InternalDateSource internalDateSource, File[] files,
+                                        ReturnFormat format) throws Exception {
+        return returnMessage(messages.insert(userId, createMessageWithFiles(toEmailAddress, subject, contentMessage, files,
+                        TEXT_PLAIN_MIME_TYPE)).setDeleted(deleted).setInternalDateSource(internalDateSource.toString())
+                .execute(), format);
+    }
+
+    public Message insertMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean deleted,
+                                          Collection<File> files) throws Exception {
+        return insertMessageWithFiles(toEmailAddress, subject, contentMessage, deleted, files.toArray(new File[0]),
+                LIBRARY_OBJECT);
+    }
+
+    public <T> T insertMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean deleted,
+                                        Collection<File> files, ReturnFormat format) throws Exception {
+        return insertMessageWithFiles(toEmailAddress, subject, contentMessage, deleted, files.toArray(new File[0]), format);
+    }
+
+    public Message insertMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean deleted,
+                                          InternalDateSource internalDateSource, Collection<File> files) throws Exception {
+        return insertMessageWithFiles(toEmailAddress, subject, contentMessage, deleted, internalDateSource,
+                files.toArray(new File[0]), LIBRARY_OBJECT);
+    }
+
+    public <T> T insertMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean deleted,
+                                        InternalDateSource internalDateSource, Collection<File> files,
+                                        ReturnFormat format) throws Exception {
+        return insertMessageWithFiles(toEmailAddress, subject, contentMessage, deleted, internalDateSource,
+                files.toArray(new File[0]), format);
+    }
+
+    private <T> T returnMessage(com.google.api.services.gmail.model.Message message, ReturnFormat format) {
         switch (format) {
             case JSON:
                 return (T) new JSONObject(message);

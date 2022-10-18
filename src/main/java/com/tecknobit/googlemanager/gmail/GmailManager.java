@@ -1,6 +1,7 @@
 package com.tecknobit.googlemanager.gmail;
 
 import com.google.api.services.gmail.Gmail;
+import com.google.api.services.gmail.model.Message;
 import com.tecknobit.googlemanager.GoogleManager;
 import org.apache.commons.codec.binary.Base64;
 
@@ -249,21 +250,6 @@ public class GmailManager extends GoogleManager {
     }
 
     /**
-     * Method to create a {@link MimeMessage} object
-     *
-     * @param toEmailAddress: recipient of the message
-     * @param subject:        subject of the message
-     * @return mime message as {@link MimeMessage}
-     **/
-    public MimeMessage createMime(String toEmailAddress, String subject) throws Exception {
-        MimeMessage mime = new MimeMessage(Session.getDefaultInstance(new Properties(), null));
-        mime.setFrom(new InternetAddress(userId));
-        mime.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(toEmailAddress));
-        mime.setSubject(subject);
-        return mime;
-    }
-
-    /**
      * Method to create a message with a file as attachment
      *
      * @param toEmailAddress: recipient of the message
@@ -273,8 +259,8 @@ public class GmailManager extends GoogleManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message as {@link MimeMessage}
      **/
-    public MimeMessage createMessageWithFile(String toEmailAddress, String subject, String messageText, File file,
-                                             String mimeType) throws Exception {
+    protected Message createMessageWithFile(String toEmailAddress, String subject, String messageText, File file,
+                                            String mimeType) throws Exception {
         MimeMessage mime = createMime(toEmailAddress, subject);
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
         mimeBodyPart.setContent(messageText, mimeType);
@@ -285,7 +271,7 @@ public class GmailManager extends GoogleManager {
         mimeBodyPart.setFileName(file.getName());
         multipart.addBodyPart(mimeBodyPart);
         mime.setContent(multipart);
-        return mime;
+        return createMessage(mime);
     }
 
     /**
@@ -298,8 +284,8 @@ public class GmailManager extends GoogleManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message as {@link MimeMessage}
      **/
-    public MimeMessage createMessageWithFiles(String toEmailAddress, String subject, String messageText, File[] files,
-                                              String mimeType) throws Exception {
+    protected Message createMessageWithFiles(String toEmailAddress, String subject, String messageText, File[] files,
+                                             String mimeType) throws Exception {
         MimeMessage mime = createMime(toEmailAddress, subject);
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
         mimeBodyPart.setContent(messageText, mimeType);
@@ -312,20 +298,18 @@ public class GmailManager extends GoogleManager {
             multipart.addBodyPart(mimeBodyPart);
         }
         mime.setContent(multipart);
-        return mime;
+        return createMessage(mime);
     }
 
     /**
      * Method to create a message
      *
-     * @param from:        sender of the message
-     * @param to:          recipient of the message
-     * @param subject:     subject of the message
-     * @param messageText: message content message
-     * @return message as {@link com.google.api.services.gmail.model.Message}
+     * @param to          :          recipient of the message
+     * @param subject     :     subject of the message
+     * @param messageText : message content message
+     * @return message as {@link Message}
      **/
-    protected com.google.api.services.gmail.model.Message createMessage(String from, String to, String subject,
-                                                                        String messageText) throws Exception {
+    protected Message createMessage(String to, String subject, String messageText) throws Exception {
         MimeMessage mimeMessage = createMime(to, subject);
         mimeMessage.setText(messageText);
         return createMessage(mimeMessage);
@@ -335,16 +319,31 @@ public class GmailManager extends GoogleManager {
      * Method to create a message
      *
      * @param messageDetails: message details created with {@link MimeMessage}
-     * @return message as {@link com.google.api.services.gmail.model.Message}
+     * @return message as {@link Message}
      **/
-    protected com.google.api.services.gmail.model.Message createMessage(MimeMessage messageDetails) throws Exception {
-        com.google.api.services.gmail.model.Message message = new com.google.api.services.gmail.model.Message();
+    protected Message createMessage(MimeMessage messageDetails) throws Exception {
+        Message message = new Message();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         messageDetails.writeTo(buffer);
         byte[] rawMessageBytes = buffer.toByteArray();
         String encodedEmail = Base64.encodeBase64URLSafeString(rawMessageBytes);
         message.setRaw(encodedEmail);
         return message;
+    }
+
+    /**
+     * Method to create a {@link MimeMessage} object
+     *
+     * @param toEmailAddress: recipient of the message
+     * @param subject:        subject of the message
+     * @return mime message as {@link MimeMessage}
+     **/
+    protected MimeMessage createMime(String toEmailAddress, String subject) throws Exception {
+        MimeMessage mime = new MimeMessage(Session.getDefaultInstance(new Properties(), null));
+        mime.setFrom(new InternetAddress(userId));
+        mime.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(toEmailAddress));
+        mime.setSubject(subject);
+        return mime;
     }
 
 }
