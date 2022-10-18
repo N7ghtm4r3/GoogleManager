@@ -7,23 +7,13 @@ import com.tecknobit.googlemanager.gmail.GmailManager;
 import com.tecknobit.googlemanager.gmail.drafts.records.Draft;
 import com.tecknobit.googlemanager.gmail.drafts.records.Drafts;
 import com.tecknobit.googlemanager.gmail.drafts.records.Message;
-import org.apache.commons.codec.binary.Base64;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.activation.DataHandler;
-import javax.activation.FileDataSource;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Properties;
 
 import static com.tecknobit.googlemanager.GoogleManager.ReturnFormat.LIBRARY_OBJECT;
 import static com.tecknobit.googlemanager.gmail.GmailManager.ResponseFormat.FULL_FORMAT;
@@ -162,7 +152,7 @@ public class GmailDraftsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T createDraft(String toEmailAddress, String subject, String emailText, ReturnFormat format) throws Exception {
-        MimeMessage email = createMimeMessage(toEmailAddress, subject);
+        MimeMessage email = createMime(toEmailAddress, subject);
         email.setText(emailText);
         return createDraft(email, format, true);
     }
@@ -398,21 +388,6 @@ public class GmailDraftsManager extends GmailManager {
     }
 
     /**
-     * Method to create a {@link MimeMessage} object useful to create the drafts
-     *
-     * @param toEmailAddress: recipient of the email message
-     * @param subject:        subject of the email message
-     * @return mime message as {@link MimeMessage}
-     **/
-    private MimeMessage createMimeMessage(String toEmailAddress, String subject) throws Exception {
-        MimeMessage mime = new MimeMessage(Session.getDefaultInstance(new Properties(), null));
-        mime.setFrom(new InternetAddress(userId));
-        mime.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(toEmailAddress));
-        mime.setSubject(subject);
-        return mime;
-    }
-
-    /**
      * Method to create a draft with a file as attachment
      *
      * @param toEmailAddress:     recipient of the email message
@@ -426,17 +401,8 @@ public class GmailDraftsManager extends GmailManager {
      **/
     private <T> T createDraftWithFile(String toEmailAddress, String subject, String emailText, File file, String mimeType,
                                       ReturnFormat format, boolean sendCreateResponse) throws Exception {
-        MimeMessage email = createMimeMessage(toEmailAddress, subject);
-        MimeBodyPart mimeBodyPart = new MimeBodyPart();
-        mimeBodyPart.setContent(emailText, mimeType);
-        Multipart multipart = new MimeMultipart();
-        multipart.addBodyPart(mimeBodyPart);
-        mimeBodyPart = new MimeBodyPart();
-        mimeBodyPart.setDataHandler(new DataHandler(new FileDataSource(file)));
-        mimeBodyPart.setFileName(file.getName());
-        multipart.addBodyPart(mimeBodyPart);
-        email.setContent(multipart);
-        return createDraft(email, format, sendCreateResponse);
+        return createDraft(createMessageWithFile(toEmailAddress, subject, emailText, file, mimeType), format,
+                sendCreateResponse);
     }
 
     /**
@@ -451,21 +417,10 @@ public class GmailDraftsManager extends GmailManager {
      * @param sendCreateResponse: flag to send or not request to create a new draft
      * @return draft as {@code "format"} defines
      **/
-    private <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files, String mimeType,
-                                       ReturnFormat format, boolean sendCreateResponse) throws Exception {
-        MimeMessage email = createMimeMessage(toEmailAddress, subject);
-        MimeBodyPart mimeBodyPart = new MimeBodyPart();
-        mimeBodyPart.setContent(emailText, mimeType);
-        Multipart multipart = new MimeMultipart();
-        multipart.addBodyPart(mimeBodyPart);
-        for (File file : files) {
-            mimeBodyPart = new MimeBodyPart();
-            mimeBodyPart.setDataHandler(new DataHandler(new FileDataSource(file)));
-            mimeBodyPart.setFileName(file.getName());
-            multipart.addBodyPart(mimeBodyPart);
-        }
-        email.setContent(multipart);
-        return createDraft(email, format, sendCreateResponse);
+    private <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
+                                       String mimeType, ReturnFormat format, boolean sendCreateResponse) throws Exception {
+        return createDraft(createMessageWithFiles(toEmailAddress, subject, emailText, files, mimeType), format,
+                sendCreateResponse);
     }
 
     /**
@@ -478,13 +433,7 @@ public class GmailDraftsManager extends GmailManager {
      **/
     private <T> T createDraft(MimeMessage email, ReturnFormat format, boolean sendCreateResponse) throws Exception {
         com.google.api.services.gmail.model.Draft draft = new com.google.api.services.gmail.model.Draft();
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        email.writeTo(buffer);
-        byte[] rawMessageBytes = buffer.toByteArray();
-        String encodedEmail = Base64.encodeBase64URLSafeString(rawMessageBytes);
-        com.google.api.services.gmail.model.Message message = new com.google.api.services.gmail.model.Message();
-        message.setRaw(encodedEmail);
-        draft.setMessage(message);
+        draft.setMessage(createMessage(email));
         if (sendCreateResponse) {
             draft = drafts.create(userId, draft).execute();
             switch (format) {
@@ -969,7 +918,7 @@ public class GmailDraftsManager extends GmailManager {
      **/
     public <T> T updateDraft(String draftId, String toEmailAddress, String subject, String emailText,
                              ReturnFormat format) throws Exception {
-        MimeMessage mimeMessage = createMimeMessage(toEmailAddress, subject);
+        MimeMessage mimeMessage = createMime(toEmailAddress, subject);
         mimeMessage.setText(emailText);
         return updateDraft(createDraft(mimeMessage, null, false), draftId, format);
     }
@@ -1003,7 +952,7 @@ public class GmailDraftsManager extends GmailManager {
      **/
     public <T> T updateToEmailAddress(String draftId, String toEmailAddress, String emailText,
                                       ReturnFormat format) throws Exception {
-        MimeMessage mimeMessage = createMimeMessage(toEmailAddress, getHeaderValue(draftId, SUBJECT));
+        MimeMessage mimeMessage = createMime(toEmailAddress, getHeaderValue(draftId, SUBJECT));
         mimeMessage.setText(emailText);
         return updateDraft(createDraft(mimeMessage, null, false), draftId, format);
     }
@@ -1036,7 +985,7 @@ public class GmailDraftsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T updateSubject(String draftId, String subject, String emailText, ReturnFormat format) throws Exception {
-        MimeMessage mimeMessage = createMimeMessage(getHeaderValue(draftId, To), subject);
+        MimeMessage mimeMessage = createMime(getHeaderValue(draftId, To), subject);
         mimeMessage.setText(emailText);
         return updateDraft(createDraft(mimeMessage, null, false), draftId, format);
     }

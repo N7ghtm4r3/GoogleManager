@@ -22,6 +22,11 @@ import static java.util.Arrays.stream;
  **/
 public class GmailMessagesManager extends GmailManager {
 
+    public Message importMessage(String to, String subject, String contentMessage, boolean neverMarkSpam,
+                                 boolean processForCalendar, boolean deleted) throws Exception {
+        return importMessage(to, subject, contentMessage, neverMarkSpam, processForCalendar, deleted, LIBRARY_OBJECT);
+    }
+
     /**
      * {@code messages} is the instance for {@link Gmail.Users.Messages}'s service
      **/
@@ -202,5 +207,80 @@ public class GmailMessagesManager extends GmailManager {
                 return (T) message.toString();
         }
     }
-    
+
+    public <T> T importMessage(String to, String subject, String contentMessage, boolean neverMarkSpam,
+                               boolean processForCalendar, boolean deleted, ReturnFormat format) throws Exception {
+        return importMessage(messages.gmailImport(userId, createMessage("", to, subject, contentMessage))
+                .setNeverMarkSpam(neverMarkSpam)
+                .setProcessForCalendar(processForCalendar)
+                .setDeleted(deleted)
+                .execute(), format);
+    }
+
+    public Message importMessage(String to, String subject, String contentMessage, boolean neverMarkSpam,
+                                 boolean processForCalendar, boolean deleted,
+                                 InternalDateSource internalDateSource) throws Exception {
+        return importMessage(to, subject, contentMessage, neverMarkSpam, processForCalendar, deleted,
+                internalDateSource, LIBRARY_OBJECT);
+    }
+
+    // TODO: 18/10/2022 MAKE METHODS FOR FILE IMPORTS AND CHECK GMAILMANAGER METHOD IF MAKE RETURN MESSAGE OR MIME LIKE NOW 
+    /*
+    public Message importMessageWithFile(String to, String subject, String contentMessage, boolean neverMarkSpam,
+                                         boolean processForCalendar, boolean deleted, File file) throws Exception {
+        return importMessageWithFile(to, subject, contentMessage, neverMarkSpam, processForCalendar, deleted, file,
+                LIBRARY_OBJECT);
+    }
+
+    public <T> T importMessageWithFile(String to, String subject, String contentMessage, boolean neverMarkSpam,
+                                       boolean processForCalendar, boolean deleted, File file,
+                                       ReturnFormat format) throws Exception {
+        return importMessage(messages.gmailImport(userId, createMessage(createMessageWithFile(to, subject, contentMessage, file,
+                        TEXT_PLAIN_MIME_TYPE)))
+                .setNeverMarkSpam(neverMarkSpam)
+                .setProcessForCalendar(processForCalendar)
+                .setDeleted(deleted)
+                .execute(), format);
+    }*/
+
+    public <T> T importMessage(String to, String subject, String contentMessage, boolean neverMarkSpam,
+                               boolean processForCalendar, boolean deleted, InternalDateSource internalDateSource,
+                               ReturnFormat format) throws Exception {
+        return importMessage(messages.gmailImport(userId, createMessage("", to, subject, contentMessage))
+                .setNeverMarkSpam(neverMarkSpam)
+                .setProcessForCalendar(processForCalendar)
+                .setDeleted(deleted)
+                .setInternalDateSource(internalDateSource.toString())
+                .execute(), format);
+    }
+
+    private <T> T importMessage(com.google.api.services.gmail.model.Message message, ReturnFormat format) {
+        switch (format) {
+            case JSON:
+                return (T) new JSONObject(message);
+            case LIBRARY_OBJECT:
+                return (T) new Message(new JSONObject(message));
+            default:
+                return (T) message.toString();
+        }
+    }
+
+    public enum InternalDateSource {
+
+        receivedTime("receivedTime"),
+        dateHeader("dateHeader");
+
+        private final String internalDataSource;
+
+        InternalDateSource(final String internalDataSource) {
+            this.internalDataSource = internalDataSource;
+        }
+
+        @Override
+        public String toString() {
+            return internalDataSource;
+        }
+
+    }
+
 }
