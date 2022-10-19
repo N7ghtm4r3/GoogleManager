@@ -18,13 +18,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
+import static javax.mail.Message.RecipientType.*;
+
 /**
  * The {@code GmailManager} class is useful to manage Gmail's API service
  *
  * @author N7ghtm4r3 - Tecknobit
  * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest">Gmail API</a>
  **/
-// TODO: 18/10/2022 ADD BCC CC ETC IN SOME WAY AND CHECK A WAY TO CREATE A CREATEMESSAGE() WITH LIBRARY OBJECT
 public class GmailManager extends GoogleManager {
 
     /**
@@ -250,6 +251,62 @@ public class GmailManager extends GoogleManager {
     }
 
     /**
+     * Method to create a message
+     *
+     * @param toEmailAddress: recipient of the message
+     * @param subject:        subject of the message
+     * @param messageText:    content message
+     * @return message as {@link Message}
+     **/
+    protected Message createSimpleMessage(String toEmailAddress, String subject, String messageText) throws Exception {
+        return createCompleteMessage(toEmailAddress, subject, null, null, messageText);
+    }
+
+    /**
+     * Method to create a message
+     *
+     * @param toEmailAddress: recipient of the message
+     * @param subject:        subject of the message
+     * @param Cc:             carbon copy value
+     * @param messageText:    content message
+     * @return message as {@link Message}
+     **/
+    protected Message createCcMessage(String toEmailAddress, String subject, String Cc, String messageText) throws Exception {
+        return createCompleteMessage(toEmailAddress, subject, Cc, null, messageText);
+    }
+
+    /**
+     * Method to create a message
+     *
+     * @param toEmailAddress: recipient of the message
+     * @param subject:        subject of the message
+     * @param messageText:    content message
+     * @param Bcc:            blind carbon copy value
+     * @return message as {@link Message}
+     **/
+    protected Message createBccMessage(String toEmailAddress, String subject, String Bcc,
+                                       String messageText) throws Exception {
+        return createCompleteMessage(toEmailAddress, subject, null, Bcc, messageText);
+    }
+
+    /**
+     * Method to create a message
+     *
+     * @param toEmailAddress : recipient of the message
+     * @param subject        :        subject of the message
+     * @param Cc             : carbon copy value
+     * @param Bcc            : blind carbon copy value
+     * @param messageText    : content message
+     * @return message as {@link Message}
+     **/
+    protected Message createCompleteMessage(String toEmailAddress, String subject, String Cc, String Bcc,
+                                            String messageText) throws Exception {
+        MimeMessage mimeMessage = createMime(toEmailAddress, subject, Cc, Bcc);
+        mimeMessage.setText(messageText);
+        return createMessage(mimeMessage);
+    }
+
+    /**
      * Method to create a message with a file as attachment
      *
      * @param toEmailAddress: recipient of the message
@@ -259,9 +316,70 @@ public class GmailManager extends GoogleManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message as {@link MimeMessage}
      **/
-    protected Message createMessageWithFile(String toEmailAddress, String subject, String messageText, File file,
-                                            String mimeType) throws Exception {
-        MimeMessage mime = createMime(toEmailAddress, subject);
+    protected Message createSimpleMessageWithFile(String toEmailAddress, String subject, String messageText, File file,
+                                                  String mimeType) throws Exception {
+        return createMessage(messageText, file, createMime(toEmailAddress, subject, null, null), mimeType);
+    }
+
+    /**
+     * Method to create a message with a file as attachment
+     *
+     * @param toEmailAddress : recipient of the message
+     * @param subject        :        subject of the message
+     * @param Cc             : carbon copy value
+     * @param messageText    :    content of the message
+     * @param file           :           attachment file to sent with message
+     * @param mimeType       :       type of mime -> constants available at {@link GmailManager}
+     * @return message as {@link MimeMessage}
+     **/
+    protected Message createCcMessageWithFile(String toEmailAddress, String subject, String Cc, String messageText,
+                                              File file, String mimeType) throws Exception {
+        return createMessage(messageText, file, createMime(toEmailAddress, subject, Cc, null), mimeType);
+    }
+
+    /**
+     * Method to create a message with a file as attachment
+     *
+     * @param toEmailAddress : recipient of the message
+     * @param subject        :        subject of the message
+     * @param Bcc            : blind carbon copy value
+     * @param messageText    :    content of the message
+     * @param file           :           attachment file to sent with message
+     * @param mimeType       :       type of mime -> constants available at {@link GmailManager}
+     * @return message as {@link MimeMessage}
+     **/
+    protected Message createBccMessageWithFile(String toEmailAddress, String subject, String Bcc, String messageText,
+                                               File file, String mimeType) throws Exception {
+        return createMessage(messageText, file, createMime(toEmailAddress, subject, null, Bcc), mimeType);
+    }
+
+    /**
+     * Method to create a message with a file as attachment
+     *
+     * @param toEmailAddress : recipient of the message
+     * @param subject        :        subject of the message
+     * @param Cc             : carbon copy value
+     * @param Bcc            : blind carbon copy value
+     * @param messageText    :    content of the message
+     * @param file           :           attachment file to sent with message
+     * @param mimeType       :       type of mime -> constants available at {@link GmailManager}
+     * @return message as {@link MimeMessage}
+     **/
+    protected Message createCompleteMessageWithFile(String toEmailAddress, String subject, String Cc, String Bcc,
+                                                    String messageText, File file, String mimeType) throws Exception {
+        return createMessage(messageText, file, createMime(toEmailAddress, subject, Cc, Bcc), mimeType);
+    }
+
+    /**
+     * Method to create a message with a file as attachment
+     *
+     * @param messageText: content of the message
+     * @param file:        attachment file to sent with message
+     * @param mime:        mime message used for the message
+     * @param mimeType:    type of mime -> constants available at {@link GmailManager}
+     * @return message as {@link MimeMessage}
+     **/
+    private Message createMessage(String messageText, File file, MimeMessage mime, String mimeType) throws Exception {
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
         mimeBodyPart.setContent(messageText, mimeType);
         Multipart multipart = new MimeMultipart();
@@ -286,7 +404,68 @@ public class GmailManager extends GoogleManager {
      **/
     protected Message createMessageWithFiles(String toEmailAddress, String subject, String messageText, File[] files,
                                              String mimeType) throws Exception {
-        MimeMessage mime = createMime(toEmailAddress, subject);
+        return createMessage(messageText, files, createMime(toEmailAddress, subject, null, null), mimeType);
+    }
+
+    /**
+     * Method to create a message with a different files as attachments
+     *
+     * @param toEmailAddress : recipient of the message
+     * @param subject        :        subject of the message
+     * @param Cc             : carbon copy value
+     * @param messageText    :    content of the message
+     * @param files          :          attachments files to sent with message
+     * @param mimeType       :       type of mime -> constants available at {@link GmailManager}
+     * @return message as {@link MimeMessage}
+     **/
+    protected Message createCcMessageWithFiles(String toEmailAddress, String subject, String Cc, String messageText,
+                                               File[] files, String mimeType) throws Exception {
+        return createMessage(messageText, files, createMime(toEmailAddress, subject, Cc, null), mimeType);
+    }
+
+    /**
+     * Method to create a message with a different files as attachments
+     *
+     * @param toEmailAddress : recipient of the message
+     * @param subject        :        subject of the message
+     * @param Bcc            : blind carbon copy value
+     * @param messageText    :    content of the message
+     * @param files          :          attachments files to sent with message
+     * @param mimeType       :       type of mime -> constants available at {@link GmailManager}
+     * @return message as {@link MimeMessage}
+     **/
+    protected Message createBccMessageWithFiles(String toEmailAddress, String subject, String Bcc, String messageText,
+                                                File[] files, String mimeType) throws Exception {
+        return createMessage(messageText, files, createMime(toEmailAddress, subject, null, Bcc), mimeType);
+    }
+
+    /**
+     * Method to create a message with a different files as attachments
+     *
+     * @param toEmailAddress : recipient of the message
+     * @param subject        :        subject of the message
+     * @param Cc             : carbon copy value
+     * @param Bcc            : blind carbon copy value
+     * @param messageText    :    content of the message
+     * @param files          :          attachments files to sent with message
+     * @param mimeType       :       type of mime -> constants available at {@link GmailManager}
+     * @return message as {@link MimeMessage}
+     **/
+    protected Message createCompletedMessageWithFiles(String toEmailAddress, String subject, String Cc, String Bcc,
+                                                      String messageText, File[] files, String mimeType) throws Exception {
+        return createMessage(messageText, files, createMime(toEmailAddress, subject, Cc, Bcc), mimeType);
+    }
+
+    /**
+     * Method to create a message with a different files as attachments
+     *
+     * @param messageText: content of the message
+     * @param files:       attachments files to sent with message
+     * @param mime:        mime message used for the message
+     * @param mimeType:    type of mime -> constants available at {@link GmailManager}
+     * @return message as {@link MimeMessage}
+     **/
+    private Message createMessage(String messageText, File[] files, MimeMessage mime, String mimeType) throws Exception {
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
         mimeBodyPart.setContent(messageText, mimeType);
         Multipart multipart = new MimeMultipart();
@@ -304,24 +483,10 @@ public class GmailManager extends GoogleManager {
     /**
      * Method to create a message
      *
-     * @param to          :          recipient of the message
-     * @param subject     :     subject of the message
-     * @param messageText : message content message
-     * @return message as {@link Message}
-     **/
-    protected Message createMessage(String to, String subject, String messageText) throws Exception {
-        MimeMessage mimeMessage = createMime(to, subject);
-        mimeMessage.setText(messageText);
-        return createMessage(mimeMessage);
-    }
-
-    /**
-     * Method to create a message
-     *
      * @param messageDetails: message details created with {@link MimeMessage}
      * @return message as {@link Message}
      **/
-    protected Message createMessage(MimeMessage messageDetails) throws Exception {
+    private Message createMessage(MimeMessage messageDetails) throws Exception {
         Message message = new Message();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         messageDetails.writeTo(buffer);
@@ -336,13 +501,24 @@ public class GmailManager extends GoogleManager {
      *
      * @param toEmailAddress: recipient of the message
      * @param subject:        subject of the message
+     * @param Cc:             carbon copy value
+     * @param Bcc:            blind carbon copy value
      * @return mime message as {@link MimeMessage}
      **/
-    protected MimeMessage createMime(String toEmailAddress, String subject) throws Exception {
+    private MimeMessage createMime(String toEmailAddress, String subject, String Cc, String Bcc) throws Exception {
         MimeMessage mime = new MimeMessage(Session.getDefaultInstance(new Properties(), null));
         mime.setFrom(new InternetAddress(userId));
-        mime.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(toEmailAddress));
-        mime.setSubject(subject);
+        mime.addRecipient(TO, new InternetAddress(toEmailAddress));
+        if (Cc != null) {
+            if (Cc.contains("["))
+                Cc = Cc.replace(" ", "").substring(1, Cc.length() - 2);
+            mime.setRecipients(CC, Cc);
+        }
+        if (Bcc != null) {
+            if (Bcc.contains("["))
+                Bcc = Bcc.replace(" ", "").substring(1, Bcc.length() - 2);
+            mime.setRecipients(BCC, Bcc);
+        }
         return mime;
     }
 

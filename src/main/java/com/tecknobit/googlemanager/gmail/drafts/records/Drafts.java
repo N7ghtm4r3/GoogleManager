@@ -1,6 +1,6 @@
 package com.tecknobit.googlemanager.gmail.drafts.records;
 
-import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
+import com.tecknobit.googlemanager.gmail.records.BaseList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -12,8 +12,9 @@ import java.util.Collection;
  *
  * @author N7ghtm4r3 - Tecknobit
  * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list">users.drafts.list</a>
+ * @see BaseList
  **/
-public class Drafts {
+public class Drafts extends BaseList {
 
     /**
      * {@code drafts} list of drafts
@@ -21,26 +22,15 @@ public class Drafts {
     private final ArrayList<Draft> drafts;
 
     /**
-     * {@code nextPageToken} token to retrieve the next page of results in the list
-     **/
-    private final String nextPageToken;
-
-    /**
-     * {@code resultSizeEstimate} estimated total number of results
-     **/
-    private final int resultSizeEstimate;
-
-    /**
      * Constructor to init a {@link Drafts}
      *
-     * @param drafts:             list of drafts
      * @param nextPageToken:      token to retrieve the next page of results in the list
      * @param resultSizeEstimate: estimated total number of results
+     * @param drafts:             list of drafts
      **/
-    public Drafts(ArrayList<Draft> drafts, String nextPageToken, int resultSizeEstimate) {
+    public Drafts(String nextPageToken, int resultSizeEstimate, ArrayList<Draft> drafts) {
+        super(nextPageToken, resultSizeEstimate);
         this.drafts = drafts;
-        this.nextPageToken = nextPageToken;
-        this.resultSizeEstimate = resultSizeEstimate;
     }
 
     /**
@@ -49,13 +39,11 @@ public class Drafts {
      * @param jDrafts: {@code "drafts"} details as {@link JSONObject}
      **/
     public Drafts(JSONObject jDrafts) {
-        JsonHelper hDrafts = new JsonHelper(jDrafts);
+        super(jDrafts);
         drafts = new ArrayList<>();
-        JSONArray jDraftsList = hDrafts.getJSONArray("drafts", new JSONArray());
+        JSONArray jDraftsList = hList.getJSONArray("drafts", new JSONArray());
         for (int j = 0; j < jDraftsList.length(); j++)
             drafts.add(new Draft(jDraftsList.getJSONObject(j)));
-        nextPageToken = hDrafts.getString("nextPageToken", null);
-        resultSizeEstimate = hDrafts.getInt("resultSizeEstimate", 0);
     }
 
     /**
@@ -87,26 +75,6 @@ public class Drafts {
      **/
     public boolean removeDraft(Draft draftToRemove) {
         return drafts.remove(draftToRemove);
-    }
-
-    /**
-     * Method to get {@link #nextPageToken} instance <br>
-     * Any params required
-     *
-     * @return {@link #nextPageToken} instance as {@link String}
-     **/
-    public String getNextPageToken() {
-        return nextPageToken;
-    }
-
-    /**
-     * Method to get {@link #resultSizeEstimate} instance <br>
-     * Any params required
-     *
-     * @return {@link #resultSizeEstimate} instance as int
-     **/
-    public int getResultSizeEstimate() {
-        return resultSizeEstimate;
     }
 
     /**

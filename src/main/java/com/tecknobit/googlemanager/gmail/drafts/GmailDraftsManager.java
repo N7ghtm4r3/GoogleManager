@@ -7,7 +7,6 @@ import com.tecknobit.googlemanager.gmail.GmailManager;
 import com.tecknobit.googlemanager.gmail.drafts.records.Draft;
 import com.tecknobit.googlemanager.gmail.drafts.records.Drafts;
 import com.tecknobit.googlemanager.gmail.records.Message;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -25,7 +24,8 @@ import static com.tecknobit.googlemanager.gmail.records.Message.Header.To;
  * @author N7ghtm4r3 - Tecknobit
  * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts">Gmail drafts</a>
  **/
-// TODO: 15/10/2022 WHEN ATTACHMENTS ENDPOINT IS CREATED IMPLEMENT UPDATE WITH AUTO FILE FETCHER
+// TODO: 15/10/2022 WHEN ATTACHMENTS ENDPOINT IS CREATED IMPLEMENT UPDATE WITH AUTO FILE FETCHER AND SET To, Cc, and Bcc headers
+// TODO: 19/10/2022 IN SEND DRAFT METHODS     
 public class GmailDraftsManager extends GmailManager {
 
     /**
@@ -151,7 +151,7 @@ public class GmailDraftsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T createDraft(String toEmailAddress, String subject, String emailText, ReturnFormat format) throws Exception {
-        return createDraft(createMessage(toEmailAddress, subject, emailText), format, true);
+        return createDraft(createSimpleMessage(toEmailAddress, subject, emailText), format, true);
     }
 
     /**
@@ -398,7 +398,7 @@ public class GmailDraftsManager extends GmailManager {
      **/
     private <T> T createDraftWithFile(String toEmailAddress, String subject, String emailText, File file, String mimeType,
                                       ReturnFormat format, boolean sendCreateResponse) throws Exception {
-        return createDraft(createMessageWithFile(toEmailAddress, subject, emailText, file, mimeType), format,
+        return createDraft(createSimpleMessageWithFile(toEmailAddress, subject, emailText, file, mimeType), format,
                 sendCreateResponse);
     }
 
@@ -814,9 +814,9 @@ public class GmailDraftsManager extends GmailManager {
     private <T> T getDraftsList(ListDraftsResponse drafts, ReturnFormat format) {
         switch (format) {
             case JSON:
-                return (T) new JSONArray(drafts.getDrafts());
+                return (T) new JSONObject(drafts);
             case LIBRARY_OBJECT:
-                return (T) new Drafts(new JSONObject(drafts.toString()));
+                return (T) new Drafts(new JSONObject(drafts));
             default:
                 return (T) drafts.toString();
         }
@@ -915,7 +915,7 @@ public class GmailDraftsManager extends GmailManager {
      **/
     public <T> T updateDraft(String draftId, String toEmailAddress, String subject, String emailText,
                              ReturnFormat format) throws Exception {
-        return updateDraft(createDraft(createMessage(toEmailAddress, subject, emailText), null, false),
+        return updateDraft(createDraft(createSimpleMessage(toEmailAddress, subject, emailText), null, false),
                 draftId, format);
     }
 
@@ -948,7 +948,7 @@ public class GmailDraftsManager extends GmailManager {
      **/
     public <T> T updateToEmailAddress(String draftId, String toEmailAddress, String emailText,
                                       ReturnFormat format) throws Exception {
-        return updateDraft(createDraft(createMessage(toEmailAddress, getHeaderValue(draftId, SUBJECT), emailText),
+        return updateDraft(createDraft(createSimpleMessage(toEmailAddress, getHeaderValue(draftId, SUBJECT), emailText),
                 null, false), draftId, format);
     }
 
@@ -980,7 +980,7 @@ public class GmailDraftsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     public <T> T updateSubject(String draftId, String subject, String emailText, ReturnFormat format) throws Exception {
-        return updateDraft(createDraft(createMessage(getHeaderValue(draftId, To), subject, emailText), null, false),
+        return updateDraft(createDraft(createSimpleMessage(getHeaderValue(draftId, To), subject, emailText), null, false),
                 draftId, format);
     }
 

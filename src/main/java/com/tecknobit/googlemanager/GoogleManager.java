@@ -411,7 +411,7 @@ public abstract class GoogleManager {
     }
 
     /**
-     * List of return format types offered by library to format the responses as user wants
+     * BaseList of return format types offered by library to format the responses as user wants
      *
      * @apiNote <ul>
      * <li>
