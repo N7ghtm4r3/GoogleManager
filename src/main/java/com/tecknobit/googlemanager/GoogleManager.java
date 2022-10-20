@@ -27,6 +27,7 @@ import static java.lang.Integer.parseInt;
  * @apiNote see the official documentation at: <a href="https://support.google.com/googleapi/answer/7037264?hl=en&ref_topic=7013279">
  * Manage APIs in the API Console</a>
  **/
+// TODO: 20/10/2022 AUTH TOKEN AUTO REFRESH
 public abstract class GoogleManager {
 
     /**
