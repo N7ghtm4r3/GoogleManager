@@ -33,7 +33,7 @@ public class GmailUsersManager extends GmailManager {
      * @param host:           host used in the auth operations
      * @param callBackPath:   callback path used in the auth operations
      * @param applicationName: name of application to give at the project
-     * @throws IOException when auth request have been go wrong
+     * @throws IOException when auth request has been go wrong
      **/
     public GmailUsersManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                              int port, String host, String callBackPath, String applicationName) throws IOException {
@@ -49,7 +49,7 @@ public class GmailUsersManager extends GmailManager {
      * @param accessType:      access type used in the auth operations
      * @param approvalPrompt:  approval prompt type used in the auth operations
      * @param applicationName: name of application to give at the project
-     * @throws IOException when auth request have been go wrong
+     * @throws IOException when auth request has been go wrong
      **/
     public GmailUsersManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                              String applicationName) throws IOException {
@@ -66,7 +66,7 @@ public class GmailUsersManager extends GmailManager {
      * @param approvalPrompt:  approval prompt type used in the auth operations
      * @param port:            port used in the auth operations
      * @param applicationName: name of application to give at the project
-     * @throws IOException when auth request have been go wrong
+     * @throws IOException when auth request has been go wrong
      **/
     public GmailUsersManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                              int port, String applicationName) throws IOException {
@@ -84,7 +84,7 @@ public class GmailUsersManager extends GmailManager {
      * @param port:            port used in the auth operations
      * @param callBackPath:    callback path used in the auth operations
      * @param applicationName: name of application to give at the project
-     * @throws IOException when auth request have been go wrong
+     * @throws IOException when auth request has been go wrong
      **/
     public GmailUsersManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                              int port, String callBackPath, String applicationName) throws IOException {
@@ -102,7 +102,7 @@ public class GmailUsersManager extends GmailManager {
      * @param port:            port used in the auth operations
      * @param host:            host used in the auth operations
      * @param applicationName: name of application to give at the project
-     * @throws IOException when auth request have been go wrong
+     * @throws IOException when auth request has been go wrong
      **/
     public GmailUsersManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                              String host, int port, String applicationName) throws IOException {
@@ -110,11 +110,31 @@ public class GmailUsersManager extends GmailManager {
     }
 
     /**
+     * Constructor to init a {@link GmailUsersManager} <br>
+     * Any params required
+     *
+     * @apiNote this constructor is useful to instantiate a new {@link GmailManager}'s manager without reinsert
+     * credentials and is useful in those cases if you need to use different manager at the same time:
+     * <pre>
+     *     {@code
+     *        //You need to insert all credentials requested
+     *        GmailManager firstManager = new GmailManager(CLIENT_ID, CLIENT_SECRET, "email@gmail.com",
+     *                 ACCESS_TYPE, APPROVAL_PROMPT, port, "host", "callback_path", "application_name");
+     *        //You don't need to insert all credentials to make manager work
+     *        GmailManager secondManager = new GmailManager(); //same credentials used
+     *     }
+     * </pre>
+     **/
+    public GmailUsersManager() throws IOException {
+        super();
+    }
+
+    /**
      * Method to get profile <br>
      * Any params required
      *
      * @return profile as {@link Profile} custom object
-     * @throws IOException when request have been go wrong
+     * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users/getProfile">
      * users.getProfile</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -128,7 +148,7 @@ public class GmailUsersManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return profile as {@code "format"} defines
-     * @throws IOException when request have been go wrong
+     * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users/getProfile">
      * users.getProfile</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -175,7 +195,7 @@ public class GmailUsersManager extends GmailManager {
      *                           ({@link PushNotificationWatch#INCLUDE_LABEL_FILTER_ACTION} or {@link PushNotificationWatch#EXCLUDE_LABEL_FILTER_ACTION})
      * @param topicName:         a fully qualified Google Cloud Pub/Sub API topic name to publish the events to
      * @return push notification watch as {@link PushNotificationWatch} custom object
-     * @throws IOException when request have been go wrong
+     * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users/watch">
      * users.watch</a>
      **/
@@ -193,7 +213,7 @@ public class GmailUsersManager extends GmailManager {
      * @param topicName:         a fully qualified Google Cloud Pub/Sub API topic name to publish the events to
      * @param format:            return type formatter -> {@link ReturnFormat}
      * @return push notification watch as {@code "format"} defines
-     * @throws IOException when request have been go wrong
+     * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users/watch">
      * users.watch</a>
      **/
@@ -222,7 +242,7 @@ public class GmailUsersManager extends GmailManager {
      *                           ({@link PushNotificationWatch#INCLUDE_LABEL_FILTER_ACTION} or {@link PushNotificationWatch#EXCLUDE_LABEL_FILTER_ACTION})
      * @param topicName:         a fully qualified Google Cloud Pub/Sub API topic name to publish the events to
      * @return push notification watch as {@link PushNotificationWatch} custom object
-     * @throws IOException when request have been go wrong
+     * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users/watch">
      * users.watch</a>
      **/
@@ -239,7 +259,7 @@ public class GmailUsersManager extends GmailManager {
      * @param topicName:         a fully qualified Google Cloud Pub/Sub API topic name to publish the events to
      * @param format:            return type formatter -> {@link ReturnFormat}
      * @return push notification watch as {@code "format"} defines
-     * @throws IOException when request have been go wrong
+     * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users/watch">
      * users.watch</a>
      **/

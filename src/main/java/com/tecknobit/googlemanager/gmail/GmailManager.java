@@ -1,6 +1,7 @@
 package com.tecknobit.googlemanager.gmail;
 
 import com.google.api.services.gmail.Gmail;
+import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.model.Message;
 import com.tecknobit.googlemanager.GoogleManager;
 import org.apache.commons.codec.binary.Base64;
@@ -164,13 +165,14 @@ public class GmailManager extends GoogleManager {
      * @param host:           host used in the auth operations
      * @param callBackPath:   callback path used in the auth operations
      * @param applicationName: name of application to give at the project
-     * @throws IOException when auth request have been go wrong
+     * @throws IOException when auth request has been go wrong
      **/
     public GmailManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                         int port, String host, String callBackPath, String applicationName) throws IOException {
-        super(clientId, clientSecret, userId, accessType, approvalPrompt, port, host, callBackPath);
-        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName)
+        super(clientId, clientSecret, userId, accessType, approvalPrompt, port, host, callBackPath, GmailScopes.all());
+        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credentials).setApplicationName(applicationName)
                 .build().users();
+        properties.setProperty("application_name", applicationName);
     }
 
     /**
@@ -182,13 +184,14 @@ public class GmailManager extends GoogleManager {
      * @param accessType:      access type used in the auth operations
      * @param approvalPrompt:  approval prompt type used in the auth operations
      * @param applicationName: name of application to give at the project
-     * @throws IOException when auth request have been go wrong
+     * @throws IOException when auth request has been go wrong
      **/
     public GmailManager(String clientId, String clientSecret, String userId, String accessType,
                         String approvalPrompt, String applicationName) throws IOException {
-        super(clientId, clientSecret, userId, accessType, approvalPrompt);
-        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName)
+        super(clientId, clientSecret, userId, accessType, approvalPrompt, GmailScopes.all());
+        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credentials).setApplicationName(applicationName)
                 .build().users();
+        properties.setProperty("application_name", applicationName);
     }
 
     /**
@@ -201,13 +204,14 @@ public class GmailManager extends GoogleManager {
      * @param approvalPrompt:  approval prompt type used in the auth operations
      * @param port:            port used in the auth operations
      * @param applicationName: name of application to give at the project
-     * @throws IOException when auth request have been go wrong
+     * @throws IOException when auth request has been go wrong
      **/
     public GmailManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                         int port, String applicationName) throws IOException {
-        super(clientId, clientSecret, userId, accessType, approvalPrompt, port);
-        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName)
+        super(clientId, clientSecret, userId, accessType, approvalPrompt, port, GmailScopes.all());
+        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credentials).setApplicationName(applicationName)
                 .build().users();
+        properties.setProperty("application_name", applicationName);
     }
 
     /**
@@ -221,13 +225,14 @@ public class GmailManager extends GoogleManager {
      * @param port:            port used in the auth operations
      * @param callBackPath:    callback path used in the auth operations
      * @param applicationName: name of application to give at the project
-     * @throws IOException when auth request have been go wrong
+     * @throws IOException when auth request has been go wrong
      **/
     public GmailManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                         int port, String callBackPath, String applicationName) throws IOException {
-        super(clientId, clientSecret, userId, accessType, approvalPrompt, port, callBackPath);
-        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName)
+        super(clientId, clientSecret, userId, accessType, approvalPrompt, port, callBackPath, GmailScopes.all());
+        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credentials).setApplicationName(applicationName)
                 .build().users();
+        properties.setProperty("application_name", applicationName);
     }
 
     /**
@@ -241,13 +246,36 @@ public class GmailManager extends GoogleManager {
      * @param port:            port used in the auth operations
      * @param host:            host used in the auth operations
      * @param applicationName: name of application to give at the project
-     * @throws IOException when auth request have been go wrong
+     * @throws IOException when auth request has been go wrong
      **/
     public GmailManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                         String host, int port, String applicationName) throws IOException {
-        super(clientId, clientSecret, userId, accessType, approvalPrompt, host, port);
-        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credential).setApplicationName(applicationName)
+        super(clientId, clientSecret, userId, accessType, approvalPrompt, host, port, GmailScopes.all());
+        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credentials).setApplicationName(applicationName)
                 .build().users();
+        properties.setProperty("application_name", applicationName);
+    }
+
+    /**
+     * Constructor to init a {@link GmailManager} <br>
+     * Any params required
+     *
+     * @apiNote this constructor is useful to instantiate a new {@link GmailManager}'s manager without reinsert
+     * credentials and is useful in those cases if you need to use different manager at the same time:
+     * <pre>
+     *     {@code
+     *        //You need to insert all credentials requested
+     *        GmailManager firstManager = new GmailManager(CLIENT_ID, CLIENT_SECRET, "email@gmail.com",
+     *                 ACCESS_TYPE, APPROVAL_PROMPT, port, "host", "callback_path", "application_name");
+     *        //You don't need to insert all credentials to make manager work
+     *        GmailManager secondManager = new GmailManager(); //same credentials used
+     *     }
+     * </pre>
+     **/
+    public GmailManager() throws IOException {
+        super(GmailScopes.all());
+        gmail = new Gmail.Builder(netHttpTransport, gsonFactory, credentials).setApplicationName(properties
+                .getProperty("application_name")).build().users();
     }
 
     /**

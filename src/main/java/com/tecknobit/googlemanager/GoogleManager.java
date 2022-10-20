@@ -1,19 +1,22 @@
 package com.tecknobit.googlemanager;
 
 import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.auth.oauth2.StoredCredential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow.Builder;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
-import com.google.api.services.gmail.GmailScopes;
+import com.google.api.client.util.store.DataStore;
+import com.google.api.client.util.store.FileDataStoreFactory;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Properties;
 
-import static java.util.Arrays.asList;
-
-// TODO: 10/10/2022 SAVE OR SEE HOW TO STORE CREDS TO AVOID EVERYTIME THE LOGIN SCREEN AND SEE HOW TO REFRESH TOKEN EVENTUALLY SEE FOR A GET ERROR RESPONSE METHOD
-// TODO: 12/10/2022 WARN USER ABOUT DEFAULT VALUE RETURNED IF NOT EXIST IN DOCU STRING FOR GETTERS
+import static java.lang.Integer.parseInt;
 
 /**
  * The {@code GoogleManager} class is useful to manage all Google's API services giving basic methods
@@ -64,19 +67,40 @@ public abstract class GoogleManager {
 
     /**
      * {@code AUTO_APPROVAL_PROMPT} is a constant for auto approval prompt type used in the auth operations
+     *
      * @apiNote from original Google's documentation,
      * {@code "auto"} to request auto-approval and is the default for web applications
-     * **/
+     **/
     public static final String AUTO_APPROVAL_PROMPT = "auto";
 
     /**
+     * {@code properties} is a local instance used to instantiate a new {@link GoogleManager}'s manager without inserted
+     * credentials
+     **/
+    protected static final Properties properties = new Properties();
+
+    /**
+     * {@code credentialDataStore} is a local instance used to memorize credentials for {@code "Google"}'s api usage
+     **/
+    private static final DataStore<StoredCredential> credentialDataStore;
+
+    static {
+        try {
+            credentialDataStore = new FileDataStoreFactory(new File("/.oauth-credentials/"))
+                    .getDataStore("credentialDatastore");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * {@code netHttpTransport} is an instance used to HTTP transport
-     * **/
+     **/
     protected final NetHttpTransport netHttpTransport = new NetHttpTransport();
 
     /**
      * {@code gsonFactory} is an instance used to JSON factory
-     * **/
+     **/
     protected final GsonFactory gsonFactory = GsonFactory.getDefaultInstance();
 
     /**
@@ -85,9 +109,9 @@ public abstract class GoogleManager {
     protected GoogleAuthorizationCodeFlow authCodeFlow;
 
     /**
-     * {@code credential} is an instance used to accessing protected resources using an access token
+     * {@code credentials} is an instance used to accessing protected resources using an access token
      * **/
-    protected Credential credential;
+    protected Credential credentials;
 
     /**
      * {@code clientId} is a local instance used to identifier a client
@@ -138,11 +162,12 @@ public abstract class GoogleManager {
      * @param port: port used in the auth operations
      * @param host: host used in the auth operations
      * @param callBackPath: callback path used in the auth operations
-     * @throws IOException when auth request have been go wrong
+     * @param scopes: collection of {@link String} for scopes
+     * @throws IOException when auth request has been go wrong
      * **/
     public GoogleManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
-                         int port, String host, String callBackPath) throws IOException {
-        if (!changeProject(clientId, clientSecret, userId, accessType, approvalPrompt, port, host, callBackPath))
+                         int port, String host, String callBackPath, Collection<String> scopes) throws IOException {
+        if (!changeProject(clientId, clientSecret, userId, accessType, approvalPrompt, port, host, callBackPath, scopes))
             throw new IOException();
     }
 
@@ -152,11 +177,13 @@ public abstract class GoogleManager {
      * @param userId: used to identifier a user -> me to use an authenticated user
      * @param accessType: access type used in the auth operations
      * @param approvalPrompt: approval prompt type used in the auth operations
-     * @throws IOException when auth request have been go wrong
+     * @param scopes: collection of {@link String} for scopes
+     * @throws IOException when auth request has been go wrong
      * **/
-    public GoogleManager(String clientId, String clientSecret, String userId, String accessType,
-                         String approvalPrompt) throws IOException {
-        this(clientId, clientSecret, userId, accessType, approvalPrompt, DEFAULT_PORT, DEFAULT_HOST, DEFAULT_CALLBACK_PATH);
+    public GoogleManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
+                         Collection<String> scopes) throws IOException {
+        this(clientId, clientSecret, userId, accessType, approvalPrompt, DEFAULT_PORT, DEFAULT_HOST, DEFAULT_CALLBACK_PATH,
+                scopes);
     }
 
     /** Constructor to init a {@link GoogleManager}
@@ -166,11 +193,12 @@ public abstract class GoogleManager {
      * @param accessType: access type used in the auth operations
      * @param approvalPrompt: approval prompt type used in the auth operations
      * @param port: port used in the auth operations
-     * @throws IOException when auth request have been go wrong
+     * @param scopes: collection of {@link String} for scopes
+     * @throws IOException when auth request has been go wrong
      * **/
-    public GoogleManager(String clientId, String clientSecret, String userId, String accessType,
-                         String approvalPrompt, int port) throws IOException {
-        this(clientId, clientSecret, userId, accessType, approvalPrompt, port, DEFAULT_HOST, DEFAULT_CALLBACK_PATH);
+    public GoogleManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
+                         int port, Collection<String> scopes) throws IOException {
+        this(clientId, clientSecret, userId, accessType, approvalPrompt, port, DEFAULT_HOST, DEFAULT_CALLBACK_PATH, scopes);
     }
 
     /** Constructor to init a {@link GoogleManager}
@@ -181,26 +209,59 @@ public abstract class GoogleManager {
      * @param approvalPrompt: approval prompt type used in the auth operations
      * @param port: port used in the auth operations
      * @param callBackPath: callback path used in the auth operations
-     * @throws IOException when auth request have been go wrong
+     * @param scopes: collection of {@link String} for scopes
+     * @throws IOException when auth request has been go wrong
      * **/
-    public GoogleManager(String clientId, String clientSecret, String userId, String accessType,
-                         String approvalPrompt, int port, String callBackPath) throws IOException {
-        this(clientId, clientSecret, userId, accessType, approvalPrompt, port, DEFAULT_HOST, callBackPath);
+    public GoogleManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
+                         int port, String callBackPath, Collection<String> scopes) throws IOException {
+        this(clientId, clientSecret, userId, accessType, approvalPrompt, port, DEFAULT_HOST, callBackPath, scopes);
     }
 
-    /** Constructor to init a {@link GoogleManager}
-     * @param clientId: client identifier value
-     * @param clientSecret: client secret value
-     * @param userId: used to identifier a user -> me to use an authenticated user
-     * @param accessType: access type used in the auth operations
+    /**
+     * Constructor to init a {@link GoogleManager}
+     *
+     * @param clientId:       client identifier value
+     * @param clientSecret:   client secret value
+     * @param userId:         used to identifier a user -> me to use an authenticated user
+     * @param accessType:     access type used in the auth operations
      * @param approvalPrompt: approval prompt type used in the auth operations
-     * @param host: host used in the auth operations
-     * @param port: port used in the auth operations
-     * @throws IOException when auth request have been go wrong
-     * **/
-    public GoogleManager(String clientId, String clientSecret, String userId, String accessType,
-                         String approvalPrompt, String host, int port) throws IOException {
-        this(clientId, clientSecret, userId, accessType, approvalPrompt, port, host, DEFAULT_CALLBACK_PATH);
+     * @param host:           host used in the auth operations
+     * @param port:           port used in the auth operations
+     * @param scopes:         collection of {@link String} for scopes
+     * @throws IOException when auth request has been go wrong
+     **/
+    public GoogleManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
+                         String host, int port, Collection<String> scopes) throws IOException {
+        this(clientId, clientSecret, userId, accessType, approvalPrompt, port, host, DEFAULT_CALLBACK_PATH, scopes);
+    }
+
+    /**
+     * Constructor to init a {@link GoogleManager}
+     *
+     * @param scopes: collection of {@link String} for scopes
+     * @throws IOException when auth request has been go wrong
+     * @apiNote this constructor is useful to instantiate a new {@link GoogleManager}'s manager without inserted
+     * credentials and is useful in those cases if you need to use different manager at the same time:
+     * <pre>
+     *     {@code
+     *        //You need to insert all credentials requested
+     *        GoogleManager firstManager = new GoogleManager(CLIENT_ID, CLIENT_SECRET, "email@gmail.com",
+     *                 ACCESS_TYPE, APPROVAL_PROMPT, port, "host", "callback_path");
+     *        //You don't need to insert all credentials to make manager work
+     *        GoogleManager secondManager = new GoogleManager(); //same credentials used
+     *     }
+     * </pre>
+     **/
+    public GoogleManager(Collection<String> scopes) throws IOException {
+        clientId = properties.getProperty("clientId");
+        if (clientId == null)
+            throw new IOException("You need to call a parameterized constructor first of this or invalid clientId inserted");
+        if (!changeProject(clientId, properties.getProperty("clientSecret"), properties.getProperty("userId"),
+                properties.getProperty("accessType"), properties.getProperty("approvalPrompt"),
+                parseInt(properties.getProperty("port")), properties.getProperty("host"),
+                properties.getProperty("callBackPath"), scopes)) {
+            throw new IOException();
+        }
     }
 
     /**
@@ -214,11 +275,12 @@ public abstract class GoogleManager {
      * @param port:           port used in the auth operations
      * @param host:           host used in the auth operations
      * @param callBackPath:   callback path used in the auth operations
+     * @param scopes:         collection of {@link String} for scopes
      * @return result of change -> {@code "true"} is successful, {@code "false"} if not successful
-     * @apiNote throws {@link IOException} when some params are not correct or auth request have been go wrong
+     * @apiNote throws {@link IOException} when some params are not correct or auth request has been go wrong
      **/
-    public boolean changeProject(String clientId, String clientSecret, String userId, String accessType,
-                                 String approvalPrompt, int port, String host, String callBackPath) {
+    public boolean changeProject(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
+                                 int port, String host, String callBackPath, Collection<String> scopes) {
         try {
             if (accessType != null && !accessType.equals(ONLINE_ACCESS_TYPE) && !accessType.equals(OFFLINE_ACCESS_TYPE))
                 throw new IOException("Access type must be online, offline or null");
@@ -228,12 +290,12 @@ public abstract class GoogleManager {
             }
             if (!callBackPath.contains("/"))
                 callBackPath = "/" + callBackPath;
-            authCodeFlow = new GoogleAuthorizationCodeFlow.Builder(netHttpTransport, gsonFactory, clientId, clientSecret,
-                    asList(GmailScopes.MAIL_GOOGLE_COM))
+            authCodeFlow = new Builder(netHttpTransport, gsonFactory, clientId, clientSecret, scopes)
                     .setAccessType(accessType)
                     .setApprovalPrompt(approvalPrompt)
+                    .setCredentialDataStore(credentialDataStore)
                     .build();
-            credential = new AuthorizationCodeInstalledApp(authCodeFlow, new LocalServerReceiver.Builder()
+            credentials = new AuthorizationCodeInstalledApp(authCodeFlow, new LocalServerReceiver.Builder()
                     .setPort(port).setHost(host).setCallbackPath(callBackPath).build()).authorize(userId);
             this.clientId = clientId;
             this.clientSecret = clientSecret;
@@ -243,6 +305,14 @@ public abstract class GoogleManager {
             this.port = port;
             this.host = host;
             this.callBackPath = callBackPath;
+            properties.setProperty("clientId", clientId);
+            properties.setProperty("clientSecret", clientSecret);
+            properties.setProperty("userId", userId);
+            properties.setProperty("accessType", accessType);
+            properties.setProperty("approvalPrompt", approvalPrompt);
+            properties.setProperty("port", String.valueOf(port));
+            properties.setProperty("host", host);
+            properties.setProperty("callBackPath", callBackPath);
         } catch (IOException e) {
             return false;
         }
@@ -257,13 +327,14 @@ public abstract class GoogleManager {
      * @param userId:         used to identifier a user -> me to use an authenticated user
      * @param accessType:     access type used in the auth operations
      * @param approvalPrompt: approval prompt type used in the auth operations
+     * @param scopes:         collection of {@link String} for scopes
      * @return result of change -> {@code "true"} is successful, {@code "false"} if not successful
-     * @apiNote throws {@link IOException} when some params are not correct or auth request have been go wrong
+     * @apiNote throws {@link IOException} when some params are not correct or auth request has been go wrong
      **/
-    public boolean changeProject(String clientId, String clientSecret, String userId, String accessType,
-                                 String approvalPrompt) {
+    public boolean changeProject(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
+                                 Collection<String> scopes) {
         return changeProject(clientId, clientSecret, userId, accessType, approvalPrompt, DEFAULT_PORT, DEFAULT_HOST,
-                DEFAULT_CALLBACK_PATH);
+                DEFAULT_CALLBACK_PATH, scopes);
     }
 
     /**
@@ -275,13 +346,14 @@ public abstract class GoogleManager {
      * @param accessType:     access type used in the auth operations
      * @param approvalPrompt: approval prompt type used in the auth operations
      * @param port:           port used in the auth operations
+     * @param scopes:         collection of {@link String} for scopes
      * @return result of change -> {@code "true"} is successful, {@code "false"} if not successful
-     * @apiNote throws {@link IOException} when some params are not correct or auth request have been go wrong
+     * @apiNote throws {@link IOException} when some params are not correct or auth request has been go wrong
      **/
-    public boolean changeProject(String clientId, String clientSecret, String userId, String accessType,
-                                 String approvalPrompt, int port) {
+    public boolean changeProject(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
+                                 int port, Collection<String> scopes) {
         return changeProject(clientId, clientSecret, userId, accessType, approvalPrompt, port, DEFAULT_HOST,
-                DEFAULT_CALLBACK_PATH);
+                DEFAULT_CALLBACK_PATH, scopes);
     }
 
     /**
@@ -294,12 +366,14 @@ public abstract class GoogleManager {
      * @param approvalPrompt: approval prompt type used in the auth operations
      * @param port:           port used in the auth operations
      * @param callBackPath:   callback path used in the auth operations
+     * @param scopes:         collection of {@link String} for scopes
      * @return result of change -> {@code "true"} is successful, {@code "false"} if not successful
-     * @apiNote throws {@link IOException} when some params are not correct or auth request have been go wrong
+     * @apiNote throws {@link IOException} when some params are not correct or auth request has been go wrong
      **/
-    public boolean changeProject(String clientId, String clientSecret, String userId, String accessType,
-                                 String approvalPrompt, int port, String callBackPath) {
-        return changeProject(clientId, clientSecret, userId, accessType, approvalPrompt, port, DEFAULT_HOST, callBackPath);
+    public boolean changeProject(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
+                                 int port, String callBackPath, Collection<String> scopes) {
+        return changeProject(clientId, clientSecret, userId, accessType, approvalPrompt, port, DEFAULT_HOST, callBackPath,
+                scopes);
     }
 
     /**
@@ -312,22 +386,24 @@ public abstract class GoogleManager {
      * @param approvalPrompt: approval prompt type used in the auth operations
      * @param port:           port used in the auth operations
      * @param host:           host used in the auth operations
+     * @param scopes:         collection of {@link String} for scopes
      * @return result of change -> {@code "true"} is successful, {@code "false"} if not successful
-     * @apiNote throws {@link IOException} when some params are not correct or auth request have been go wrong
+     * @apiNote throws {@link IOException} when some params are not correct or auth request has been go wrong
      **/
-    public boolean changeProject(String clientId, String clientSecret, String userId, String accessType,
-                                 String approvalPrompt, String host, int port) {
-        return changeProject(clientId, clientSecret, userId, accessType, approvalPrompt, port, host, DEFAULT_CALLBACK_PATH);
+    public boolean changeProject(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
+                                 String host, int port, Collection<String> scopes) {
+        return changeProject(clientId, clientSecret, userId, accessType, approvalPrompt, port, host,
+                DEFAULT_CALLBACK_PATH, scopes);
     }
 
     /**
-     * Method to get {@link #credential} instance <br>
+     * Method to get {@link #credentials} instance <br>
      * Any params required
      *
-     * @return {@link #credential} instance as {@link Credential}
+     * @return {@link #credentials} instance as {@link Credential}
      **/
-    public Credential getCredential() {
-        return credential;
+    public Credential getCredentials() {
+        return credentials;
     }
 
     /**

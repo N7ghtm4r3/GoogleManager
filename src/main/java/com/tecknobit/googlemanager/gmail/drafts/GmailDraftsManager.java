@@ -45,7 +45,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param host:           host used in the auth operations
      * @param callBackPath:   callback path used in the auth operations
      * @param applicationName: name of application to give at the project
-     * @throws IOException when auth request have been go wrong
+     * @throws IOException when auth request has been go wrong
      **/
     public GmailDraftsManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                               int port, String host, String callBackPath, String applicationName) throws IOException {
@@ -61,7 +61,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param accessType:      access type used in the auth operations
      * @param approvalPrompt:  approval prompt type used in the auth operations
      * @param applicationName: name of application to give at the project
-     * @throws IOException when auth request have been go wrong
+     * @throws IOException when auth request has been go wrong
      **/
     public GmailDraftsManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                               String applicationName) throws IOException {
@@ -78,7 +78,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param approvalPrompt:  approval prompt type used in the auth operations
      * @param port:            port used in the auth operations
      * @param applicationName: name of application to give at the project
-     * @throws IOException when auth request have been go wrong
+     * @throws IOException when auth request has been go wrong
      **/
     public GmailDraftsManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                               int port, String applicationName) throws IOException {
@@ -96,7 +96,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param port:            port used in the auth operations
      * @param callBackPath:    callback path used in the auth operations
      * @param applicationName: name of application to give at the project
-     * @throws IOException when auth request have been go wrong
+     * @throws IOException when auth request has been go wrong
      **/
     public GmailDraftsManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                               int port, String callBackPath, String applicationName) throws IOException {
@@ -114,11 +114,31 @@ public class GmailDraftsManager extends GmailManager {
      * @param port:            port used in the auth operations
      * @param host:            host used in the auth operations
      * @param applicationName: name of application to give at the project
-     * @throws IOException when auth request have been go wrong
+     * @throws IOException when auth request has been go wrong
      **/
     public GmailDraftsManager(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
                               String host, int port, String applicationName) throws IOException {
         super(clientId, clientSecret, userId, accessType, approvalPrompt, host, port, applicationName);
+    }
+
+    /**
+     * Constructor to init a {@link GmailDraftsManager} <br>
+     * Any params required
+     *
+     * @apiNote this constructor is useful to instantiate a new {@link GmailManager}'s manager without reinsert
+     * credentials and is useful in those cases if you need to use different manager at the same time:
+     * <pre>
+     *     {@code
+     *        //You need to insert all credentials requested
+     *        GmailManager firstManager = new GmailManager(CLIENT_ID, CLIENT_SECRET, "email@gmail.com",
+     *                 ACCESS_TYPE, APPROVAL_PROMPT, port, "host", "callback_path", "application_name");
+     *        //You don't need to insert all credentials to make manager work
+     *        GmailManager secondManager = new GmailManager(); //same credentials used
+     *     }
+     * </pre>
+     **/
+    public GmailDraftsManager() throws IOException {
+        super();
     }
 
     /**
@@ -128,7 +148,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param subject:        subject of the email message
      * @param emailText:      email content message
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request have been go wrong
+     * @throws Exception when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -145,7 +165,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request have been go wrong
+     * @throws Exception when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -162,7 +182,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param file:           attachment file to sent with draft
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request have been go wrong
+     * @throws Exception when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -180,7 +200,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param file:           attachment file to sent with draft
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request have been go wrong
+     * @throws Exception when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -199,7 +219,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param file:           attachment file to sent with draft
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request have been go wrong
+     * @throws Exception when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -219,7 +239,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request have been go wrong
+     * @throws Exception when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -237,7 +257,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request have been go wrong
+     * @throws Exception when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -256,7 +276,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request have been go wrong
+     * @throws Exception when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -276,7 +296,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request have been go wrong
+     * @throws Exception when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -296,7 +316,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request have been go wrong
+     * @throws Exception when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -314,7 +334,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request have been go wrong
+     * @throws Exception when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -333,7 +353,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request have been go wrong
+     * @throws Exception when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -353,7 +373,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request have been go wrong
+     * @throws Exception when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -373,7 +393,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request have been go wrong
+     * @throws Exception when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
