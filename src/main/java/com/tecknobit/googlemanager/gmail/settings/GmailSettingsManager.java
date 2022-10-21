@@ -20,7 +20,27 @@ import static com.tecknobit.googlemanager.gmail.settings.records.ImapSettings.Ex
  * The {@code GmailSettingsManager} class is useful to manage all Gmail's settings endpoints
  *
  * @author N7ghtm4r3 - Tecknobit
- * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings">Gmail settings</a>
+ * @apiNote this class include also all {@code "settings"} sub-endpoints, see the officials documentations at:
+ * <ul>
+ *     <li>
+ *         <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings">settings</a>
+ *     </li>
+ *     <li>
+ *         <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.delegates">settings.delegates</a>
+ *     </li>
+ *     <li>
+ *         <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters">settings.filters</a>
+ *     </li>
+ *     <li>
+ *         <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses">settings.forwardingAddresses</a>
+ *     </li>
+ *     <li>
+ *         <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs">settings.sendAs</a>
+ *     </li>
+ *     <li>
+ *         <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo">settings.sendAs.smimeInfo</a>
+ *     </li>
+ * </ul>
  **/
 public class GmailSettingsManager extends GmailManager {
 
@@ -173,15 +193,17 @@ public class GmailSettingsManager extends GmailManager {
         return returnVacationSettings(settings.getVacation(userId).execute(), format);
     }
 
-    // TODO: 21/10/2022 BEFORE UPDATE RESTORE CURRENT OBJECT TO AVOID UPDATING OF DATA NOT INSERTED BY THE USER
-
     public AutoForwarding updateAutoForwardingEnabled(boolean enabled) throws IOException {
         return updateAutoForwardingEnabled(enabled, LIBRARY_OBJECT);
     }
 
     public <T> T updateAutoForwardingEnabled(boolean enabled, ReturnFormat format) throws IOException {
-        return returnAutoForwarding(settings.updateAutoForwarding(userId, new com.google.api.services.gmail.model.AutoForwarding()
-                .setEnabled(enabled)).execute(), format);
+        AutoForwarding actualAutoForwarding = getAutoForwarding();
+        if (enabled)
+            actualAutoForwarding.enable();
+        else
+            actualAutoForwarding.disable();
+        return updateAutoForwarding(actualAutoForwarding, format);
     }
 
     public AutoForwarding updateAutoForwardingEmailAddress(String emailAddress) throws IOException {
@@ -189,8 +211,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T updateAutoForwardingEmailAddress(String emailAddress, ReturnFormat format) throws IOException {
-        return returnAutoForwarding(settings.updateAutoForwarding(userId, new com.google.api.services.gmail.model.AutoForwarding()
-                .setEmailAddress(emailAddress)).execute(), format);
+        AutoForwarding actualAutoForwarding = getAutoForwarding();
+        actualAutoForwarding.setEmailAddress(emailAddress);
+        return updateAutoForwarding(actualAutoForwarding, format);
     }
 
     public AutoForwarding updateAutoForwardingDisposition(Disposition disposition) throws IOException {
@@ -198,8 +221,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T updateAutoForwardingDisposition(Disposition disposition, ReturnFormat format) throws IOException {
-        return returnAutoForwarding(settings.updateAutoForwarding(userId, new com.google.api.services.gmail.model.AutoForwarding()
-                .setEmailAddress(disposition.toString())).execute(), format);
+        AutoForwarding actualAutoForwarding = getAutoForwarding();
+        actualAutoForwarding.setDisposition(disposition);
+        return updateAutoForwarding(actualAutoForwarding, format);
     }
 
     public AutoForwarding updateAutoForwarding(boolean enabled, String emailAddress) throws IOException {
@@ -207,10 +231,13 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T updateAutoForwarding(boolean enabled, String emailAddress, ReturnFormat format) throws IOException {
-        com.google.api.services.gmail.model.AutoForwarding autoForwarding = new com.google.api.services.gmail.model.AutoForwarding();
-        autoForwarding.setEnabled(enabled);
-        autoForwarding.setEmailAddress(emailAddress);
-        return returnAutoForwarding(settings.updateAutoForwarding(userId, autoForwarding).execute(), format);
+        AutoForwarding actualAutoForwarding = getAutoForwarding();
+        if (enabled)
+            actualAutoForwarding.enable();
+        else
+            actualAutoForwarding.disable();
+        actualAutoForwarding.setEmailAddress(emailAddress);
+        return updateAutoForwarding(actualAutoForwarding, format);
     }
 
     public AutoForwarding updateAutoForwarding(boolean enabled, Disposition disposition) throws IOException {
@@ -218,10 +245,13 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T updateAutoForwarding(boolean enabled, Disposition disposition, ReturnFormat format) throws IOException {
-        com.google.api.services.gmail.model.AutoForwarding autoForwarding = new com.google.api.services.gmail.model.AutoForwarding();
-        autoForwarding.setEnabled(enabled);
-        autoForwarding.setDisposition(disposition.toString());
-        return returnAutoForwarding(settings.updateAutoForwarding(userId, autoForwarding).execute(), format);
+        AutoForwarding actualAutoForwarding = getAutoForwarding();
+        if (enabled)
+            actualAutoForwarding.enable();
+        else
+            actualAutoForwarding.disable();
+        actualAutoForwarding.setDisposition(disposition);
+        return updateAutoForwarding(actualAutoForwarding, format);
     }
 
     public AutoForwarding updateAutoForwarding(String emailAddress, Disposition disposition) throws IOException {
@@ -229,9 +259,21 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T updateAutoForwarding(String emailAddress, Disposition disposition, ReturnFormat format) throws IOException {
+        AutoForwarding actualAutoForwarding = getAutoForwarding();
+        actualAutoForwarding.setEmailAddress(emailAddress);
+        actualAutoForwarding.setDisposition(disposition);
+        return updateAutoForwarding(actualAutoForwarding, format);
+    }
+
+    public AutoForwarding updateAutoForwarding(AutoForwarding autoForwardingUpdated) throws IOException {
+        return updateAutoForwarding(autoForwardingUpdated, LIBRARY_OBJECT);
+    }
+
+    public <T> T updateAutoForwarding(AutoForwarding autoForwardingUpdated, ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.AutoForwarding autoForwarding = new com.google.api.services.gmail.model.AutoForwarding();
-        autoForwarding.setEmailAddress(emailAddress);
-        autoForwarding.setDisposition(disposition.toString());
+        autoForwarding.setEnabled(autoForwardingUpdated.isEnabled());
+        autoForwarding.setEmailAddress(autoForwardingUpdated.getEmailAddress());
+        autoForwarding.setDisposition(autoForwardingUpdated.getDisposition().toString());
         return returnAutoForwarding(settings.updateAutoForwarding(userId, autoForwarding).execute(), format);
     }
 
@@ -245,19 +287,7 @@ public class GmailSettingsManager extends GmailManager {
         com.google.api.services.gmail.model.AutoForwarding autoForwarding = new com.google.api.services.gmail.model.AutoForwarding();
         autoForwarding.setEnabled(enabled);
         autoForwarding.setEmailAddress(emailAddress);
-        autoForwarding.setDisposition(disposition.toString());
-        return returnAutoForwarding(settings.updateAutoForwarding(userId, autoForwarding).execute(), format);
-    }
-
-    public AutoForwarding updateAutoForwarding(AutoForwarding autoForwardingUpdated) throws IOException {
-        return updateAutoForwarding(autoForwardingUpdated, LIBRARY_OBJECT);
-    }
-
-    public <T> T updateAutoForwarding(AutoForwarding autoForwardingUpdated, ReturnFormat format) throws IOException {
-        com.google.api.services.gmail.model.AutoForwarding autoForwarding = new com.google.api.services.gmail.model.AutoForwarding();
-        autoForwarding.setEnabled(autoForwardingUpdated.isEnabled());
-        autoForwarding.setEmailAddress(autoForwardingUpdated.getEmailAddress());
-        autoForwarding.setDisposition(autoForwardingUpdated.getDisposition().toString());
+        autoForwarding.setDisposition(disposition.name());
         return returnAutoForwarding(settings.updateAutoForwarding(userId, autoForwarding).execute(), format);
     }
 
@@ -278,8 +308,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T enableImap(ReturnFormat format) throws IOException {
-        return returnImap(settings.updateImap(userId, new com.google.api.services.gmail.model.ImapSettings()
-                .setEnabled(true)).execute(), format);
+        ImapSettings actualImap = getImap();
+        actualImap.enable();
+        return updateImap(actualImap, format);
     }
 
     public ImapSettings disableImap() throws IOException {
@@ -287,8 +318,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T disableImap(ReturnFormat format) throws IOException {
-        return returnImap(settings.updateImap(userId, new com.google.api.services.gmail.model.ImapSettings()
-                .setEnabled(false)).execute(), format);
+        ImapSettings actualImap = getImap();
+        actualImap.disable();
+        return updateImap(actualImap, format);
     }
 
     public ImapSettings enableImapAutoExpunge() throws IOException {
@@ -296,8 +328,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T enableImapAutoExpunge(ReturnFormat format) throws IOException {
-        return returnImap(settings.updateImap(userId, new com.google.api.services.gmail.model.ImapSettings()
-                .setAutoExpunge(true)).execute(), format);
+        ImapSettings actualImap = getImap();
+        actualImap.enableAutoExpunge();
+        return updateImap(actualImap, format);
     }
 
     public ImapSettings disableImapAutoExpunge() throws IOException {
@@ -305,8 +338,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T disableImapAutoExpunge(ReturnFormat format) throws IOException {
-        return returnImap(settings.updateImap(userId, new com.google.api.services.gmail.model.ImapSettings()
-                .setAutoExpunge(false)).execute(), format);
+        ImapSettings actualImap = getImap();
+        actualImap.disableAutoExpunge();
+        return updateImap(actualImap, format);
     }
 
     public ImapSettings updateImapExpungeBehavior(ExpungeBehavior expungeBehavior) throws IOException {
@@ -314,8 +348,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T updateImapExpungeBehavior(ExpungeBehavior expungeBehavior, ReturnFormat format) throws IOException {
-        return returnImap(settings.updateImap(userId, new com.google.api.services.gmail.model.ImapSettings()
-                .setExpungeBehavior(expungeBehavior.toString())).execute(), format);
+        ImapSettings actualImap = getImap();
+        actualImap.setExpungeBehavior(expungeBehavior);
+        return updateImap(actualImap, format);
     }
 
     public ImapSettings updateImapMaxFolderSize(int maxFolderSize) throws IOException {
@@ -323,8 +358,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T updateImapMaxFolderSize(int maxFolderSize, ReturnFormat format) throws IOException {
-        return returnImap(settings.updateImap(userId, new com.google.api.services.gmail.model.ImapSettings()
-                .setMaxFolderSize(maxFolderSize)).execute(), format);
+        ImapSettings actualImap = getImap();
+        actualImap.setMaxFolderSize(maxFolderSize);
+        return updateImap(actualImap, format);
     }
 
     @SafeVarargs
@@ -334,7 +370,7 @@ public class GmailSettingsManager extends GmailManager {
 
     @SafeVarargs
     public final <T> T updateImap(ReturnFormat format, T... imapSettingsUpdated) throws IOException {
-        com.google.api.services.gmail.model.ImapSettings imapSettings = new com.google.api.services.gmail.model.ImapSettings();
+        com.google.api.services.gmail.model.ImapSettings imapSettings = settings.getImap(userId).execute();
         for (int j = 0; j < imapSettingsUpdated.length; j++) {
             if (j % 2 == 0 && imapSettingsUpdated[j].getClass().equals(Boolean.class))
                 imapSettings.setEnabled((boolean) imapSettingsUpdated[j]);
@@ -370,7 +406,7 @@ public class GmailSettingsManager extends GmailManager {
         return returnImap(settings.updateImap(userId, new com.google.api.services.gmail.model.ImapSettings()
                 .setEnabled(enable)
                 .setAutoExpunge(autoExpunge)
-                .setExpungeBehavior(expungeBehavior.toString())
+                .setExpungeBehavior(expungeBehavior.name())
                 .setMaxFolderSize(maxFolderSize)).execute(), format);
     }
 
@@ -406,8 +442,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T updatePopAccessWindow(AccessWindow accessWindow, ReturnFormat format) throws IOException {
-        return returnPopSettings(settings.updatePop(userId, new com.google.api.services.gmail.model.PopSettings()
-                .setAccessWindow(accessWindow.toString())).execute(), format);
+        PopSettings actualPopSettings = getPopSettings();
+        actualPopSettings.setAccessWindow(accessWindow);
+        return updatePopSettings(actualPopSettings, format);
     }
 
     public PopSettings updatePopDisposition(Disposition disposition) throws IOException {
@@ -415,8 +452,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T updatePopDisposition(Disposition disposition, ReturnFormat format) throws IOException {
-        return returnPopSettings(settings.updatePop(userId, new com.google.api.services.gmail.model.PopSettings()
-                .setDisposition(disposition.toString())).execute(), format);
+        PopSettings actualPopSettings = getPopSettings();
+        actualPopSettings.setDisposition(disposition);
+        return updatePopSettings(actualPopSettings, format);
     }
 
     public PopSettings updatePopSettings(PopSettings popSettingsUpdated) throws IOException {
@@ -435,7 +473,7 @@ public class GmailSettingsManager extends GmailManager {
 
     public <T> T updatePopSettings(AccessWindow accessWindow, Disposition disposition, ReturnFormat format) throws IOException {
         return returnPopSettings(settings.updatePop(userId, new com.google.api.services.gmail.model.PopSettings()
-                .setAccessWindow(accessWindow.toString()).setDisposition(disposition.toString())).execute(), format);
+                .setAccessWindow(accessWindow.name()).setDisposition(disposition.name())).execute(), format);
     }
 
     private <T> T returnPopSettings(com.google.api.services.gmail.model.PopSettings popSettings, ReturnFormat format) {
@@ -455,22 +493,23 @@ public class GmailSettingsManager extends GmailManager {
 
     public <T> T enableVacationPlainTextAutoReply(String responseSubject, String responsePlainText,
                                                   ReturnFormat format) throws IOException {
-        return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
-                .setEnableAutoReply(true)
-                .setResponseSubject(responseSubject)
-                .setResponseBodyPlainText(responsePlainText)).execute(), format);
+        VacationSettings actualVacationSettings = getVacationSettings();
+        actualVacationSettings.enableAutoReply();
+        actualVacationSettings.setResponseSubject(responseSubject);
+        actualVacationSettings.setResponseBodyPlainText(responsePlainText);
+        return updateVacationSettings(actualVacationSettings, format);
     }
 
-    public VacationSettings enableVacationHtmlTextAutoReply(String responseSubject, String responseHtml) throws IOException {
-        return enableVacationHtmlTextAutoReply(responseSubject, responseHtml, LIBRARY_OBJECT);
+    public VacationSettings enableVacationHtmlAutoReply(String responseSubject, String responseHtml) throws IOException {
+        return enableVacationHtmlAutoReply(responseSubject, responseHtml, LIBRARY_OBJECT);
     }
 
-    public <T> T enableVacationHtmlTextAutoReply(String responseSubject, String responseHtml,
-                                                 ReturnFormat format) throws IOException {
-        return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
-                .setEnableAutoReply(true)
-                .setResponseSubject(responseSubject)
-                .setResponseBodyHtml(responseHtml)).execute(), format);
+    public <T> T enableVacationHtmlAutoReply(String responseSubject, String responseHtml, ReturnFormat format) throws IOException {
+        VacationSettings actualVacationSettings = getVacationSettings();
+        actualVacationSettings.enableAutoReply();
+        actualVacationSettings.setResponseSubject(responseSubject);
+        actualVacationSettings.setResponseBodyHtml(responseHtml);
+        return updateVacationSettings(actualVacationSettings, format);
     }
 
     public VacationSettings enableVacationAutoReply(String responseSubject, String responsePlainText,
@@ -480,11 +519,12 @@ public class GmailSettingsManager extends GmailManager {
 
     public <T> T enableVacationAutoReply(String responseSubject, String responsePlainText, String responseHtml,
                                          ReturnFormat format) throws IOException {
-        return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
-                .setEnableAutoReply(true)
-                .setResponseSubject(responseSubject)
-                .setResponseBodyPlainText(responsePlainText)
-                .setResponseBodyHtml(responseHtml)).execute(), format);
+        VacationSettings actualVacationSettings = getVacationSettings();
+        actualVacationSettings.enableAutoReply();
+        actualVacationSettings.setResponseSubject(responseSubject);
+        actualVacationSettings.setResponseBodyPlainText(responsePlainText);
+        actualVacationSettings.setResponseBodyHtml(responseHtml);
+        return updateVacationSettings(actualVacationSettings, format);
     }
 
     public VacationSettings updateVacationResponseSubject(String responseSubject) throws IOException {
@@ -492,8 +532,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T updateVacationResponseSubject(String responseSubject, ReturnFormat format) throws IOException {
-        return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
-                .setResponseSubject(responseSubject)).execute(), format);
+        VacationSettings actualVacationSettings = getVacationSettings();
+        actualVacationSettings.setResponseSubject(responseSubject);
+        return updateVacationSettings(actualVacationSettings, format);
     }
 
     public VacationSettings updateVacationResponsePlainText(String responsePlainText) throws IOException {
@@ -501,8 +542,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T updateVacationResponsePlainText(String responsePlainText, ReturnFormat format) throws IOException {
-        return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
-                .setResponseBodyPlainText(responsePlainText)).execute(), format);
+        VacationSettings actualVacationSettings = getVacationSettings();
+        actualVacationSettings.setResponseBodyPlainText(responsePlainText);
+        return updateVacationSettings(actualVacationSettings, format);
     }
 
     public VacationSettings updateVacationResponsePlainText(String responseSubject, String responsePlainText) throws IOException {
@@ -511,9 +553,10 @@ public class GmailSettingsManager extends GmailManager {
 
     public <T> T updateVacationResponsePlainText(String responseSubject, String responsePlainText,
                                                  ReturnFormat format) throws IOException {
-        return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
-                .setResponseSubject(responseSubject)
-                .setResponseBodyPlainText(responsePlainText)).execute(), format);
+        VacationSettings actualVacationSettings = getVacationSettings();
+        actualVacationSettings.setResponseSubject(responseSubject);
+        actualVacationSettings.setResponseBodyPlainText(responsePlainText);
+        return updateVacationSettings(actualVacationSettings, format);
     }
 
     public VacationSettings updateVacationResponseHtml(String responseHtml) throws IOException {
@@ -521,8 +564,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T updateVacationResponseHtml(String responseHtml, ReturnFormat format) throws IOException {
-        return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
-                .setResponseBodyHtml(responseHtml)).execute(), format);
+        VacationSettings actualVacationSettings = getVacationSettings();
+        actualVacationSettings.setResponseBodyHtml(responseHtml);
+        return updateVacationSettings(actualVacationSettings, format);
     }
 
     public VacationSettings updateVacationResponseHtml(String responseSubject, String responseHtml) throws IOException {
@@ -530,9 +574,10 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T updateVacationResponseHtml(String responseSubject, String responseHtml, ReturnFormat format) throws IOException {
-        return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
-                .setResponseSubject(responseSubject)
-                .setResponseBodyHtml(responseHtml)).execute(), format);
+        VacationSettings actualVacationSettings = getVacationSettings();
+        actualVacationSettings.setResponseSubject(responseSubject);
+        actualVacationSettings.setResponseBodyHtml(responseHtml);
+        return updateVacationSettings(actualVacationSettings, format);
     }
 
     public VacationSettings updateVacationResponseDetails(String responseSubject, String responsePlainText,
@@ -542,7 +587,7 @@ public class GmailSettingsManager extends GmailManager {
 
     public <T> T updateVacationResponseDetails(String responseSubject, String responsePlainText, String responseHtml,
                                                ReturnFormat format) throws IOException {
-        com.google.api.services.gmail.model.VacationSettings vSettings = new com.google.api.services.gmail.model.VacationSettings();
+        com.google.api.services.gmail.model.VacationSettings vSettings = settings.getVacation(userId).execute();
         settings.updateVacation(userId, vSettings.setResponseBodyHtml(responseHtml)).execute();
         vSettings.setResponseBodyHtml(null);
         return returnVacationSettings(settings.updateVacation(userId, vSettings
@@ -565,8 +610,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T enableRestrictToContacts(ReturnFormat format) throws IOException {
-        return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
-                .setRestrictToContacts(true)).execute(), format);
+        VacationSettings actualVacationSettings = getVacationSettings();
+        actualVacationSettings.enableRestrictToContacts();
+        return updateVacationSettings(actualVacationSettings, format);
     }
 
     public VacationSettings disableRestrictToContacts() throws IOException {
@@ -574,8 +620,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T disableRestrictToContacts(ReturnFormat format) throws IOException {
-        return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
-                .setRestrictToContacts(false)).execute(), format);
+        VacationSettings actualVacationSettings = getVacationSettings();
+        actualVacationSettings.disableRestrictToContacts();
+        return updateVacationSettings(actualVacationSettings, format);
     }
 
     public VacationSettings enableRestrictToDomain() throws IOException {
@@ -583,8 +630,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T enableRestrictToDomain(ReturnFormat format) throws IOException {
-        return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
-                .setRestrictToDomain(true)).execute(), format);
+        VacationSettings actualVacationSettings = getVacationSettings();
+        actualVacationSettings.enableRestrictToDomain();
+        return updateVacationSettings(actualVacationSettings, format);
     }
 
     public VacationSettings disableRestrictToDomain() throws IOException {
@@ -592,8 +640,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T disableRestrictToDomain(ReturnFormat format) throws IOException {
-        return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
-                .setRestrictToDomain(false)).execute(), format);
+        VacationSettings actualVacationSettings = getVacationSettings();
+        actualVacationSettings.disableRestrictToDomain();
+        return updateVacationSettings(actualVacationSettings, format);
     }
 
     public VacationSettings updateVacationStartTime(long startTime) throws IOException {
@@ -601,8 +650,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T updateVacationStartTime(long startTime, ReturnFormat format) throws IOException {
-        return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
-                .setStartTime(startTime)).execute(), format);
+        VacationSettings actualVacationSettings = getVacationSettings();
+        actualVacationSettings.setStartTime(startTime);
+        return updateVacationSettings(actualVacationSettings, format);
     }
 
     public VacationSettings updateVacationEndTime(long endTime) throws IOException {
@@ -610,8 +660,9 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T updateVacationEndTime(long endTime, ReturnFormat format) throws IOException {
-        return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
-                .setEndTime(endTime)).execute(), format);
+        VacationSettings actualVacationSettings = getVacationSettings();
+        actualVacationSettings.setEndTime(endTime);
+        return updateVacationSettings(actualVacationSettings, format);
     }
 
     public VacationSettings updateVacationTime(long startTime, long endTime) throws IOException {
@@ -619,9 +670,10 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     public <T> T updateVacationTime(long startTime, long endTime, ReturnFormat format) throws IOException {
-        return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
-                .setStartTime(startTime)
-                .setEndTime(endTime)).execute(), format);
+        VacationSettings actualVacationSettings = getVacationSettings();
+        actualVacationSettings.setStartTime(startTime);
+        actualVacationSettings.setEndTime(endTime);
+        return updateVacationSettings(actualVacationSettings, format);
     }
 
     public VacationSettings updateVacationSettings(VacationSettings vacationSettings) throws IOException {

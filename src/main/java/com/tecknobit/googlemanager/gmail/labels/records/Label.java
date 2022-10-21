@@ -360,7 +360,15 @@ public class Label {
      * Messages visibilities</a>
      **/
     public enum MessageListVisibility {
+
+        /**
+         * {@code show} show the label in the message list
+         **/
         show,
+
+        /**
+         * {@code hide} do not show the label in the message list
+         **/
         hide
     }
 
@@ -371,8 +379,20 @@ public class Label {
      * Label list visibilities</a>
      **/
     public enum LabelListVisibility {
+
+        /**
+         * {@code labelShow} show the label in the label list
+         **/
         labelShow,
+
+        /**
+         * {@code labelShowIfUnread} show the label if there are any unread messages with that label
+         **/
         labelShowIfUnread,
+
+        /**
+         * {@code labelHide} do not show the label in the label list
+         **/
         labelHide
     }
 
@@ -382,7 +402,15 @@ public class Label {
      * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels#type">Label types</a>
      **/
     public enum LabelType {
+
+        /**
+         * {@code system} labels created by Gmail
+         **/
         system,
+
+        /**
+         * {@code user} custom labels created by the user or application
+         **/
         user
     }
 

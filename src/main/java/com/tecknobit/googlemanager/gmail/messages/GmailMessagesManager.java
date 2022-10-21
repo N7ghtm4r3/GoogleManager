@@ -547,7 +547,7 @@ public class GmailMessagesManager extends GmailManager {
                 .setNeverMarkSpam(neverMarkSpam)
                 .setProcessForCalendar(processForCalendar)
                 .setDeleted(deleted)
-                .setInternalDateSource(internalDateSource.toString())
+                .setInternalDateSource(internalDateSource.name())
                 .execute(), format);
     }
 
@@ -653,7 +653,7 @@ public class GmailMessagesManager extends GmailManager {
                                        InternalDateSource internalDateSource, ReturnFormat format) throws Exception {
         return returnMessage(messages.gmailImport(userId, createSimpleMessageWithFile(toEmailAddress, subject,
                         contentMessage, file, TEXT_PLAIN_MIME_TYPE))
-                .setInternalDateSource(internalDateSource.toString())
+                .setInternalDateSource(internalDateSource.name())
                 .setNeverMarkSpam(neverMarkSpam)
                 .setProcessForCalendar(processForCalendar)
                 .setDeleted(deleted)
@@ -761,7 +761,7 @@ public class GmailMessagesManager extends GmailManager {
                                         InternalDateSource internalDateSource, ReturnFormat format) throws Exception {
         return returnMessage(messages.gmailImport(userId, createMessageWithFiles(toEmailAddress, subject, contentMessage,
                         files, TEXT_PLAIN_MIME_TYPE))
-                .setInternalDateSource(internalDateSource.toString())
+                .setInternalDateSource(internalDateSource.name())
                 .setNeverMarkSpam(neverMarkSpam)
                 .setProcessForCalendar(processForCalendar)
                 .setDeleted(deleted)
@@ -948,7 +948,7 @@ public class GmailMessagesManager extends GmailManager {
     public <T> T insertMessage(String toEmailAddress, String subject, String contentMessage, boolean deleted,
                                InternalDateSource internalDateSource, ReturnFormat format) throws Exception {
         return returnMessage(messages.insert(userId, createSimpleMessage(toEmailAddress, subject, contentMessage))
-                .setDeleted(deleted).setInternalDateSource(internalDateSource.toString()).execute(), format);
+                .setDeleted(deleted).setInternalDateSource(internalDateSource.name()).execute(), format);
     }
 
     /**
@@ -1035,7 +1035,7 @@ public class GmailMessagesManager extends GmailManager {
     public <T> T insertMessageWithFile(String toEmailAddress, String subject, String contentMessage, boolean deleted,
                                        InternalDateSource internalDateSource, File file, ReturnFormat format) throws Exception {
         return returnMessage(messages.insert(userId, createSimpleMessageWithFile(toEmailAddress, subject, contentMessage, file,
-                        TEXT_PLAIN_MIME_TYPE)).setDeleted(deleted).setInternalDateSource(internalDateSource.toString()).execute(),
+                        TEXT_PLAIN_MIME_TYPE)).setDeleted(deleted).setInternalDateSource(internalDateSource.name()).execute(),
                 format);
     }
 
@@ -1124,7 +1124,7 @@ public class GmailMessagesManager extends GmailManager {
                                         InternalDateSource internalDateSource, File[] files,
                                         ReturnFormat format) throws Exception {
         return returnMessage(messages.insert(userId, createMessageWithFiles(toEmailAddress, subject, contentMessage, files,
-                        TEXT_PLAIN_MIME_TYPE)).setDeleted(deleted).setInternalDateSource(internalDateSource.toString())
+                        TEXT_PLAIN_MIME_TYPE)).setDeleted(deleted).setInternalDateSource(internalDateSource.name())
                 .execute(), format);
     }
 
@@ -4744,37 +4744,12 @@ public class GmailMessagesManager extends GmailManager {
         /**
          * {@code receivedTime} internal message date set to current time when received by Gmail
          **/
-        receivedTime("receivedTime"),
+        receivedTime,
 
         /**
          * {@code dateHeader} internal message time based on 'Date' header in email, when valid
          **/
-        dateHeader("dateHeader");
-
-        /**
-         * {@code internalDataSource} the internal date source
-         **/
-        private final String internalDataSource;
-
-        /**
-         * Constructor to init a {@link InternalDateSource}
-         *
-         * @param internalDataSource: the internal date source
-         **/
-        InternalDateSource(final String internalDataSource) {
-            this.internalDataSource = internalDataSource;
-        }
-
-        /**
-         * Method to get {@link #internalDataSource} instance <br>
-         * Any params required
-         *
-         * @return {@link #internalDataSource} instance as {@link String}
-         **/
-        @Override
-        public String toString() {
-            return internalDataSource;
-        }
+        dateHeader
 
     }
 
