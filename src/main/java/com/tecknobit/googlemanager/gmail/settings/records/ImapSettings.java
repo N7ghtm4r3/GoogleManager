@@ -10,9 +10,9 @@ public class ImapSettings {
     private boolean enabled;
     private boolean autoExpunge;
     private ExpungeBehavior expungeBehavior;
-    private double maxFolderSize;
+    private int maxFolderSize;
 
-    public ImapSettings(boolean enabled, boolean autoExpunge, ExpungeBehavior expungeBehavior, double maxFolderSize) {
+    public ImapSettings(boolean enabled, boolean autoExpunge, ExpungeBehavior expungeBehavior, int maxFolderSize) {
         this.enabled = enabled;
         this.autoExpunge = autoExpunge;
         this.expungeBehavior = expungeBehavior;
@@ -25,7 +25,7 @@ public class ImapSettings {
         autoExpunge = hImapSettings.getBoolean("autoExpunge");
         expungeBehavior = ExpungeBehavior.valueOf(hImapSettings.getString("expungeBehavior",
                 expungeBehaviorUnspecified.toString()));
-        maxFolderSize = hImapSettings.getDouble("maxFolderSize");
+        maxFolderSize = hImapSettings.getInt("maxFolderSize");
     }
 
     public boolean isEnabled() {
@@ -40,7 +40,7 @@ public class ImapSettings {
         enabled = false;
     }
 
-    public boolean isAutoExpunge() {
+    public boolean isAutoExpungeEnabled() {
         return autoExpunge;
     }
 
@@ -56,11 +56,11 @@ public class ImapSettings {
         this.expungeBehavior = expungeBehavior;
     }
 
-    public double getMaxFolderSize() {
+    public int getMaxFolderSize() {
         return maxFolderSize;
     }
 
-    public void setMaxFolderSize(double maxFolderSize) {
+    public void setMaxFolderSize(int maxFolderSize) {
         this.maxFolderSize = maxFolderSize;
     }
 
