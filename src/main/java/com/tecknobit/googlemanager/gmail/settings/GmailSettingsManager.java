@@ -1,13 +1,19 @@
 package com.tecknobit.googlemanager.gmail.settings;
 
 import com.google.api.services.gmail.Gmail;
-import com.google.api.services.gmail.model.LanguageSettings;
-import com.google.api.services.gmail.model.ListDelegatesResponse;
+import com.google.api.services.gmail.model.*;
+import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
 import com.tecknobit.googlemanager.gmail.GmailManager;
-import com.tecknobit.googlemanager.gmail.settings.records.*;
+import com.tecknobit.googlemanager.gmail.settings.records.AutoForwarding;
 import com.tecknobit.googlemanager.gmail.settings.records.AutoForwarding.Disposition;
+import com.tecknobit.googlemanager.gmail.settings.records.Delegate;
 import com.tecknobit.googlemanager.gmail.settings.records.Delegate.VerificationStatus;
+import com.tecknobit.googlemanager.gmail.settings.records.Filter;
+import com.tecknobit.googlemanager.gmail.settings.records.ImapSettings;
+import com.tecknobit.googlemanager.gmail.settings.records.PopSettings;
 import com.tecknobit.googlemanager.gmail.settings.records.PopSettings.AccessWindow;
+import com.tecknobit.googlemanager.gmail.settings.records.VacationSettings;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -54,6 +60,11 @@ public class GmailSettingsManager extends GmailManager {
      * {@code delegates} is the instance for {@link Gmail.Users.Settings.Delegates}'s service
      **/
     protected final Gmail.Users.Settings.Delegates delegates = settings.delegates();
+
+    /**
+     * {@code filters} is the instance for {@link Gmail.Users.Settings.Filters}'s service
+     **/
+    protected final Gmail.Users.Settings.Filters filters = settings.filters();
 
     /**
      * Constructor to init a {@link GmailSettingsManager}
@@ -2097,7 +2108,7 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to get lists the delegates for the specified account.
+     * Method to get list of the delegates for the specified account.
      * This method is only available to service account clients that have been delegated domain-wide authority <br>
      * Any params required
      *
@@ -2111,7 +2122,7 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to get lists the delegates for the specified account.
+     * Method to get list of the delegates for the specified account.
      * This method is only available to service account clients that have been delegated domain-wide authority
      *
      * @param format: return type formatter -> {@link ReturnFormat}
@@ -2127,20 +2138,212 @@ public class GmailSettingsManager extends GmailManager {
                 return (T) new JSONObject(delegates);
             case LIBRARY_OBJECT:
                 ArrayList<Delegate> delegatesList = new ArrayList<>();
-                for (com.google.api.services.gmail.model.Delegate delegate : delegates.getDelegates())
-                    delegatesList.add(new Delegate(new JSONObject(delegate)));
+                if (delegates != null)
+                    for (com.google.api.services.gmail.model.Delegate delegate : delegates.getDelegates())
+                        delegatesList.add(new Delegate(new JSONObject(delegate)));
                 return (T) delegatesList;
             default:
                 return (T) delegates.toString();
         }
     }
 
-    public Filter createFilter() {
-        return createFilter(LIBRARY_OBJECT);
+    /**
+     * Method to create a filter. Note: you can only create a maximum of 1,000 filters
+     *
+     * @param filter: filter with details to create
+     * @return filter created as {@link Filter} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/create">
+     * users.settings.filters.create</a>
+     * @implSpec you have to load {@code "filter"} with custom details, but if you don't need some details you must
+     * insert:
+     * <ul>
+     *     <li>
+     *         null: for objects
+     *     </li>
+     *     <li>
+     *         0 for integers
+     *     </li>
+     *     <li>
+     *         false for booleans
+     *     </li>
+     * </ul>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public Filter createFilter(Filter filter) throws IOException {
+        return createFilter(filter, LIBRARY_OBJECT);
     }
 
-    public <T> T createFilter(ReturnFormat format) {
-        return null;
+    /**
+     * Method to create a filter. Note: you can only create a maximum of 1,000 filters
+     *
+     * @param filter: filter with details to create
+     * @param format: return type formatter -> {@link ReturnFormat}
+     * @return filter created as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/create">
+     * users.settings.filters.create</a>
+     * @implSpec you have to load {@code "filter"} with custom details, but if you don't need some details you must
+     * insert:
+     * <ul>
+     *     <li>
+     *         null: for objects
+     *     </li>
+     *     <li>
+     *         0 for integers
+     *     </li>
+     *     <li>
+     *         false for booleans
+     *     </li>
+     * </ul>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T createFilter(Filter filter, ReturnFormat format) throws IOException {
+        com.google.api.services.gmail.model.Filter gFilter = new com.google.api.services.gmail.model.Filter();
+        JSONObject filterSource = new JSONObject(filter);
+        for (String key : filterSource.keySet()) {
+            Object value = filterSource.get(key);
+            if (value instanceof JSONObject) {
+                FilterCriteria filterCriteria = null;
+                FilterAction filterAction = null;
+                if (key.equals("criteria"))
+                    filterCriteria = new FilterCriteria();
+                else
+                    filterAction = new FilterAction();
+                for (String vKey : ((JSONObject) value).keySet()) {
+                    if (filterCriteria != null) {
+                        Object criteriaValue = JsonHelper.get((JSONObject) value, vKey);
+                        if (criteriaValue instanceof Filter.Criteria.SizeComparison)
+                            gFilter.setCriteria(filterCriteria.set(vKey, ((Filter.Criteria.SizeComparison) criteriaValue).name()));
+                        else
+                            gFilter.setCriteria(filterCriteria.set(vKey, criteriaValue));
+                    } else {
+                        Object actionValue = JsonHelper.get((JSONObject) value, vKey);
+                        if (actionValue instanceof JSONArray)
+                            gFilter.setAction(filterAction.set(vKey, ((JSONArray) actionValue).toList()));
+                        else
+                            gFilter.setAction(filterAction.set(vKey, actionValue));
+                    }
+                }
+            } else
+                gFilter.set(key, value);
+        }
+        return returnFilter(filters.create(userId, gFilter).execute(), format);
     }
 
+    /**
+     * Method to immediately and permanently deletes the specified filter
+     *
+     * @param filterToDelete: filter to delete
+     * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/delete">
+     * users.settings.filters.delete</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public boolean deleteFilter(Filter filterToDelete) {
+        return deleteFilter(filterToDelete.getId());
+    }
+
+    /**
+     * Method to immediately and permanently deletes the specified filter
+     *
+     * @param filterIdToDelete: the ID of the filter to be deleted
+     * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/delete">
+     * users.settings.filters.delete</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public boolean deleteFilter(String filterIdToDelete) {
+        try {
+            filters.delete(userId, filterIdToDelete).execute();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Method to get a filter
+     *
+     * @param filterId: the ID of the filter to be fetched
+     * @return filter requested as {@link Filter} custom object
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/get">
+     * users.settings.filters.get</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public Filter getFilter(String filterId) throws IOException {
+        return getFilter(filterId, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get a filter
+     *
+     * @param filterId: the ID of the filter to be fetched
+     * @param format:   return type formatter -> {@link ReturnFormat}
+     * @return filter requested as {@code "format"} defines
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/get">
+     * users.settings.filters.get</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T getFilter(String filterId, ReturnFormat format) throws IOException {
+        return returnFilter(filters.get(userId, filterId).execute(), format);
+    }
+
+    /**
+     * Method to create a filter object
+     *
+     * @param filter: filter obtained from Google's response
+     * @param format: return type formatter -> {@link ReturnFormat}
+     * @return filter as {@code "format"} defines
+     **/
+    private <T> T returnFilter(com.google.api.services.gmail.model.Filter filter, ReturnFormat format) {
+        switch (format) {
+            case JSON:
+                return (T) new JSONObject(filter);
+            case LIBRARY_OBJECT:
+                return (T) new Filter(new JSONObject(filter));
+            default:
+                return (T) filter.toString();
+        }
+    }
+
+    /**
+     * Method to get a list of the message filters of a Gmail user <br>
+     * Any params required
+     *
+     * @return list of filters as {@link Collection} of {@link Filter} custom object
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/list">
+     * users.settings.filters.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public Collection<Filter> getFiltersList() throws IOException {
+        return getFiltersList(LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get a list of the message filters of a Gmail user <br>
+     *
+     * @param format: return type formatter -> {@link ReturnFormat}
+     * @return list of filters as {@code "format"} defines
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/list">
+     * users.settings.filters.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T getFiltersList(ReturnFormat format) throws IOException {
+        ListFiltersResponse filters = this.filters.list(userId).execute();
+        switch (format) {
+            case JSON:
+                return (T) new JSONObject(filters);
+            case LIBRARY_OBJECT:
+                ArrayList<Filter> filtersList = new ArrayList<>();
+                if (filters != null)
+                    for (com.google.api.services.gmail.model.Filter filter : filters.getFilter())
+                        filtersList.add(new Filter(new JSONObject(filter)));
+                return (T) filtersList;
+            default:
+                return (T) filters.toString();
+        }
+    }
+
+    
 }
