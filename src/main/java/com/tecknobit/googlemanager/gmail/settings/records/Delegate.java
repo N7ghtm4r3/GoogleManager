@@ -25,6 +25,17 @@ public class Delegate {
     /**
      * Constructor to init a {@link Delegate}
      *
+     * @param delegateEmail: the email address of the delegate
+     * @apiNote this constructor is useful in those cases if you want to create a new {@link Delegate}
+     **/
+    public Delegate(String delegateEmail) {
+        this.delegateEmail = delegateEmail;
+        verificationStatus = verificationStatusUnspecified;
+    }
+
+    /**
+     * Constructor to init a {@link Delegate}
+     *
      * @param delegateEmail:      the email address of the delegate
      * @param verificationStatus: indicates whether this address has been verified and can act as a delegate for the account. Read-only
      **/
@@ -80,7 +91,7 @@ public class Delegate {
      * {@code VerificationStatus} indicates whether ownership of an email address has been verified for delegation use
      *
      * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.delegates#verificationstatus">
-     * VerificationStatus</a>
+     * Verification Status</a>
      **/
     public enum VerificationStatus {
 

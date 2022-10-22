@@ -9,6 +9,7 @@ import com.tecknobit.googlemanager.gmail.settings.records.AutoForwarding.Disposi
 import com.tecknobit.googlemanager.gmail.settings.records.Delegate;
 import com.tecknobit.googlemanager.gmail.settings.records.Delegate.VerificationStatus;
 import com.tecknobit.googlemanager.gmail.settings.records.Filter;
+import com.tecknobit.googlemanager.gmail.settings.records.ForwardingAddress;
 import com.tecknobit.googlemanager.gmail.settings.records.ImapSettings;
 import com.tecknobit.googlemanager.gmail.settings.records.PopSettings;
 import com.tecknobit.googlemanager.gmail.settings.records.PopSettings.AccessWindow;
@@ -65,6 +66,11 @@ public class GmailSettingsManager extends GmailManager {
      * {@code filters} is the instance for {@link Gmail.Users.Settings.Filters}'s service
      **/
     protected final Gmail.Users.Settings.Filters filters = settings.filters();
+
+    /**
+     * {@code forwardingAddresses} is the instance for {@link Gmail.Users.Settings.ForwardingAddresses}'s service
+     **/
+    protected final Gmail.Users.Settings.ForwardingAddresses forwardingAddresses = settings.forwardingAddresses();
 
     /**
      * Constructor to init a {@link GmailSettingsManager}
@@ -2267,6 +2273,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param filterId: the ID of the filter to be fetched
      * @return filter requested as {@link Filter} custom object
+     * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/get">
      * users.settings.filters.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2281,6 +2288,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param filterId: the ID of the filter to be fetched
      * @param format:   return type formatter -> {@link ReturnFormat}
      * @return filter requested as {@code "format"} defines
+     * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/get">
      * users.settings.filters.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2312,6 +2320,7 @@ public class GmailSettingsManager extends GmailManager {
      * Any params required
      *
      * @return list of filters as {@link Collection} of {@link Filter} custom object
+     * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/list">
      * users.settings.filters.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2325,6 +2334,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return list of filters as {@code "format"} defines
+     * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/list">
      * users.settings.filters.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2345,5 +2355,199 @@ public class GmailSettingsManager extends GmailManager {
         }
     }
 
-    
+    /**
+     * Method to create a forwarding address. If ownership verification is required, a message will be sent to the recipient
+     * and the resource's verification status will be set to {@code "pending"}; otherwise, the resource will be created with verification status
+     * set to {@code "accepted"} <br>
+     * This method is only available to service account clients that have been delegated domain-wide authority
+     *
+     * @param forwardingAddress: forwarding address to create
+     * @return forwarding address created as {@link ForwardingAddress} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/create">
+     * users.settings.forwardingAddresses.create</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public ForwardingAddress createForwardingAddress(ForwardingAddress forwardingAddress) throws IOException {
+        return createForwardingAddress(forwardingAddress, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to create a forwarding address. If ownership verification is required, a message will be sent to the recipient
+     * and the resource's verification status will be set to {@code "pending"}; otherwise, the resource will be created with verification status
+     * set to {@code "accepted"} <br>
+     * This method is only available to service account clients that have been delegated domain-wide authority
+     *
+     * @param forwardingAddress: forwarding address to create
+     * @param format:            return type formatter -> {@link ReturnFormat}
+     * @return forwarding address created as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/create">
+     * users.settings.forwardingAddresses.create</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T createForwardingAddress(ForwardingAddress forwardingAddress, ReturnFormat format) throws IOException {
+        return returnForwardingAddress(forwardingAddresses.create(userId, new com.google.api.services.gmail.model.ForwardingAddress()
+                .setForwardingEmail(forwardingAddress.getForwardingEmail())
+                .setVerificationStatus(forwardingAddress.getVerificationStatus().name())).execute(), format);
+    }
+
+    /**
+     * Method to create a forwarding address. If ownership verification is required, a message will be sent to the recipient
+     * and the resource's verification status will be set to {@code "pending"}; otherwise, the resource will be created with verification status
+     * set to {@code "accepted"} <br>
+     * This method is only available to service account clients that have been delegated domain-wide authority
+     *
+     * @param forwardingEmail: an email address to which messages can be forwarded
+     * @return forwarding address created as {@link ForwardingAddress} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/create">
+     * users.settings.forwardingAddresses.create</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public ForwardingAddress createForwardingAddress(String forwardingEmail) throws IOException {
+        return createForwardingAddress(forwardingEmail, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to create a forwarding address. If ownership verification is required, a message will be sent to the recipient
+     * and the resource's verification status will be set to {@code "pending"}; otherwise, the resource will be created with verification status
+     * set to {@code "accepted"} <br>
+     * This method is only available to service account clients that have been delegated domain-wide authority
+     *
+     * @param forwardingEmail: an email address to which messages can be forwarded
+     * @param format:          return type formatter -> {@link ReturnFormat}
+     * @return forwarding address created as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/create">
+     * users.settings.forwardingAddresses.create</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T createForwardingAddress(String forwardingEmail, ReturnFormat format) throws IOException {
+        return returnForwardingAddress(forwardingAddresses.create(userId, new com.google.api.services.gmail.model.ForwardingAddress()
+                .setForwardingEmail(forwardingEmail)).execute(), format);
+    }
+
+    /**
+     * Method to delete the specified forwarding address and revokes any verification that may have been required.
+     * This method is only available to service account clients that have been delegated domain-wide authority
+     *
+     * @param forwardingAddressToDelete: forwarding address to be deleted
+     * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/delete">
+     * users.settings.forwardingAddresses.delete</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public boolean deleteForwardingAddress(ForwardingAddress forwardingAddressToDelete) {
+        return deleteForwardingAddress(forwardingAddressToDelete.getForwardingEmail());
+    }
+
+    /**
+     * Method to delete the specified forwarding address and revokes any verification that may have been required.
+     * This method is only available to service account clients that have been delegated domain-wide authority
+     *
+     * @param forwardingEmailToDelete: the forwarding address to be deleted
+     * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/delete">
+     * users.settings.forwardingAddresses.delete</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public boolean deleteForwardingAddress(String forwardingEmailToDelete) {
+        try {
+            forwardingAddresses.delete(userId, forwardingEmailToDelete).execute();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Method to get the specified forwarding address
+     *
+     * @param forwardingEmail: the forwarding address to be retrieved
+     * @return forwarding address requested as {@link ForwardingAddress} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/get">
+     * users.settings.forwardingAddresses.get</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public ForwardingAddress getForwardingAddress(String forwardingEmail) throws IOException {
+        return getForwardingAddress(forwardingEmail, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get the specified forwarding address
+     *
+     * @param forwardingEmail: the forwarding address to be retrieved
+     * @param format:          return type formatter -> {@link ReturnFormat}
+     * @return forwarding address requested as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/get">
+     * users.settings.forwardingAddresses.get</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T getForwardingAddress(String forwardingEmail, ReturnFormat format) throws IOException {
+        return returnForwardingAddress(forwardingAddresses.get(userId, forwardingEmail).execute(), format);
+    }
+
+    /**
+     * Method to create a forwarding address object
+     *
+     * @param forwardingAddress: forwarding address obtained from Google's response
+     * @param format:            return type formatter -> {@link ReturnFormat}
+     * @return forwarding address as {@code "format"} defines
+     **/
+    private <T> T returnForwardingAddress(com.google.api.services.gmail.model.ForwardingAddress forwardingAddress,
+                                          ReturnFormat format) {
+        switch (format) {
+            case JSON:
+                return (T) new JSONObject(forwardingAddress);
+            case LIBRARY_OBJECT:
+                return (T) new ForwardingAddress(new JSONObject(forwardingAddress));
+            default:
+                return (T) forwardingAddress.toString();
+        }
+    }
+
+    /**
+     * Method to get a list of the forwarding addresses for the specified account <br>
+     * Any params required
+     *
+     * @return list of forwarding addresses as {@link Collection} of {@link ForwardingAddress} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/list">
+     * users.settings.forwardingAddresses.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public Collection<ForwardingAddress> getForwardingAddressesList() throws IOException {
+        return getForwardingAddressesList(LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get a list of the forwarding addresses for the specified account <br>
+     * Any params required
+     *
+     * @param format: return type formatter -> {@link ReturnFormat}
+     * @return list of forwarding addresses as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/list">
+     * users.settings.forwardingAddresses.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T getForwardingAddressesList(ReturnFormat format) throws IOException {
+        ListForwardingAddressesResponse addresses = this.forwardingAddresses.list(userId).execute();
+        switch (format) {
+            case JSON:
+                return (T) new JSONObject(addresses);
+            case LIBRARY_OBJECT:
+                ArrayList<ForwardingAddress> addressesList = new ArrayList<>();
+                if (addresses != null)
+                    for (com.google.api.services.gmail.model.ForwardingAddress address : addresses.getForwardingAddresses())
+                        addressesList.add(new ForwardingAddress(new JSONObject(address)));
+                return (T) addressesList;
+            default:
+                return (T) addresses.toString();
+        }
+    }
+
 }
