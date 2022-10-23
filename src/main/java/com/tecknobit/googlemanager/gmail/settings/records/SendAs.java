@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import static com.tecknobit.googlemanager.gmail.settings.records.SendAs.SendAsVerificationStatus.verificationStatusUnspecified;
 
 /**
- * The {@code SendAs} class is useful to format a Gmail's send as
+ * The {@code SendAs} class is useful to format a Gmail's send-as
  *
  * @author N7ghtm4r3 - Tecknobit
  * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs#SendAs">SendAs</a>
@@ -18,6 +18,7 @@ public class SendAs {
      * This is read-only for all operations except create
      **/
     private final String sendAsEmail;
+
     /**
      * {@code displayName} a name that appears in the {@code "From:"} header for mail sent using this alias.
      * For custom {@code "from"} addresses, when this is empty, {@code "Gmail"} will populate the {@code "From:"} header with the name that is used
@@ -25,21 +26,25 @@ public class SendAs {
      * name format, requests to update this field for the primary login will silently fail
      **/
     private final String displayName;
+
     /**
      * {@code replyToAddress} an optional email address that is included in a {@code "Reply-To:"} header for mail sent using this alias.
      * If this is empty, {@code "Gmail"} will not generate a {@code "Reply-To:"} header
      **/
     private final String replyToAddress;
+
     /**
      * {@code signature} an optional {@code "HTML"} signature that is included in messages composed with this alias in the Gmail web UI.
      * This signature is added to new emails only
      **/
     private final String signature;
+
     /**
      * {@code isPrimary} whether this address is the primary address used to login to the account. Every Gmail account has
      * exactly one primary address, and it cannot be deleted from the collection of send-as aliases. This field is read-only
      **/
     private final boolean isPrimary;
+
     /**
      * {@code isDefault} whether this address is selected as the default {@code "From:"} address in situations such as composing
      * a new message or sending a vacation auto-reply. Every Gmail account has exactly one default send-as address,
@@ -47,17 +52,20 @@ public class SendAs {
      * will result in this field becoming false for the other previous default address
      **/
     private final boolean isDefault;
+
     /**
      * {@code treatAsAlias} whether Gmail should treat this address as an alias for the user's primary email address.
      * This setting only applies to custom {@code "from"} aliases
      **/
     private final boolean treatAsAlias;
+
     /**
      * {@code smtpMsa} an optional {@code "SMTP"} service that will be used as an outbound relay for mail sent using this alias.
      * If this is empty, outbound mail will be sent directly from Gmail's servers to the destination {@code "SMTP"} service
      * This setting only applies to custom {@code "from"} aliases
      **/
     private final SmtpMsa smtpMsa;
+
     /**
      * {@code verificationStatus} indicates whether this address has been verified for use as a send-as alias. Read-only.
      * This setting only applies to custom {@code "from"} aliases

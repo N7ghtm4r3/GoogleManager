@@ -15,6 +15,7 @@ import com.tecknobit.googlemanager.gmail.settings.records.PopSettings;
 import com.tecknobit.googlemanager.gmail.settings.records.PopSettings.AccessWindow;
 import com.tecknobit.googlemanager.gmail.settings.records.SendAs;
 import com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa.SecurityMode;
+import com.tecknobit.googlemanager.gmail.settings.records.SmimeInfo;
 import com.tecknobit.googlemanager.gmail.settings.records.VacationSettings;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -78,6 +79,11 @@ public class GmailSettingsManager extends GmailManager {
      * {@code sendAs} is the instance for {@link Gmail.Users.Settings.SendAs}'s service
      **/
     protected final Gmail.Users.Settings.SendAs sendAs = settings.sendAs();
+
+    /**
+     * {@code smimeInfo} is the instance for {@link Gmail.Users.Settings.SendAs.SmimeInfo}'s service
+     **/
+    protected final Gmail.Users.Settings.SendAs.SmimeInfo smimeInfo = settings.sendAs().smimeInfo();
 
     /**
      * {@code currentUsername} the username used for authentication with the {@code "SMTP"} service
@@ -3513,7 +3519,7 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to patch the specified send-as alias <br>
+     * Method to patch the specified send-as alias
      *
      * @param sendAsEmail:           the send-as alias to be updated
      * @param displayNameUpdated:    a name that appears in the {@code "From:"} header for mail sent using this alias
@@ -3547,7 +3553,7 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to patch the specified send-as alias <br>
+     * Method to patch the specified send-as alias
      *
      * @param sendAsEmail:           the send-as alias to be updated
      * @param displayNameUpdated:    a name that appears in the {@code "From:"} header for mail sent using this alias
@@ -3639,6 +3645,296 @@ public class GmailSettingsManager extends GmailManager {
     public boolean verifySendAs(String sendAsEmailToVerify) {
         try {
             sendAs.verify(userId, sendAsEmailToVerify).execute();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Method to delete the specified S/MIME config for the specified send-as alias
+     *
+     * @param sendAsEmail:       the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param smimeInfoToDelete: smime-info to delete
+     * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/delete">
+     * users.settings.sendAs.smimeInfo.delete</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public boolean deleteSmimeInfo(String sendAsEmail, SmimeInfo smimeInfoToDelete) {
+        return deleteSmimeInfo(sendAsEmail, smimeInfoToDelete.getId());
+    }
+
+    /**
+     * Method to delete the specified S/MIME config for the specified send-as alias
+     *
+     * @param sendAsEmail:         the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param idSmimeInfoToDelete: the immutable ID for the SmimeInfo
+     * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/delete">
+     * users.settings.sendAs.smimeInfo.delete</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public boolean deleteSmimeInfo(String sendAsEmail, String idSmimeInfoToDelete) {
+        try {
+            smimeInfo.delete(userId, sendAsEmail, idSmimeInfoToDelete).execute();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Method to get the specified S/MIME config for the specified send-as alias
+     *
+     * @param sendAsEmail:      the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param idSmimeInfoToGet: the immutable ID for the SmimeInfo
+     * @return smime-info requested as {@link SmimeInfo} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/get">
+     * users.settings.sendAs.smimeInfo.get</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public SmimeInfo getSmimeInfo(String sendAsEmail, String idSmimeInfoToGet) throws IOException {
+        return getSmimeInfo(sendAsEmail, idSmimeInfoToGet, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get the specified S/MIME config for the specified send-as alias
+     *
+     * @param sendAsEmail:      the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param idSmimeInfoToGet: the immutable ID for the SmimeInfo
+     * @param format:           return type formatter -> {@link ReturnFormat}
+     * @return smime-info requested as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/get">
+     * users.settings.sendAs.smimeInfo.get</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T getSmimeInfo(String sendAsEmail, String idSmimeInfoToGet, ReturnFormat format) throws IOException {
+        return returnSmimeInfo(smimeInfo.get(userId, sendAsEmail, idSmimeInfoToGet).execute(), format);
+    }
+
+    /**
+     * Method to insert (upload) the given S/MIME config for the specified send-as alias. Note that pkcs12 format is required for the key
+     *
+     * @param sendAsEmail:          the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param issuerCn:             the {@code "S/MIME"} certificate issuer's common name
+     * @param isDefault:            whether this SmimeInfo is the default one for this user's send-as address
+     * @param expiration:           when the certificate expires (in milliseconds since epoch)
+     * @param encryptedKeyPassword: encrypted key password, when key is encrypted
+     * @param pem:                  {@code "PEM"} formatted {@code "X509"} concatenated certificate string (standard base64 encoding).
+     * @return smime-info requested as {@link SmimeInfo} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/insert">
+     * users.settings.sendAs.smimeInfo.insert</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public SmimeInfo insertSmimeInfo(String sendAsEmail, String issuerCn, boolean isDefault, long expiration,
+                                     String encryptedKeyPassword, String pem) throws IOException {
+        return insertSmimeInfo(sendAsEmail, new SmimeInfo(issuerCn, isDefault, expiration, encryptedKeyPassword, pem),
+                LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to insert (upload) the given S/MIME config for the specified send-as alias. Note that pkcs12 format is required for the key
+     *
+     * @param sendAsEmail:          the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param issuerCn:             the {@code "S/MIME"} certificate issuer's common name
+     * @param isDefault:            whether this SmimeInfo is the default one for this user's send-as address
+     * @param expiration:           when the certificate expires (in milliseconds since epoch)
+     * @param encryptedKeyPassword: encrypted key password, when key is encrypted
+     * @param pem:                  {@code "PEM"} formatted {@code "X509"} concatenated certificate string (standard base64 encoding).
+     * @param format:               return type formatter -> {@link ReturnFormat}
+     * @return smime-info inserted as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/insert">
+     * users.settings.sendAs.smimeInfo.insert</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T insertSmimeInfo(String sendAsEmail, String issuerCn, boolean isDefault, long expiration,
+                                 String encryptedKeyPassword, String pem, ReturnFormat format) throws IOException {
+        return insertSmimeInfo(sendAsEmail, new SmimeInfo(issuerCn, isDefault, expiration, encryptedKeyPassword, pem),
+                format);
+    }
+
+    /**
+     * Method to insert (upload) the given S/MIME config for the specified send-as alias. Note that pkcs12 format is required for the key
+     *
+     * @param sendAsEmail:          the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param pkcs12:               {@code "PKCS#12"} format containing a single private/public key pair and certificate chain.
+     *                              This format is only accepted from client for creating a new SmimeInfo and is never returned, because the private key
+     *                              is not intended to be exported. {@code "PKCS#12"} may be encrypted, in which case {@code "encryptedKeyPassword"} should be set appropriately.
+     *                              A base64-encoded string
+     * @param issuerCn:             the {@code "S/MIME"} certificate issuer's common name
+     * @param isDefault:            whether this SmimeInfo is the default one for this user's send-as address
+     * @param expiration:           when the certificate expires (in milliseconds since epoch)
+     * @param encryptedKeyPassword: encrypted key password, when key is encrypted
+     * @return smime-info requested as {@link SmimeInfo} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/insert">
+     * users.settings.sendAs.smimeInfo.insert</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public SmimeInfo insertSmimeInfo(String sendAsEmail, String pkcs12, String issuerCn, boolean isDefault, long expiration,
+                                     String encryptedKeyPassword) throws IOException {
+        return insertSmimeInfo(sendAsEmail, new SmimeInfo(pkcs12, issuerCn, isDefault, expiration, encryptedKeyPassword),
+                LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to insert (upload) the given S/MIME config for the specified send-as alias. Note that pkcs12 format is required for the key
+     *
+     * @param sendAsEmail:          the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param pkcs12:               {@code "PKCS#12"} format containing a single private/public key pair and certificate chain.
+     *                              This format is only accepted from client for creating a new SmimeInfo and is never returned, because the private key
+     *                              is not intended to be exported. {@code "PKCS#12"} may be encrypted, in which case {@code "encryptedKeyPassword"} should be set appropriately.
+     *                              A base64-encoded string
+     * @param issuerCn:             the {@code "S/MIME"} certificate issuer's common name
+     * @param isDefault:            whether this SmimeInfo is the default one for this user's send-as address
+     * @param expiration:           when the certificate expires (in milliseconds since epoch)
+     * @param encryptedKeyPassword: encrypted key password, when key is encrypted
+     * @param format:               return type formatter -> {@link ReturnFormat}
+     * @return smime-info inserted as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/insert">
+     * users.settings.sendAs.smimeInfo.insert</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T insertSmimeInfo(String sendAsEmail, String pkcs12, String issuerCn, boolean isDefault, long expiration,
+                                 String encryptedKeyPassword, ReturnFormat format) throws IOException {
+        return insertSmimeInfo(sendAsEmail, new SmimeInfo(pkcs12, issuerCn, isDefault, expiration, encryptedKeyPassword),
+                format);
+    }
+
+    /**
+     * Method to insert (upload) the given S/MIME config for the specified send-as alias. Note that pkcs12 format is required for the key
+     *
+     * @param sendAsEmail:       the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param smimeInfoToInsert: smime-info to insert
+     * @return smime-info requested as {@link SmimeInfo} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/insert">
+     * users.settings.sendAs.smimeInfo.insert</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public SmimeInfo insertSmimeInfo(String sendAsEmail, SmimeInfo smimeInfoToInsert) throws IOException {
+        return insertSmimeInfo(sendAsEmail, smimeInfoToInsert, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to insert (upload) the given S/MIME config for the specified send-as alias. Note that pkcs12 format is required for the key
+     *
+     * @param sendAsEmail:       the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param smimeInfoToInsert: smime-info to insert
+     * @param format:            return type formatter -> {@link ReturnFormat}
+     * @return smime-info inserted as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/insert">
+     * users.settings.sendAs.smimeInfo.insert</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T insertSmimeInfo(String sendAsEmail, SmimeInfo smimeInfoToInsert, ReturnFormat format) throws IOException {
+        com.google.api.services.gmail.model.SmimeInfo gSmimeInfo = new com.google.api.services.gmail.model.SmimeInfo();
+        JSONObject smimeInfoSource = new JSONObject(smimeInfoToInsert);
+        for (String key : smimeInfoSource.keySet()) {
+            if (key.equals("pem"))
+                smimeInfoToInsert.encodePem();
+            else if (key.equals("pkcs12"))
+                smimeInfoToInsert.encodePkcs12();
+            gSmimeInfo.set(key, smimeInfoSource.get(key));
+        }
+        return returnSmimeInfo(smimeInfo.insert(userId, sendAsEmail, gSmimeInfo).execute(), format);
+    }
+
+    /**
+     * Method to create a smime-info object
+     *
+     * @param smimeInfo: smime-info obtained from Google's response
+     * @param format:    return type formatter -> {@link ReturnFormat}
+     * @return smime-info as {@code "format"} defines
+     **/
+    private <T> T returnSmimeInfo(com.google.api.services.gmail.model.SmimeInfo smimeInfo, ReturnFormat format) {
+        switch (format) {
+            case JSON:
+                return (T) new JSONObject(smimeInfo);
+            case LIBRARY_OBJECT:
+                return (T) new SmimeInfo(new JSONObject(smimeInfo));
+            default:
+                return (T) smimeInfo.toString();
+        }
+    }
+
+    /**
+     * Method to get a list of S/MIME configs for the specified send-as alias
+     *
+     * @param sendAsEmail: the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @return smime-info list as {@link Collection} of {@link SmimeInfo} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/list">
+     * users.settings.sendAs.smimeInfo.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public Collection<SmimeInfo> getSmimeInfoList(String sendAsEmail) throws IOException {
+        return getSmimeInfoList(sendAsEmail, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get a list of S/MIME configs for the specified send-as alias
+     *
+     * @param sendAsEmail: the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param format:      return type formatter -> {@link ReturnFormat}
+     * @return smime-info list as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/list">
+     * users.settings.sendAs.smimeInfo.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T getSmimeInfoList(String sendAsEmail, ReturnFormat format) throws IOException {
+        ListSmimeInfoResponse list = smimeInfo.list(userId, sendAsEmail).execute();
+        switch (format) {
+            case JSON:
+                return (T) new JSONObject(list);
+            case LIBRARY_OBJECT:
+                ArrayList<SmimeInfo> smimeInfoList = new ArrayList<>();
+                if (list != null)
+                    for (com.google.api.services.gmail.model.SmimeInfo smimeInfo : list.getSmimeInfo())
+                        smimeInfoList.add(new SmimeInfo(new JSONObject(smimeInfo)));
+                return (T) smimeInfoList;
+            default:
+                return (T) list.toString();
+        }
+    }
+
+    /**
+     * Method to set the default S/MIME config for the specified send-as alias
+     *
+     * @param sendAsEmail:      the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param defaultSmimeInfo: smime-info to set default
+     * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/setDefault">
+     * users.settings.sendAs.smimeInfo.setDefault</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public boolean setDefaultSmimeInfo(String sendAsEmail, SmimeInfo defaultSmimeInfo) {
+        return setDefaultSmimeInfo(sendAsEmail, defaultSmimeInfo.getId());
+    }
+
+    /**
+     * Method to set the default S/MIME config for the specified send-as alias
+     *
+     * @param sendAsEmail:        the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param idDefaultSmimeInfo: the immutable ID for the SmimeInfo
+     * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/setDefault">
+     * users.settings.sendAs.smimeInfo.setDefault</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public boolean setDefaultSmimeInfo(String sendAsEmail, String idDefaultSmimeInfo) {
+        try {
+            smimeInfo.setDefault(userId, sendAsEmail, idDefaultSmimeInfo).execute();
             return true;
         } catch (IOException e) {
             e.printStackTrace();
