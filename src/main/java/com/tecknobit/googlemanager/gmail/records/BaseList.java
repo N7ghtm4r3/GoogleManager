@@ -15,6 +15,9 @@ import org.json.JSONObject;
  *     <li>
  *         <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">users.messages.list</a>
  *     </li>
+ *     <li>
+ *         <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">users.threads.list</a>
+ *     </li>
  * </ul>
  **/
 public class BaseList {

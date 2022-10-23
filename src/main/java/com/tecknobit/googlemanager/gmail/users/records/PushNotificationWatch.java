@@ -1,5 +1,6 @@
 package com.tecknobit.googlemanager.gmail.users.records;
 
+import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
 import org.json.JSONObject;
 
 import java.math.BigInteger;
@@ -50,8 +51,9 @@ public class PushNotificationWatch {
      * @param jPushNotification: {@code "push notification watch"} details as {@link JSONObject}
      **/
     public PushNotificationWatch(JSONObject jPushNotification) {
-        historyId = jPushNotification.getBigInteger("historyId");
-        expiration = jPushNotification.getLong("expiration");
+        JsonHelper hPushNotification = new JsonHelper(jPushNotification);
+        historyId = hPushNotification.getBigInteger("historyId", BigInteger.valueOf(0));
+        expiration = hPushNotification.getLong("expiration", 0);
     }
 
     /**

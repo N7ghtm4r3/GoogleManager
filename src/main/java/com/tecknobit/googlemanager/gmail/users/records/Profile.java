@@ -1,5 +1,6 @@
 package com.tecknobit.googlemanager.gmail.users.records;
 
+import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
 import org.json.JSONObject;
 
 import java.math.BigInteger;
@@ -52,10 +53,11 @@ public class Profile {
      * @param jProfile: {@code "profile"} details as {@link JSONObject}
      * **/
     public Profile(JSONObject jProfile) {
-        emailAddress = jProfile.getString("emailAddress");
-        messagesTotal = jProfile.getInt("messagesTotal");
-        threadsTotal = jProfile.getInt("threadsTotal");
-        historyId = jProfile.getBigInteger("historyId");
+        JsonHelper hProfile = new JsonHelper(jProfile);
+        emailAddress = hProfile.getString("emailAddress");
+        messagesTotal = hProfile.getInt("messagesTotal", 0);
+        threadsTotal = hProfile.getInt("threadsTotal", 0);
+        historyId = hProfile.getBigInteger("historyId", BigInteger.valueOf(0));
     }
 
     /** Method to get {@link #emailAddress} instance <br>

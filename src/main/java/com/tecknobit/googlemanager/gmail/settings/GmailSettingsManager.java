@@ -3653,7 +3653,7 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to delete the specified S/MIME config for the specified send-as alias
+     * Method to delete the specified {@code "S/MIME"} config for the specified send-as alias
      *
      * @param sendAsEmail:       the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @param smimeInfoToDelete: smime-info to delete
@@ -3667,7 +3667,7 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to delete the specified S/MIME config for the specified send-as alias
+     * Method to delete the specified {@code "S/MIME"} config for the specified send-as alias
      *
      * @param sendAsEmail:         the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @param idSmimeInfoToDelete: the immutable ID for the SmimeInfo
@@ -3687,7 +3687,7 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to get the specified S/MIME config for the specified send-as alias
+     * Method to get the specified {@code "S/MIME"} config for the specified send-as alias
      *
      * @param sendAsEmail:      the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @param idSmimeInfoToGet: the immutable ID for the SmimeInfo
@@ -3702,7 +3702,7 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to get the specified S/MIME config for the specified send-as alias
+     * Method to get the specified {@code "S/MIME"} config for the specified send-as alias
      *
      * @param sendAsEmail:      the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @param idSmimeInfoToGet: the immutable ID for the SmimeInfo
@@ -3718,10 +3718,10 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to insert (upload) the given S/MIME config for the specified send-as alias. Note that pkcs12 format is required for the key
+     * Method to insert (upload) the given {@code "S/MIME"} config for the specified send-as alias. Note that pkcs12 format is required for the key
      *
      * @param sendAsEmail:          the email address that appears in the {@code "From:"} header for mail sent using this alias
-     * @param issuerCn:             the {@code "S/MIME"} certificate issuer's common name
+     * @param issuerCn:             the {@code "{@code "S/MIME"}"} certificate issuer's common name
      * @param isDefault:            whether this SmimeInfo is the default one for this user's send-as address
      * @param expiration:           when the certificate expires (in milliseconds since epoch)
      * @param encryptedKeyPassword: encrypted key password, when key is encrypted
@@ -3739,10 +3739,10 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to insert (upload) the given S/MIME config for the specified send-as alias. Note that pkcs12 format is required for the key
+     * Method to insert (upload) the given {@code "S/MIME"} config for the specified send-as alias. Note that pkcs12 format is required for the key
      *
      * @param sendAsEmail:          the email address that appears in the {@code "From:"} header for mail sent using this alias
-     * @param issuerCn:             the {@code "S/MIME"} certificate issuer's common name
+     * @param issuerCn:             the {@code "{@code "S/MIME"}"} certificate issuer's common name
      * @param isDefault:            whether this SmimeInfo is the default one for this user's send-as address
      * @param expiration:           when the certificate expires (in milliseconds since epoch)
      * @param encryptedKeyPassword: encrypted key password, when key is encrypted
@@ -3761,14 +3761,14 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to insert (upload) the given S/MIME config for the specified send-as alias. Note that pkcs12 format is required for the key
+     * Method to insert (upload) the given {@code "S/MIME"} config for the specified send-as alias. Note that pkcs12 format is required for the key
      *
      * @param sendAsEmail:          the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @param pkcs12:               {@code "PKCS#12"} format containing a single private/public key pair and certificate chain.
      *                              This format is only accepted from client for creating a new SmimeInfo and is never returned, because the private key
      *                              is not intended to be exported. {@code "PKCS#12"} may be encrypted, in which case {@code "encryptedKeyPassword"} should be set appropriately.
      *                              A base64-encoded string
-     * @param issuerCn:             the {@code "S/MIME"} certificate issuer's common name
+     * @param issuerCn:             the {@code "{@code "S/MIME"}"} certificate issuer's common name
      * @param isDefault:            whether this SmimeInfo is the default one for this user's send-as address
      * @param expiration:           when the certificate expires (in milliseconds since epoch)
      * @param encryptedKeyPassword: encrypted key password, when key is encrypted
@@ -3785,14 +3785,14 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to insert (upload) the given S/MIME config for the specified send-as alias. Note that pkcs12 format is required for the key
+     * Method to insert (upload) the given {@code "S/MIME"} config for the specified send-as alias. Note that pkcs12 format is required for the key
      *
      * @param sendAsEmail:          the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @param pkcs12:               {@code "PKCS#12"} format containing a single private/public key pair and certificate chain.
      *                              This format is only accepted from client for creating a new SmimeInfo and is never returned, because the private key
      *                              is not intended to be exported. {@code "PKCS#12"} may be encrypted, in which case {@code "encryptedKeyPassword"} should be set appropriately.
      *                              A base64-encoded string
-     * @param issuerCn:             the {@code "S/MIME"} certificate issuer's common name
+     * @param issuerCn:             the {@code "{@code "S/MIME"}"} certificate issuer's common name
      * @param isDefault:            whether this SmimeInfo is the default one for this user's send-as address
      * @param expiration:           when the certificate expires (in milliseconds since epoch)
      * @param encryptedKeyPassword: encrypted key password, when key is encrypted
@@ -3810,7 +3810,7 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to insert (upload) the given S/MIME config for the specified send-as alias. Note that pkcs12 format is required for the key
+     * Method to insert (upload) the given {@code "S/MIME"} config for the specified send-as alias. Note that pkcs12 format is required for the key
      *
      * @param sendAsEmail:       the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @param smimeInfoToInsert: smime-info to insert
@@ -3825,7 +3825,7 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to insert (upload) the given S/MIME config for the specified send-as alias. Note that pkcs12 format is required for the key
+     * Method to insert (upload) the given {@code "S/MIME"} config for the specified send-as alias. Note that pkcs12 format is required for the key
      *
      * @param sendAsEmail:       the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @param smimeInfoToInsert: smime-info to insert
@@ -3868,7 +3868,7 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to get a list of S/MIME configs for the specified send-as alias
+     * Method to get a list of {@code "S/MIME"} configs for the specified send-as alias
      *
      * @param sendAsEmail: the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @return smime-info list as {@link Collection} of {@link SmimeInfo} custom object
@@ -3882,7 +3882,7 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to get a list of S/MIME configs for the specified send-as alias
+     * Method to get a list of {@code "S/MIME"} configs for the specified send-as alias
      *
      * @param sendAsEmail: the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @param format:      return type formatter -> {@link ReturnFormat}
@@ -3909,7 +3909,7 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to set the default S/MIME config for the specified send-as alias
+     * Method to set the default {@code "S/MIME"} config for the specified send-as alias
      *
      * @param sendAsEmail:      the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @param defaultSmimeInfo: smime-info to set default
@@ -3923,7 +3923,7 @@ public class GmailSettingsManager extends GmailManager {
     }
 
     /**
-     * Method to set the default S/MIME config for the specified send-as alias
+     * Method to set the default {@code "S/MIME"} config for the specified send-as alias
      *
      * @param sendAsEmail:        the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @param idDefaultSmimeInfo: the immutable ID for the SmimeInfo

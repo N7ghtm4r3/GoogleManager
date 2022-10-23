@@ -1315,7 +1315,7 @@ public class GmailMessagesManager extends GmailManager {
     /**
      * Method to get list of the messages in the user's mailbox
      *
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @return messages list requested as {@link Messages} custom object
@@ -1331,7 +1331,7 @@ public class GmailMessagesManager extends GmailManager {
     /**
      * Method to get list of the messages in the user's mailbox
      *
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param format:           return type formatter -> {@link ReturnFormat}
@@ -1452,7 +1452,7 @@ public class GmailMessagesManager extends GmailManager {
      * Method to get list of the messages in the user's mailbox
      *
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param maxResults:       maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @return messages list requested as {@link Messages} custom object
@@ -1469,7 +1469,7 @@ public class GmailMessagesManager extends GmailManager {
      * Method to get list of the messages in the user's mailbox
      *
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param maxResults:       maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param format:           return type formatter -> {@link ReturnFormat}
@@ -1646,7 +1646,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param maxResults:       maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return messages list requested as {@link Messages} custom object
      * @throws IOException when request has been go wrong
@@ -1665,7 +1665,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param maxResults:       maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
@@ -1688,7 +1688,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param maxResults:       maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return messages list requested as {@link Messages} custom object
      * @throws IOException when request has been go wrong
@@ -1707,7 +1707,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param maxResults:       maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
@@ -1729,7 +1729,7 @@ public class GmailMessagesManager extends GmailManager {
      *
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param pageToken:        page token to retrieve a specific page of results in the list
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return messages list requested as {@link Messages} custom object
      * @throws IOException when request has been go wrong
@@ -1746,7 +1746,7 @@ public class GmailMessagesManager extends GmailManager {
      *
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param pageToken:        page token to retrieve a specific page of results in the list
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
@@ -1841,7 +1841,7 @@ public class GmailMessagesManager extends GmailManager {
      *
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param pageToken:        page token to retrieve a specific page of results in the list
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
      * @return messages list requested as {@link Messages} custom object
@@ -1860,7 +1860,7 @@ public class GmailMessagesManager extends GmailManager {
      *
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param pageToken:        page token to retrieve a specific page of results in the list
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
@@ -1883,7 +1883,7 @@ public class GmailMessagesManager extends GmailManager {
      *
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param pageToken:        page token to retrieve a specific page of results in the list
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @return messages list requested as {@link Messages} custom object
@@ -1902,7 +1902,7 @@ public class GmailMessagesManager extends GmailManager {
      *
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param pageToken:        page token to retrieve a specific page of results in the list
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
@@ -1925,7 +1925,7 @@ public class GmailMessagesManager extends GmailManager {
      *
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return messages list requested as {@link Messages} custom object
      * @throws IOException when request has been go wrong
@@ -1942,7 +1942,7 @@ public class GmailMessagesManager extends GmailManager {
      *
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
@@ -1963,7 +1963,7 @@ public class GmailMessagesManager extends GmailManager {
      *
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return messages list requested as {@link Messages} custom object
      * @throws IOException when request has been go wrong
@@ -1980,7 +1980,7 @@ public class GmailMessagesManager extends GmailManager {
      *
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
@@ -2002,7 +2002,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param maxResults:       maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param pageToken:        page token to retrieve a specific page of results in the list
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return messages list requested as {@link Messages} custom object
@@ -2022,7 +2022,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param maxResults:       maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param pageToken:        page token to retrieve a specific page of results in the list
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
@@ -2048,7 +2048,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param maxResults:       maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param pageToken:        page token to retrieve a specific page of results in the list
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return messages list requested as {@link Messages} custom object
@@ -2068,7 +2068,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param maxResults:       maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param pageToken:        page token to retrieve a specific page of results in the list
-     * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
+     * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
