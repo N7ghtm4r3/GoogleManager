@@ -19,7 +19,7 @@ public class ImapSettings {
     private boolean enabled;
 
     /**
-     * {@code autoExpunge} if this value is true, Gmail will immediately expunge a message when it is marked as deleted in {@code "IMAP"}. Otherwise, Gmail will wait for an update from the client before expunging messages marked as deleted
+     * {@code autoExpunge} if this value is true, {@code "Gmail"} will immediately expunge a message when it is marked as deleted in {@code "IMAP"}. Otherwise, {@code "Gmail"} will wait for an update from the client before expunging messages marked as deleted
      **/
     private boolean autoExpunge;
 
@@ -37,7 +37,7 @@ public class ImapSettings {
      * Constructor to init a {@link ImapSettings}
      *
      * @param enabled:         whether {@code "IMAP"} is enabled for the account
-     * @param autoExpunge:     if this value is true, Gmail will immediately expunge a message when it is marked as deleted in {@code "IMAP"}. Otherwise, Gmail will wait for an update from the client before expunging messages marked as deleted
+     * @param autoExpunge:     if this value is true, {@code "Gmail"} will immediately expunge a message when it is marked as deleted in {@code "IMAP"}. Otherwise, {@code "Gmail"} will wait for an update from the client before expunging messages marked as deleted
      * @param expungeBehavior: the action that will be executed on a message when it is marked as deleted and expunged from the last visible {@code "IMAP"} folder
      * @param maxFolderSize:   an optional limit on the number of messages that an {@code "IMAP"} folder may contain. Legal values are 0, 1000, 2000, 5000 or 10000. A value of zero is interpreted to mean that there is no limit
      **/

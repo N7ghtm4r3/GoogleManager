@@ -183,6 +183,7 @@ public class GmailUsersManager extends GmailManager {
             gmail.stop(userId);
             return true;
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }

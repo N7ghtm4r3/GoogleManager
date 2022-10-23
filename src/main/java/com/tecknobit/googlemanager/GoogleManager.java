@@ -315,6 +315,7 @@ public abstract class GoogleManager {
             properties.setProperty("host", host);
             properties.setProperty("callBackPath", callBackPath);
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
         return true;

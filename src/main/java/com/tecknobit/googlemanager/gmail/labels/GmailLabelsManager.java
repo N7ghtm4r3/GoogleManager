@@ -142,8 +142,8 @@ public class GmailLabelsManager extends GmailManager {
      * Method to create a new label
      *
      * @param name:                  the display name of the label
-     * @param messageListVisibility: the visibility of messages with this label in the message list in the Gmail web interface
-     * @param labelListVisibility:   the visibility of the label in the label list in the Gmail web interface
+     * @param messageListVisibility: the visibility of messages with this label in the message list in the{@code " Gmail web interface"}
+     * @param labelListVisibility:   the visibility of the label in the label list in the{@code " Gmail web interface"}
      * @return label created as {@link Label} custom object
      * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/create">
@@ -189,8 +189,8 @@ public class GmailLabelsManager extends GmailManager {
      * Method to create a new label
      *
      * @param name:                  the display name of the label
-     * @param messageListVisibility: the visibility of messages with this label in the message list in the Gmail web interface
-     * @param labelListVisibility:   the visibility of the label in the label list in the Gmail web interface
+     * @param messageListVisibility: the visibility of messages with this label in the message list in the{@code " Gmail web interface"}
+     * @param labelListVisibility:   the visibility of the label in the label list in the{@code " Gmail web interface"}
      * @param format:                return type formatter -> {@link ReturnFormat}
      * @return label as {@code "format"} defines
      * @throws IOException when request has been go wrong
@@ -216,8 +216,8 @@ public class GmailLabelsManager extends GmailManager {
      * Method to create a new label with custom colors
      *
      * @param name:                  the display name of the label
-     * @param messageListVisibility: the visibility of messages with this label in the message list in the Gmail web interface
-     * @param labelListVisibility:   the visibility of the label in the label list in the Gmail web interface
+     * @param messageListVisibility: the visibility of messages with this label in the message list in the{@code " Gmail web interface"}
+     * @param labelListVisibility:   the visibility of the label in the label list in the{@code " Gmail web interface"}
      * @param textColor:             the text color of the label -> available at {@link AllowedColor}
      * @param backgroundColor:       the background color of the label -> available at {@link AllowedColor}
      * @return label created as {@link Label} custom object
@@ -270,8 +270,8 @@ public class GmailLabelsManager extends GmailManager {
      * Method to create a new label with custom colors
      *
      * @param name:                  the display name of the label
-     * @param messageListVisibility: the visibility of messages with this label in the message list in the Gmail web interface
-     * @param labelListVisibility:   the visibility of the label in the label list in the Gmail web interface
+     * @param messageListVisibility: the visibility of messages with this label in the message list in the{@code " Gmail web interface"}
+     * @param labelListVisibility:   the visibility of the label in the label list in the{@code " Gmail web interface"}
      * @param textColor:             the text color of the label -> available at {@link AllowedColor}
      * @param backgroundColor:       the background color of the label -> available at {@link AllowedColor}
      * @param format:                return type formatter -> {@link ReturnFormat}
@@ -303,8 +303,8 @@ public class GmailLabelsManager extends GmailManager {
      * Method to create a label with base details
      *
      * @param name:                  the display name of the label
-     * @param messageListVisibility: the visibility of messages with this label in the message list in the Gmail web interface
-     * @param labelListVisibility:   the visibility of the label in the label list in the Gmail web interface
+     * @param messageListVisibility: the visibility of messages with this label in the message list in the{@code " Gmail web interface"}
+     * @param labelListVisibility:   the visibility of the label in the label list in the{@code " Gmail web interface"}
      * @return label as {@link com.google.api.services.gmail.model.Label}
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels#Label">Label</a>
      **/
@@ -344,6 +344,7 @@ public class GmailLabelsManager extends GmailManager {
             labels.delete(userId, labelId).execute();
             return true;
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }

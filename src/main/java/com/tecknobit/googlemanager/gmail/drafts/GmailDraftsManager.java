@@ -479,6 +479,7 @@ public class GmailDraftsManager extends GmailManager {
             drafts.delete(userId, draftId).execute();
             return true;
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }

@@ -62,8 +62,8 @@ public class Filter {
     public Filter(JSONObject jFilter) {
         JsonHelper hFilter = new JsonHelper(jFilter);
         id = hFilter.getString("id");
-        criteria = new Criteria(hFilter.getJSONObject("criteria"));
-        action = new Action(hFilter.getJSONObject("action"));
+        criteria = new Criteria(hFilter.getJSONObject("criteria", new JSONObject()));
+        action = new Action(hFilter.getJSONObject("action", new JSONObject()));
     }
 
     /**

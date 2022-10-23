@@ -131,12 +131,12 @@ public class Label {
     private final String name;
 
     /**
-     * {@code messageListVisibility} the visibility of messages with this label in the message list in the Gmail web interface
+     * {@code messageListVisibility} the visibility of messages with this label in the message list in the{@code " Gmail web interface"}
      **/
     private final MessageListVisibility messageListVisibility;
 
     /**
-     * {@code labelListVisibility} the visibility of the label in the label list in the Gmail web interface
+     * {@code labelListVisibility} the visibility of the label in the label list in the{@code " Gmail web interface"}
      **/
     private final LabelListVisibility labelListVisibility;
 
@@ -176,8 +176,8 @@ public class Label {
      *
      * @param id:                    the immutable ID of the label
      * @param name:                  the display name of the label
-     * @param messageListVisibility: the visibility of messages with this label in the message list in the Gmail web interface
-     * @param labelListVisibility:   the visibility of the label in the label list in the Gmail web interface
+     * @param messageListVisibility: the visibility of messages with this label in the message list in the{@code " Gmail web interface"}
+     * @param labelListVisibility:   the visibility of the label in the label list in the{@code " Gmail web interface"}
      * @param type:                  the owner type for the label
      * @param messagesTotal:         the total number of messages with the label
      * @param messagesUnread:        the number of unread messages with the label
@@ -203,8 +203,8 @@ public class Label {
      * Constructor to init a {@link Label}
      *
      * @param name:                  the display name of the label
-     * @param messageListVisibility: the visibility of messages with this label in the message list in the Gmail web interface
-     * @param labelListVisibility:   the visibility of the label in the label list in the Gmail web interface
+     * @param messageListVisibility: the visibility of messages with this label in the message list in the{@code " Gmail web interface"}
+     * @param labelListVisibility:   the visibility of the label in the label list in the{@code " Gmail web interface"}
      **/
     public Label(String name, MessageListVisibility messageListVisibility, LabelListVisibility labelListVisibility) {
         this(null, name, messageListVisibility, labelListVisibility, null, 0, 0, 0, 0, null);
@@ -214,8 +214,8 @@ public class Label {
      * Constructor to init a {@link Label}
      *
      * @param name:                  the display name of the label
-     * @param messageListVisibility: the visibility of messages with this label in the message list in the Gmail web interface
-     * @param labelListVisibility:   the visibility of the label in the label list in the Gmail web interface
+     * @param messageListVisibility: the visibility of messages with this label in the message list in the{@code " Gmail web interface"}
+     * @param labelListVisibility:   the visibility of the label in the label list in the{@code " Gmail web interface"}
      * @param color:                 the color to assign to the label. Color is only available for labels that have their type set to user
      **/
     public Label(String name, MessageListVisibility messageListVisibility, LabelListVisibility labelListVisibility,
@@ -354,7 +354,7 @@ public class Label {
     }
 
     /**
-     * {@code MessageListVisibility} the messages visibilities available for messages with this label in the message list in the Gmail web interface
+     * {@code MessageListVisibility} the messages visibilities available for messages with this label in the message list in the{@code " Gmail web interface"}
      *
      * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels#messagelistvisibility">
      * Messages visibilities</a>
@@ -373,7 +373,7 @@ public class Label {
     }
 
     /**
-     * {@code LabelListVisibility} the list of visibilities available for visibility of the label in the label list in the Gmail web interface
+     * {@code LabelListVisibility} the list of visibilities available for visibility of the label in the label list in the{@code " Gmail web interface"}
      *
      * @apiNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels#labellistvisibility">
      * Label list visibilities</a>

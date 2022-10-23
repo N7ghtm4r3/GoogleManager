@@ -13,6 +13,8 @@ import com.tecknobit.googlemanager.gmail.settings.records.ForwardingAddress;
 import com.tecknobit.googlemanager.gmail.settings.records.ImapSettings;
 import com.tecknobit.googlemanager.gmail.settings.records.PopSettings;
 import com.tecknobit.googlemanager.gmail.settings.records.PopSettings.AccessWindow;
+import com.tecknobit.googlemanager.gmail.settings.records.SendAs;
+import com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa.SecurityMode;
 import com.tecknobit.googlemanager.gmail.settings.records.VacationSettings;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -71,6 +73,32 @@ public class GmailSettingsManager extends GmailManager {
      * {@code forwardingAddresses} is the instance for {@link Gmail.Users.Settings.ForwardingAddresses}'s service
      **/
     protected final Gmail.Users.Settings.ForwardingAddresses forwardingAddresses = settings.forwardingAddresses();
+
+    /**
+     * {@code sendAs} is the instance for {@link Gmail.Users.Settings.SendAs}'s service
+     **/
+    protected final Gmail.Users.Settings.SendAs sendAs = settings.sendAs();
+
+    /**
+     * {@code currentUsername} the username used for authentication with the {@code "SMTP"} service
+     *
+     * @apiNote this field is useful for this class to reinsert this value in {@link SendAs} object after {@code "Gmail"}'s response
+     * because it will not return this field. <br>
+     * <strong>This field will be not store in any parts if not during runtime of your program </strong>
+     * @implNote it will be use in {@link #sendAs} operations
+     **/
+    private String currentUsername;
+
+    /**
+     * {@code currentPassword} the password used for authentication with the {@code "SMTP"} service
+     *
+     * @apiNote this field is useful for this class to reinsert this value in {@link SendAs} object after {@code "Gmail"}'s response
+     * because it will not return this field. <br>
+     * <strong>This field will be not store in any parts if not during runtime of your program </strong>
+     * @implNote it will be use in {@link #sendAs} operations
+     **/
+    private String currentPassword;
+
 
     /**
      * Constructor to init a {@link GmailSettingsManager}
@@ -961,7 +989,7 @@ public class GmailSettingsManager extends GmailManager {
      * Method to update {@code "IMAP"} settings
      *
      * @param enable:          whether {@code "IMAP"} is enabled for the account
-     * @param autoExpunge:     if this value is true, Gmail will immediately expunge a message when it is marked as deleted in {@code "IMAP"}. Otherwise, Gmail will wait for an update from the client before expunging messages marked as deleted
+     * @param autoExpunge:     if this value is true, {@code "Gmail"} will immediately expunge a message when it is marked as deleted in {@code "IMAP"}. Otherwise, {@code "Gmail"} will wait for an update from the client before expunging messages marked as deleted
      * @param expungeBehavior: the action that will be executed on a message when it is marked as deleted and expunged from the last visible {@code "IMAP"} folder
      * @param maxFolderSize:   an optional limit on the number of messages that an {@code "IMAP"} folder may contain. Legal values are 0, 1000, 2000, 5000 or 10000. A value of zero is interpreted to mean that there is no limit
      * @return {@code "IMAP"} settings updated as {@link ImapSettings} custom object
@@ -979,7 +1007,7 @@ public class GmailSettingsManager extends GmailManager {
      * Method to update {@code "IMAP"} settings
      *
      * @param enable:          whether {@code "IMAP"} is enabled for the account
-     * @param autoExpunge:     if this value is true, Gmail will immediately expunge a message when it is marked as deleted in {@code "IMAP"}. Otherwise, Gmail will wait for an update from the client before expunging messages marked as deleted
+     * @param autoExpunge:     if this value is true, {@code "Gmail"} will immediately expunge a message when it is marked as deleted in {@code "IMAP"}. Otherwise, {@code "Gmail"} will wait for an update from the client before expunging messages marked as deleted
      * @param expungeBehavior: the action that will be executed on a message when it is marked as deleted and expunged from the last visible {@code "IMAP"} folder
      * @param maxFolderSize:   an optional limit on the number of messages that an {@code "IMAP"} folder may contain. Legal values are 0, 1000, 2000, 5000 or 10000. A value of zero is interpreted to mean that there is no limit
      * @param format:          return type formatter -> {@link ReturnFormat}
@@ -1244,7 +1272,7 @@ public class GmailSettingsManager extends GmailManager {
      * This method allows to enable vacation responder settings without change all the current vacation responder settings
      *
      * @param responseSubject: optional text to prepend to the subject line in vacation responses. In order to enable auto-replies, either the response subject or the response body must be nonempty
-     * @param responseHtml:    response body in HTML format. Gmail will sanitize the HTML before storing it.
+     * @param responseHtml:    response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      *                         If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"} are specified, {@code "responseBodyHtml"} will be used
      * @return vacation responder settings updated as {@link VacationSettings} custom object
      * @throws IOException when request has been go wrong
@@ -1261,7 +1289,7 @@ public class GmailSettingsManager extends GmailManager {
      * This method allows to enable vacation responder settings without change all the current vacation responder settings
      *
      * @param responseSubject: optional text to prepend to the subject line in vacation responses. In order to enable auto-replies, either the response subject or the response body must be nonempty
-     * @param responseHtml:    response body in HTML format. Gmail will sanitize the HTML before storing it.
+     * @param responseHtml:    response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      *                         If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"} are specified, {@code "responseBodyHtml"} will be used
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
@@ -1285,7 +1313,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param responseSubject:   optional text to prepend to the subject line in vacation responses. In order to enable auto-replies, either the response subject or the response body must be nonempty
      * @param responsePlainText: response body in plain text format. If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"}
      *                           are specified, {@code "responseBodyHtml"}  will be used
-     * @param responseHtml:      response body in HTML format. Gmail will sanitize the HTML before storing it.
+     * @param responseHtml:      response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      *                           If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"} are specified, {@code "responseBodyHtml"} will be used
      * @return vacation responder settings updated as {@link VacationSettings} custom object
      * @throws IOException when request has been go wrong
@@ -1305,7 +1333,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param responseSubject:   optional text to prepend to the subject line in vacation responses. In order to enable auto-replies, either the response subject or the response body must be nonempty
      * @param responsePlainText: response body in plain text format. If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"}
      *                           are specified, {@code "responseBodyHtml"}  will be used
-     * @param responseHtml:      response body in HTML format. Gmail will sanitize the HTML before storing it.
+     * @param responseHtml:      response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      *                           If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"} are specified, {@code "responseBodyHtml"} will be used
      * @param format:            return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
@@ -1435,7 +1463,7 @@ public class GmailSettingsManager extends GmailManager {
      * Method to update vacation responder settings <br>
      * This method allows to update only {@code "responseBodyHtml"} params without change all the current vacation responder settings
      *
-     * @param responseHtml: response body in HTML format. Gmail will sanitize the HTML before storing it.
+     * @param responseHtml: response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      * @return vacation responder settings updated as {@code "format"} defines
      * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
@@ -1450,7 +1478,7 @@ public class GmailSettingsManager extends GmailManager {
      * Method to update vacation responder settings <br>
      * This method allows to update only {@code "responseBodyHtml"} params without change all the current vacation responder settings
      *
-     * @param responseHtml: response body in HTML format. Gmail will sanitize the HTML before storing it.
+     * @param responseHtml: response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      * @param format:       return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
      * @throws IOException when request has been go wrong
@@ -1469,7 +1497,7 @@ public class GmailSettingsManager extends GmailManager {
      * This method allows to update {@code "responseSubject"} and {@code "responseBodyHtml"} params without change all the current vacation responder settings
      *
      * @param responseSubject: optional text to prepend to the subject line in vacation responses. In order to enable auto-replies, either the response subject or the response body must be nonempty
-     * @param responseHtml:    response body in HTML format. Gmail will sanitize the HTML before storing it.
+     * @param responseHtml:    response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      * @return vacation responder settings updated as {@code "format"} defines
      * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
@@ -1485,7 +1513,7 @@ public class GmailSettingsManager extends GmailManager {
      * This method allows to update {@code "responseSubject"} and {@code "responseBodyHtml"} params without change all the current vacation responder settings
      *
      * @param responseSubject: optional text to prepend to the subject line in vacation responses. In order to enable auto-replies, either the response subject or the response body must be nonempty
-     * @param responseHtml:    response body in HTML format. Gmail will sanitize the HTML before storing it.
+     * @param responseHtml:    response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
      * @throws IOException when request has been go wrong
@@ -1508,7 +1536,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param responseSubject:   optional text to prepend to the subject line in vacation responses. In order to enable auto-replies, either the response subject or the response body must be nonempty
      * @param responsePlainText: response body in plain text format. If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"}
      *                           are specified, {@code "responseBodyHtml"}  will be used
-     * @param responseHtml:      response body in HTML format. Gmail will sanitize the HTML before storing it.
+     * @param responseHtml:      response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      * @return vacation responder settings updated as {@code "format"} defines
      * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
@@ -1528,7 +1556,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param responseSubject:   optional text to prepend to the subject line in vacation responses. In order to enable auto-replies, either the response subject or the response body must be nonempty
      * @param responsePlainText: response body in plain text format. If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"}
      *                           are specified, {@code "responseBodyHtml"}  will be used
-     * @param responseHtml:      response body in HTML format. Gmail will sanitize the HTML before storing it.
+     * @param responseHtml:      response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      * @param format:            return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
      * @throws IOException when request has been go wrong
@@ -1710,7 +1738,7 @@ public class GmailSettingsManager extends GmailManager {
      * This method allows to update {@code "startTime"} param without change all the current vacation responder settings
      *
      * @param startTime an optional start time for sending auto-replies (epoch ms). When this is specified,
-     *                  Gmail will automatically reply only to messages that it receives after the start time.
+     *                  {@code "Gmail"} will automatically reply only to messages that it receives after the start time.
      *                  If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @return vacation responder settings updated as {@link VacationSettings} custom object
      * @throws IOException when request has been go wrong
@@ -1727,7 +1755,7 @@ public class GmailSettingsManager extends GmailManager {
      * This method allows to update {@code "startTime"} param without change all the current vacation responder settings
      *
      * @param startTime an optional start time for sending auto-replies (epoch ms). When this is specified,
-     *                  Gmail will automatically reply only to messages that it receives after the start time.
+     *                  {@code "Gmail"} will automatically reply only to messages that it receives after the start time.
      *                  If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @param format:   return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
@@ -1747,7 +1775,7 @@ public class GmailSettingsManager extends GmailManager {
      * This method allows to update {@code "endTime"} param without change all the current vacation responder settings
      *
      * @param endTime: an optional end time for sending auto-replies (epoch ms). When this is specified,
-     *                 Gmail will automatically reply only to messages that it receives before the end time.
+     *                 {@code "Gmail"} will automatically reply only to messages that it receives before the end time.
      *                 If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @return vacation responder settings updated as {@link VacationSettings} custom object
      * @throws IOException when request has been go wrong
@@ -1764,7 +1792,7 @@ public class GmailSettingsManager extends GmailManager {
      * This method allows to update {@code "endTime"} param without change all the current vacation responder settings
      *
      * @param endTime: an optional end time for sending auto-replies (epoch ms). When this is specified,
-     *                 Gmail will automatically reply only to messages that it receives before the end time.
+     *                 {@code "Gmail"} will automatically reply only to messages that it receives before the end time.
      *                 If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @param format:  return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
@@ -1784,10 +1812,10 @@ public class GmailSettingsManager extends GmailManager {
      * This method allows to update {@code "startTime"} param without change all the current vacation responder settings
      *
      * @param startTime an optional start time for sending auto-replies (epoch ms). When this is specified,
-     *                  Gmail will automatically reply only to messages that it receives after the start time.
+     *                  {@code "Gmail"} will automatically reply only to messages that it receives after the start time.
      *                  If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @param endTime:  an optional end time for sending auto-replies (epoch ms). When this is specified,
-     *                  Gmail will automatically reply only to messages that it receives before the end time.
+     *                  {@code "Gmail"} will automatically reply only to messages that it receives before the end time.
      *                  If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @return vacation responder settings updated as {@link VacationSettings} custom object
      * @throws IOException when request has been go wrong
@@ -1804,10 +1832,10 @@ public class GmailSettingsManager extends GmailManager {
      * This method allows to update {@code "startTime"} param without change all the current vacation responder settings
      *
      * @param startTime an optional start time for sending auto-replies (epoch ms). When this is specified,
-     *                  Gmail will automatically reply only to messages that it receives after the start time.
+     *                  {@code "Gmail"} will automatically reply only to messages that it receives after the start time.
      *                  If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @param endTime:  an optional end time for sending auto-replies (epoch ms). When this is specified,
-     *                  Gmail will automatically reply only to messages that it receives before the end time.
+     *                  {@code "Gmail"} will automatically reply only to messages that it receives before the end time.
      *                  If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @param format:   return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
@@ -1867,16 +1895,16 @@ public class GmailSettingsManager extends GmailManager {
      * @param responseSubject:           optional text to prepend to the subject line in vacation responses. In order to enable auto-replies, either the response subject or the response body must be nonempty
      * @param responsePlainText:response body in plain text format. If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"}
      *                                   are specified, {@code "responseBodyHtml"}  will be used
-     * @param responseHtml:response      body in HTML format. Gmail will sanitize the HTML before storing it.
+     * @param responseHtml:response      body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      *                                   If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"} are specified, {@code "responseBodyHtml"}
      *                                   will be used
      * @param restrictToContacts:        flag that determines whether responses are sent to recipients who are not in the user's list of contacts
      * @param restrictToDomain:          flag that determines whether responses are sent to recipients who are outside the user's domain. This feature is only available for G Suite users
      * @param startTime                  an optional start time for sending auto-replies (epoch ms). When this is specified,
-     *                                   Gmail will automatically reply only to messages that it receives after the start time.
+     *                                   {@code "Gmail"} will automatically reply only to messages that it receives after the start time.
      *                                   If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @param endTime:                   an optional end time for sending auto-replies (epoch ms). When this is specified,
-     *                                   Gmail will automatically reply only to messages that it receives before the end time.
+     *                                   {@code "Gmail"} will automatically reply only to messages that it receives before the end time.
      *                                   If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @return vacation responder settings updated as {@link VacationSettings} custom object
      * @throws IOException when request has been go wrong
@@ -1898,16 +1926,16 @@ public class GmailSettingsManager extends GmailManager {
      * @param responseSubject:           optional text to prepend to the subject line in vacation responses. In order to enable auto-replies, either the response subject or the response body must be nonempty
      * @param responsePlainText:response body in plain text format. If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"}
      *                                   are specified, {@code "responseBodyHtml"}  will be used
-     * @param responseHtml:response      body in HTML format. Gmail will sanitize the HTML before storing it.
+     * @param responseHtml:response      body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      *                                   If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"} are specified, {@code "responseBodyHtml"}
      *                                   will be used
      * @param restrictToContacts:        flag that determines whether responses are sent to recipients who are not in the user's list of contacts
      * @param restrictToDomain:          flag that determines whether responses are sent to recipients who are outside the user's domain. This feature is only available for G Suite users
      * @param startTime                  an optional start time for sending auto-replies (epoch ms). When this is specified,
-     *                                   Gmail will automatically reply only to messages that it receives after the start time.
+     *                                   {@code "Gmail"} will automatically reply only to messages that it receives after the start time.
      *                                   If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @param endTime:                   an optional end time for sending auto-replies (epoch ms). When this is specified,
-     *                                   Gmail will automatically reply only to messages that it receives before the end time.
+     *                                   {@code "Gmail"} will automatically reply only to messages that it receives before the end time.
      *                                   If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @param format:                    return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
@@ -2060,6 +2088,7 @@ public class GmailSettingsManager extends GmailManager {
             delegates.delete(userId, delegateEmail).execute();
             return true;
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -2264,6 +2293,7 @@ public class GmailSettingsManager extends GmailManager {
             filters.delete(userId, filterIdToDelete).execute();
             return true;
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -2354,7 +2384,7 @@ public class GmailSettingsManager extends GmailManager {
                 return (T) filters.toString();
         }
     }
-
+    
     /**
      * Method to create a forwarding address. If ownership verification is required, a message will be sent to the recipient
      * and the resource's verification status will be set to {@code "pending"}; otherwise, the resource will be created with verification status
@@ -2457,6 +2487,7 @@ public class GmailSettingsManager extends GmailManager {
             forwardingAddresses.delete(userId, forwardingEmailToDelete).execute();
             return true;
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -2547,6 +2578,1071 @@ public class GmailSettingsManager extends GmailManager {
                 return (T) addressesList;
             default:
                 return (T) addresses.toString();
+        }
+    }
+
+    /**
+     * Method to create a custom {@code "from"} send-as alias. If an {@code "SMTP MSA"} is specified, {@code "Gmail"} will attempt to connect to the
+     * SMTP service to validate the configuration before creating the alias. If ownership verification is required for the alias,
+     * a message will be sent to the email address and the resource's verification status will be set to pending; otherwise,
+     * the resource will be created with verification status set to accepted. If a signature is provided, {@code "Gmail"} will sanitize
+     * the {@code "HTML"} before saving it with the alias
+     *
+     * @param sendAsToCreate: send-as to create
+     * @return send-as as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/create">
+     * users.settings.sendAs.create</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    public SendAs createSendAs(SendAs sendAsToCreate) throws IOException {
+        return createSendAs(sendAsToCreate, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to create a custom {@code "from"} send-as alias. If an {@code "SMTP MSA"} is specified, {@code "Gmail"} will attempt to connect to the
+     * SMTP service to validate the configuration before creating the alias. If ownership verification is required for the alias,
+     * a message will be sent to the email address and the resource's verification status will be set to pending; otherwise,
+     * the resource will be created with verification status set to accepted. If a signature is provided, {@code "Gmail"} will sanitize
+     * the {@code "HTML"} before saving it with the alias
+     *
+     * @param sendAsToCreate: send-as to create
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return send-as created as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/create">
+     * users.settings.sendAs.create</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    public <T> T createSendAs(SendAs sendAsToCreate, ReturnFormat format) throws IOException {
+        com.google.api.services.gmail.model.SendAs gSendAs = new com.google.api.services.gmail.model.SendAs()
+                .setSendAsEmail(sendAsToCreate.getSendAsEmail())
+                .setDisplayName(sendAsToCreate.getDisplayName())
+                .setReplyToAddress(sendAsToCreate.getReplyToAddress())
+                .setSignature(sendAsToCreate.getSignature())
+                .setIsDefault(sendAsToCreate.isDefault())
+                .setTreatAsAlias(sendAsToCreate.isTreatAsAlias());
+        SendAs.SmtpMsa smtpMsaToCreate = sendAsToCreate.getSmtpMsa();
+        if (smtpMsaToCreate != null) {
+            currentUsername = smtpMsaToCreate.getUsername();
+            currentPassword = smtpMsaToCreate.getPassword();
+            gSendAs.setSmtpMsa(new SmtpMsa().setHost(smtpMsaToCreate.getHost())
+                    .setPort(smtpMsaToCreate.getPort())
+                    .setUsername(currentUsername)
+                    .setPassword(currentPassword)
+                    .setSecurityMode(smtpMsaToCreate.getSecurityMode().name()));
+        }
+        return returnSendAs(sendAs.create(userId, gSendAs).execute(), format);
+    }
+
+    /**
+     * Method to delete the specified send-as alias. Revokes any verification that may have been required for using it.
+     * This method is only available to service account clients that have been delegated domain-wide authority
+     *
+     * @param sendAsToDelete: send-as to delete
+     * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/delete">
+     * users.settings.sendAs.delete</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public boolean deleteSendAs(SendAs sendAsToDelete) {
+        return deleteSendAs(sendAsToDelete.getSendAsEmail());
+    }
+
+    /**
+     * Method to delete the specified send-as alias. Revokes any verification that may have been required for using it.
+     * This method is only available to service account clients that have been delegated domain-wide authority
+     *
+     * @param sendAsEmailToDelete: the send-as alias to be deleted
+     * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/delete">
+     * users.settings.sendAs.delete</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public boolean deleteSendAs(String sendAsEmailToDelete) {
+        try {
+            sendAs.delete(userId, sendAsEmailToDelete).execute();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Method to get the specified send-as alias. Fails with an HTTP 404 error if the specified address is not a member of the collection
+     *
+     * @param sendAsEmailToGet: the send-as alias to be retrieved
+     * @return send-as requested as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/get">
+     * users.settings.sendAs.get</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public SendAs getSendAs(String sendAsEmailToGet) throws IOException {
+        return getSendAs(sendAsEmailToGet, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get the specified send-as alias. Fails with an HTTP 404 error if the specified address is not a member of the collection
+     *
+     * @param sendAsEmailToGet: the send-as alias to be retrieved
+     * @param format:           return type formatter -> {@link ReturnFormat}
+     * @return send-as requested as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/get">
+     * users.settings.sendAs.get</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T getSendAs(String sendAsEmailToGet, ReturnFormat format) throws IOException {
+        return returnSendAs(sendAs.get(userId, sendAsEmailToGet).execute(), format);
+    }
+
+    /**
+     * Method to get a list of the send-as aliases for the specified account. The result includes the primary send-as address
+     * associated with the account as well as any custom {@code "from"} aliases <br>
+     * Any params required
+     *
+     * @return send-as list as {@link Collection} of {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/list">
+     * users.settings.sendAs.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public Collection<SendAs> getSendAsList() throws IOException {
+        return getSendAsList(LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get a list of the send-as aliases for the specified account. The result includes the primary send-as address
+     * associated with the account as well as any custom {@code "from"} aliases <br>
+     *
+     * @param format: return type formatter -> {@link ReturnFormat}
+     * @return send-as list as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/list">
+     * users.settings.sendAs.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T getSendAsList(ReturnFormat format) throws IOException {
+        ListSendAsResponse list = sendAs.list(userId).execute();
+        switch (format) {
+            case JSON:
+                return (T) new JSONObject(list);
+            case LIBRARY_OBJECT:
+                ArrayList<SendAs> sendAsList = new ArrayList<>();
+                if (list != null)
+                    for (com.google.api.services.gmail.model.SendAs sendAs : list.getSendAs())
+                        sendAsList.add(new SendAs(new JSONObject(sendAs)));
+                return (T) sendAsList;
+            default:
+                return (T) list.toString();
+        }
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "displayName"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:        the send-as alias to be updated
+     * @param displayNameUpdated: a name that appears in the {@code "From:"} header for mail sent using this alias
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public SendAs changeSendAsDisplayName(String sendAsEmail, String displayNameUpdated) throws IOException {
+        return changeSendAsDisplayName(sendAsEmail, displayNameUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "displayName"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:        the send-as alias to be updated
+     * @param displayNameUpdated: a name that appears in the {@code "From:"} header for mail sent using this alias
+     * @param format:             return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T changeSendAsDisplayName(String sendAsEmail, String displayNameUpdated,
+                                         ReturnFormat format) throws IOException {
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                .setDisplayName(displayNameUpdated)).execute(), format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "replyToAddress"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:           the send-as alias to be updated
+     * @param replyToAddressUpdated: an optional email address that is included in a {@code "Reply-To:"} header for mail sent using this alias
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public SendAs changeSendAsReplyToAddress(String sendAsEmail, String replyToAddressUpdated) throws IOException {
+        return changeSendAsReplyToAddress(sendAsEmail, replyToAddressUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "replyToAddress"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:           the send-as alias to be updated
+     * @param replyToAddressUpdated: an optional email address that is included in a {@code "Reply-To:"} header for mail sent using this alias
+     * @param format:                return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T changeSendAsReplyToAddress(String sendAsEmail, String replyToAddressUpdated,
+                                            ReturnFormat format) throws IOException {
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                .setReplyToAddress(replyToAddressUpdated)).execute(), format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "signature"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:      the send-as alias to be updated
+     * @param signatureUpdated: an optional {@code "HTML"} signature that is included in messages composed with this alias in the Gmail web UI
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public SendAs changeSendAsSignature(String sendAsEmail, String signatureUpdated) throws IOException {
+        return changeSendAsSignature(sendAsEmail, signatureUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "signature"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:      the send-as alias to be updated
+     * @param signatureUpdated: an optional {@code "HTML"} signature that is included in messages composed with this alias in the Gmail web UI
+     * @param format:           return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T changeSendAsSignature(String sendAsEmail, String signatureUpdated, ReturnFormat format) throws IOException {
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                .setSignature(signatureUpdated)).execute(), format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "default"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:    the send-as alias to be updated
+     * @param defaultUpdated: whether this address is selected as the default {@code "From:"} address in situations such as composing
+     *                        a new message or sending a vacation auto-reply
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public SendAs changeSendAsDefault(String sendAsEmail, boolean defaultUpdated) throws IOException {
+        return changeSendAsDefault(sendAsEmail, defaultUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "default"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:    the send-as alias to be updated
+     * @param defaultUpdated: whether this address is selected as the default {@code "From:"} address in situations such as composing
+     *                        a new message or sending a vacation auto-reply
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T changeSendAsDefault(String sendAsEmail, boolean defaultUpdated, ReturnFormat format) throws IOException {
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                .setIsDefault(defaultUpdated)).execute(), format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "default"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param treatAsAliasUpdated: whether Gmail should treat this address as an alias for the user's primary email address
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public SendAs changeSendAsTreatAsAlias(String sendAsEmail, boolean treatAsAliasUpdated) throws IOException {
+        return changeSendAsTreatAsAlias(sendAsEmail, treatAsAliasUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "default"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param treatAsAliasUpdated: whether Gmail should treat this address as an alias for the user's primary email address
+     * @param format:              return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T changeSendAsTreatAsAlias(String sendAsEmail, boolean treatAsAliasUpdated,
+                                          ReturnFormat format) throws IOException {
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                .setTreatAsAlias(treatAsAliasUpdated)).execute(), format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail: the send-as alias to be updated
+     * @param hostUpdated: the hostname of the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public SendAs changeSmtpMsaHost(String sendAsEmail, String hostUpdated) throws IOException {
+        return changeSmtpMsaHost(sendAsEmail, hostUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail: the send-as alias to be updated
+     * @param hostUpdated: the hostname of the {@code "SMTP"} service
+     * @param format:      return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T changeSmtpMsaHost(String sendAsEmail, String hostUpdated, ReturnFormat format) throws IOException {
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                .setSmtpMsa(new SmtpMsa().setHost(hostUpdated))).execute(), format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "port"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail: the send-as alias to be updated
+     * @param portUpdated: the port of the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public SendAs changeSmtpMsaPort(String sendAsEmail, int portUpdated) throws IOException {
+        return changeSmtpMsaPort(sendAsEmail, portUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "port"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail: the send-as alias to be updated
+     * @param portUpdated: the port of the {@code "SMTP"} service
+     * @param format:      return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T changeSmtpMsaPort(String sendAsEmail, int portUpdated, ReturnFormat format) throws IOException {
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                .setSmtpMsa(new SmtpMsa().setPort(portUpdated))).execute(), format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "username"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:     the send-as alias to be updated
+     * @param usernameUpdated: the username that will be used for authentication with the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     **/
+    public SendAs changeSmtpMsaUsername(String sendAsEmail, String usernameUpdated) throws IOException {
+        return changeSmtpMsaUsername(sendAsEmail, usernameUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "username"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:     the send-as alias to be updated
+     * @param usernameUpdated: the username that will be used for authentication with the {@code "SMTP"} service
+     * @param format:          return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     **/
+    public <T> T changeSmtpMsaUsername(String sendAsEmail, String usernameUpdated, ReturnFormat format) throws IOException {
+        currentUsername = usernameUpdated;
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                .setSmtpMsa(new SmtpMsa().setUsername(usernameUpdated))).execute(), format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "password"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:     the send-as alias to be updated
+     * @param passwordUpdated: the password that will be used for authentication with the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentPassword
+     **/
+    public SendAs changeSmtpMsaPassword(String sendAsEmail, String passwordUpdated) throws IOException {
+        return changeSmtpMsaPassword(sendAsEmail, passwordUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "password"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:     the send-as alias to be updated
+     * @param passwordUpdated: the password that will be used for authentication with the {@code "SMTP"} service
+     * @param format:          return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentPassword
+     **/
+    public <T> T changeSmtpMsaPassword(String sendAsEmail, String passwordUpdated, ReturnFormat format) throws IOException {
+        currentPassword = passwordUpdated;
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                .setSmtpMsa(new SmtpMsa().setPassword(passwordUpdated))).execute(), format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "securityMode"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public SendAs changeSmtpMsaSecurityMode(String sendAsEmail, SecurityMode securityModeUpdated) throws IOException {
+        return changeSmtpMsaSecurityMode(sendAsEmail, securityModeUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "securityMode"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @param format:              return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T changeSmtpMsaSecurityMode(String sendAsEmail, SecurityMode securityModeUpdated,
+                                           ReturnFormat format) throws IOException {
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                .setSmtpMsa(new SmtpMsa().setSecurityMode(securityModeUpdated.name()))).execute(), format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"} and {@code "port"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail: the send-as alias to be updated
+     * @param hostUpdated: the hostname of the {@code "SMTP"} service
+     * @param portUpdated: the port of the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public SendAs changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated, int portUpdated) throws IOException {
+        return changeSmtpMsaDomainDetails(sendAsEmail, hostUpdated, portUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"} and {@code "port"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail: the send-as alias to be updated
+     * @param hostUpdated: the hostname of the {@code "SMTP"} service
+     * @param portUpdated: the port of the {@code "SMTP"} service
+     * @param format:      return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated, int portUpdated,
+                                            ReturnFormat format) throws IOException {
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                .setSmtpMsa(new SmtpMsa().setHost(hostUpdated).setPort(portUpdated))).execute(), format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"} and {@code "securityMode"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param hostUpdated:         the hostname of the {@code "SMTP"} service
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public SendAs changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated,
+                                             SecurityMode securityModeUpdated) throws IOException {
+        return changeSmtpMsaDomainDetails(sendAsEmail, hostUpdated, securityModeUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"} and {@code "securityMode"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param hostUpdated:         the hostname of the {@code "SMTP"} service
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @param format:              return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated, SecurityMode securityModeUpdated,
+                                            ReturnFormat format) throws IOException {
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                        .setSmtpMsa(new SmtpMsa().setHost(hostUpdated).setSecurityMode(securityModeUpdated.name()))).execute(),
+                format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"} and {@code "securityMode"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param portUpdated:         the port of the {@code "SMTP"} service
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public SendAs changeSmtpMsaDomainDetails(String sendAsEmail, int portUpdated,
+                                             SecurityMode securityModeUpdated) throws IOException {
+        return changeSmtpMsaDomainDetails(sendAsEmail, portUpdated, securityModeUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"} and {@code "securityMode"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param portUpdated:         the port of the {@code "SMTP"} service
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @param format:              return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T changeSmtpMsaDomainDetails(String sendAsEmail, int portUpdated, SecurityMode securityModeUpdated,
+                                            ReturnFormat format) throws IOException {
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                        .setSmtpMsa(new SmtpMsa().setPort(portUpdated).setSecurityMode(securityModeUpdated.name()))).execute(),
+                format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"}, {@code "port"} and {@code "securityMode"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param hostUpdated:         the hostname of the {@code "SMTP"} service
+     * @param portUpdated:         the port of the {@code "SMTP"} service
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public SendAs changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated, int portUpdated,
+                                             SecurityMode securityModeUpdated) throws IOException {
+        return changeSmtpMsaDomainDetails(sendAsEmail, hostUpdated, portUpdated, securityModeUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"}, {@code "port"} and {@code "securityMode"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param hostUpdated:         the hostname of the {@code "SMTP"} service
+     * @param portUpdated:         the port of the {@code "SMTP"} service
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @param format:              return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public <T> T changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated, int portUpdated,
+                                            SecurityMode securityModeUpdated, ReturnFormat format) throws IOException {
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                .setSmtpMsa(new SmtpMsa().setHost(hostUpdated).setPort(portUpdated)
+                        .setSecurityMode(securityModeUpdated.name()))).execute(), format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "username"} and {@code "password"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:     the send-as alias to be updated
+     * @param usernameUpdated: the username that will be used for authentication with the {@code "SMTP"} service
+     * @param passwordUpdated: the password that will be used for authentication with the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    public SendAs changeSmtpMsaCredentials(String sendAsEmail, String usernameUpdated,
+                                           String passwordUpdated) throws IOException {
+        return changeSmtpMsaCredentials(sendAsEmail, usernameUpdated, passwordUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "username"} and {@code "password"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:     the send-as alias to be updated
+     * @param usernameUpdated: the username that will be used for authentication with the {@code "SMTP"} service
+     * @param passwordUpdated: the password that will be used for authentication with the {@code "SMTP"} service
+     * @param format:          return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    public <T> T changeSmtpMsaCredentials(String sendAsEmail, String usernameUpdated, String passwordUpdated,
+                                          ReturnFormat format) throws IOException {
+        currentUsername = usernameUpdated;
+        currentPassword = passwordUpdated;
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                .setSmtpMsa(new SmtpMsa().setUsername(usernameUpdated).setPassword(passwordUpdated))).execute(), format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "smtpMsa"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:    the send-as alias to be updated
+     * @param smtpMsaUpdated: the smtpMsa updated
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    public SendAs changeSmtpMsa(String sendAsEmail, SendAs.SmtpMsa smtpMsaUpdated) throws IOException {
+        return changeSmtpMsa(sendAsEmail, smtpMsaUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "smtpMsa"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:    the send-as alias to be updated
+     * @param smtpMsaUpdated: the smtpMsa updated
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    public <T> T changeSmtpMsa(String sendAsEmail, SendAs.SmtpMsa smtpMsaUpdated, ReturnFormat format) throws IOException {
+        currentUsername = smtpMsaUpdated.getUsername();
+        currentPassword = smtpMsaUpdated.getPassword();
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                .setSmtpMsa(new SmtpMsa().setHost(smtpMsaUpdated.getHost()).setPort(smtpMsaUpdated.getPort())
+                        .setUsername(currentUsername).setPassword(currentPassword)
+                        .setSecurityMode(smtpMsaUpdated.getSecurityMode().name()))).execute(), format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "smtpMsa"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param hostUpdated:         the hostname of the {@code "SMTP"} service {@code "Required"}
+     * @param portUpdated:         the port of the {@code "SMTP"} service {@code "Required"}
+     * @param usernameUpdated:     the username that will be used for authentication with the {@code "SMTP"} service
+     * @param passwordUpdated:     the password that will be used for authentication with the {@code "SMTP"} service
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    public SendAs changeSmtpMsa(String sendAsEmail, String hostUpdated, int portUpdated, String usernameUpdated,
+                                String passwordUpdated, SecurityMode securityModeUpdated) throws IOException {
+        return changeSmtpMsa(sendAsEmail, hostUpdated, portUpdated, usernameUpdated, passwordUpdated, securityModeUpdated,
+                LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "smtpMsa"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param hostUpdated:         the hostname of the {@code "SMTP"} service {@code "Required"}
+     * @param portUpdated:         the port of the {@code "SMTP"} service {@code "Required"}
+     * @param usernameUpdated:     the username that will be used for authentication with the {@code "SMTP"} service
+     * @param passwordUpdated:     the password that will be used for authentication with the {@code "SMTP"} service
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @param format:              return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    public <T> T changeSmtpMsa(String sendAsEmail, String hostUpdated, int portUpdated, String usernameUpdated,
+                               String passwordUpdated, SecurityMode securityModeUpdated,
+                               ReturnFormat format) throws IOException {
+        currentUsername = usernameUpdated;
+        currentPassword = passwordUpdated;
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                .setSmtpMsa(new SmtpMsa().setHost(hostUpdated).setPort(portUpdated).setUsername(usernameUpdated)
+                        .setPassword(passwordUpdated).setSecurityMode(securityModeUpdated.name()))).execute(), format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     *
+     * @param sendAsUpdated: the send-as updated
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    public SendAs changeSendAs(SendAs sendAsUpdated) throws IOException {
+        return changeSendAs(sendAsUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     *
+     * @param sendAsUpdated: the send-as updated
+     * @param format:        return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    public <T> T changeSendAs(SendAs sendAsUpdated, ReturnFormat format) throws IOException {
+        com.google.api.services.gmail.model.SendAs gSendAs = new com.google.api.services.gmail.model.SendAs()
+                .setDisplayName(sendAsUpdated.getDisplayName())
+                .setReplyToAddress(sendAsUpdated.getReplyToAddress())
+                .setSignature(sendAsUpdated.getSignature())
+                .setIsDefault(sendAsUpdated.isDefault())
+                .setTreatAsAlias(sendAsUpdated.isTreatAsAlias());
+        SendAs.SmtpMsa smtpMsaUpdated = sendAsUpdated.getSmtpMsa();
+        if (smtpMsaUpdated != null) {
+            currentUsername = smtpMsaUpdated.getUsername();
+            currentPassword = smtpMsaUpdated.getPassword();
+            gSendAs.setSmtpMsa(new SmtpMsa().setHost(smtpMsaUpdated.getHost())
+                    .setPort(smtpMsaUpdated.getPort())
+                    .setUsername(currentUsername)
+                    .setPassword(currentPassword)
+                    .setSecurityMode(smtpMsaUpdated.getSecurityMode().name()));
+        }
+        return returnSendAs(sendAs.patch(userId, sendAsUpdated.getSendAsEmail(), gSendAs).execute(), format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     *
+     * @param sendAsEmail:           the send-as alias to be updated
+     * @param displayNameUpdated:    a name that appears in the {@code "From:"} header for mail sent using this alias
+     * @param replyToAddressUpdated: an optional email address that is included in a {@code "Reply-To:"} header for mail sent using this alias
+     * @param signatureUpdated:      an optional {@code "HTML"} signature that is included in messages composed with this alias in the Gmail web UI
+     * @param defaultUpdated:whether this address is selected as the default {@code "From:"} address in situations such as composing
+     *                               a new message or sending a vacation auto-reply
+     * @param treatAsAliasUpdated:   whether Gmail should treat this address as an alias for the user's primary email address
+     * @param hostUpdated:           the hostname of the {@code "SMTP"} service {@code "Required"}
+     * @param portUpdated:           the port of the {@code "SMTP"} service {@code "Required"}
+     * @param usernameUpdated:       the username that will be used for authentication with the {@code "SMTP"} service
+     * @param passwordUpdated:       the password that will be used for authentication with the {@code "SMTP"} service
+     * @param securityModeUpdated:   the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    public SendAs changeSendAs(String sendAsEmail, String displayNameUpdated, String replyToAddressUpdated,
+                               String signatureUpdated, boolean defaultUpdated, boolean treatAsAliasUpdated,
+                               String hostUpdated, int portUpdated, String usernameUpdated, String passwordUpdated,
+                               SecurityMode securityModeUpdated) throws IOException {
+        return changeSendAs(sendAsEmail, displayNameUpdated, replyToAddressUpdated, signatureUpdated, defaultUpdated,
+                treatAsAliasUpdated, hostUpdated, portUpdated, usernameUpdated, passwordUpdated, securityModeUpdated,
+                LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     *
+     * @param sendAsEmail:           the send-as alias to be updated
+     * @param displayNameUpdated:    a name that appears in the {@code "From:"} header for mail sent using this alias
+     * @param replyToAddressUpdated: an optional email address that is included in a {@code "Reply-To:"} header for mail sent using this alias
+     * @param signatureUpdated:      an optional {@code "HTML"} signature that is included in messages composed with this alias in the Gmail web UI
+     * @param defaultUpdated:whether this address is selected as the default {@code "From:"} address in situations such as composing
+     *                               a new message or sending a vacation auto-reply
+     * @param treatAsAliasUpdated:   whether Gmail should treat this address as an alias for the user's primary email address
+     * @param hostUpdated:           the hostname of the {@code "SMTP"} service {@code "Required"}
+     * @param portUpdated:           the port of the {@code "SMTP"} service {@code "Required"}
+     * @param usernameUpdated:       the username that will be used for authentication with the {@code "SMTP"} service
+     * @param passwordUpdated:       the password that will be used for authentication with the {@code "SMTP"} service
+     * @param securityModeUpdated:   the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @param format:                return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    public <T> T changeSendAs(String sendAsEmail, String displayNameUpdated, String replyToAddressUpdated,
+                              String signatureUpdated, boolean defaultUpdated, boolean treatAsAliasUpdated,
+                              String hostUpdated, int portUpdated, String usernameUpdated, String passwordUpdated,
+                              SecurityMode securityModeUpdated, ReturnFormat format) throws IOException {
+        currentUsername = usernameUpdated;
+        currentPassword = passwordUpdated;
+        return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
+                .setDisplayName(displayNameUpdated)
+                .setReplyToAddress(replyToAddressUpdated)
+                .setSignature(signatureUpdated)
+                .setIsDefault(defaultUpdated)
+                .setTreatAsAlias(treatAsAliasUpdated)
+                .setSmtpMsa(new SmtpMsa().setHost(hostUpdated)
+                        .setPort(portUpdated)
+                        .setUsername(usernameUpdated)
+                        .setPassword(passwordUpdated)
+                        .setSecurityMode(securityModeUpdated.name()))).execute(), format);
+    }
+
+    /**
+     * Method to create a send-as object
+     *
+     * @param sendAs: send-as obtained from Google's response
+     * @param format: return type formatter -> {@link ReturnFormat}
+     * @return send-as as {@code "format"} defines
+     **/
+    private <T> T returnSendAs(com.google.api.services.gmail.model.SendAs sendAs, ReturnFormat format) {
+        SmtpMsa smtpMsa = sendAs.getSmtpMsa();
+        if (smtpMsa != null)
+            sendAs.setSmtpMsa(smtpMsa.setUsername(currentUsername).setPassword(currentPassword));
+        switch (format) {
+            case JSON:
+                return (T) new JSONObject(sendAs);
+            case LIBRARY_OBJECT:
+                return (T) new SendAs(new JSONObject(sendAs));
+            default:
+                return (T) sendAs.toString();
+        }
+    }
+
+    /**
+     * Method to send a verification email to the specified send-as alias address. The verification status must be {@code "pending"}.
+     * This method is only available to service account clients that have been delegated domain-wide authority
+     *
+     * @param sendAsToVerify: send-as to verify
+     * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/verify">
+     * users.settings.sendAs.verify</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public boolean verifySendAs(SendAs sendAsToVerify) {
+        return verifySendAs(sendAsToVerify.getSendAsEmail());
+    }
+
+    /**
+     * Method to send a verification email to the specified send-as alias address. The verification status must be {@code "pending"}.
+     * This method is only available to service account clients that have been delegated domain-wide authority
+     *
+     * @param sendAsEmailToVerify: the send-as alias to be verified
+     * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/verify">
+     * users.settings.sendAs.verify</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    public boolean verifySendAs(String sendAsEmailToVerify) {
+        try {
+            sendAs.verify(userId, sendAsEmailToVerify).execute();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 

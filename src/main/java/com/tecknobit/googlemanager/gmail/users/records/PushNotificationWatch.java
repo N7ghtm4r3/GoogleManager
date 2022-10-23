@@ -29,7 +29,7 @@ public class PushNotificationWatch {
     private final BigInteger historyId;
 
     /**
-     * {@code expiration} when Gmail will stop sending notifications for mailbox updates (epoch millis). Call watch again before this time to renew the watch
+     * {@code expiration} when {@code "Gmail"} will stop sending notifications for mailbox updates (epoch millis). Call watch again before this time to renew the watch
      **/
     private final long expiration;
 
@@ -37,7 +37,7 @@ public class PushNotificationWatch {
      * Constructor to init a {@link PushNotificationWatch}
      *
      * @param historyId:  the ID of the mailbox's current history record
-     * @param expiration: when Gmail will stop sending notifications for mailbox updates (epoch millis). Call watch again before this time to renew the watch
+     * @param expiration: when {@code "Gmail"} will stop sending notifications for mailbox updates (epoch millis). Call watch again before this time to renew the watch
      **/
     public PushNotificationWatch(BigInteger historyId, long expiration) {
         this.historyId = historyId;

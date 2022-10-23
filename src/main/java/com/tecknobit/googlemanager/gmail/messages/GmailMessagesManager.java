@@ -163,6 +163,7 @@ public class GmailMessagesManager extends GmailManager {
             messages.batchDelete(userId, new BatchDeleteMessagesRequest().setIds(stream(idsToDelete).toList())).execute();
             return true;
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -199,6 +200,7 @@ public class GmailMessagesManager extends GmailManager {
                     .setRemoveLabelIds(stream(labelIdsToRemove).toList())).execute();
             return true;
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -249,6 +251,7 @@ public class GmailMessagesManager extends GmailManager {
             messages.delete(userId, messageIdToDelete).execute();
             return true;
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -455,12 +458,12 @@ public class GmailMessagesManager extends GmailManager {
     }
 
     /**
-     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP
+     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via {@code "SMTP"}
      *
      * @param toEmailAddress:     recipient of the message
      * @param subject:            subject of the message
      * @param contentMessage:     content message
-     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox
+     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as {@code "SPAM"} in the mailbox
      * @param processForCalendar: process calendar invites in the email and add any extracted meetings to the Google Calendar for this user
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @return message requested as {@link Message} custom object
@@ -476,12 +479,12 @@ public class GmailMessagesManager extends GmailManager {
     }
 
     /**
-     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP
+     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via {@code "SMTP"}
      *
      * @param toEmailAddress:     recipient of the message
      * @param subject:            subject of the message
      * @param contentMessage:     content message
-     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox
+     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as {@code "SPAM"} in the mailbox
      * @param processForCalendar: process calendar invites in the email and add any extracted meetings to the Google Calendar for this user
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param format:             return type formatter -> {@link ReturnFormat}
@@ -501,12 +504,12 @@ public class GmailMessagesManager extends GmailManager {
     }
 
     /**
-     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP
+     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via {@code "SMTP"}
      *
      * @param toEmailAddress:     recipient of the message
      * @param subject:            subject of the message
      * @param contentMessage:     content message
-     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox
+     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as {@code "SPAM"} in the mailbox
      * @param processForCalendar: process calendar invites in the email and add any extracted meetings to the Google Calendar for this user
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param internalDateSource: source for Gmail's internal date of the message -> constants available at {@link InternalDateSource}
@@ -524,12 +527,12 @@ public class GmailMessagesManager extends GmailManager {
     }
 
     /**
-     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP
+     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via {@code "SMTP"}
      *
      * @param toEmailAddress:     recipient of the message
      * @param subject:            subject of the message
      * @param contentMessage:     content message
-     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox
+     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as {@code "SPAM"} in the mailbox
      * @param processForCalendar: process calendar invites in the email and add any extracted meetings to the Google Calendar for this user
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param internalDateSource: source for Gmail's internal date of the message -> constants available at {@link InternalDateSource}
@@ -552,13 +555,13 @@ public class GmailMessagesManager extends GmailManager {
     }
 
     /**
-     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP
+     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via {@code "SMTP"}
      * with attachment
      *
      * @param toEmailAddress:     recipient of the message
      * @param subject:            subject of the message
      * @param contentMessage:     content message
-     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox
+     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as {@code "SPAM"} in the mailbox
      * @param processForCalendar: process calendar invites in the email and add any extracted meetings to the Google Calendar for this user
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param file:               attachment file
@@ -576,13 +579,13 @@ public class GmailMessagesManager extends GmailManager {
     }
 
     /**
-     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP
+     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via {@code "SMTP"}
      * with attachment
      *
      * @param toEmailAddress:     recipient of the message
      * @param subject:            subject of the message
      * @param contentMessage:     content message
-     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox
+     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as {@code "SPAM"} in the mailbox
      * @param processForCalendar: process calendar invites in the email and add any extracted meetings to the Google Calendar for this user
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param file:               attachment file
@@ -605,13 +608,13 @@ public class GmailMessagesManager extends GmailManager {
     }
 
     /**
-     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP
+     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via {@code "SMTP"}
      * with attachment
      *
      * @param toEmailAddress:     recipient of the message
      * @param subject:            subject of the message
      * @param contentMessage:     content message
-     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox
+     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as {@code "SPAM"} in the mailbox
      * @param processForCalendar: process calendar invites in the email and add any extracted meetings to the Google Calendar for this user
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param file:               attachment file
@@ -630,13 +633,13 @@ public class GmailMessagesManager extends GmailManager {
     }
 
     /**
-     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP
+     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via {@code "SMTP"}
      * with attachment
      *
      * @param toEmailAddress:     recipient of the message
      * @param subject:            subject of the message
      * @param contentMessage:     content message
-     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox
+     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as {@code "SPAM"} in the mailbox
      * @param processForCalendar: process calendar invites in the email and add any extracted meetings to the Google Calendar for this user
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param file:               attachment file
@@ -661,13 +664,13 @@ public class GmailMessagesManager extends GmailManager {
     }
 
     /**
-     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP
+     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via {@code "SMTP"}
      * with different attachments
      *
      * @param toEmailAddress:     recipient of the message
      * @param subject:            subject of the message
      * @param contentMessage:     content message
-     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox
+     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as {@code "SPAM"} in the mailbox
      * @param processForCalendar: process calendar invites in the email and add any extracted meetings to the Google Calendar for this user
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param files:              attachments files in array of {@link File} format
@@ -684,13 +687,13 @@ public class GmailMessagesManager extends GmailManager {
     }
 
     /**
-     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP
+     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via {@code "SMTP"}
      * with different attachments
      *
      * @param toEmailAddress:     recipient of the message
      * @param subject:            subject of the message
      * @param contentMessage:     content message
-     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox
+     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as {@code "SPAM"} in the mailbox
      * @param processForCalendar: process calendar invites in the email and add any extracted meetings to the Google Calendar for this user
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param files:              attachments files in array of {@link File} format
@@ -713,13 +716,13 @@ public class GmailMessagesManager extends GmailManager {
     }
 
     /**
-     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP
+     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via {@code "SMTP"}
      * with different attachments
      *
      * @param toEmailAddress:     recipient of the message
      * @param subject:            subject of the message
      * @param contentMessage:     content message
-     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox
+     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as {@code "SPAM"} in the mailbox
      * @param processForCalendar: process calendar invites in the email and add any extracted meetings to the Google Calendar for this user
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param files:              attachments files in array of {@link File} format
@@ -738,13 +741,13 @@ public class GmailMessagesManager extends GmailManager {
     }
 
     /**
-     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP
+     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via {@code "SMTP"}
      * with different attachments
      *
      * @param toEmailAddress:     recipient of the message
      * @param subject:            subject of the message
      * @param contentMessage:     content message
-     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox
+     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as {@code "SPAM"} in the mailbox
      * @param processForCalendar: process calendar invites in the email and add any extracted meetings to the Google Calendar for this user
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param files:              attachments files in array of {@link File} format
@@ -769,13 +772,13 @@ public class GmailMessagesManager extends GmailManager {
     }
 
     /**
-     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP
+     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via {@code "SMTP"}
      * with different attachments
      *
      * @param toEmailAddress:     recipient of the message
      * @param subject:            subject of the message
      * @param contentMessage:     content message
-     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox
+     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as {@code "SPAM"} in the mailbox
      * @param processForCalendar: process calendar invites in the email and add any extracted meetings to the Google Calendar for this user
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param files:              attachments files in {@link Collection} of {@link File} format
@@ -793,13 +796,13 @@ public class GmailMessagesManager extends GmailManager {
     }
 
     /**
-     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP
+     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via {@code "SMTP"}
      * with different attachments
      *
      * @param toEmailAddress:     recipient of the message
      * @param subject:            subject of the message
      * @param contentMessage:     content message
-     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox
+     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as {@code "SPAM"} in the mailbox
      * @param processForCalendar: process calendar invites in the email and add any extracted meetings to the Google Calendar for this user
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param files:              attachments files in {@link Collection} of {@link File} format
@@ -818,13 +821,13 @@ public class GmailMessagesManager extends GmailManager {
     }
 
     /**
-     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP
+     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via {@code "SMTP"}
      * with different attachments
      *
      * @param toEmailAddress:     recipient of the message
      * @param subject:            subject of the message
      * @param contentMessage:     content message
-     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox
+     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as {@code "SPAM"} in the mailbox
      * @param processForCalendar: process calendar invites in the email and add any extracted meetings to the Google Calendar for this user
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param files:              attachments files in {@link Collection} of {@link File} format
@@ -843,13 +846,13 @@ public class GmailMessagesManager extends GmailManager {
     }
 
     /**
-     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP
+     * Method to import a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via {@code "SMTP"}
      * with different attachments
      *
      * @param toEmailAddress:     recipient of the message
      * @param subject:            subject of the message
      * @param contentMessage:     content message
-     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox
+     * @param neverMarkSpam:      ignore the Gmail spam classifier decision and never mark this email as {@code "SPAM"} in the mailbox
      * @param processForCalendar: process calendar invites in the email and add any extracted meetings to the Google Calendar for this user
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param files:              attachments files in {@link Collection} of {@link File} format

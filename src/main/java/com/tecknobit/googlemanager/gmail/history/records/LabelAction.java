@@ -52,7 +52,7 @@ public class LabelAction {
      **/
     public LabelAction(JSONObject jLabel) {
         JsonHelper hLabel = new JsonHelper(jLabel);
-        message = new Message(hLabel.getJSONObject("message"));
+        message = new Message(hLabel.getJSONObject("message", new JSONObject()));
         JSONArray jLabelIds = hLabel.getJSONArray("labelIds", new JSONArray());
         labelIds = new ArrayList<>();
         for (int j = 0; j < jLabelIds.length(); j++)

@@ -29,7 +29,7 @@ public class VacationSettings {
     private String responseBodyPlainText;
 
     /**
-     * {@code responseBodyHtml} response body in HTML format. Gmail will sanitize the HTML before storing it.
+     * {@code responseBodyHtml} response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      * If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"} are specified, {@code "responseBodyHtml"}
      * will be used
      **/
@@ -48,14 +48,14 @@ public class VacationSettings {
 
     /**
      * {@code startTime} an optional start time for sending auto-replies (epoch ms). When this is specified,
-     * Gmail will automatically reply only to messages that it receives after the start time.
+     * {@code "Gmail"} will automatically reply only to messages that it receives after the start time.
      * If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      **/
     private long startTime;
 
     /**
      * {@code endTime} an optional end time for sending auto-replies (epoch ms). When this is specified,
-     * Gmail will automatically reply only to messages that it receives before the end time.
+     * {@code "Gmail"} will automatically reply only to messages that it receives before the end time.
      * If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      **/
     private long endTime;
@@ -66,7 +66,7 @@ public class VacationSettings {
      * @param enableAutoReply:       flag that controls whether Gmail automatically replies to messages
      * @param responseSubject:       optional text to prepend to the subject line in vacation responses
      * @param responseBodyPlainText: response body in plain text format
-     * @param responseBodyHtml:      response body in HTML format
+     * @param responseBodyHtml:      response body in {@code "HTML"} format
      * @param restrictToContacts:    flag that determines whether responses are sent to recipients who are not in the user's list of contacts
      * @param restrictToDomain:      flag that determines whether responses are sent to recipients who are outside
      *                               the user's domain. This feature is only available for G Suite users
@@ -180,7 +180,7 @@ public class VacationSettings {
     /**
      * Method to set {@link #responseBodyHtml} instance
      *
-     * @param responseBodyHtml: response body in HTML format
+     * @param responseBodyHtml: response body in {@code "HTML"} format
      **/
     public void setResponseBodyHtml(String responseBodyHtml) {
         this.responseBodyHtml = responseBodyHtml;
