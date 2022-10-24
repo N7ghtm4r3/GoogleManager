@@ -6,6 +6,7 @@ import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInsta
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow.Builder;
+import com.google.api.client.googleapis.auth.oauth2.GoogleRefreshTokenRequest;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.store.DataStore;
@@ -17,6 +18,8 @@ import java.util.Collection;
 import java.util.Properties;
 
 import static java.lang.Integer.parseInt;
+import static java.lang.Thread.sleep;
+import static java.util.concurrent.Executors.newSingleThreadExecutor;
 
 /**
  * The {@code GoogleManager} class is useful to manage all Google's API services giving basic methods
@@ -146,13 +149,25 @@ public abstract class GoogleManager {
 
     /**
      * {@code host} is a local instance used to memorize host used in the auth operations
-     * **/
+     **/
     protected String host;
 
     /**
      * {@code callBackPath} is a local instance used to memorize callback path used in the auth operations
-     * **/
+     **/
     protected String callBackPath;
+
+    /**
+     * {@code callBackPath} is a local instance to store collections of {@link String} for scopes
+     **/
+    private Collection<String> scopes;
+
+    /**
+     * {@code tokenAutoRefreshing} is a local instance to enable or not the auto refreshing routine of {@link #credentials}'s token
+     *
+     * @apiNote by default is {@code "false"}
+     **/
+    private volatile boolean tokenAutoRefreshing;
 
     /** Constructor to init a {@link GoogleManager}
      * @param clientId: client identifier value
@@ -280,8 +295,9 @@ public abstract class GoogleManager {
      * @return result of change -> {@code "true"} is successful, {@code "false"} if not successful
      * @apiNote throws {@link IOException} when some params are not correct or auth request has been go wrong
      **/
-    public boolean changeProject(String clientId, String clientSecret, String userId, String accessType, String approvalPrompt,
-                                 int port, String host, String callBackPath, Collection<String> scopes) {
+    public boolean changeProject(String clientId, String clientSecret, String userId, String accessType,
+                                 String approvalPrompt, int port, String host, String callBackPath,
+                                 Collection<String> scopes) {
         try {
             if (accessType != null && !accessType.equals(ONLINE_ACCESS_TYPE) && !accessType.equals(OFFLINE_ACCESS_TYPE))
                 throw new IOException("Access type must be online, offline or null");
@@ -298,6 +314,7 @@ public abstract class GoogleManager {
                     .build();
             credentials = new AuthorizationCodeInstalledApp(authCodeFlow, new LocalServerReceiver.Builder()
                     .setPort(port).setHost(host).setCallbackPath(callBackPath).build()).authorize(userId);
+            this.scopes = scopes;
             this.clientId = clientId;
             this.clientSecret = clientSecret;
             this.userId = userId;
@@ -396,6 +413,45 @@ public abstract class GoogleManager {
                                  String host, int port, Collection<String> scopes) {
         return changeProject(clientId, clientSecret, userId, accessType, approvalPrompt, port, host,
                 DEFAULT_CALLBACK_PATH, scopes);
+    }
+
+    /**
+     * Method to enable the auto refreshing of refresh token for {@link #credentials} instance <br>
+     * Any params required
+     *
+     * @apiNote useful for example for {@code "backend"} use, because the token expires generally after {@code "1h"}
+     * and with this method it will be automatically refreshed allowing to continue the workflow with {@code "Google"}'s
+     * services
+     **/
+    public void enableTokenAutoRefreshing() {
+        if (!tokenAutoRefreshing) {
+            tokenAutoRefreshing = true;
+            newSingleThreadExecutor().execute(() -> {
+                while (tokenAutoRefreshing) {
+                    try {
+                        if (System.currentTimeMillis() >= credentials.getExpirationTimeMilliseconds()) {
+                            credentials.setRefreshToken(new GoogleRefreshTokenRequest(netHttpTransport, gsonFactory,
+                                    credentials.getRefreshToken(), clientId, clientSecret).setScopes(scopes)
+                                    .setGrantType("refresh_token").execute().getRefreshToken());
+                            System.out.println("Changed" + credentials.getExpirationTimeMilliseconds());
+                        }
+                        sleep(5000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.exit(-1);
+                    }
+                }
+            });
+        }
+    }
+
+    /**
+     * Method to disable the auto refreshing of refresh token for {@link #credentials} instance <br>
+     * Any params required
+     **/
+    public void disableTokenAutoRefreshing() {
+        if (tokenAutoRefreshing)
+            tokenAutoRefreshing = false;
     }
 
     /**

@@ -4687,7 +4687,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param format:  return type formatter -> {@link ReturnFormat}
      * @return messages as {@code "format"} defines
      **/
-    private <T> T returnMessage(com.google.api.services.gmail.model.Message message, ReturnFormat format) {
+    public static <T> T returnMessage(com.google.api.services.gmail.model.Message message, ReturnFormat format) {
         switch (format) {
             case JSON:
                 return (T) new JSONObject(message);
