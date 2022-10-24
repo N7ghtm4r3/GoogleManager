@@ -30,7 +30,6 @@ import static java.util.concurrent.Executors.newSingleThreadExecutor;
  * @apiNote see the official documentation at: <a href="https://support.google.com/googleapi/answer/7037264?hl=en&ref_topic=7013279">
  * Manage APIs in the API Console</a>
  **/
-//TODO: 20/10/2022 AUTH TOKEN AUTO REFRESH
 public abstract class GoogleManager {
 
     /**
@@ -307,22 +306,18 @@ public abstract class GoogleManager {
             }
             if (!callBackPath.contains("/"))
                 callBackPath = "/" + callBackPath;
-            authCodeFlow = new Builder(netHttpTransport, gsonFactory, clientId, clientSecret, scopes)
-                    .setAccessType(accessType)
-                    .setApprovalPrompt(approvalPrompt)
-                    .setCredentialDataStore(credentialDataStore)
-                    .build();
-            credentials = new AuthorizationCodeInstalledApp(authCodeFlow, new LocalServerReceiver.Builder()
-                    .setPort(port).setHost(host).setCallbackPath(callBackPath).build()).authorize(userId);
+            this.accessType = accessType;
+            this.approvalPrompt = approvalPrompt;
             this.scopes = scopes;
             this.clientId = clientId;
             this.clientSecret = clientSecret;
             this.userId = userId;
-            this.accessType = accessType;
-            this.approvalPrompt = approvalPrompt;
             this.port = port;
             this.host = host;
             this.callBackPath = callBackPath;
+            createAuthCodeFlow();
+            credentials = new AuthorizationCodeInstalledApp(authCodeFlow, new LocalServerReceiver.Builder()
+                    .setPort(port).setHost(host).setCallbackPath(callBackPath).build()).authorize(userId);
             properties.setProperty("clientId", clientId);
             properties.setProperty("clientSecret", clientSecret);
             properties.setProperty("userId", userId);
@@ -416,29 +411,47 @@ public abstract class GoogleManager {
     }
 
     /**
+     * Method to instantiate {@link #authCodeFlow} <br>
+     * Any params required
+     **/
+    private void createAuthCodeFlow() {
+        authCodeFlow = new Builder(netHttpTransport, gsonFactory, clientId, clientSecret, scopes)
+                .setAccessType(accessType)
+                .setApprovalPrompt(approvalPrompt)
+                .setCredentialDataStore(credentialDataStore)
+                .build();
+    }
+
+    /**
      * Method to enable the auto refreshing of refresh token for {@link #credentials} instance <br>
      * Any params required
      *
-     * @apiNote useful for example for {@code "backend"} use, because the token expires generally after {@code "1h"}
-     * and with this method it will be automatically refreshed allowing to continue the workflow with {@code "Google"}'s
-     * services
+     * @apiNote useful for example for {@code "backend"} use, because the token expires and with this method
+     * it will be automatically refreshed allowing to continue the workflow with {@code "Google"}'s
+     * services, {@link #accessType} will be set as {@link #OFFLINE_ACCESS_TYPE} and {@link #approvalPrompt} will be set
+     * as {@link #FORCE_APPROVAL_PROMPT} to perform the auto refresh
      **/
     public void enableTokenAutoRefreshing() {
         if (!tokenAutoRefreshing) {
+            if (authCodeFlow.getAccessType().equals(ONLINE_ACCESS_TYPE) ||
+                    authCodeFlow.getApprovalPrompt().equals(AUTO_APPROVAL_PROMPT)) {
+                accessType = OFFLINE_ACCESS_TYPE;
+                approvalPrompt = FORCE_APPROVAL_PROMPT;
+                createAuthCodeFlow();
+            }
             tokenAutoRefreshing = true;
             newSingleThreadExecutor().execute(() -> {
                 while (tokenAutoRefreshing) {
                     try {
                         if (System.currentTimeMillis() >= credentials.getExpirationTimeMilliseconds()) {
-                            credentials.setRefreshToken(new GoogleRefreshTokenRequest(netHttpTransport, gsonFactory,
+                            credentials.refreshToken();
+                            credentials.setAccessToken(new GoogleRefreshTokenRequest(netHttpTransport, gsonFactory,
                                     credentials.getRefreshToken(), clientId, clientSecret).setScopes(scopes)
-                                    .setGrantType("refresh_token").execute().getRefreshToken());
-                            System.out.println("Changed" + credentials.getExpirationTimeMilliseconds());
+                                    .setGrantType("refresh_token").execute().getAccessToken());
                         }
                         sleep(5000);
                     } catch (Exception e) {
                         e.printStackTrace();
-                        System.exit(-1);
                     }
                 }
             });

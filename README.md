@@ -23,7 +23,7 @@ allprojects {
 
 ```gradle
 dependencies {
-	implementation 'com.github.N7ghtm4r3:GoogleManager:1.0.0'
+  implementation 'com.github.N7ghtm4r3:GoogleManager:1.0.0'
 }
 ```
 
@@ -85,23 +85,23 @@ Console</a>, the new project that you will use in this library:
 For any library manager you need to instantiate it like this:
 
 ```java
-// Choose the manager for example: Gmail, etc 
+// choose the manager for example: Gmail, etc 
 GoogleManager manager=new GoogleManager(clientId,clientSecret,userId, /* params of the constructor chosen */);
-// And then use it 
+// and then use it 
         manager.makeSomething();
 ```
 
 To avoid re-entering credentials for each manager, you can instantiate managers like this:
 
 ```java
-// Choose the manager for example: Gmail, etc 
-GoogleManager firstManager=new GoogleManager(clientId,clientSecret,userId, /* params of the constructor chosen */);
-// And then use it 
-        firstManager.makeSomething();
-// You don't need to insert all credentials to make manager work
-        GoogleManager secondManager=new GoogleManager(); //same credentials used
-// And then use it
-        secondManager.makeSomething();
+// choose the manager for example: Gmail, etc 
+GoogleManager firstManager = new GoogleManager(clientId, clientSecret, userId, /* params of the constructor chosen */);
+// and then use it 
+firstManager.makeSomething();
+// you don't need to insert all credentials to make manager work
+GoogleManager secondManager = new GoogleManager(); // same credentials used
+// and then use it
+secondManager.makeSomething();
 ```
 
 ## Authors
