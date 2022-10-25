@@ -565,7 +565,7 @@ public abstract class GoogleManager {
      * STRING -> return response formatted as {@link String}
      * </li>
      * <li>
-     * JSON -> return response formatted in JSON ({@link org.json.JSONObject} or {@link org.json.JSONArray}}
+     * JSON -> return response formatted as JSON ({@link org.json.JSONObject} or {@link org.json.JSONArray}}
      * </li>
      * <li>
      * LIBRARY_OBJECT -> return response formatted as custom object offered by {@code GoogleManager}'s library

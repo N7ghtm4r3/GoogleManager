@@ -74,20 +74,23 @@ Console</a>, the new project that you will use in this library:
   to <a href="https://console.cloud.google.com/apis/credentials/consent">configure consent screen</a> to be allowed to
   use **OAuth 2.0 Client IDs** service (this library use **only** this as authentication mode)
 - After configured the consent screen, you have to create and
-  configure <a href="https://console.cloud.google.com/apis/credentials/oauthclient">OAuth client ID</a> to copy the **
-  Client ID** and the **Client secret** or download the JSON file with these credentials, in this case you need to parse
+  configure <a href="https://console.cloud.google.com/apis/credentials/oauthclient">OAuth client ID</a> to copy the
+  **Client ID** and the **Client secret** or download the JSON file with these credentials, in this case you need to
+  parse
   by yourself to get the **Client ID** and the **Client secret**. <br> **Note:** based on your choose for **Application
   type** you have to configure by yourself details such as **host**, **port**, **callback path**, etc
 - After these operations you and your project are ready to use **GoogleManager** library!
 
 ## Usage/Examples
 
+#### Execution
+
 For any library manager you need to instantiate it like this:
 
 ```java
 // choose the manager for example: Gmail, etc 
 GoogleManager manager=new GoogleManager(clientId,clientSecret,userId, /* params of the constructor chosen */);
-// and then use it 
+// and then use it
         manager.makeSomething();
 ```
 
@@ -95,13 +98,32 @@ To avoid re-entering credentials for each manager, you can instantiate managers 
 
 ```java
 // choose the manager for example: Gmail, etc 
-GoogleManager firstManager = new GoogleManager(clientId, clientSecret, userId, /* params of the constructor chosen */);
+GoogleManager firstManager=new GoogleManager(clientId,clientSecret,userId, /* params of the constructor chosen */);
 // and then use it 
-firstManager.makeSomething();
+        firstManager.makeSomething();
 // you don't need to insert all credentials to make manager work
-GoogleManager secondManager = new GoogleManager(); // same credentials used
+        GoogleManager secondManager=new GoogleManager(); // same credentials used
 // and then use it
-secondManager.makeSomething();
+        secondManager.makeSomething();
+```
+
+#### Responses
+
+Library give to you the opportunity to customize the return object after a request, the possibilities are:
+
+- **JSON:** return response formatted as **JSON** (**org.json.JSONObject** or **org.json.JSONArray**)
+- **STRING:** return response formatted as **String**
+- **LIBRARY_OBJECT:** return response formatted as custom object offered by **GoogleManager's library**
+
+You find the constants in **GoogleManager.ReturnFormat'enum**
+
+```java
+// choose the manager for example: Gmail, etc 
+GoogleManager manager=new GoogleManager(clientId,clientSecret,userId, /* params of the constructor chosen */);
+// method to return directly a library given by library
+        manager.someRequest(); // in this case will be returned directly a LIBRARY_OBJECT
+// method to customize the format of the return 
+        manager.someRequest(ReturnFormat.JSON); // in this case will be returned response in JSON format
 ```
 
 ## Authors

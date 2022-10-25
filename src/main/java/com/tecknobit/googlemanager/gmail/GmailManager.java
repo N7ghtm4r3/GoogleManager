@@ -407,7 +407,7 @@ public class GmailManager extends GoogleManager {
      * @param mimeType:    type of mime -> constants available at {@link GmailManager}
      * @return message as {@link MimeMessage}
      **/
-    private Message createMessage(String messageText, File file, MimeMessage mime, String mimeType) throws Exception {
+    protected Message createMessage(String messageText, File file, MimeMessage mime, String mimeType) throws Exception {
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
         mimeBodyPart.setContent(messageText, mimeType);
         Multipart multipart = new MimeMultipart();
@@ -493,7 +493,7 @@ public class GmailManager extends GoogleManager {
      * @param mimeType:    type of mime -> constants available at {@link GmailManager}
      * @return message as {@link MimeMessage}
      **/
-    private Message createMessage(String messageText, File[] files, MimeMessage mime, String mimeType) throws Exception {
+    protected Message createMessage(String messageText, File[] files, MimeMessage mime, String mimeType) throws Exception {
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
         mimeBodyPart.setContent(messageText, mimeType);
         Multipart multipart = new MimeMultipart();
@@ -514,7 +514,7 @@ public class GmailManager extends GoogleManager {
      * @param messageDetails: message details created with {@link MimeMessage}
      * @return message as {@link Message}
      **/
-    private Message createMessage(MimeMessage messageDetails) throws Exception {
+    protected Message createMessage(MimeMessage messageDetails) throws Exception {
         Message message = new Message();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         messageDetails.writeTo(buffer);
@@ -533,10 +533,11 @@ public class GmailManager extends GoogleManager {
      * @param Bcc:            blind carbon copy value
      * @return mime message as {@link MimeMessage}
      **/
-    private MimeMessage createMime(String toEmailAddress, String subject, String Cc, String Bcc) throws Exception {
+    protected MimeMessage createMime(String toEmailAddress, String subject, String Cc, String Bcc) throws Exception {
         MimeMessage mime = new MimeMessage(Session.getDefaultInstance(new Properties(), null));
         mime.setFrom(new InternetAddress(userId));
         mime.addRecipient(TO, new InternetAddress(toEmailAddress));
+        mime.setSubject(subject);
         if (Cc != null) {
             if (Cc.contains("["))
                 Cc = Cc.replace(" ", "").substring(1, Cc.length() - 2);
