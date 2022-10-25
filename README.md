@@ -89,7 +89,7 @@ For any library manager you need to instantiate it like this:
 
 ```java
 // choose the manager for example: Gmail, etc 
-GoogleManager manager=new GoogleManager(clientId,clientSecret,userId, /* params of the constructor chosen */);
+GoogleManager manager = new GoogleManager(clientId,clientSecret,userId, /* params of the constructor chosen */);
 // and then use it
 manager.makeSomething();
 ```
@@ -98,11 +98,11 @@ To avoid re-entering credentials for each manager, you can instantiate managers 
 
 ```java
 // choose the manager for example: Gmail, etc 
-GoogleManager firstManager=new GoogleManager(clientId,clientSecret,userId, /* params of the constructor chosen */);
+GoogleManager firstManager = new GoogleManager(clientId,clientSecret,userId, /* params of the constructor chosen */);
 // and then use it 
 firstManager.makeSomething();
 // you don't need to insert all credentials to make manager work
- GoogleManager secondManager=new GoogleManager(); // same credentials used
+ GoogleManager secondManager = new GoogleManager(); // same credentials used
 // and then use it
 secondManager.makeSomething();
 ```
@@ -119,7 +119,7 @@ You find the constants in **GoogleManager.ReturnFormat'enum**
 
 ```java
 // choose the manager for example: Gmail, etc 
-GoogleManager manager=new GoogleManager(clientId,clientSecret,userId, /* params of the constructor chosen */);
+GoogleManager manager = new GoogleManager(clientId,clientSecret,userId, /* params of the constructor chosen */);
 // method to return directly a library given by library
 manager.someRequest(); // in this case will be returned directly a LIBRARY_OBJECT
 // method to customize the format of the return 
