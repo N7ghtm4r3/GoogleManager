@@ -4,15 +4,12 @@ plugins {
 }
 
 group 'com.tecknobit'
-version '0.0.0.14'
+version '1.0.0'
 
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
 }
-
-sourceCompatibility = JavaVersion.VERSION_16
-targetCompatibility = JavaVersion.VERSION_16
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
@@ -31,7 +28,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'com.tecknobit.googlemanager'
             artifactId = 'GoogleManager'
-            version = '0.0.0.14'
+            version = '1.0.0'
             from components.java
         }
     }
