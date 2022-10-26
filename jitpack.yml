@@ -1,6 +1,2 @@
 jdk:
   - openjdk17
-before_install:
-  - sdk install maven
-install:
-  - mvn install -Dmaven.javadoc.skip=true -DskipTests
