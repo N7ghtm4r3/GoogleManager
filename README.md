@@ -102,7 +102,7 @@ GoogleManager firstManager = new GoogleManager(clientId,clientSecret,userId, /* 
 // and then use it 
 firstManager.makeSomething();
 // you don't need to insert all credentials to make manager work
- GoogleManager secondManager = new GoogleManager(); // same credentials used
+GoogleManager secondManager = new GoogleManager(); // same credentials used
 // and then use it
 secondManager.makeSomething();
 ```
