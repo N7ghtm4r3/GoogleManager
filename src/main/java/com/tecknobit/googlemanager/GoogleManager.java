@@ -77,7 +77,7 @@ public abstract class GoogleManager {
     public static final String AUTO_APPROVAL_PROMPT = "auto";
 
     /**
-     * {@code properties} is a local instance used to instantiate a new {@link GoogleManager}'s manager without inserted
+     * {@code properties} is a local instance used to instantiate a new {@link GoogleManager}'s manager without re-insert
      * credentials
      **/
     protected static final Properties properties = new Properties();
