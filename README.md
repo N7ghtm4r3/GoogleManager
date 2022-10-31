@@ -115,7 +115,7 @@ Library give to you the opportunity to customize the return object after a reque
 - **STRING:** return response formatted as **String**
 - **LIBRARY_OBJECT:** return response formatted as custom object offered by **GoogleManager's library**
 
-You find the constants in **GoogleManager.ReturnFormat'enum**
+You find the constants in **GoogleManager.ReturnFormat enum**
 
 ```java
 // choose the manager for example: Gmail, etc 
