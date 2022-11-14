@@ -1,6 +1,6 @@
 package com.tecknobit.googlemanager.gmail.threads.records;
 
-import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
+import com.tecknobit.apimanager.formatters.JsonHelper;
 import com.tecknobit.googlemanager.gmail.records.Message;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,7 +18,7 @@ import java.util.Collection;
 public class GmailThread {
 
     /**
-     * {@code id} the unique ID of the thread
+     * {@code id} the unique {@code "ID"} of the thread
      **/
     private final String id;
 
@@ -28,7 +28,7 @@ public class GmailThread {
     private final String snippet;
 
     /**
-     * {@code historyId} the ID of the last history record that modified this thread
+     * {@code historyId} the {@code "ID"} of the last history record that modified this thread
      **/
     private final BigInteger historyId;
 
@@ -40,9 +40,9 @@ public class GmailThread {
     /**
      * Constructor to init a {@link GmailThread}
      *
-     * @param id:        the unique ID of the thread
+     * @param id:        the unique {@code "ID"} of the thread
      * @param snippet:   a short part of the message text
-     * @param historyId: the ID of the last history record that modified this thread
+     * @param historyId: the {@code "ID"} of the last history record that modified this thread
      * @param messages:  the list of messages in the thread
      **/
     public GmailThread(String id, String snippet, BigInteger historyId, ArrayList<Message> messages) {

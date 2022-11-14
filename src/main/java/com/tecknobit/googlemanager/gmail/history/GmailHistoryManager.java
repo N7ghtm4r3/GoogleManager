@@ -2,6 +2,8 @@ package com.tecknobit.googlemanager.gmail.history;
 
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.ListHistoryResponse;
+import com.tecknobit.apimanager.annotations.RequestPath;
+import com.tecknobit.apimanager.annotations.Returner;
 import com.tecknobit.googlemanager.gmail.GmailManager;
 import com.tecknobit.googlemanager.gmail.history.records.HistoryList;
 import org.json.JSONObject;
@@ -172,6 +174,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId) throws IOException {
         return getHistoryList(startHistoryId, LIBRARY_OBJECT);
     }
@@ -187,8 +190,9 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, ReturnFormat format) throws IOException {
-        return getHistoryList(history.list(userId).setStartHistoryId(valueOf(startHistoryId)).execute(), format);
+        return returnHistoryList(history.list(userId).setStartHistoryId(valueOf(startHistoryId)).execute(), format);
     }
 
     /**
@@ -202,6 +206,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, int maxResults) throws IOException {
         return getHistoryList(startHistoryId, maxResults, LIBRARY_OBJECT);
     }
@@ -218,11 +223,12 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, int maxResults, ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setMaxResults((long) maxResults)
                 .execute();
-        return getHistoryList(listHistoryResponse, format);
+        return returnHistoryList(listHistoryResponse, format);
     }
 
     /**
@@ -236,6 +242,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, String pageToken) throws IOException {
         return getHistoryList(startHistoryId, pageToken, LIBRARY_OBJECT);
     }
@@ -252,11 +259,12 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, String pageToken, ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setPageToken(pageToken)
                 .execute();
-        return getHistoryList(listHistoryResponse, format);
+        return returnHistoryList(listHistoryResponse, format);
     }
 
     /**
@@ -270,6 +278,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(String labelId, long startHistoryId) throws IOException {
         return getHistoryList(labelId, startHistoryId, LIBRARY_OBJECT);
     }
@@ -286,11 +295,12 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(String labelId, long startHistoryId, ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setLabelId(labelId)
                 .execute();
-        return getHistoryList(listHistoryResponse, format);
+        return returnHistoryList(listHistoryResponse, format);
     }
 
     /**
@@ -304,6 +314,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, String[] historyTypes) throws IOException {
         return getHistoryList(startHistoryId, historyTypes, LIBRARY_OBJECT);
     }
@@ -320,11 +331,12 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, String[] historyTypes, ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setHistoryTypes(stream(historyTypes).toList())
                 .execute();
-        return getHistoryList(listHistoryResponse, format);
+        return returnHistoryList(listHistoryResponse, format);
     }
 
     /**
@@ -338,6 +350,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, Collection<String> historyTypes) throws IOException {
         return getHistoryList(startHistoryId, historyTypes, LIBRARY_OBJECT);
     }
@@ -354,12 +367,13 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, Collection<String> historyTypes,
                                 ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setHistoryTypes(historyTypes.stream().toList())
                 .execute();
-        return getHistoryList(listHistoryResponse, format);
+        return returnHistoryList(listHistoryResponse, format);
     }
 
     /**
@@ -374,6 +388,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, int maxResults, String pageToken) throws IOException {
         return getHistoryList(startHistoryId, maxResults, pageToken, LIBRARY_OBJECT);
     }
@@ -391,13 +406,14 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, int maxResults, String pageToken,
                                 ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setMaxResults((long) maxResults)
                 .setPageToken(pageToken)
                 .execute();
-        return getHistoryList(listHistoryResponse, format);
+        return returnHistoryList(listHistoryResponse, format);
     }
 
     /**
@@ -412,6 +428,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, String labelId, int maxResults) throws IOException {
         return getHistoryList(startHistoryId, labelId, maxResults, LIBRARY_OBJECT);
     }
@@ -429,13 +446,14 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, String labelId, int maxResults,
                                 ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setMaxResults((long) maxResults)
                 .setLabelId(labelId)
                 .execute();
-        return getHistoryList(listHistoryResponse, format);
+        return returnHistoryList(listHistoryResponse, format);
     }
 
     /**
@@ -450,6 +468,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, int maxResults, String[] historyTypes) throws IOException {
         return getHistoryList(startHistoryId, maxResults, historyTypes, LIBRARY_OBJECT);
     }
@@ -467,13 +486,14 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, int maxResults, String[] historyTypes,
                                 ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setMaxResults((long) maxResults)
                 .setHistoryTypes(stream(historyTypes).toList())
                 .execute();
-        return getHistoryList(listHistoryResponse, format);
+        return returnHistoryList(listHistoryResponse, format);
     }
 
     /**
@@ -488,6 +508,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, int maxResults, Collection<String> historyTypes) throws IOException {
         return getHistoryList(startHistoryId, maxResults, historyTypes, LIBRARY_OBJECT);
     }
@@ -505,13 +526,14 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, int maxResults, Collection<String> historyTypes,
                                 ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setMaxResults((long) maxResults)
                 .setHistoryTypes(historyTypes.stream().toList())
                 .execute();
-        return getHistoryList(listHistoryResponse, format);
+        return returnHistoryList(listHistoryResponse, format);
     }
 
     /**
@@ -526,6 +548,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, String pageToken, String labelId) throws IOException {
         return getHistoryList(startHistoryId, pageToken, labelId, LIBRARY_OBJECT);
     }
@@ -543,13 +566,14 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, String pageToken, String labelId,
                                 ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setPageToken(pageToken)
                 .setLabelId(labelId)
                 .execute();
-        return getHistoryList(listHistoryResponse, format);
+        return returnHistoryList(listHistoryResponse, format);
     }
 
     /**
@@ -564,6 +588,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, String pageToken, String[] historyTypes) throws IOException {
         return getHistoryList(startHistoryId, pageToken, historyTypes, LIBRARY_OBJECT);
     }
@@ -581,13 +606,14 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, String pageToken, String[] historyTypes,
                                 ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setPageToken(pageToken)
                 .setHistoryTypes(stream(historyTypes).toList())
                 .execute();
-        return getHistoryList(listHistoryResponse, format);
+        return returnHistoryList(listHistoryResponse, format);
     }
 
     /**
@@ -602,6 +628,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, String pageToken, Collection<String> historyTypes) throws IOException {
         return getHistoryList(startHistoryId, pageToken, historyTypes, LIBRARY_OBJECT);
     }
@@ -619,13 +646,14 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, String pageToken, Collection<String> historyTypes,
                                 ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setPageToken(pageToken)
                 .setHistoryTypes(historyTypes.stream().toList())
                 .execute();
-        return getHistoryList(listHistoryResponse, format);
+        return returnHistoryList(listHistoryResponse, format);
     }
 
     /**
@@ -640,6 +668,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(String labelId, long startHistoryId, String[] historyTypes) throws IOException {
         return getHistoryList(labelId, startHistoryId, historyTypes, LIBRARY_OBJECT);
     }
@@ -657,13 +686,14 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(String labelId, long startHistoryId, String[] historyTypes,
                                 ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setLabelId(labelId)
                 .setHistoryTypes(stream(historyTypes).toList())
                 .execute();
-        return getHistoryList(listHistoryResponse, format);
+        return returnHistoryList(listHistoryResponse, format);
     }
 
     /**
@@ -678,6 +708,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(String labelId, long startHistoryId, Collection<String> historyTypes) throws IOException {
         return getHistoryList(labelId, startHistoryId, historyTypes, LIBRARY_OBJECT);
     }
@@ -695,13 +726,14 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(String labelId, long startHistoryId, Collection<String> historyTypes,
                                 ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
                 .setLabelId(labelId)
                 .setHistoryTypes(historyTypes.stream().toList())
                 .execute();
-        return getHistoryList(listHistoryResponse, format);
+        return returnHistoryList(listHistoryResponse, format);
     }
 
     /**
@@ -718,6 +750,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, int maxResults, String pageToken, String labelId,
                                       String[] historyTypes) throws IOException {
         return getHistoryList(startHistoryId, maxResults, pageToken, labelId, historyTypes, LIBRARY_OBJECT);
@@ -738,6 +771,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, int maxResults, String pageToken, String labelId,
                                 String[] historyTypes, ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
@@ -746,7 +780,7 @@ public class GmailHistoryManager extends GmailManager {
                 .setLabelId(labelId)
                 .setHistoryTypes(stream(historyTypes).toList())
                 .execute();
-        return getHistoryList(listHistoryResponse, format);
+        return returnHistoryList(listHistoryResponse, format);
     }
 
     /**
@@ -763,6 +797,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, int maxResults, String pageToken, String labelId,
                                       Collection<String> historyTypes) throws IOException {
         return getHistoryList(startHistoryId, maxResults, pageToken, labelId, historyTypes, LIBRARY_OBJECT);
@@ -783,6 +818,7 @@ public class GmailHistoryManager extends GmailManager {
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, int maxResults, String pageToken, String labelId,
                                 Collection<String> historyTypes, ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
@@ -791,7 +827,7 @@ public class GmailHistoryManager extends GmailManager {
                 .setLabelId(labelId)
                 .setHistoryTypes(historyTypes.stream().toList())
                 .execute();
-        return getHistoryList(listHistoryResponse, format);
+        return returnHistoryList(listHistoryResponse, format);
     }
 
     /**
@@ -801,7 +837,8 @@ public class GmailHistoryManager extends GmailManager {
      * @param format:              return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
      **/
-    private <T> T getHistoryList(ListHistoryResponse listHistoryResponse, ReturnFormat format) {
+    @Returner
+    private <T> T returnHistoryList(ListHistoryResponse listHistoryResponse, ReturnFormat format) {
         switch (format) {
             case JSON:
                 return (T) new JSONObject(listHistoryResponse);

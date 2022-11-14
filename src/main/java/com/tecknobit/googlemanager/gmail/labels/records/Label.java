@@ -1,6 +1,6 @@
 package com.tecknobit.googlemanager.gmail.labels.records;
 
-import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
+import com.tecknobit.apimanager.formatters.JsonHelper;
 import org.json.JSONObject;
 
 import static com.tecknobit.googlemanager.gmail.labels.records.Label.LabelColor.AllowedColor.valueOf;
@@ -121,7 +121,7 @@ public class Label {
     public static final String UNWANTED_LABEL = "UNWANTED";
 
     /**
-     * {@code id} the immutable ID of the label
+     * {@code id} the immutable {@code "ID"} of the label
      **/
     private final String id;
 
@@ -174,7 +174,7 @@ public class Label {
     /**
      * Constructor to init a {@link Label}
      *
-     * @param id:                    the immutable ID of the label
+     * @param id:                    the immutable {@code "ID"} of the label
      * @param name:                  the display name of the label
      * @param messageListVisibility: the visibility of messages with this label in the message list in the{@code " Gmail web interface"}
      * @param labelListVisibility:   the visibility of the label in the label list in the{@code " Gmail web interface"}

@@ -4,6 +4,7 @@ import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.ListThreadsResponse;
 import com.google.api.services.gmail.model.ModifyThreadRequest;
 import com.google.api.services.gmail.model.Thread;
+import com.tecknobit.apimanager.annotations.Returner;
 import com.tecknobit.googlemanager.gmail.GmailManager;
 import com.tecknobit.googlemanager.gmail.threads.records.GmailThread;
 import com.tecknobit.googlemanager.gmail.threads.records.GmailThreads;
@@ -157,7 +158,7 @@ public class GmailThreadsManager extends GmailManager {
      * Any messages that belong to the thread are also deleted. This operation cannot be undone. <br>
      * Prefer {@link #trashThread(GmailThread)} or {@link #trashThread(String)} instead
      *
-     * @param threadIdToDelete: ID of the Thread to delete
+     * @param threadIdToDelete: {@code "ID"} of the Thread to delete
      * @return result of change -> {@code "true"} is successful, {@code "false"} if not successful
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/delete">
      * users.threads.delete</a>
@@ -176,7 +177,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to get the specified thread
      *
-     * @param threadIdToGet: the ID of the message containing the attachment
+     * @param threadIdToGet: the {@code "ID"} of the message containing the attachment
      * @return thread requested as {@link GmailThread} custom object
      * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/get">
@@ -190,7 +191,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to get the specified thread
      *
-     * @param threadIdToGet: the ID of the message containing the attachment
+     * @param threadIdToGet: the {@code "ID"} of the message containing the attachment
      * @param format:        return type formatter -> {@link ReturnFormat}
      * @return thread requested as {@code "format"} defines
      * @throws IOException when request has been go wrong
@@ -205,7 +206,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to get the specified thread
      *
-     * @param threadIdToGet:  the ID of the message containing the attachment
+     * @param threadIdToGet:  the {@code "ID"} of the message containing the attachment
      * @param responseFormat: the format to return the thread in -> constants available at {@link ResponseFormat}
      * @return thread requested as {@link GmailThread} custom object
      * @throws IOException when request has been go wrong
@@ -220,7 +221,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to get the specified thread
      *
-     * @param threadIdToGet:  the ID of the message containing the attachment
+     * @param threadIdToGet:  the {@code "ID"} of the message containing the attachment
      * @param responseFormat: the format to return the thread in -> constants available at {@link ResponseFormat}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return thread requested as {@code "format"} defines
@@ -236,7 +237,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to get the specified thread
      *
-     * @param threadIdToGet:   the ID of the message containing the attachment
+     * @param threadIdToGet:   the {@code "ID"} of the message containing the attachment
      * @param metadataHeaders: when given and format is {@code "METADATA"}, only include headers specified in array of {@link String} format
      * @return thread requested as {@code "format"} defines
      * @throws IOException when request has been go wrong
@@ -251,7 +252,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to get the specified thread
      *
-     * @param threadIdToGet:   the ID of the message containing the attachment
+     * @param threadIdToGet:   the {@code "ID"} of the message containing the attachment
      * @param metadataHeaders: when given and format is {@code "METADATA"}, only include headers specified in array of {@link String} format
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return thread requested as {@code "format"} defines
@@ -268,7 +269,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to get the specified thread
      *
-     * @param threadIdToGet:   the ID of the message containing the attachment
+     * @param threadIdToGet:   the {@code "ID"} of the message containing the attachment
      * @param metadataHeaders: when given and format is {@code "METADATA"}, only include headers specified in {@link Collection} of {@link String} format
      * @return thread requested as {@code "format"} defines
      * @throws IOException when request has been go wrong
@@ -283,7 +284,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to get the specified thread
      *
-     * @param threadIdToGet:   the ID of the message containing the attachment
+     * @param threadIdToGet:   the {@code "ID"} of the message containing the attachment
      * @param metadataHeaders: when given and format is {@code "METADATA"}, only include headers specified in {@link Collection} of {@link String} format
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return thread requested as {@code "format"} defines
@@ -1173,6 +1174,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param format:              return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
      **/
+    @Returner
     private <T> T getThreadsList(ListThreadsResponse listThreadsResponse, ReturnFormat format) {
         switch (format) {
             case JSON:
@@ -1187,7 +1189,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to modify only the add labels applied to the thread. This applies to all messages in the thread
      *
-     * @param threadId:    the ID of the thread to modify
+     * @param threadId:    the {@code "ID"} of the thread to modify
      * @param addLabelIds: list of IDs of labels to add to this thread. You can add up to 100 labels with each update in array of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
      * @throws IOException when request has been go wrong
@@ -1202,7 +1204,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to modify only the add labels applied to the thread. This applies to all messages in the thread
      *
-     * @param threadId:    the ID of the thread to modify
+     * @param threadId:    the {@code "ID"} of the thread to modify
      * @param addLabelIds: list of IDs of labels to add to this thread. You can add up to 100 labels with each update in array of {@link String} format
      * @param format:      return type formatter -> {@link ReturnFormat}
      * @return thread modified as {@code "format"} defines
@@ -1219,7 +1221,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to modify only the add labels applied to the thread. This applies to all messages in the thread
      *
-     * @param threadId:    the ID of the thread to modify
+     * @param threadId:    the {@code "ID"} of the thread to modify
      * @param addLabelIds: list of IDs of labels to add to this thread. You can add up to 100 labels with each update in {@link Collection} of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
      * @throws IOException when request has been go wrong
@@ -1234,7 +1236,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to modify only the add labels applied to the thread. This applies to all messages in the thread
      *
-     * @param threadId:    the ID of the thread to modify
+     * @param threadId:    the {@code "ID"} of the thread to modify
      * @param addLabelIds: list of IDs of labels to add to this thread. You can add up to 100 labels with each update in {@link Collection} of {@link String} format
      * @param format:      return type formatter -> {@link ReturnFormat}
      * @return thread modified as {@code "format"} defines
@@ -1251,7 +1253,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to modify only the remove the labels applied to the thread. This applies to all messages in the thread
      *
-     * @param threadId:       the ID of the thread to modify
+     * @param threadId:       the {@code "ID"} of the thread to modify
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in array of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
      * @throws IOException when request has been go wrong
@@ -1266,7 +1268,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to modify only the remove the labels applied to the thread. This applies to all messages in the thread
      *
-     * @param threadId:       the ID of the thread to modify
+     * @param threadId:       the {@code "ID"} of the thread to modify
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return thread modified as {@code "format"} defines
@@ -1283,7 +1285,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to modify only the remove the labels applied to the thread. This applies to all messages in the thread
      *
-     * @param threadId:       the ID of the thread to modify
+     * @param threadId:       the {@code "ID"} of the thread to modify
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in {@link Collection} of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
      * @throws IOException when request has been go wrong
@@ -1298,7 +1300,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to modify only the remove the labels applied to the thread. This applies to all messages in the thread
      *
-     * @param threadId:       the ID of the thread to modify
+     * @param threadId:       the {@code "ID"} of the thread to modify
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return thread modified as {@code "format"} defines
@@ -1315,7 +1317,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to modify the labels applied to the thread. This applies to all messages in the thread
      *
-     * @param threadId:       the ID of the thread to modify
+     * @param threadId:       the {@code "ID"} of the thread to modify
      * @param addLabelIds:    list of IDs of labels to add to this thread. You can add up to 100 labels with each update in array of {@link String} format
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in array of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
@@ -1331,7 +1333,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to modify the labels applied to the thread. This applies to all messages in the thread
      *
-     * @param threadId:       the ID of the thread to modify
+     * @param threadId:       the {@code "ID"} of the thread to modify
      * @param addLabelIds:    list of IDs of labels to add to this thread. You can add up to 100 labels with each update in array of {@link String} format
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
@@ -1350,7 +1352,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to modify the labels applied to the thread. This applies to all messages in the thread
      *
-     * @param threadId:       the ID of the thread to modify
+     * @param threadId:       the {@code "ID"} of the thread to modify
      * @param addLabelIds:    list of IDs of labels to add to this thread. You can add up to 100 labels with each update in {@link Collection} of {@link String} format
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in array of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
@@ -1366,7 +1368,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to modify the labels applied to the thread. This applies to all messages in the thread
      *
-     * @param threadId:       the ID of the thread to modify
+     * @param threadId:       the {@code "ID"} of the thread to modify
      * @param addLabelIds:    list of IDs of labels to add to this thread. You can add up to 100 labels with each update in {@link Collection} of {@link String} format
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
@@ -1386,7 +1388,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to move the specified thread to the trash. Any messages that belong to the thread are also moved to the trash
      *
-     * @param threadIdToTrash: the ID of the thread to Trash
+     * @param threadIdToTrash: the {@code "ID"} of the thread to Trash
      * @return thread trashed as {@link GmailThread} custom object
      * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/trash">
@@ -1400,7 +1402,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to move the specified thread to the trash. Any messages that belong to the thread are also moved to the trash
      *
-     * @param threadIdToTrash: the ID of the thread to Trash
+     * @param threadIdToTrash: the {@code "ID"} of the thread to Trash
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return thread trashed as {@code "format"} defines
      * @throws IOException when request has been go wrong
@@ -1444,7 +1446,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to remove the specified thread from the trash. Any messages that belong to the thread are also removed from the trash
      *
-     * @param threadIdToUntrash: the ID of the thread to remove from Trash
+     * @param threadIdToUntrash: the {@code "ID"} of the thread to remove from Trash
      * @return thread untrashed as {@link GmailThread} custom object
      * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/untrash">
@@ -1458,7 +1460,7 @@ public class GmailThreadsManager extends GmailManager {
     /**
      * Method to remove the specified thread from the trash. Any messages that belong to the thread are also removed from the trash
      *
-     * @param threadIdToUntrash: the ID of the thread to remove from Trash
+     * @param threadIdToUntrash: the {@code "ID"} of the thread to remove from Trash
      * @param format:            return type formatter -> {@link ReturnFormat}
      * @return thread untrashed as {@code "format"} defines
      * @throws IOException when request has been go wrong
@@ -1506,6 +1508,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return thread as {@code "format"} defines
      **/
+    @Returner
     private <T> T returnThread(Thread thread, ReturnFormat format) {
         switch (format) {
             case JSON:

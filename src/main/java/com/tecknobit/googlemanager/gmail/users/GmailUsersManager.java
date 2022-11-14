@@ -2,6 +2,8 @@ package com.tecknobit.googlemanager.gmail.users;
 
 import com.google.api.services.gmail.model.WatchRequest;
 import com.google.api.services.gmail.model.WatchResponse;
+import com.tecknobit.apimanager.annotations.RequestPath;
+import com.tecknobit.apimanager.annotations.Returner;
 import com.tecknobit.googlemanager.gmail.GmailManager;
 import com.tecknobit.googlemanager.gmail.users.records.Profile;
 import com.tecknobit.googlemanager.gmail.users.records.PushNotificationWatch;
@@ -139,6 +141,7 @@ public class GmailUsersManager extends GmailManager {
      * users.getProfile</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/profile")
     public Profile getProfile() throws IOException {
         return getProfile(LIBRARY_OBJECT);
     }
@@ -153,6 +156,8 @@ public class GmailUsersManager extends GmailManager {
      * users.getProfile</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @Returner
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/profile")
     public <T> T getProfile(ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.Profile profile = gmail.getProfile(userId).execute();
         switch (format) {
@@ -178,6 +183,7 @@ public class GmailUsersManager extends GmailManager {
      * users.stop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/stop")
     public boolean stop() {
         try {
             gmail.stop(userId);
@@ -186,6 +192,42 @@ public class GmailUsersManager extends GmailManager {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * Method to set up or update a push notification watch on the given user mailbox
+     *
+     * @param labelIds:          list of labelIds to restrict notifications about as {@link String} array
+     * @param labelFilterAction: filtering behavior of labelIds list specified ->
+     *                           ({@link PushNotificationWatch#INCLUDE_LABEL_FILTER_ACTION} or {@link PushNotificationWatch#EXCLUDE_LABEL_FILTER_ACTION})
+     * @param topicName:         a fully qualified Google Cloud Pub/Sub API topic name to publish the events to
+     * @return push notification watch as {@link PushNotificationWatch} custom object
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users/watch">
+     * users.watch</a>
+     **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/watch")
+    public PushNotificationWatch watch(String[] labelIds, String labelFilterAction, String topicName) throws IOException {
+        return watch(labelIds, labelFilterAction, topicName, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to set up or update a push notification watch on the given user mailbox
+     *
+     * @param labelIds:          list of labelIds to restrict notifications about as {@link String} array
+     * @param labelFilterAction: filtering behavior of labelIds list specified ->
+     *                           ({@link PushNotificationWatch#INCLUDE_LABEL_FILTER_ACTION} or {@link PushNotificationWatch#EXCLUDE_LABEL_FILTER_ACTION})
+     * @param topicName:         a fully qualified Google Cloud Pub/Sub API topic name to publish the events to
+     * @param format:            return type formatter -> {@link ReturnFormat}
+     * @return push notification watch as {@code "format"} defines
+     * @throws IOException when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users/watch">
+     * users.watch</a>
+     **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/watch")
+    public <T> T watch(String[] labelIds, String labelFilterAction, String topicName,
+                       ReturnFormat format) throws IOException {
+        return watch(asList(labelIds), labelFilterAction, topicName, format);
     }
 
     /**
@@ -200,6 +242,7 @@ public class GmailUsersManager extends GmailManager {
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users/watch">
      * users.watch</a>
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/watch")
     public PushNotificationWatch watch(Collection<String> labelIds, String labelFilterAction,
                                        String topicName) throws IOException {
         return watch(labelIds, labelFilterAction, topicName, LIBRARY_OBJECT);
@@ -218,6 +261,8 @@ public class GmailUsersManager extends GmailManager {
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users/watch">
      * users.watch</a>
      **/
+    @Returner
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/watch")
     public <T> T watch(Collection<String> labelIds, String labelFilterAction, String topicName,
                        ReturnFormat format) throws IOException {
         WatchRequest watchRequest = new WatchRequest();
@@ -233,40 +278,6 @@ public class GmailUsersManager extends GmailManager {
             default:
                 return (T) watch.toString();
         }
-    }
-
-    /**
-     * Method to set up or update a push notification watch on the given user mailbox
-     *
-     * @param labelIds:          list of labelIds to restrict notifications about as {@link String} array
-     * @param labelFilterAction: filtering behavior of labelIds list specified ->
-     *                           ({@link PushNotificationWatch#INCLUDE_LABEL_FILTER_ACTION} or {@link PushNotificationWatch#EXCLUDE_LABEL_FILTER_ACTION})
-     * @param topicName:         a fully qualified Google Cloud Pub/Sub API topic name to publish the events to
-     * @return push notification watch as {@link PushNotificationWatch} custom object
-     * @throws IOException when request has been go wrong
-     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users/watch">
-     * users.watch</a>
-     **/
-    public PushNotificationWatch watch(String[] labelIds, String labelFilterAction, String topicName) throws IOException {
-        return watch(labelIds, labelFilterAction, topicName, LIBRARY_OBJECT);
-    }
-
-    /**
-     * Method to set up or update a push notification watch on the given user mailbox
-     *
-     * @param labelIds:          list of labelIds to restrict notifications about as {@link String} array
-     * @param labelFilterAction: filtering behavior of labelIds list specified ->
-     *                           ({@link PushNotificationWatch#INCLUDE_LABEL_FILTER_ACTION} or {@link PushNotificationWatch#EXCLUDE_LABEL_FILTER_ACTION})
-     * @param topicName:         a fully qualified Google Cloud Pub/Sub API topic name to publish the events to
-     * @param format:            return type formatter -> {@link ReturnFormat}
-     * @return push notification watch as {@code "format"} defines
-     * @throws IOException when request has been go wrong
-     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users/watch">
-     * users.watch</a>
-     **/
-    public <T> T watch(String[] labelIds, String labelFilterAction, String topicName,
-                       ReturnFormat format) throws IOException {
-        return watch(asList(labelIds), labelFilterAction, topicName, format);
     }
 
 }

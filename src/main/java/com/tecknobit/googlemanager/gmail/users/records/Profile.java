@@ -1,6 +1,6 @@
 package com.tecknobit.googlemanager.gmail.users.records;
 
-import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
+import com.tecknobit.apimanager.formatters.JsonHelper;
 import org.json.JSONObject;
 
 import java.math.BigInteger;
@@ -30,7 +30,7 @@ public class Profile {
     private final int threadsTotal;
 
     /**
-     * {@code historyId} is the ID of the mailbox's current history record
+     * {@code historyId} is the {@code "ID"} of the mailbox's current history record
      **/
     private final BigInteger historyId;
 
@@ -40,7 +40,7 @@ public class Profile {
      * @param emailAddress:  the user's email address
      * @param messagesTotal: the total number of messages in the mailbox
      * @param threadsTotal:  the total number of threads in the mailbox
-     * @param historyId:     the ID of the mailbox's current history record
+     * @param historyId:     the {@code "ID"} of the mailbox's current history record
      **/
     public Profile(String emailAddress, int messagesTotal, int threadsTotal, BigInteger historyId) {
         this.emailAddress = emailAddress;

@@ -1,6 +1,6 @@
 package com.tecknobit.googlemanager.gmail.settings.records;
 
-import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
+import com.tecknobit.apimanager.formatters.JsonHelper;
 import org.json.JSONObject;
 
 import java.util.Base64;
@@ -16,7 +16,7 @@ import static com.google.common.io.BaseEncoding.base64Url;
 public class SmimeInfo {
 
     /**
-     * {@code id} the immutable ID for the SmimeInfo
+     * {@code id} the immutable {@code "ID"} for the SmimeInfo
      **/
     private final String id;
 
@@ -94,7 +94,7 @@ public class SmimeInfo {
     /**
      * Constructor to init a {@link SmimeInfo}
      *
-     * @param id:                   the immutable ID for the SmimeInfo
+     * @param id:                   the immutable {@code "ID"} for the SmimeInfo
      * @param issuerCn:             the {@code "S/MIME"} certificate issuer's common name
      * @param isDefault:            whether this SmimeInfo is the default one for this user's send-as address
      * @param expiration:           when the certificate expires (in milliseconds since epoch)
@@ -116,7 +116,7 @@ public class SmimeInfo {
     /**
      * Constructor to init a {@link SmimeInfo}
      *
-     * @param id:                   the immutable ID for the SmimeInfo
+     * @param id:                   the immutable {@code "ID"} for the SmimeInfo
      * @param pkcs12:               {@code "PKCS#12"} format containing a single private/public key pair and certificate chain.
      *                              This format is only accepted from client for creating a new SmimeInfo and is never returned, because the private key
      *                              is not intended to be exported. {@code "PKCS#12"} may be encrypted, in which case {@code "encryptedKeyPassword"} should be set appropriately.

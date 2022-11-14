@@ -1,6 +1,6 @@
 package com.tecknobit.googlemanager.gmail.drafts.records;
 
-import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
+import com.tecknobit.apimanager.formatters.JsonHelper;
 import com.tecknobit.googlemanager.gmail.records.Message;
 import org.json.JSONObject;
 
@@ -13,7 +13,7 @@ import org.json.JSONObject;
 public class Draft {
 
     /**
-     * {@code id} is the immutable ID of the draft
+     * {@code id} is the immutable {@code "ID"} of the draft
      **/
     private final String id;
 
@@ -25,7 +25,7 @@ public class Draft {
     /**
      * Constructor to init a {@link Draft}
      *
-     * @param id:      the immutable ID of the draft
+     * @param id:      the immutable {@code "ID"} of the draft
      * @param message: the message content of the draft
      **/
     public Draft(String id, Message message) {

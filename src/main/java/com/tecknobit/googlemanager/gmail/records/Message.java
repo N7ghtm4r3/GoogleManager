@@ -1,6 +1,6 @@
 package com.tecknobit.googlemanager.gmail.records;
 
-import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
+import com.tecknobit.apimanager.formatters.JsonHelper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -20,12 +20,12 @@ import static com.google.common.io.BaseEncoding.base64Url;
 public class Message {
 
     /**
-     * {@code id} the immutable ID of the message
+     * {@code id} the immutable {@code "ID"} of the message
      **/
     private final String id;
 
     /**
-     * {@code partId} the immutable ID of the message part
+     * {@code partId} the immutable {@code "ID"} of the message part
      **/
     private final String partId;
 
@@ -55,7 +55,7 @@ public class Message {
     private final ArrayList<Message> parts;
 
     /**
-     * {@code threadId} the ID of the thread the message belongs to. To add a message or draft to a thread, the following criteria must be met
+     * {@code threadId} the {@code "ID"} of the thread the message belongs to. To add a message or draft to a thread, the following criteria must be met
      **/
     private final String threadId;
 
@@ -70,7 +70,7 @@ public class Message {
     private final String snippet;
 
     /**
-     * {@code historyId} the ID of the last history record that modified this message
+     * {@code historyId} the {@code "ID"} of the last history record that modified this message
      **/
     private final BigInteger historyId;
 
@@ -92,17 +92,17 @@ public class Message {
     /**
      * Constructor to init a {@link Message}
      *
-     * @param id:           the immutable ID of the message
-     * @param partId:       the immutable ID of the message part
+     * @param id:           the immutable {@code "ID"} of the message
+     * @param partId:       the immutable {@code "ID"} of the message part
      * @param mimeType:     the MIME type of the message part
      * @param fileName:     the filename of the attachment. Only present if this message part represents an attachment
      * @param headers:      list of headers on this message part
      * @param messageBody:  the message part body for this part, which may be empty for container MIME message parts
      * @param parts:        the child MIME message parts of this part
-     * @param threadId:     the ID of the thread the message belongs to. To add a message or draft to a thread, the following criteria must be met
+     * @param threadId:     the {@code "ID"} of the thread the message belongs to. To add a message or draft to a thread, the following criteria must be met
      * @param labelIds:     list of IDs of labels applied to this message
      * @param snippet:      a short part of the message text
-     * @param historyId:    the ID of the last history record that modified this message
+     * @param historyId:    the {@code "ID"} of the last history record that modified this message
      * @param internalDate: estimated total number of results
      * @param sizeEstimate: estimated size in bytes of the message
      * @param raw:          the entire email message in an RFC 2822 formatted and base64url encoded string
@@ -475,7 +475,7 @@ public class Message {
     public static class MessageBody {
 
         /**
-         * {@code attachmentId} contains the ID of an external attachment that can be retrieved in a separate
+         * {@code attachmentId} contains the {@code "ID"} of an external attachment that can be retrieved in a separate
          **/
         private final String attachmentId;
 
@@ -492,9 +492,9 @@ public class Message {
         /**
          * Constructor to init a {@link MessageBody}
          *
-         * @param attachmentId: contains the ID of an external attachment that can be retrieved in a separate
-         * @param size: number of bytes for the message part data (encoding notwithstanding)
-         * @param data: the body data of a MIME message part as a base64url encoded string
+         * @param attachmentId: contains the {@code "ID"} of an external attachment that can be retrieved in a separate
+         * @param size:         number of bytes for the message part data (encoding notwithstanding)
+         * @param data:         the body data of a MIME message part as a base64url encoded string
          **/
         public MessageBody(String attachmentId, int size, String data) {
             this.attachmentId = attachmentId;

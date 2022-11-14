@@ -315,9 +315,18 @@ public abstract class GoogleManager {
             this.port = port;
             this.host = host;
             this.callBackPath = callBackPath;
-            createAuthCodeFlow();
-            credentials = new AuthorizationCodeInstalledApp(authCodeFlow, new LocalServerReceiver.Builder()
-                    .setPort(port).setHost(host).setCallbackPath(callBackPath).build()).authorize(userId);
+            try {
+                createAuthCodeFlow();
+                credentials = new AuthorizationCodeInstalledApp(authCodeFlow, new LocalServerReceiver.Builder()
+                        .setPort(port).setHost(host).setCallbackPath(callBackPath).build()).authorize(userId);
+            } catch (Exception e) {
+                String errorMessage = e.getLocalizedMessage();
+                if (errorMessage.contains("invalid_grant") || errorMessage.contains("Token has been revoked")) {
+                    credentialDataStore.clear();
+                    return changeProject(clientId, clientSecret, userId, accessType, approvalPrompt, port, host,
+                            callBackPath, scopes);
+                }
+            }
             properties.setProperty("clientId", clientId);
             properties.setProperty("clientSecret", clientSecret);
             properties.setProperty("userId", userId);

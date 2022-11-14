@@ -1,6 +1,6 @@
 package com.tecknobit.googlemanager.gmail.records;
 
-import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
+import com.tecknobit.apimanager.formatters.JsonHelper;
 import org.json.JSONObject;
 
 /**

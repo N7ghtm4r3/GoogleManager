@@ -1,6 +1,6 @@
 package com.tecknobit.googlemanager.gmail.settings.records;
 
-import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
+import com.tecknobit.apimanager.formatters.JsonHelper;
 import org.json.JSONObject;
 
 import static com.tecknobit.googlemanager.gmail.settings.records.SendAs.SendAsVerificationStatus.verificationStatusUnspecified;

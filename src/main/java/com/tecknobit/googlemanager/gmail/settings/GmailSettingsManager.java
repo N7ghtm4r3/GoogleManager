@@ -2,7 +2,8 @@ package com.tecknobit.googlemanager.gmail.settings;
 
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.*;
-import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
+import com.tecknobit.apimanager.annotations.Returner;
+import com.tecknobit.apimanager.formatters.JsonHelper;
 import com.tecknobit.googlemanager.gmail.GmailManager;
 import com.tecknobit.googlemanager.gmail.settings.records.AutoForwarding;
 import com.tecknobit.googlemanager.gmail.settings.records.AutoForwarding.Disposition;
@@ -666,6 +667,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return auto-forwarding setting as {@code "format"} defines
      **/
+    @Returner
     private <T> T returnAutoForwarding(com.google.api.services.gmail.model.AutoForwarding autoForwarding,
                                        ReturnFormat format) {
         switch (format) {
@@ -1039,6 +1041,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param format:       return type formatter -> {@link ReturnFormat}
      * @return {@code "IMAP"} settings settings as {@code "format"} defines
      **/
+    @Returner
     private <T> T returnImap(com.google.api.services.gmail.model.ImapSettings imapSettings, ReturnFormat format) {
         switch (format) {
             case JSON:
@@ -1073,6 +1076,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return language settings settings as {@code "format"} defines
      **/
+    @Returner
     private <T> T returnLanguage(LanguageSettings languageSettings, ReturnFormat format) {
         JSONObject jLanguage = new JSONObject(languageSettings);
         switch (format) {
@@ -1222,6 +1226,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param format:      return type formatter -> {@link ReturnFormat}
      * @return {@code "POP"} settings settings as {@code "format"} defines
      **/
+    @Returner
     private <T> T returnPopSettings(com.google.api.services.gmail.model.PopSettings popSettings, ReturnFormat format) {
         switch (format) {
             case JSON:
@@ -1971,6 +1976,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings as {@code "format"} defines
      **/
+    @Returner
     private <T> T returnVacationSettings(com.google.api.services.gmail.model.VacationSettings vacationSettings,
                                          ReturnFormat format) {
         switch (format) {
@@ -2137,6 +2143,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param format:   return type formatter -> {@link ReturnFormat}
      * @return delegate as {@code "format"} defines
      **/
+    @Returner
     private <T> T returnDelegate(com.google.api.services.gmail.model.Delegate delegate, ReturnFormat format) {
         switch (format) {
             case JSON:
@@ -2172,6 +2179,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.delegates.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @Returner
     public <T> T getDelegatesList(ReturnFormat format) throws IOException {
         ListDelegatesResponse delegates = this.delegates.list(userId).execute();
         switch (format) {
@@ -2288,7 +2296,7 @@ public class GmailSettingsManager extends GmailManager {
     /**
      * Method to immediately and permanently deletes the specified filter
      *
-     * @param filterIdToDelete: the ID of the filter to be deleted
+     * @param filterIdToDelete: the {@code "ID"} of the filter to be deleted
      * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/delete">
      * users.settings.filters.delete</a>
@@ -2307,7 +2315,7 @@ public class GmailSettingsManager extends GmailManager {
     /**
      * Method to get a filter
      *
-     * @param filterId: the ID of the filter to be fetched
+     * @param filterId: the {@code "ID"} of the filter to be fetched
      * @return filter requested as {@link Filter} custom object
      * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/get">
@@ -2321,7 +2329,7 @@ public class GmailSettingsManager extends GmailManager {
     /**
      * Method to get a filter
      *
-     * @param filterId: the ID of the filter to be fetched
+     * @param filterId: the {@code "ID"} of the filter to be fetched
      * @param format:   return type formatter -> {@link ReturnFormat}
      * @return filter requested as {@code "format"} defines
      * @throws IOException when request has been go wrong
@@ -2340,6 +2348,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return filter as {@code "format"} defines
      **/
+    @Returner
     private <T> T returnFilter(com.google.api.services.gmail.model.Filter filter, ReturnFormat format) {
         switch (format) {
             case JSON:
@@ -2375,6 +2384,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.filters.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @Returner
     public <T> T getFiltersList(ReturnFormat format) throws IOException {
         ListFiltersResponse filters = this.filters.list(userId).execute();
         switch (format) {
@@ -2534,6 +2544,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param format:            return type formatter -> {@link ReturnFormat}
      * @return forwarding address as {@code "format"} defines
      **/
+    @Returner
     private <T> T returnForwardingAddress(com.google.api.services.gmail.model.ForwardingAddress forwardingAddress,
                                           ReturnFormat format) {
         switch (format) {
@@ -2571,6 +2582,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.forwardingAddresses.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @Returner
     public <T> T getForwardingAddressesList(ReturnFormat format) throws IOException {
         ListForwardingAddressesResponse addresses = this.forwardingAddresses.list(userId).execute();
         switch (format) {
@@ -2734,6 +2746,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @Returner
     public <T> T getSendAsList(ReturnFormat format) throws IOException {
         ListSendAsResponse list = sendAs.list(userId).execute();
         switch (format) {
@@ -3604,6 +3617,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return send-as as {@code "format"} defines
      **/
+    @Returner
     private <T> T returnSendAs(com.google.api.services.gmail.model.SendAs sendAs, ReturnFormat format) {
         SmtpMsa smtpMsa = sendAs.getSmtpMsa();
         if (smtpMsa != null)
@@ -3670,7 +3684,7 @@ public class GmailSettingsManager extends GmailManager {
      * Method to delete the specified {@code "S/MIME"} config for the specified send-as alias
      *
      * @param sendAsEmail:         the email address that appears in the {@code "From:"} header for mail sent using this alias
-     * @param idSmimeInfoToDelete: the immutable ID for the SmimeInfo
+     * @param idSmimeInfoToDelete: the immutable {@code "ID"} for the SmimeInfo
      * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/delete">
      * users.settings.sendAs.smimeInfo.delete</a>
@@ -3690,7 +3704,7 @@ public class GmailSettingsManager extends GmailManager {
      * Method to get the specified {@code "S/MIME"} config for the specified send-as alias
      *
      * @param sendAsEmail:      the email address that appears in the {@code "From:"} header for mail sent using this alias
-     * @param idSmimeInfoToGet: the immutable ID for the SmimeInfo
+     * @param idSmimeInfoToGet: the immutable {@code "ID"} for the SmimeInfo
      * @return smime-info requested as {@link SmimeInfo} custom object
      * @throws IOException when request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/get">
@@ -3705,7 +3719,7 @@ public class GmailSettingsManager extends GmailManager {
      * Method to get the specified {@code "S/MIME"} config for the specified send-as alias
      *
      * @param sendAsEmail:      the email address that appears in the {@code "From:"} header for mail sent using this alias
-     * @param idSmimeInfoToGet: the immutable ID for the SmimeInfo
+     * @param idSmimeInfoToGet: the immutable {@code "ID"} for the SmimeInfo
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return smime-info requested as {@code "format"} defines
      * @throws IOException when request has been go wrong
@@ -3856,6 +3870,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param format:    return type formatter -> {@link ReturnFormat}
      * @return smime-info as {@code "format"} defines
      **/
+    @Returner
     private <T> T returnSmimeInfo(com.google.api.services.gmail.model.SmimeInfo smimeInfo, ReturnFormat format) {
         switch (format) {
             case JSON:
@@ -3892,6 +3907,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.smimeInfo.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @Returner
     public <T> T getSmimeInfoList(String sendAsEmail, ReturnFormat format) throws IOException {
         ListSmimeInfoResponse list = smimeInfo.list(userId, sendAsEmail).execute();
         switch (format) {
@@ -3926,7 +3942,7 @@ public class GmailSettingsManager extends GmailManager {
      * Method to set the default {@code "S/MIME"} config for the specified send-as alias
      *
      * @param sendAsEmail:        the email address that appears in the {@code "From:"} header for mail sent using this alias
-     * @param idDefaultSmimeInfo: the immutable ID for the SmimeInfo
+     * @param idDefaultSmimeInfo: the immutable {@code "ID"} for the SmimeInfo
      * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/setDefault">
      * users.settings.sendAs.smimeInfo.setDefault</a>

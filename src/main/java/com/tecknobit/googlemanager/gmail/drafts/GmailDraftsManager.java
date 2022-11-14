@@ -2,6 +2,8 @@ package com.tecknobit.googlemanager.gmail.drafts;
 
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.ListDraftsResponse;
+import com.tecknobit.apimanager.annotations.RequestPath;
+import com.tecknobit.apimanager.annotations.Returner;
 import com.tecknobit.googlemanager.gmail.GmailManager;
 import com.tecknobit.googlemanager.gmail.drafts.records.Draft;
 import com.tecknobit.googlemanager.gmail.drafts.records.Drafts;
@@ -149,6 +151,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraft(String toEmailAddress, String subject, String emailText) throws Exception {
         return createDraft(toEmailAddress, subject, emailText, LIBRARY_OBJECT);
     }
@@ -166,6 +169,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraft(String toEmailAddress, String subject, String emailText, ReturnFormat format) throws Exception {
         return createDraft(createSimpleMessage(toEmailAddress, subject, emailText), format, true);
     }
@@ -183,6 +187,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithCc(String toEmailAddress, String subject, String emailText, String... Cc) throws Exception {
         return createDraftWithCc(toEmailAddress, subject, emailText, LIBRARY_OBJECT, Cc);
     }
@@ -201,6 +206,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithCc(String toEmailAddress, String subject, String emailText, ReturnFormat format,
                                    String... Cc) throws Exception {
         return createDraft(createCcMessage(toEmailAddress, subject, Arrays.toString(Cc), emailText), format, true);
@@ -219,6 +225,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithBcc(String toEmailAddress, String subject, String emailText, String... Bcc) throws Exception {
         return createDraftWithBcc(toEmailAddress, subject, emailText, LIBRARY_OBJECT, Bcc);
     }
@@ -237,6 +244,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithBcc(String toEmailAddress, String subject, String emailText, ReturnFormat format,
                                     String... Bcc) throws Exception {
         return createDraft(createBccMessage(toEmailAddress, subject, Arrays.toString(Bcc), emailText), format, true);
@@ -256,6 +264,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraft(String toEmailAddress, String subject, String emailText, String[] Cc,
                              String[] Bcc) throws Exception {
         return createDraft(toEmailAddress, subject, emailText, Cc, Bcc, LIBRARY_OBJECT);
@@ -276,6 +285,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraft(String toEmailAddress, String subject, String emailText, String[] Cc, String[] Bcc,
                              ReturnFormat format) throws Exception {
         return createDraft(createCompleteMessage(toEmailAddress, subject, Arrays.toString(Cc), Arrays.toString(Bcc),
@@ -296,6 +306,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraft(String toEmailAddress, String subject, String emailText, Collection<String> Cc,
                              Collection<String> Bcc) throws Exception {
         return createDraft(toEmailAddress, subject, emailText, Cc, Bcc, LIBRARY_OBJECT);
@@ -316,6 +327,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraft(String toEmailAddress, String subject, String emailText, Collection<String> Cc,
                              Collection<String> Bcc, ReturnFormat format) throws Exception {
         return createDraft(createCompleteMessage(toEmailAddress, subject, Arrays.toString(Cc.toArray()),
@@ -335,6 +347,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFile(String toEmailAddress, String subject, String emailText, File file) throws Exception {
         return createDraftWithFile(toEmailAddress, subject, emailText, file, LIBRARY_OBJECT);
     }
@@ -354,6 +367,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      ReturnFormat format) throws Exception {
         return createDraft(createSimpleMessageWithFile(toEmailAddress, subject, emailText, file, TEXT_PLAIN_MIME_TYPE),
@@ -374,6 +388,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      String mimeType) throws Exception {
         return createDraftWithFile(toEmailAddress, subject, emailText, file, mimeType, LIBRARY_OBJECT);
@@ -394,6 +409,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFile(String toEmailAddress, String subject, String emailText, File file, String mimeType,
                                      ReturnFormat format) throws Exception {
         return createDraft(createSimpleMessageWithFile(toEmailAddress, subject, emailText, file, mimeType), format,
@@ -414,6 +430,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createCcDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                        String... Cc) throws Exception {
         return createCcDraftWithFile(toEmailAddress, subject, emailText, file, LIBRARY_OBJECT, Cc);
@@ -434,6 +451,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createCcDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                        ReturnFormat format, String... Cc) throws Exception {
         return createDraft(createCcMessageWithFile(toEmailAddress, subject, Arrays.toString(Cc), emailText, file,
@@ -455,6 +473,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createCcDraftWithFile(String toEmailAddress, String subject, String emailText, String mimeType,
                                        File file, String... Cc) throws Exception {
         return createCcDraftWithFile(toEmailAddress, subject, emailText, file, mimeType, LIBRARY_OBJECT, Cc);
@@ -476,6 +495,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createCcDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                        String mimeType, ReturnFormat format, String... Cc) throws Exception {
         return createDraft(createCcMessageWithFile(toEmailAddress, subject, Arrays.toString(Cc), emailText, file,
@@ -496,6 +516,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createBccDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                         String... Bcc) throws Exception {
         return createBccDraftWithFile(toEmailAddress, subject, emailText, file, LIBRARY_OBJECT, Bcc);
@@ -516,6 +537,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createBccDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                         ReturnFormat format, String... Bcc) throws Exception {
         return createDraft(createBccMessageWithFile(toEmailAddress, subject, Arrays.toString(Bcc), emailText, file,
@@ -537,6 +559,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      String[] Cc, String[] Bcc) throws Exception {
         return createDraftWithFile(toEmailAddress, subject, emailText, file, Cc, Bcc, LIBRARY_OBJECT);
@@ -558,6 +581,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
         return createDraft(createCompleteMessageWithFile(toEmailAddress, subject, Arrays.toString(Cc), emailText,
@@ -580,6 +604,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      String[] Cc, String[] Bcc, String mimeType) throws Exception {
         return createDraftWithFile(toEmailAddress, subject, emailText, file, Cc, Bcc, mimeType, LIBRARY_OBJECT);
@@ -602,6 +627,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      String[] Cc, String[] Bcc, String mimeType, ReturnFormat format) throws Exception {
         return createDraft(createCompleteMessageWithFile(toEmailAddress, subject, Arrays.toString(Cc), emailText,
@@ -623,6 +649,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      Collection<String> Cc, Collection<String> Bcc) throws Exception {
         return createDraftWithFile(toEmailAddress, subject, emailText, file, Cc, Bcc, LIBRARY_OBJECT);
@@ -644,6 +671,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      Collection<String> Cc, Collection<String> Bcc, ReturnFormat format) throws Exception {
         return createDraft(createCompleteMessageWithFile(toEmailAddress, subject, emailText, Arrays.toString(Cc.toArray()),
@@ -666,6 +694,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      Collection<String> Cc, Collection<String> Bcc, String mimeType) throws Exception {
         return createDraftWithFile(toEmailAddress, subject, emailText, file, Cc, Bcc, mimeType, LIBRARY_OBJECT);
@@ -688,6 +717,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      Collection<String> Cc, Collection<String> Bcc, String mimeType,
                                      ReturnFormat format) throws Exception {
@@ -708,6 +738,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText,
                                       File[] files) throws Exception {
         return createDraftWithFiles(toEmailAddress, subject, emailText, files, LIBRARY_OBJECT);
@@ -727,6 +758,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       ReturnFormat format) throws Exception {
         return createDraft(createMessageWithFiles(toEmailAddress, subject, emailText, files, TEXT_PLAIN_MIME_TYPE),
@@ -747,6 +779,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createCcDraftWithFiles(String toEmailAddress, String subject, String emailText,
                                         File[] files, String... Cc) throws Exception {
         return createCcDraftWithFiles(toEmailAddress, subject, emailText, files, LIBRARY_OBJECT, Cc);
@@ -767,6 +800,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createCcDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                         ReturnFormat format, String... Cc) throws Exception {
         return createDraft(createCcMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc), emailText, files,
@@ -787,6 +821,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createBccDraftWithFiles(String toEmailAddress, String subject, String emailText,
                                          File[] files, String... Bcc) throws Exception {
         return createBccDraftWithFiles(toEmailAddress, subject, emailText, files, LIBRARY_OBJECT, Bcc);
@@ -807,6 +842,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createBccDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                          ReturnFormat format, String... Bcc) throws Exception {
         return createDraft(createBccMessageWithFiles(toEmailAddress, subject, Arrays.toString(Bcc), emailText, files,
@@ -828,6 +864,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       String[] Cc, String[] Bcc) throws Exception {
         return createDraftWithFiles(toEmailAddress, subject, emailText, files, Cc, Bcc, LIBRARY_OBJECT);
@@ -849,6 +886,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
         return createDraft(createCompletedMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc), emailText,
@@ -870,6 +908,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       Collection<String> Cc, Collection<String> Bcc) throws Exception {
         return createDraftWithFiles(toEmailAddress, subject, emailText, files, Cc, Bcc, LIBRARY_OBJECT);
@@ -891,6 +930,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       Collection<String> Cc, Collection<String> Bcc, ReturnFormat format) throws Exception {
         return createDraft(createCompletedMessageWithFiles(toEmailAddress, subject, emailText, Arrays.toString(Cc.toArray()),
@@ -911,6 +951,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType) throws Exception {
         return createDraftWithFiles(toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT);
@@ -931,6 +972,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, ReturnFormat format) throws Exception {
         return createDraft(createMessageWithFiles(toEmailAddress, subject, emailText, files, mimeType), format,
@@ -952,6 +994,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createCcDraftWithFiles(String toEmailAddress, String subject, String emailText, String mimeType,
                                         File[] files, String... Cc) throws Exception {
         return createCcDraftWithFiles(toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT, Cc);
@@ -973,6 +1016,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createCcDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                         String mimeType, ReturnFormat format, String... Cc) throws Exception {
         return createDraft(createCcMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc), emailText, files,
@@ -994,6 +1038,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createBccDraftWithFiles(String toEmailAddress, String subject, String emailText, String mimeType,
                                          File[] files, String... Bcc) throws Exception {
         return createBccDraftWithFiles(toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT, Bcc);
@@ -1015,6 +1060,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createBccDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                          String mimeType, ReturnFormat format, String... Bcc) throws Exception {
         return createDraft(createBccMessageWithFiles(toEmailAddress, subject, Arrays.toString(Bcc), emailText, files,
@@ -1037,6 +1083,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, String[] Cc, String[] Bcc) throws Exception {
         return createDraftWithFiles(toEmailAddress, subject, emailText, files, mimeType, Cc, Bcc, LIBRARY_OBJECT);
@@ -1059,6 +1106,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
         return createDraft(createCompletedMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc), emailText,
@@ -1081,6 +1129,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, Collection<String> Cc, Collection<String> Bcc) throws Exception {
         return createDraftWithFiles(toEmailAddress, subject, emailText, files, mimeType, Cc, Bcc, LIBRARY_OBJECT);
@@ -1103,6 +1152,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, Collection<String> Cc, Collection<String> Bcc,
                                       ReturnFormat format) throws Exception {
@@ -1123,6 +1173,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText,
                                       Collection<File> files) throws Exception {
         return createDraftWithFiles(toEmailAddress, subject, emailText, files, LIBRARY_OBJECT);
@@ -1142,6 +1193,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       ReturnFormat format) throws Exception {
         return createDraft(createMessageWithFiles(toEmailAddress, subject, emailText, files.toArray(new File[0]),
@@ -1162,6 +1214,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createCcDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                         String... Cc) throws Exception {
         return createCcDraftWithFiles(toEmailAddress, subject, emailText, files, LIBRARY_OBJECT, Cc);
@@ -1182,6 +1235,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createCcDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                         ReturnFormat format, String... Cc) throws Exception {
         return createDraft(createCcMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc), emailText,
@@ -1202,6 +1256,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createBccDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                          String... Bcc) throws Exception {
         return createBccDraftWithFiles(toEmailAddress, subject, emailText, files, LIBRARY_OBJECT, Bcc);
@@ -1222,6 +1277,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createBccDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                          ReturnFormat format, String... Bcc) throws Exception {
         return createDraft(createBccMessageWithFiles(toEmailAddress, subject, Arrays.toString(Bcc), emailText,
@@ -1243,6 +1299,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       String[] Cc, String[] Bcc) throws Exception {
         return createDraftWithFiles(toEmailAddress, subject, emailText, files, Cc, Bcc, LIBRARY_OBJECT);
@@ -1264,6 +1321,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
         return createDraft(createCompletedMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc), emailText,
@@ -1285,6 +1343,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       Collection<String> Cc, Collection<String> Bcc) throws Exception {
         return createDraftWithFiles(toEmailAddress, subject, emailText, files, Cc, Bcc, LIBRARY_OBJECT);
@@ -1306,6 +1365,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       Collection<String> Cc, Collection<String> Bcc, ReturnFormat format) throws Exception {
         return createDraft(createCompletedMessageWithFiles(toEmailAddress, subject, emailText, Arrays.toString(Cc.toArray()),
@@ -1326,6 +1386,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, String mimeType,
                                       Collection<File> files) throws Exception {
         return createDraftWithFiles(toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT);
@@ -1346,6 +1407,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       String mimeType, ReturnFormat format) throws Exception {
         return createDraft(createMessageWithFiles(toEmailAddress, subject, emailText, files.toArray(new File[0]),
@@ -1367,6 +1429,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createCcDraftWithFiles(String toEmailAddress, String subject, String emailText, String mimeType,
                                         Collection<File> files, String... Cc) throws Exception {
         return createCcDraftWithFiles(toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT, Cc);
@@ -1388,6 +1451,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createCcDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                         String mimeType, ReturnFormat format, String... Cc) throws Exception {
         return createDraft(createCcMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc), emailText,
@@ -1409,6 +1473,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createBccDraftWithFiles(String toEmailAddress, String subject, String mimeType, String emailText,
                                          Collection<File> files, String... Bcc) throws Exception {
         return createBccDraftWithFiles(toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT, Bcc);
@@ -1430,6 +1495,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createBccDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                          String mimeType, ReturnFormat format, String... Bcc) throws Exception {
         return createDraft(createBccMessageWithFiles(toEmailAddress, subject, Arrays.toString(Bcc), emailText,
@@ -1452,6 +1518,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       String mimeType, String[] Cc, String[] Bcc) throws Exception {
         return createDraftWithFiles(toEmailAddress, subject, emailText, files, mimeType, Cc, Bcc, LIBRARY_OBJECT);
@@ -1474,6 +1541,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       String mimeType, String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
         return createDraft(createCompletedMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc), emailText,
@@ -1496,6 +1564,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       String mimeType, Collection<String> Cc, Collection<String> Bcc) throws Exception {
         return createDraftWithFiles(toEmailAddress, subject, emailText, files, mimeType, Cc, Bcc, LIBRARY_OBJECT);
@@ -1518,6 +1587,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       String mimeType, Collection<String> Cc, Collection<String> Bcc,
                                       ReturnFormat format) throws Exception {
@@ -1533,6 +1603,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param sendCreateResponse: flag to send or not request to create a new draft
      * @return draft as {@code "format"} defines
      **/
+    @Returner
     private <T> T createDraft(com.google.api.services.gmail.model.Message message, ReturnFormat format,
                               boolean sendCreateResponse) throws Exception {
         com.google.api.services.gmail.model.Draft draft = new com.google.api.services.gmail.model.Draft().setMessage(message);
@@ -1550,6 +1621,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts/{id}")
     public boolean deleteDraft(String draftId) {
         try {
             drafts.delete(userId, draftId).execute();
@@ -1569,6 +1641,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts/{id}")
     public Draft getDraft(String draftId) throws IOException {
         return getDraft(draftId, LIBRARY_OBJECT);
     }
@@ -1597,6 +1670,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts/{id}")
     public Draft getDraft(String draftId, ResponseFormat responseFormat) throws IOException {
         return getDraft(draftId, responseFormat, LIBRARY_OBJECT);
     }
@@ -1612,6 +1686,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T getDraft(String draftId, ResponseFormat responseFormat, ReturnFormat format) throws IOException {
         Gmail.Users.Drafts.Get getDraft = drafts.get(userId, draftId);
         if (responseFormat != null)
@@ -1628,6 +1703,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public Drafts getDraftsList(boolean includeSpamTrash) throws IOException {
         return getDraftsList(includeSpamTrash, LIBRARY_OBJECT);
     }
@@ -1642,8 +1718,9 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public <T> T getDraftsList(boolean includeSpamTrash, ReturnFormat format) throws IOException {
-        return getDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash).execute(), format);
+        return returnDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash).execute(), format);
     }
 
     /**
@@ -1656,6 +1733,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public Drafts getDraftsList(boolean includeSpamTrash, int maxResults) throws IOException {
         return getDraftsList(includeSpamTrash, maxResults, LIBRARY_OBJECT);
     }
@@ -1671,8 +1749,9 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public <T> T getDraftsList(boolean includeSpamTrash, int maxResults, ReturnFormat format) throws IOException {
-        return getDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash)
+        return returnDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash)
                 .setMaxResults((long) maxResults)
                 .execute(), format);
     }
@@ -1687,6 +1766,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public Drafts getDraftsList(boolean includeSpamTrash, String pageToken) throws IOException {
         return getDraftsList(includeSpamTrash, pageToken, LIBRARY_OBJECT);
     }
@@ -1702,8 +1782,9 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public <T> T getDraftsList(boolean includeSpamTrash, String pageToken, ReturnFormat format) throws IOException {
-        return getDraftsList(drafts.list(userId)
+        return returnDraftsList(drafts.list(userId)
                 .setIncludeSpamTrash(includeSpamTrash)
                 .setPageToken(pageToken)
                 .execute(), format);
@@ -1720,6 +1801,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public Drafts getDraftsList(String q, boolean includeSpamTrash) throws IOException {
         return getDraftsList(q, includeSpamTrash, LIBRARY_OBJECT);
     }
@@ -1736,8 +1818,9 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public <T> T getDraftsList(String q, boolean includeSpamTrash, ReturnFormat format) throws IOException {
-        return getDraftsList(drafts.list(userId)
+        return returnDraftsList(drafts.list(userId)
                 .setQ(q)
                 .setIncludeSpamTrash(includeSpamTrash)
                 .execute(), format);
@@ -1754,6 +1837,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public Drafts getDraftsList(boolean includeSpamTrash, int maxResults, String pageToken) throws IOException {
         return getDraftsList(includeSpamTrash, maxResults, pageToken, LIBRARY_OBJECT);
     }
@@ -1770,9 +1854,10 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public <T> T getDraftsList(boolean includeSpamTrash, int maxResults, String pageToken,
                                ReturnFormat format) throws IOException {
-        return getDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash)
+        return returnDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash)
                 .setMaxResults((long) maxResults)
                 .setPageToken(pageToken)
                 .execute(), format);
@@ -1790,6 +1875,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public Drafts getDraftsList(boolean includeSpamTrash, String q, int maxResults) throws IOException {
         return getDraftsList(includeSpamTrash, q, maxResults, LIBRARY_OBJECT);
     }
@@ -1807,9 +1893,10 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public <T> T getDraftsList(boolean includeSpamTrash, String q, int maxResults,
                                ReturnFormat format) throws IOException {
-        return getDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash)
+        return returnDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash)
                 .setQ(q)
                 .setMaxResults((long) maxResults)
                 .execute(), format);
@@ -1827,6 +1914,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public Drafts getDraftsList(boolean includeSpamTrash, String pageToken, String q) throws IOException {
         return getDraftsList(includeSpamTrash, pageToken, q, LIBRARY_OBJECT);
     }
@@ -1844,9 +1932,10 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public <T> T getDraftsList(boolean includeSpamTrash, String pageToken, String q,
                                ReturnFormat format) throws IOException {
-        return getDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash)
+        return returnDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash)
                 .setPageToken(pageToken)
                 .setQ(q)
                 .execute(), format);
@@ -1865,6 +1954,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public Drafts getDraftsList(boolean includeSpamTrash, int maxResults, String pageToken,
                                 String q) throws IOException {
         return getDraftsList(includeSpamTrash, maxResults, pageToken, q, LIBRARY_OBJECT);
@@ -1884,9 +1974,10 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public <T> T getDraftsList(boolean includeSpamTrash, int maxResults, String pageToken,
                                String q, ReturnFormat format) throws IOException {
-        return getDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash)
+        return returnDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash)
                 .setMaxResults((long) maxResults)
                 .setPageToken(pageToken)
                 .setQ(q)
@@ -1900,7 +1991,8 @@ public class GmailDraftsManager extends GmailManager {
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return draft list as {@code "format"} defines
      **/
-    private <T> T getDraftsList(ListDraftsResponse drafts, ReturnFormat format) {
+    @Returner
+    private <T> T returnDraftsList(ListDraftsResponse drafts, ReturnFormat format) {
         switch (format) {
             case JSON:
                 return (T) new JSONObject(drafts);
@@ -1920,6 +2012,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/send")
     public Message sendDraft(String draftId) throws IOException {
         return sendDraft(draftId, LIBRARY_OBJECT);
     }
@@ -1934,6 +2027,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/send")
     public <T> T sendDraft(String draftId, ReturnFormat format) throws IOException {
         return GmailMessagesManager.returnMessage(drafts.send(userId, drafts.get(userId, draftId).execute()).execute(),
                 format);
@@ -1948,6 +2042,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/send")
     public Message sendDraft(Draft draft) throws IOException {
         return sendDraft(draft.getId(), LIBRARY_OBJECT);
     }
@@ -1962,6 +2057,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/send")
     public <T> T sendDraft(Draft draft, ReturnFormat format) throws IOException {
         return sendDraft(draft.getId(), format);
     }
@@ -1979,6 +2075,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraft(String draftId, String toEmailAddress, String subject, String emailText) throws Exception {
         return updateDraft(draftId, toEmailAddress, subject, emailText, LIBRARY_OBJECT);
     }
@@ -1997,6 +2094,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraft(String draftId, String toEmailAddress, String subject, String emailText,
                              ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createSimpleMessage(toEmailAddress, subject, emailText), format);
@@ -2016,6 +2114,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithCc(String draftId, String toEmailAddress, String subject, String emailText,
                                    String... Cc) throws Exception {
         return updateDraftWithCc(draftId, toEmailAddress, subject, emailText, LIBRARY_OBJECT, Cc);
@@ -2036,6 +2135,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithCc(String draftId, String toEmailAddress, String subject, String emailText,
                                    ReturnFormat format, String... Cc) throws Exception {
         return executeDraftUpdate(draftId, createCcMessage(toEmailAddress, subject, Arrays.toString(Cc), emailText),
@@ -2056,6 +2156,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithBcc(String draftId, String toEmailAddress, String subject, String emailText,
                                     String... Bcc) throws Exception {
         return updateDraftWithBcc(draftId, toEmailAddress, subject, emailText, LIBRARY_OBJECT, Bcc);
@@ -2076,6 +2177,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithBcc(String draftId, String toEmailAddress, String subject, String emailText,
                                     ReturnFormat format, String... Bcc) throws Exception {
         return executeDraftUpdate(draftId, createBccMessage(toEmailAddress, subject, Arrays.toString(Bcc), emailText),
@@ -2097,6 +2199,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraft(String draftId, String toEmailAddress, String subject, String emailText, String[] Cc,
                              String[] Bcc) throws Exception {
         return updateDraft(draftId, toEmailAddress, subject, emailText, Cc, Bcc, LIBRARY_OBJECT);
@@ -2118,6 +2221,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraft(String draftId, String toEmailAddress, String subject, String emailText, String[] Cc,
                              String[] Bcc, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createCompleteMessage(toEmailAddress, subject, Arrays.toString(Cc),
@@ -2139,6 +2243,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraft(String draftId, String toEmailAddress, String subject, String emailText,
                              Collection<String> Cc, Collection<String> Bcc) throws Exception {
         return updateDraft(draftId, toEmailAddress, subject, emailText, Cc, Bcc, LIBRARY_OBJECT);
@@ -2160,6 +2265,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraft(String draftId, String toEmailAddress, String subject, String emailText,
                              Collection<String> Cc, Collection<String> Bcc, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createCompleteMessage(toEmailAddress, subject, Arrays.toString(Cc.toArray()),
@@ -2180,6 +2286,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText,
                                      File file) throws Exception {
         return updateDraftWithFile(draftId, toEmailAddress, subject, emailText, file, LIBRARY_OBJECT);
@@ -2200,6 +2307,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createSimpleMessageWithFile(toEmailAddress, subject, emailText, file,
@@ -2221,6 +2329,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      String mimeType) throws Exception {
         return updateDraftWithFile(draftId, toEmailAddress, subject, emailText, file, mimeType, LIBRARY_OBJECT);
@@ -2242,6 +2351,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      String mimeType, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createSimpleMessageWithFile(toEmailAddress, subject, emailText, file, mimeType),
@@ -2263,6 +2373,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateCcDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                        String... Cc) throws Exception {
         return updateCcDraftWithFile(draftId, toEmailAddress, subject, emailText, file, LIBRARY_OBJECT, Cc);
@@ -2284,6 +2395,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateCcDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                        ReturnFormat format, String... Cc) throws Exception {
         return executeDraftUpdate(draftId, createCcMessageWithFile(toEmailAddress, subject, Arrays.toString(Cc), emailText,
@@ -2306,6 +2418,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateCcDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText,
                                        String mimeType, File file, String... Cc) throws Exception {
         return updateCcDraftWithFile(draftId, toEmailAddress, subject, emailText, file, mimeType, LIBRARY_OBJECT, Cc);
@@ -2328,6 +2441,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateCcDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                        String mimeType, ReturnFormat format, String... Cc) throws Exception {
         return executeDraftUpdate(draftId, createCcMessageWithFile(toEmailAddress, subject, Arrays.toString(Cc), emailText,
@@ -2349,6 +2463,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateBccDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                         String... Bcc) throws Exception {
         return updateBccDraftWithFile(draftId, toEmailAddress, subject, emailText, file, LIBRARY_OBJECT, Bcc);
@@ -2370,6 +2485,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateBccDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                         ReturnFormat format, String... Bcc) throws Exception {
         return executeDraftUpdate(draftId, createBccMessageWithFile(toEmailAddress, subject, Arrays.toString(Bcc), emailText,
@@ -2392,6 +2508,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      String[] Cc, String[] Bcc) throws Exception {
         return updateDraftWithFile(draftId, toEmailAddress, subject, emailText, file, Cc, Bcc, LIBRARY_OBJECT);
@@ -2414,6 +2531,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createCompleteMessageWithFile(toEmailAddress, subject, Arrays.toString(Cc),
@@ -2437,6 +2555,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      String[] Cc, String[] Bcc, String mimeType) throws Exception {
         return updateDraftWithFile(draftId, toEmailAddress, subject, emailText, file, Cc, Bcc, mimeType, LIBRARY_OBJECT);
@@ -2460,6 +2579,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      String[] Cc, String[] Bcc, String mimeType, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createCompleteMessageWithFile(toEmailAddress, subject, Arrays.toString(Cc),
@@ -2482,6 +2602,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      Collection<String> Cc, Collection<String> Bcc) throws Exception {
         return updateDraftWithFile(draftId, toEmailAddress, subject, emailText, file, Cc, Bcc, LIBRARY_OBJECT);
@@ -2504,6 +2625,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      Collection<String> Cc, Collection<String> Bcc, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createCompleteMessageWithFile(toEmailAddress, subject, emailText,
@@ -2527,6 +2649,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      Collection<String> Cc, Collection<String> Bcc, String mimeType) throws Exception {
         return updateDraftWithFile(draftId, toEmailAddress, subject, emailText, file, Cc, Bcc, mimeType, LIBRARY_OBJECT);
@@ -2550,6 +2673,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      Collection<String> Cc, Collection<String> Bcc, String mimeType,
                                      ReturnFormat format) throws Exception {
@@ -2571,6 +2695,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       File[] files) throws Exception {
         return updateDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, LIBRARY_OBJECT);
@@ -2591,6 +2716,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       File[] files, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createMessageWithFiles(toEmailAddress, subject, emailText, files,
@@ -2612,6 +2738,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateCcDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                         File[] files, String... Cc) throws Exception {
         return updateCcDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, LIBRARY_OBJECT, Cc);
@@ -2633,6 +2760,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateCcDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                         File[] files, ReturnFormat format, String... Cc) throws Exception {
         return executeDraftUpdate(draftId, createCcMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc), emailText,
@@ -2654,6 +2782,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateBccDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                          File[] files, String... Bcc) throws Exception {
         return updateBccDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, LIBRARY_OBJECT, Bcc);
@@ -2675,6 +2804,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateBccDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                          File[] files, ReturnFormat format, String... Bcc) throws Exception {
         return executeDraftUpdate(draftId, createBccMessageWithFiles(toEmailAddress, subject, Arrays.toString(Bcc), emailText,
@@ -2697,6 +2827,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       File[] files, String[] Cc, String[] Bcc) throws Exception {
         return updateDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, Cc, Bcc, LIBRARY_OBJECT);
@@ -2719,6 +2850,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText, File[] files,
                                       String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createCompletedMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc),
@@ -2741,6 +2873,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText, File[] files,
                                       Collection<String> Cc, Collection<String> Bcc) throws Exception {
         return updateDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, Cc, Bcc, LIBRARY_OBJECT);
@@ -2763,6 +2896,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText, File[] files,
                                       Collection<String> Cc, Collection<String> Bcc, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createCompletedMessageWithFiles(toEmailAddress, subject, emailText,
@@ -2784,6 +2918,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType) throws Exception {
         return updateDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT);
@@ -2805,6 +2940,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createMessageWithFiles(toEmailAddress, subject, emailText, files, mimeType),
@@ -2827,6 +2963,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateCcDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                         String mimeType, File[] files, String... Cc) throws Exception {
         return updateCcDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT, Cc);
@@ -2849,6 +2986,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateCcDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                         File[] files, String mimeType, ReturnFormat format,
                                         String... Cc) throws Exception {
@@ -2872,6 +3010,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateBccDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                          String mimeType, File[] files, String... Bcc) throws Exception {
         return updateBccDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT, Bcc);
@@ -2894,6 +3033,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateBccDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                          File[] files, String mimeType, ReturnFormat format,
                                          String... Bcc) throws Exception {
@@ -2918,6 +3058,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, String[] Cc, String[] Bcc) throws Exception {
         return updateDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, mimeType, Cc, Bcc, LIBRARY_OBJECT);
@@ -2941,6 +3082,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createCompletedMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc),
@@ -2964,6 +3106,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, Collection<String> Cc, Collection<String> Bcc) throws Exception {
         return updateDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, mimeType, Cc, Bcc, LIBRARY_OBJECT);
@@ -2987,6 +3130,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       File[] files, String mimeType, Collection<String> Cc, Collection<String> Bcc,
                                       ReturnFormat format) throws Exception {
@@ -3008,6 +3152,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files) throws Exception {
         return updateDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, LIBRARY_OBJECT);
@@ -3028,6 +3173,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createMessageWithFiles(toEmailAddress, subject, emailText,
@@ -3049,6 +3195,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateCcDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                         Collection<File> files, String... Cc) throws Exception {
         return updateCcDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, LIBRARY_OBJECT, Cc);
@@ -3070,6 +3217,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateCcDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                         Collection<File> files, ReturnFormat format, String... Cc) throws Exception {
         return executeDraftUpdate(draftId, createCcMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc), emailText,
@@ -3090,6 +3238,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateBccDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                          Collection<File> files, String... Bcc) throws Exception {
         return updateBccDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, LIBRARY_OBJECT, Bcc);
@@ -3111,6 +3260,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateBccDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                          Collection<File> files, ReturnFormat format, String... Bcc) throws Exception {
         return executeDraftUpdate(draftId, createBccMessageWithFiles(toEmailAddress, subject, Arrays.toString(Bcc),
@@ -3133,6 +3283,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, String[] Cc, String[] Bcc) throws Exception {
         return updateDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, Cc, Bcc, LIBRARY_OBJECT);
@@ -3155,6 +3306,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, String[] Cc, String[] Bcc,
                                       ReturnFormat format) throws Exception {
@@ -3178,6 +3330,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, Collection<String> Cc,
                                       Collection<String> Bcc) throws Exception {
@@ -3201,6 +3354,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, Collection<String> Cc, Collection<String> Bcc,
                                       ReturnFormat format) throws Exception {
@@ -3224,6 +3378,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       String mimeType, Collection<File> files) throws Exception {
         return updateDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT);
@@ -3245,6 +3400,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, String mimeType, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createMessageWithFiles(toEmailAddress, subject, emailText,
@@ -3267,6 +3423,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateCcDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                         String mimeType, Collection<File> files, String... Cc) throws Exception {
         return updateCcDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT, Cc);
@@ -3289,6 +3446,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateCcDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                         Collection<File> files, String mimeType, ReturnFormat format,
                                         String... Cc) throws Exception {
@@ -3312,6 +3470,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateBccDraftWithFiles(String draftId, String toEmailAddress, String subject, String mimeType,
                                          String emailText, Collection<File> files, String... Bcc) throws Exception {
         return updateBccDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT, Bcc);
@@ -3334,6 +3493,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateBccDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                          Collection<File> files, String mimeType, ReturnFormat format,
                                          String... Bcc) throws Exception {
@@ -3358,6 +3518,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, String mimeType, String[] Cc, String[] Bcc) throws Exception {
         return updateDraftWithFiles(draftId, toEmailAddress, subject, emailText, files, mimeType, Cc, Bcc, LIBRARY_OBJECT);
@@ -3381,6 +3542,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, String mimeType, String[] Cc, String[] Bcc,
                                       ReturnFormat format) throws Exception {
@@ -3405,6 +3567,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, String mimeType, Collection<String> Cc,
                                       Collection<String> Bcc) throws Exception {
@@ -3429,6 +3592,7 @@ public class GmailDraftsManager extends GmailManager {
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, String mimeType, Collection<String> Cc,
                                       Collection<String> Bcc, ReturnFormat format) throws Exception {
@@ -3444,9 +3608,11 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:  return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
      **/
+    @Returner
     private <T> T executeDraftUpdate(String draftId, com.google.api.services.gmail.model.Message message,
                                      ReturnFormat format) throws Exception {
-        return returnDraft(drafts.update(userId, draftId, createDraft(message, null, false)).execute(), format);
+        return returnDraft(drafts.update(userId, draftId, createDraft(message, null, false))
+                .execute(), format);
     }
 
     /**
@@ -3456,6 +3622,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
      **/
+    @Returner
     private <T> T returnDraft(com.google.api.services.gmail.model.Draft draft, ReturnFormat format) {
         switch (format) {
             case JSON:

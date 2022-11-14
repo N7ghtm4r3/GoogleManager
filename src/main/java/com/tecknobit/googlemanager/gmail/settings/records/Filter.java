@@ -1,6 +1,6 @@
 package com.tecknobit.googlemanager.gmail.settings.records;
 
-import com.tecknobit.apimanager.Tools.Formatters.JsonHelper;
+import com.tecknobit.apimanager.formatters.JsonHelper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -26,7 +26,7 @@ public class Filter {
      **/
     private final Action action;
     /**
-     * {@code id} the server assigned ID of the filter
+     * {@code id} the server assigned {@code "ID"} of the filter
      **/
     private String id;
 
@@ -45,7 +45,7 @@ public class Filter {
     /**
      * Constructor to init a {@link Filter}
      *
-     * @param id:       the server assigned ID of the filter
+     * @param id:       the server assigned {@code "ID"} of the filter
      * @param criteria: matching criteria for the filter
      * @param action:   action that the filter performs
      **/
