@@ -2,6 +2,7 @@ package com.tecknobit.googlemanager.gmail.settings;
 
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.*;
+import com.tecknobit.apimanager.annotations.RequestPath;
 import com.tecknobit.apimanager.annotations.Returner;
 import com.tecknobit.apimanager.formatters.JsonHelper;
 import com.tecknobit.googlemanager.gmail.GmailManager;
@@ -225,6 +226,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.getAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public AutoForwarding getAutoForwarding() throws IOException {
         return getAutoForwarding(LIBRARY_OBJECT);
     }
@@ -239,6 +241,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.getAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public <T> T getAutoForwarding(ReturnFormat format) throws IOException {
         return returnAutoForwarding(settings.getAutoForwarding(userId).execute(), format);
     }
@@ -253,6 +256,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.getImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public ImapSettings getImap() throws IOException {
         return getImap(LIBRARY_OBJECT);
     }
@@ -267,6 +271,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.getImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public <T> T getImap(ReturnFormat format) throws IOException {
         return returnImap(settings.getImap(userId).execute(), format);
     }
@@ -281,6 +286,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.getLanguage</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/language")
     public <T> T getLanguage(ReturnFormat format) throws IOException {
         return returnLanguage(settings.getLanguage(userId).execute(), format);
     }
@@ -295,6 +301,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.getPop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public PopSettings getPopSettings() throws IOException {
         return getPopSettings(LIBRARY_OBJECT);
     }
@@ -309,6 +316,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.getPop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public <T> T getPopSettings(ReturnFormat format) throws IOException {
         return returnPopSettings(settings.getPop(userId).execute(), format);
     }
@@ -323,6 +331,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.getVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings getVacationSettings() throws IOException {
         return getVacationSettings(LIBRARY_OBJECT);
     }
@@ -337,6 +346,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.getVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T getVacationSettings(ReturnFormat format) throws IOException {
         return returnVacationSettings(settings.getVacation(userId).execute(), format);
     }
@@ -354,6 +364,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public AutoForwarding updateAutoForwardingEnabled(boolean enabled) throws IOException {
         return updateAutoForwardingEnabled(enabled, LIBRARY_OBJECT);
     }
@@ -372,6 +383,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public <T> T updateAutoForwardingEnabled(boolean enabled, ReturnFormat format) throws IOException {
         AutoForwarding actualAutoForwarding = getAutoForwarding();
         if (enabled)
@@ -394,6 +406,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public AutoForwarding updateAutoForwardingEmailAddress(String emailAddress) throws IOException {
         return updateAutoForwardingEmailAddress(emailAddress, LIBRARY_OBJECT);
     }
@@ -412,6 +425,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public <T> T updateAutoForwardingEmailAddress(String emailAddress, ReturnFormat format) throws IOException {
         AutoForwarding actualAutoForwarding = getAutoForwarding();
         actualAutoForwarding.setEmailAddress(emailAddress);
@@ -431,6 +445,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public AutoForwarding updateAutoForwardingDisposition(Disposition disposition) throws IOException {
         return updateAutoForwardingDisposition(disposition, LIBRARY_OBJECT);
     }
@@ -449,6 +464,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public <T> T updateAutoForwardingDisposition(Disposition disposition, ReturnFormat format) throws IOException {
         AutoForwarding actualAutoForwarding = getAutoForwarding();
         actualAutoForwarding.setDisposition(disposition);
@@ -469,6 +485,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public AutoForwarding updateAutoForwarding(boolean enabled, String emailAddress) throws IOException {
         return updateAutoForwarding(enabled, emailAddress, LIBRARY_OBJECT);
     }
@@ -488,6 +505,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public <T> T updateAutoForwarding(boolean enabled, String emailAddress, ReturnFormat format) throws IOException {
         AutoForwarding actualAutoForwarding = getAutoForwarding();
         if (enabled)
@@ -512,6 +530,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public AutoForwarding updateAutoForwarding(boolean enabled, Disposition disposition) throws IOException {
         return updateAutoForwarding(enabled, disposition, LIBRARY_OBJECT);
     }
@@ -531,6 +550,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public <T> T updateAutoForwarding(boolean enabled, Disposition disposition, ReturnFormat format) throws IOException {
         AutoForwarding actualAutoForwarding = getAutoForwarding();
         if (enabled)
@@ -555,6 +575,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public AutoForwarding updateAutoForwarding(String emailAddress, Disposition disposition) throws IOException {
         return updateAutoForwarding(emailAddress, disposition, LIBRARY_OBJECT);
     }
@@ -574,6 +595,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public <T> T updateAutoForwarding(String emailAddress, Disposition disposition, ReturnFormat format) throws IOException {
         AutoForwarding actualAutoForwarding = getAutoForwarding();
         actualAutoForwarding.setEmailAddress(emailAddress);
@@ -593,6 +615,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public AutoForwarding updateAutoForwarding(AutoForwarding autoForwardingUpdated) throws IOException {
         return updateAutoForwarding(autoForwardingUpdated, LIBRARY_OBJECT);
     }
@@ -610,6 +633,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public <T> T updateAutoForwarding(AutoForwarding autoForwardingUpdated, ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.AutoForwarding autoForwarding = new com.google.api.services.gmail.model.AutoForwarding();
         autoForwarding.setEnabled(autoForwardingUpdated.isEnabled());
@@ -632,6 +656,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public AutoForwarding updateAutoForwarding(boolean enabled, String emailAddress, Disposition disposition) throws IOException {
         return updateAutoForwarding(enabled, emailAddress, disposition, LIBRARY_OBJECT);
     }
@@ -651,6 +676,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public <T> T updateAutoForwarding(boolean enabled, String emailAddress, Disposition disposition,
                                       ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.AutoForwarding autoForwarding = new com.google.api.services.gmail.model.AutoForwarding();
@@ -691,6 +717,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public ImapSettings enableImap() throws IOException {
         return enableImap(LIBRARY_OBJECT);
     }
@@ -706,6 +733,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public <T> T enableImap(ReturnFormat format) throws IOException {
         ImapSettings actualImap = getImap();
         actualImap.enable();
@@ -723,6 +751,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public ImapSettings disableImap() throws IOException {
         return disableImap(LIBRARY_OBJECT);
     }
@@ -738,6 +767,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public <T> T disableImap(ReturnFormat format) throws IOException {
         ImapSettings actualImap = getImap();
         actualImap.disable();
@@ -755,6 +785,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public ImapSettings enableImapAutoExpunge() throws IOException {
         return enableImapAutoExpunge(LIBRARY_OBJECT);
     }
@@ -770,6 +801,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public <T> T enableImapAutoExpunge(ReturnFormat format) throws IOException {
         ImapSettings actualImap = getImap();
         actualImap.enableAutoExpunge();
@@ -787,6 +819,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public ImapSettings disableImapAutoExpunge() throws IOException {
         return disableImapAutoExpunge(LIBRARY_OBJECT);
     }
@@ -802,6 +835,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public <T> T disableImapAutoExpunge(ReturnFormat format) throws IOException {
         ImapSettings actualImap = getImap();
         actualImap.disableAutoExpunge();
@@ -819,6 +853,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public ImapSettings updateImapExpungeBehavior(ExpungeBehavior expungeBehavior) throws IOException {
         return updateImapExpungeBehavior(expungeBehavior, LIBRARY_OBJECT);
     }
@@ -835,6 +870,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public <T> T updateImapExpungeBehavior(ExpungeBehavior expungeBehavior, ReturnFormat format) throws IOException {
         ImapSettings actualImap = getImap();
         actualImap.setExpungeBehavior(expungeBehavior);
@@ -852,6 +888,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public ImapSettings updateImapMaxFolderSize(int maxFolderSize) throws IOException {
         return updateImapMaxFolderSize(maxFolderSize, LIBRARY_OBJECT);
     }
@@ -868,6 +905,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public <T> T updateImapMaxFolderSize(int maxFolderSize, ReturnFormat format) throws IOException {
         ImapSettings actualImap = getImap();
         actualImap.setMaxFolderSize(maxFolderSize);
@@ -907,6 +945,7 @@ public class GmailSettingsManager extends GmailManager {
      * </ul>
      **/
     @SafeVarargs
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public final <T> ImapSettings updateImap(T... imapSettingsUpdated) throws IOException {
         return (ImapSettings) updateImap(LIBRARY_OBJECT, imapSettingsUpdated);
     }
@@ -945,6 +984,7 @@ public class GmailSettingsManager extends GmailManager {
      * </ul>
      **/
     @SafeVarargs
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public final <T> T updateImap(ReturnFormat format, T... imapSettingsUpdated) throws IOException {
         com.google.api.services.gmail.model.ImapSettings imapSettings = settings.getImap(userId).execute();
         for (int j = 0; j < imapSettingsUpdated.length; j++) {
@@ -970,6 +1010,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public ImapSettings updateImap(ImapSettings imapSettingsUpdated) throws IOException {
         return updateImap(imapSettingsUpdated, LIBRARY_OBJECT);
     }
@@ -985,6 +1026,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public <T> T updateImap(ImapSettings imapSettingsUpdated, ReturnFormat format) throws IOException {
         return returnImap(settings.updateImap(userId, new com.google.api.services.gmail.model.ImapSettings()
                 .setEnabled(imapSettingsUpdated.isEnabled())
@@ -1006,6 +1048,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public ImapSettings updateImap(boolean enable, boolean autoExpunge, ExpungeBehavior expungeBehavior,
                                    int maxFolderSize) throws IOException {
         return updateImap(enable, autoExpunge, expungeBehavior, maxFolderSize, LIBRARY_OBJECT);
@@ -1025,6 +1068,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public <T> T updateImap(boolean enable, boolean autoExpunge, ExpungeBehavior expungeBehavior, int maxFolderSize,
                             ReturnFormat format) throws IOException {
         return returnImap(settings.updateImap(userId, new com.google.api.services.gmail.model.ImapSettings()
@@ -1064,6 +1108,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateLanguage</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/language")
     public <T> T updateLanguage(String languageUpdated, ReturnFormat format) throws IOException {
         return returnLanguage(settings.updateLanguage(userId, new LanguageSettings()
                 .setDisplayLanguage(languageUpdated)).execute(), format);
@@ -1099,6 +1144,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updatePop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public PopSettings updatePopAccessWindow(AccessWindow accessWindow) throws IOException {
         return updatePopAccessWindow(accessWindow, LIBRARY_OBJECT);
     }
@@ -1115,6 +1161,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updatePop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public <T> T updatePopAccessWindow(AccessWindow accessWindow, ReturnFormat format) throws IOException {
         PopSettings actualPopSettings = getPopSettings();
         actualPopSettings.setAccessWindow(accessWindow);
@@ -1132,6 +1179,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updatePop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public PopSettings updatePopDisposition(Disposition disposition) throws IOException {
         return updatePopDisposition(disposition, LIBRARY_OBJECT);
     }
@@ -1148,6 +1196,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updatePop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public <T> T updatePopDisposition(Disposition disposition, ReturnFormat format) throws IOException {
         PopSettings actualPopSettings = getPopSettings();
         actualPopSettings.setDisposition(disposition);
@@ -1164,6 +1213,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updatePop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public PopSettings updatePopSettings(PopSettings popSettingsUpdated) throws IOException {
         return updatePopSettings(popSettingsUpdated, LIBRARY_OBJECT);
     }
@@ -1179,6 +1229,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updatePop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public <T> T updatePopSettings(PopSettings popSettingsUpdated, ReturnFormat format) throws IOException {
         return returnPopSettings(settings.updatePop(userId, new com.google.api.services.gmail.model.PopSettings()
                 .setAccessWindow(popSettingsUpdated.getAccessWindow().toString())
@@ -1197,6 +1248,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updatePop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public PopSettings updatePopSettings(AccessWindow accessWindow, Disposition disposition) throws IOException {
         return updatePopSettings(accessWindow, disposition, LIBRARY_OBJECT);
     }
@@ -1214,6 +1266,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updatePop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public <T> T updatePopSettings(AccessWindow accessWindow, Disposition disposition, ReturnFormat format) throws IOException {
         return returnPopSettings(settings.updatePop(userId, new com.google.api.services.gmail.model.PopSettings()
                 .setAccessWindow(accessWindow.name()).setDisposition(disposition.name())).execute(), format);
@@ -1251,6 +1304,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings enableVacationPlainTextAutoReply(String responseSubject, String responsePlainText) throws IOException {
         return enableVacationPlainTextAutoReply(responseSubject, responsePlainText, LIBRARY_OBJECT);
     }
@@ -1269,6 +1323,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T enableVacationPlainTextAutoReply(String responseSubject, String responsePlainText,
                                                   ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
@@ -1291,6 +1346,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings enableVacationHtmlAutoReply(String responseSubject, String responseHtml) throws IOException {
         return enableVacationHtmlAutoReply(responseSubject, responseHtml, LIBRARY_OBJECT);
     }
@@ -1309,6 +1365,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T enableVacationHtmlAutoReply(String responseSubject, String responseHtml, ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
         actualVacationSettings.enableAutoReply();
@@ -1332,6 +1389,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings enableVacationAutoReply(String responseSubject, String responsePlainText,
                                                     String responseHtml) throws IOException {
         return enableVacationAutoReply(responseSubject, responsePlainText, responseHtml, LIBRARY_OBJECT);
@@ -1353,6 +1411,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T enableVacationAutoReply(String responseSubject, String responsePlainText, String responseHtml,
                                          ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
@@ -1374,6 +1433,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationResponseSubject(String responseSubject) throws IOException {
         return updateVacationResponseSubject(responseSubject, LIBRARY_OBJECT);
     }
@@ -1390,6 +1450,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationResponseSubject(String responseSubject, ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
         actualVacationSettings.setResponseSubject(responseSubject);
@@ -1408,6 +1469,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationResponsePlainText(String responsePlainText) throws IOException {
         return updateVacationResponsePlainText(responsePlainText, LIBRARY_OBJECT);
     }
@@ -1425,6 +1487,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationResponsePlainText(String responsePlainText, ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
         actualVacationSettings.setResponseBodyPlainText(responsePlainText);
@@ -1444,6 +1507,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationResponsePlainText(String responseSubject, String responsePlainText) throws IOException {
         return updateVacationResponsePlainText(responseSubject, responsePlainText, LIBRARY_OBJECT);
     }
@@ -1462,6 +1526,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationResponsePlainText(String responseSubject, String responsePlainText,
                                                  ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
@@ -1481,6 +1546,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationResponseHtml(String responseHtml) throws IOException {
         return updateVacationResponseHtml(responseHtml, LIBRARY_OBJECT);
     }
@@ -1497,6 +1563,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationResponseHtml(String responseHtml, ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
         actualVacationSettings.setResponseBodyHtml(responseHtml);
@@ -1515,6 +1582,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationResponseHtml(String responseSubject, String responseHtml) throws IOException {
         return updateVacationResponseHtml(responseSubject, responseHtml, LIBRARY_OBJECT);
     }
@@ -1532,6 +1600,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationResponseHtml(String responseSubject, String responseHtml, ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
         actualVacationSettings.setResponseSubject(responseSubject);
@@ -1554,6 +1623,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationResponseDetails(String responseSubject, String responsePlainText,
                                                           String responseHtml) throws IOException {
         return updateVacationResponseDetails(responseSubject, responsePlainText, responseHtml, LIBRARY_OBJECT);
@@ -1575,6 +1645,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationResponseDetails(String responseSubject, String responsePlainText, String responseHtml,
                                                ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.VacationSettings vSettings = settings.getVacation(userId).execute();
@@ -1596,6 +1667,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings disableVacationAutoReply() throws IOException {
         return disableVacationAutoReply(LIBRARY_OBJECT);
     }
@@ -1611,6 +1683,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T disableVacationAutoReply(ReturnFormat format) throws IOException {
         return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
                 .setEnableAutoReply(false)).execute(), format);
@@ -1627,6 +1700,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings enableRestrictToContacts() throws IOException {
         return enableRestrictToContacts(LIBRARY_OBJECT);
     }
@@ -1642,6 +1716,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T enableRestrictToContacts(ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
         actualVacationSettings.enableRestrictToContacts();
@@ -1659,6 +1734,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings disableRestrictToContacts() throws IOException {
         return disableRestrictToContacts(LIBRARY_OBJECT);
     }
@@ -1674,6 +1750,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T disableRestrictToContacts(ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
         actualVacationSettings.disableRestrictToContacts();
@@ -1691,6 +1768,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings enableRestrictToDomain() throws IOException {
         return enableRestrictToDomain(LIBRARY_OBJECT);
     }
@@ -1706,6 +1784,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T enableRestrictToDomain(ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
         actualVacationSettings.enableRestrictToDomain();
@@ -1723,6 +1802,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings disableRestrictToDomain() throws IOException {
         return disableRestrictToDomain(LIBRARY_OBJECT);
     }
@@ -1738,6 +1818,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T disableRestrictToDomain(ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
         actualVacationSettings.disableRestrictToDomain();
@@ -1757,6 +1838,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationStartTime(long startTime) throws IOException {
         return updateVacationStartTime(startTime, LIBRARY_OBJECT);
     }
@@ -1775,6 +1857,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationStartTime(long startTime, ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
         actualVacationSettings.setStartTime(startTime);
@@ -1794,6 +1877,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationEndTime(long endTime) throws IOException {
         return updateVacationEndTime(endTime, LIBRARY_OBJECT);
     }
@@ -1812,6 +1896,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationEndTime(long endTime, ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
         actualVacationSettings.setEndTime(endTime);
@@ -1834,6 +1919,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationTime(long startTime, long endTime) throws IOException {
         return updateVacationTime(startTime, endTime, LIBRARY_OBJECT);
     }
@@ -1855,6 +1941,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationTime(long startTime, long endTime, ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
         actualVacationSettings.setStartTime(startTime);
@@ -1872,6 +1959,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationSettings(VacationSettings vacationSettings) throws IOException {
         return updateVacationSettings(vacationSettings, LIBRARY_OBJECT);
     }
@@ -1887,6 +1975,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationSettings(VacationSettings vacationSettings, ReturnFormat format) throws IOException {
         return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
                 .setEnableAutoReply(vacationSettings.isEnableAutoReply())
@@ -1923,6 +2012,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationSettings(boolean enableAutoReply, String responseSubject, String responsePlainText,
                                                    String responseHtml, boolean restrictToContacts, boolean restrictToDomain,
                                                    long startTime, long endTime) throws IOException {
@@ -1955,6 +2045,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationSettings(boolean enableAutoReply, String responseSubject, String responsePlainText,
                                         String responseHtml, boolean restrictToContacts, boolean restrictToDomain,
                                         long startTime, long endTime, ReturnFormat format) throws IOException {
@@ -2003,6 +2094,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.delegates.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/delegates")
     public Delegate createDelegate(Delegate delegate) throws IOException {
         return createDelegate(delegate, LIBRARY_OBJECT);
     }
@@ -2022,6 +2114,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.delegates.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/delegates")
     public <T> T createDelegate(Delegate delegate, ReturnFormat format) throws IOException {
         return returnDelegate(delegates.create(userId, new com.google.api.services.gmail.model.Delegate()
                 .setDelegateEmail(delegate.getDelegateEmail())
@@ -2043,6 +2136,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.delegates.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/delegates")
     public Delegate createDelegate(String delegateEmail, VerificationStatus verificationStatus) throws IOException {
         return createDelegate(delegateEmail, verificationStatus, LIBRARY_OBJECT);
     }
@@ -2063,6 +2157,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.delegates.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/delegates")
     public <T> T createDelegate(String delegateEmail, VerificationStatus verificationStatus,
                                 ReturnFormat format) throws IOException {
         return returnDelegate(delegates.create(userId, new com.google.api.services.gmail.model.Delegate()
@@ -2080,6 +2175,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.delegates.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/delegates")
     public boolean deleteDelegate(Delegate delegateToDelete) {
         return deleteDelegate(delegateToDelete.getDelegateEmail());
     }
@@ -2095,6 +2191,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.delegates.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/delegates")
     public boolean deleteDelegate(String delegateEmail) {
         try {
             delegates.delete(userId, delegateEmail).execute();
@@ -2116,6 +2213,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.delegates.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/delegates/{delegateEmail}")
     public Delegate getDelegate(String delegateEmail) throws IOException {
         return getDelegate(delegateEmail, LIBRARY_OBJECT);
     }
@@ -2132,6 +2230,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.delegates.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/delegates/{delegateEmail}")
     public <T> T getDelegate(String delegateEmail, ReturnFormat format) throws IOException {
         return returnDelegate(delegates.get(userId, delegateEmail).execute(), format);
     }
@@ -2165,6 +2264,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.delegates.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/delegates")
     public Collection<Delegate> getDelegatesList() throws IOException {
         return getDelegatesList(LIBRARY_OBJECT);
     }
@@ -2180,6 +2280,7 @@ public class GmailSettingsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     @Returner
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/delegates")
     public <T> T getDelegatesList(ReturnFormat format) throws IOException {
         ListDelegatesResponse delegates = this.delegates.list(userId).execute();
         switch (format) {
@@ -2219,6 +2320,7 @@ public class GmailSettingsManager extends GmailManager {
      * </ul>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/filters")
     public Filter createFilter(Filter filter) throws IOException {
         return createFilter(filter, LIBRARY_OBJECT);
     }
@@ -2247,6 +2349,7 @@ public class GmailSettingsManager extends GmailManager {
      * </ul>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/filters")
     public <T> T createFilter(Filter filter, ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.Filter gFilter = new com.google.api.services.gmail.model.Filter();
         JSONObject filterSource = new JSONObject(filter);
@@ -2289,6 +2392,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.filters.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/filters/{id}")
     public boolean deleteFilter(Filter filterToDelete) {
         return deleteFilter(filterToDelete.getId());
     }
@@ -2302,6 +2406,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.filters.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/filters/{id}")
     public boolean deleteFilter(String filterIdToDelete) {
         try {
             filters.delete(userId, filterIdToDelete).execute();
@@ -2322,6 +2427,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.filters.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/filters/{id}")
     public Filter getFilter(String filterId) throws IOException {
         return getFilter(filterId, LIBRARY_OBJECT);
     }
@@ -2337,6 +2443,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.filters.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/filters/{id}")
     public <T> T getFilter(String filterId, ReturnFormat format) throws IOException {
         return returnFilter(filters.get(userId, filterId).execute(), format);
     }
@@ -2370,6 +2477,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.filters.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/filters")
     public Collection<Filter> getFiltersList() throws IOException {
         return getFiltersList(LIBRARY_OBJECT);
     }
@@ -2385,6 +2493,7 @@ public class GmailSettingsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     @Returner
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/filters")
     public <T> T getFiltersList(ReturnFormat format) throws IOException {
         ListFiltersResponse filters = this.filters.list(userId).execute();
         switch (format) {
@@ -2414,6 +2523,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.forwardingAddresses.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/forwardingAddresses")
     public ForwardingAddress createForwardingAddress(ForwardingAddress forwardingAddress) throws IOException {
         return createForwardingAddress(forwardingAddress, LIBRARY_OBJECT);
     }
@@ -2432,6 +2542,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.forwardingAddresses.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/forwardingAddresses")
     public <T> T createForwardingAddress(ForwardingAddress forwardingAddress, ReturnFormat format) throws IOException {
         return returnForwardingAddress(forwardingAddresses.create(userId, new com.google.api.services.gmail.model.ForwardingAddress()
                 .setForwardingEmail(forwardingAddress.getForwardingEmail())
@@ -2451,6 +2562,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.forwardingAddresses.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/forwardingAddresses")
     public ForwardingAddress createForwardingAddress(String forwardingEmail) throws IOException {
         return createForwardingAddress(forwardingEmail, LIBRARY_OBJECT);
     }
@@ -2469,6 +2581,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.forwardingAddresses.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/forwardingAddresses")
     public <T> T createForwardingAddress(String forwardingEmail, ReturnFormat format) throws IOException {
         return returnForwardingAddress(forwardingAddresses.create(userId, new com.google.api.services.gmail.model.ForwardingAddress()
                 .setForwardingEmail(forwardingEmail)).execute(), format);
@@ -2484,6 +2597,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.forwardingAddresses.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/forwardingAddresses/{forwardingEmail}")
     public boolean deleteForwardingAddress(ForwardingAddress forwardingAddressToDelete) {
         return deleteForwardingAddress(forwardingAddressToDelete.getForwardingEmail());
     }
@@ -2498,6 +2612,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.forwardingAddresses.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/forwardingAddresses/{forwardingEmail}")
     public boolean deleteForwardingAddress(String forwardingEmailToDelete) {
         try {
             forwardingAddresses.delete(userId, forwardingEmailToDelete).execute();
@@ -2518,6 +2633,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.forwardingAddresses.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/forwardingAddresses/{forwardingEmail}")
     public ForwardingAddress getForwardingAddress(String forwardingEmail) throws IOException {
         return getForwardingAddress(forwardingEmail, LIBRARY_OBJECT);
     }
@@ -2533,6 +2649,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.forwardingAddresses.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/forwardingAddresses/{forwardingEmail}")
     public <T> T getForwardingAddress(String forwardingEmail, ReturnFormat format) throws IOException {
         return returnForwardingAddress(forwardingAddresses.get(userId, forwardingEmail).execute(), format);
     }
@@ -2567,6 +2684,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.forwardingAddresses.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/forwardingAddresses")
     public Collection<ForwardingAddress> getForwardingAddressesList() throws IOException {
         return getForwardingAddressesList(LIBRARY_OBJECT);
     }
@@ -2583,6 +2701,7 @@ public class GmailSettingsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     @Returner
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/forwardingAddresses")
     public <T> T getForwardingAddressesList(ReturnFormat format) throws IOException {
         ListForwardingAddressesResponse addresses = this.forwardingAddresses.list(userId).execute();
         switch (format) {
@@ -2615,6 +2734,7 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs")
     public SendAs createSendAs(SendAs sendAsToCreate) throws IOException {
         return createSendAs(sendAsToCreate, LIBRARY_OBJECT);
     }
@@ -2636,6 +2756,7 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs")
     public <T> T createSendAs(SendAs sendAsToCreate, ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.SendAs gSendAs = new com.google.api.services.gmail.model.SendAs()
                 .setSendAsEmail(sendAsToCreate.getSendAsEmail())
@@ -2667,6 +2788,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public boolean deleteSendAs(SendAs sendAsToDelete) {
         return deleteSendAs(sendAsToDelete.getSendAsEmail());
     }
@@ -2681,6 +2803,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public boolean deleteSendAs(String sendAsEmailToDelete) {
         try {
             sendAs.delete(userId, sendAsEmailToDelete).execute();
@@ -2701,6 +2824,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs getSendAs(String sendAsEmailToGet) throws IOException {
         return getSendAs(sendAsEmailToGet, LIBRARY_OBJECT);
     }
@@ -2716,6 +2840,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T getSendAs(String sendAsEmailToGet, ReturnFormat format) throws IOException {
         return returnSendAs(sendAs.get(userId, sendAsEmailToGet).execute(), format);
     }
@@ -2731,6 +2856,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs")
     public Collection<SendAs> getSendAsList() throws IOException {
         return getSendAsList(LIBRARY_OBJECT);
     }
@@ -2747,6 +2873,7 @@ public class GmailSettingsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     @Returner
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs")
     public <T> T getSendAsList(ReturnFormat format) throws IOException {
         ListSendAsResponse list = sendAs.list(userId).execute();
         switch (format) {
@@ -2777,6 +2904,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSendAsDisplayName(String sendAsEmail, String displayNameUpdated) throws IOException {
         return changeSendAsDisplayName(sendAsEmail, displayNameUpdated, LIBRARY_OBJECT);
     }
@@ -2796,6 +2924,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSendAsDisplayName(String sendAsEmail, String displayNameUpdated,
                                          ReturnFormat format) throws IOException {
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
@@ -2816,6 +2945,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSendAsReplyToAddress(String sendAsEmail, String replyToAddressUpdated) throws IOException {
         return changeSendAsReplyToAddress(sendAsEmail, replyToAddressUpdated, LIBRARY_OBJECT);
     }
@@ -2835,6 +2965,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSendAsReplyToAddress(String sendAsEmail, String replyToAddressUpdated,
                                             ReturnFormat format) throws IOException {
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
@@ -2855,6 +2986,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSendAsSignature(String sendAsEmail, String signatureUpdated) throws IOException {
         return changeSendAsSignature(sendAsEmail, signatureUpdated, LIBRARY_OBJECT);
     }
@@ -2874,6 +3006,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSendAsSignature(String sendAsEmail, String signatureUpdated, ReturnFormat format) throws IOException {
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
                 .setSignature(signatureUpdated)).execute(), format);
@@ -2894,6 +3027,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSendAsDefault(String sendAsEmail, boolean defaultUpdated) throws IOException {
         return changeSendAsDefault(sendAsEmail, defaultUpdated, LIBRARY_OBJECT);
     }
@@ -2914,6 +3048,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSendAsDefault(String sendAsEmail, boolean defaultUpdated, ReturnFormat format) throws IOException {
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
                 .setIsDefault(defaultUpdated)).execute(), format);
@@ -2933,6 +3068,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSendAsTreatAsAlias(String sendAsEmail, boolean treatAsAliasUpdated) throws IOException {
         return changeSendAsTreatAsAlias(sendAsEmail, treatAsAliasUpdated, LIBRARY_OBJECT);
     }
@@ -2952,6 +3088,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSendAsTreatAsAlias(String sendAsEmail, boolean treatAsAliasUpdated,
                                           ReturnFormat format) throws IOException {
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
@@ -2972,6 +3109,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaHost(String sendAsEmail, String hostUpdated) throws IOException {
         return changeSmtpMsaHost(sendAsEmail, hostUpdated, LIBRARY_OBJECT);
     }
@@ -2991,6 +3129,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaHost(String sendAsEmail, String hostUpdated, ReturnFormat format) throws IOException {
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
                 .setSmtpMsa(new SmtpMsa().setHost(hostUpdated))).execute(), format);
@@ -3010,6 +3149,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaPort(String sendAsEmail, int portUpdated) throws IOException {
         return changeSmtpMsaPort(sendAsEmail, portUpdated, LIBRARY_OBJECT);
     }
@@ -3029,6 +3169,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaPort(String sendAsEmail, int portUpdated, ReturnFormat format) throws IOException {
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
                 .setSmtpMsa(new SmtpMsa().setPort(portUpdated))).execute(), format);
@@ -3049,6 +3190,7 @@ public class GmailSettingsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      * @see #currentUsername
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaUsername(String sendAsEmail, String usernameUpdated) throws IOException {
         return changeSmtpMsaUsername(sendAsEmail, usernameUpdated, LIBRARY_OBJECT);
     }
@@ -3069,6 +3211,7 @@ public class GmailSettingsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      * @see #currentUsername
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaUsername(String sendAsEmail, String usernameUpdated, ReturnFormat format) throws IOException {
         currentUsername = usernameUpdated;
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
@@ -3090,6 +3233,7 @@ public class GmailSettingsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      * @see #currentPassword
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaPassword(String sendAsEmail, String passwordUpdated) throws IOException {
         return changeSmtpMsaPassword(sendAsEmail, passwordUpdated, LIBRARY_OBJECT);
     }
@@ -3110,6 +3254,7 @@ public class GmailSettingsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      * @see #currentPassword
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaPassword(String sendAsEmail, String passwordUpdated, ReturnFormat format) throws IOException {
         currentPassword = passwordUpdated;
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
@@ -3130,6 +3275,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaSecurityMode(String sendAsEmail, SecurityMode securityModeUpdated) throws IOException {
         return changeSmtpMsaSecurityMode(sendAsEmail, securityModeUpdated, LIBRARY_OBJECT);
     }
@@ -3149,6 +3295,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaSecurityMode(String sendAsEmail, SecurityMode securityModeUpdated,
                                            ReturnFormat format) throws IOException {
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
@@ -3170,6 +3317,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated, int portUpdated) throws IOException {
         return changeSmtpMsaDomainDetails(sendAsEmail, hostUpdated, portUpdated, LIBRARY_OBJECT);
     }
@@ -3190,6 +3338,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated, int portUpdated,
                                             ReturnFormat format) throws IOException {
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
@@ -3211,6 +3360,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated,
                                              SecurityMode securityModeUpdated) throws IOException {
         return changeSmtpMsaDomainDetails(sendAsEmail, hostUpdated, securityModeUpdated, LIBRARY_OBJECT);
@@ -3232,6 +3382,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated, SecurityMode securityModeUpdated,
                                             ReturnFormat format) throws IOException {
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
@@ -3254,6 +3405,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaDomainDetails(String sendAsEmail, int portUpdated,
                                              SecurityMode securityModeUpdated) throws IOException {
         return changeSmtpMsaDomainDetails(sendAsEmail, portUpdated, securityModeUpdated, LIBRARY_OBJECT);
@@ -3275,6 +3427,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaDomainDetails(String sendAsEmail, int portUpdated, SecurityMode securityModeUpdated,
                                             ReturnFormat format) throws IOException {
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
@@ -3298,6 +3451,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated, int portUpdated,
                                              SecurityMode securityModeUpdated) throws IOException {
         return changeSmtpMsaDomainDetails(sendAsEmail, hostUpdated, portUpdated, securityModeUpdated, LIBRARY_OBJECT);
@@ -3320,6 +3474,7 @@ public class GmailSettingsManager extends GmailManager {
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated, int portUpdated,
                                             SecurityMode securityModeUpdated, ReturnFormat format) throws IOException {
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
@@ -3344,6 +3499,7 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaCredentials(String sendAsEmail, String usernameUpdated,
                                            String passwordUpdated) throws IOException {
         return changeSmtpMsaCredentials(sendAsEmail, usernameUpdated, passwordUpdated, LIBRARY_OBJECT);
@@ -3367,6 +3523,7 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaCredentials(String sendAsEmail, String usernameUpdated, String passwordUpdated,
                                           ReturnFormat format) throws IOException {
         currentUsername = usernameUpdated;
@@ -3391,6 +3548,7 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsa(String sendAsEmail, SendAs.SmtpMsa smtpMsaUpdated) throws IOException {
         return changeSmtpMsa(sendAsEmail, smtpMsaUpdated, LIBRARY_OBJECT);
     }
@@ -3412,6 +3570,7 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsa(String sendAsEmail, SendAs.SmtpMsa smtpMsaUpdated, ReturnFormat format) throws IOException {
         currentUsername = smtpMsaUpdated.getUsername();
         currentPassword = smtpMsaUpdated.getPassword();
@@ -3441,6 +3600,7 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsa(String sendAsEmail, String hostUpdated, int portUpdated, String usernameUpdated,
                                 String passwordUpdated, SecurityMode securityModeUpdated) throws IOException {
         return changeSmtpMsa(sendAsEmail, hostUpdated, portUpdated, usernameUpdated, passwordUpdated, securityModeUpdated,
@@ -3468,6 +3628,7 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsa(String sendAsEmail, String hostUpdated, int portUpdated, String usernameUpdated,
                                String passwordUpdated, SecurityMode securityModeUpdated,
                                ReturnFormat format) throws IOException {
@@ -3492,6 +3653,7 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSendAs(SendAs sendAsUpdated) throws IOException {
         return changeSendAs(sendAsUpdated, LIBRARY_OBJECT);
     }
@@ -3511,6 +3673,7 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSendAs(SendAs sendAsUpdated, ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.SendAs gSendAs = new com.google.api.services.gmail.model.SendAs()
                 .setDisplayName(sendAsUpdated.getDisplayName())
@@ -3556,6 +3719,7 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSendAs(String sendAsEmail, String displayNameUpdated, String replyToAddressUpdated,
                                String signatureUpdated, boolean defaultUpdated, boolean treatAsAliasUpdated,
                                String hostUpdated, int portUpdated, String usernameUpdated, String passwordUpdated,
@@ -3591,6 +3755,7 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSendAs(String sendAsEmail, String displayNameUpdated, String replyToAddressUpdated,
                               String signatureUpdated, boolean defaultUpdated, boolean treatAsAliasUpdated,
                               String hostUpdated, int portUpdated, String usernameUpdated, String passwordUpdated,
@@ -3642,6 +3807,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.verify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/verify")
     public boolean verifySendAs(SendAs sendAsToVerify) {
         return verifySendAs(sendAsToVerify.getSendAsEmail());
     }
@@ -3656,6 +3822,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.verify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/verify")
     public boolean verifySendAs(String sendAsEmailToVerify) {
         try {
             sendAs.verify(userId, sendAsEmailToVerify).execute();
@@ -3676,6 +3843,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.smimeInfo.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}")
     public boolean deleteSmimeInfo(String sendAsEmail, SmimeInfo smimeInfoToDelete) {
         return deleteSmimeInfo(sendAsEmail, smimeInfoToDelete.getId());
     }
@@ -3690,6 +3858,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.smimeInfo.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}")
     public boolean deleteSmimeInfo(String sendAsEmail, String idSmimeInfoToDelete) {
         try {
             smimeInfo.delete(userId, sendAsEmail, idSmimeInfoToDelete).execute();
@@ -3711,6 +3880,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.smimeInfo.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}")
     public SmimeInfo getSmimeInfo(String sendAsEmail, String idSmimeInfoToGet) throws IOException {
         return getSmimeInfo(sendAsEmail, idSmimeInfoToGet, LIBRARY_OBJECT);
     }
@@ -3727,6 +3897,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.smimeInfo.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}")
     public <T> T getSmimeInfo(String sendAsEmail, String idSmimeInfoToGet, ReturnFormat format) throws IOException {
         return returnSmimeInfo(smimeInfo.get(userId, sendAsEmail, idSmimeInfoToGet).execute(), format);
     }
@@ -3746,6 +3917,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.smimeInfo.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
     public SmimeInfo insertSmimeInfo(String sendAsEmail, String issuerCn, boolean isDefault, long expiration,
                                      String encryptedKeyPassword, String pem) throws IOException {
         return insertSmimeInfo(sendAsEmail, new SmimeInfo(issuerCn, isDefault, expiration, encryptedKeyPassword, pem),
@@ -3768,6 +3940,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.smimeInfo.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
     public <T> T insertSmimeInfo(String sendAsEmail, String issuerCn, boolean isDefault, long expiration,
                                  String encryptedKeyPassword, String pem, ReturnFormat format) throws IOException {
         return insertSmimeInfo(sendAsEmail, new SmimeInfo(issuerCn, isDefault, expiration, encryptedKeyPassword, pem),
@@ -3792,6 +3965,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.smimeInfo.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
     public SmimeInfo insertSmimeInfo(String sendAsEmail, String pkcs12, String issuerCn, boolean isDefault, long expiration,
                                      String encryptedKeyPassword) throws IOException {
         return insertSmimeInfo(sendAsEmail, new SmimeInfo(pkcs12, issuerCn, isDefault, expiration, encryptedKeyPassword),
@@ -3817,6 +3991,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.smimeInfo.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
     public <T> T insertSmimeInfo(String sendAsEmail, String pkcs12, String issuerCn, boolean isDefault, long expiration,
                                  String encryptedKeyPassword, ReturnFormat format) throws IOException {
         return insertSmimeInfo(sendAsEmail, new SmimeInfo(pkcs12, issuerCn, isDefault, expiration, encryptedKeyPassword),
@@ -3834,6 +4009,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.smimeInfo.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
     public SmimeInfo insertSmimeInfo(String sendAsEmail, SmimeInfo smimeInfoToInsert) throws IOException {
         return insertSmimeInfo(sendAsEmail, smimeInfoToInsert, LIBRARY_OBJECT);
     }
@@ -3850,6 +4026,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.smimeInfo.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
     public <T> T insertSmimeInfo(String sendAsEmail, SmimeInfo smimeInfoToInsert, ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.SmimeInfo gSmimeInfo = new com.google.api.services.gmail.model.SmimeInfo();
         JSONObject smimeInfoSource = new JSONObject(smimeInfoToInsert);
@@ -3892,6 +4069,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.smimeInfo.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
     public Collection<SmimeInfo> getSmimeInfoList(String sendAsEmail) throws IOException {
         return getSmimeInfoList(sendAsEmail, LIBRARY_OBJECT);
     }
@@ -3908,6 +4086,7 @@ public class GmailSettingsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     @Returner
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
     public <T> T getSmimeInfoList(String sendAsEmail, ReturnFormat format) throws IOException {
         ListSmimeInfoResponse list = smimeInfo.list(userId, sendAsEmail).execute();
         switch (format) {
@@ -3934,6 +4113,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.smimeInfo.setDefault</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}/setDefault")
     public boolean setDefaultSmimeInfo(String sendAsEmail, SmimeInfo defaultSmimeInfo) {
         return setDefaultSmimeInfo(sendAsEmail, defaultSmimeInfo.getId());
     }
@@ -3948,6 +4128,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.smimeInfo.setDefault</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}/setDefault")
     public boolean setDefaultSmimeInfo(String sendAsEmail, String idDefaultSmimeInfo) {
         try {
             smimeInfo.setDefault(userId, sendAsEmail, idDefaultSmimeInfo).execute();

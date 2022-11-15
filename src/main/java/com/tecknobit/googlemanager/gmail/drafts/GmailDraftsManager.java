@@ -4,6 +4,7 @@ import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.ListDraftsResponse;
 import com.tecknobit.apimanager.annotations.RequestPath;
 import com.tecknobit.apimanager.annotations.Returner;
+import com.tecknobit.apimanager.annotations.WrappedRequest;
 import com.tecknobit.googlemanager.gmail.GmailManager;
 import com.tecknobit.googlemanager.gmail.drafts.records.Draft;
 import com.tecknobit.googlemanager.gmail.drafts.records.Drafts;
@@ -1615,6 +1616,21 @@ public class GmailDraftsManager extends GmailManager {
     /**
      * Method to delete a draft
      *
+     * @param draft: draft to delete
+     * @return result of the deletion -> {@code "true"} is successful, {@code "false"} if not successful
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/delete">
+     * users.drafts.delete</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts/{id}")
+    public boolean deleteDraft(Draft draft) {
+        return deleteDraft(draft.getId());
+    }
+
+    /**
+     * Method to delete a draft
+     *
      * @param draftId: identifier of the draft to delete
      * @return result of the deletion -> {@code "true"} is successful, {@code "false"} if not successful
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/delete">
@@ -2006,6 +2022,37 @@ public class GmailDraftsManager extends GmailManager {
     /**
      * Method to send a draft
      *
+     * @param draft: draft to send
+     * @return message of the response as {@link Message} custom object
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/send">
+     * users.drafts.send</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/send")
+    public Message sendDraft(Draft draft) throws IOException {
+        return sendDraft(draft.getId(), LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to send a draft
+     *
+     * @param draft:  draft to send
+     * @param format: return type formatter -> {@link ReturnFormat}
+     * @return message as {@code "format"} defines
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/send">
+     * users.drafts.send</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/send")
+    public <T> T sendDraft(Draft draft, ReturnFormat format) throws IOException {
+        return sendDraft(draft.getId(), format);
+    }
+
+    /**
+     * Method to send a draft
+     *
      * @param draftId: identifier ot the draft to send
      * @return message of the response as {@link Message} custom object
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/send">
@@ -2034,32 +2081,43 @@ public class GmailDraftsManager extends GmailManager {
     }
 
     /**
-     * Method to send a draft
+     * Method to update a draft
      *
-     * @param draft: draft to send
-     * @return message of the response as {@link Message} custom object
-     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/send">
-     * users.drafts.send</a>
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
-    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/send")
-    public Message sendDraft(Draft draft) throws IOException {
-        return sendDraft(draft.getId(), LIBRARY_OBJECT);
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraft(Draft draft, String toEmailAddress, String subject, String emailText) throws Exception {
+        return updateDraft(draft.getId(), toEmailAddress, subject, emailText, LIBRARY_OBJECT);
     }
 
     /**
-     * Method to send a draft
+     * Method to update a draft
      *
-     * @param draft:  draft to send
-     * @param format: return type formatter -> {@link ReturnFormat}
-     * @return message as {@code "format"} defines
-     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/send">
-     * users.drafts.send</a>
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
-    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/send")
-    public <T> T sendDraft(Draft draft, ReturnFormat format) throws IOException {
-        return sendDraft(draft.getId(), format);
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraft(Draft draft, String toEmailAddress, String subject, String emailText,
+                             ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createSimpleMessage(toEmailAddress, subject, emailText), format);
     }
 
     /**
@@ -2098,6 +2156,50 @@ public class GmailDraftsManager extends GmailManager {
     public <T> T updateDraft(String draftId, String toEmailAddress, String subject, String emailText,
                              ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createSimpleMessage(toEmailAddress, subject, emailText), format);
+    }
+
+    /**
+     * Method to update a draft
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param Cc:             carbon copy value
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithCc(Draft draft, String toEmailAddress, String subject, String emailText,
+                                   String... Cc) throws Exception {
+        return updateDraftWithCc(draft.getId(), toEmailAddress, subject, emailText, LIBRARY_OBJECT, Cc);
+    }
+
+    /**
+     * Method to update a draft
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @param Cc:             carbon copy value
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithCc(Draft draft, String toEmailAddress, String subject, String emailText,
+                                   ReturnFormat format, String... Cc) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCcMessage(toEmailAddress, subject, Arrays.toString(Cc), emailText),
+                format);
     }
 
     /**
@@ -2145,6 +2247,50 @@ public class GmailDraftsManager extends GmailManager {
     /**
      * Method to update a draft
      *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param Bcc:            blind carbon copy value
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithBcc(Draft draft, String toEmailAddress, String subject, String emailText,
+                                    String... Bcc) throws Exception {
+        return updateDraftWithBcc(draft.getId(), toEmailAddress, subject, emailText, LIBRARY_OBJECT, Bcc);
+    }
+
+    /**
+     * Method to update a draft
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @param Bcc:            blind carbon copy value
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithBcc(Draft draft, String toEmailAddress, String subject, String emailText,
+                                    ReturnFormat format, String... Bcc) throws Exception {
+        return executeDraftUpdate(draft.getId(), createBccMessage(toEmailAddress, subject, Arrays.toString(Bcc), emailText),
+                format);
+    }
+
+    /**
+     * Method to update a draft
+     *
      * @param draftId:        identifier of the draft to update
      * @param toEmailAddress: recipient of the email message
      * @param subject:        subject of the email message
@@ -2182,6 +2328,52 @@ public class GmailDraftsManager extends GmailManager {
                                     ReturnFormat format, String... Bcc) throws Exception {
         return executeDraftUpdate(draftId, createBccMessage(toEmailAddress, subject, Arrays.toString(Bcc), emailText),
                 format);
+    }
+
+    /**
+     * Method to update a draft
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param Cc:             carbon copy values in array of {@link String} format
+     * @param Bcc:            blind carbon copy values in array of {@link String} format
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraft(Draft draft, String toEmailAddress, String subject, String emailText, String[] Cc,
+                             String[] Bcc) throws Exception {
+        return updateDraft(draft.getId(), toEmailAddress, subject, emailText, Cc, Bcc, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param Cc:             carbon copy values in array of {@link String} format
+     * @param Bcc:            blind carbon copy values in array of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraft(Draft draft, String toEmailAddress, String subject, String emailText, String[] Cc,
+                             String[] Bcc, ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCompleteMessage(toEmailAddress, subject, Arrays.toString(Cc),
+                Arrays.toString(Bcc), emailText), format);
     }
 
     /**
@@ -2231,6 +2423,52 @@ public class GmailDraftsManager extends GmailManager {
     /**
      * Method to update a draft
      *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
+     * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraft(Draft draft, String toEmailAddress, String subject, String emailText,
+                             Collection<String> Cc, Collection<String> Bcc) throws Exception {
+        return updateDraft(draft.getId(), toEmailAddress, subject, emailText, Cc, Bcc, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
+     * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraft(Draft draft, String toEmailAddress, String subject, String emailText,
+                             Collection<String> Cc, Collection<String> Bcc, ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCompleteMessage(toEmailAddress, subject, Arrays.toString(Cc.toArray()),
+                Arrays.toString(Bcc.toArray()), emailText), format);
+    }
+
+    /**
+     * Method to update a draft
+     *
      * @param draftId:        identifier of the draft to update
      * @param toEmailAddress: recipient of the email message
      * @param subject:        subject of the email message
@@ -2275,6 +2513,50 @@ public class GmailDraftsManager extends GmailManager {
     /**
      * Method to update a draft with a file as attachment
      *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText,
+                                     File file) throws Exception {
+        return updateDraftWithFile(draft.getId(), toEmailAddress, subject, emailText, file, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText, File file,
+                                     ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createSimpleMessageWithFile(toEmailAddress, subject, emailText, file,
+                TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
      * @param draftId:        identifier of the draft to update
      * @param toEmailAddress: recipient of the email message
      * @param subject:        subject of the email message
@@ -2312,6 +2594,52 @@ public class GmailDraftsManager extends GmailManager {
                                      ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createSimpleMessageWithFile(toEmailAddress, subject, emailText, file,
                 TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText, File file,
+                                     String mimeType) throws Exception {
+        return updateDraftWithFile(draft.getId(), toEmailAddress, subject, emailText, file, mimeType, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText, File file,
+                                     String mimeType, ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createSimpleMessageWithFile(toEmailAddress, subject, emailText, file,
+                mimeType), format);
     }
 
     /**
@@ -2361,6 +2689,52 @@ public class GmailDraftsManager extends GmailManager {
     /**
      * Method to update a draft with a file as attachment
      *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @param Cc:             carbon copy value
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateCcDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText, File file,
+                                       String... Cc) throws Exception {
+        return updateCcDraftWithFile(draft.getId(), toEmailAddress, subject, emailText, file, LIBRARY_OBJECT, Cc);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @param Cc:             carbon copy value
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateCcDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText, File file,
+                                       ReturnFormat format, String... Cc) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCcMessageWithFile(toEmailAddress, subject, Arrays.toString(Cc),
+                emailText, file, TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
      * @param draftId:        identifier of the draft to update
      * @param toEmailAddress: recipient of the email message
      * @param subject:        subject of the email message
@@ -2400,6 +2774,55 @@ public class GmailDraftsManager extends GmailManager {
                                        ReturnFormat format, String... Cc) throws Exception {
         return executeDraftUpdate(draftId, createCcMessageWithFile(toEmailAddress, subject, Arrays.toString(Cc), emailText,
                 file, TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param Cc:             carbon copy value
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateCcDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText,
+                                       String mimeType, File file, String... Cc) throws Exception {
+        return updateCcDraftWithFile(draft.getId(), toEmailAddress, subject, emailText, file, mimeType, LIBRARY_OBJECT,
+                Cc);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @param Cc:             carbon copy value
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateCcDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText, File file,
+                                       String mimeType, ReturnFormat format, String... Cc) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCcMessageWithFile(toEmailAddress, subject, Arrays.toString(Cc),
+                emailText, file, mimeType), format);
     }
 
     /**
@@ -2451,6 +2874,52 @@ public class GmailDraftsManager extends GmailManager {
     /**
      * Method to update a draft with a file as attachment
      *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @param Bcc:            blind carbon copy value
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateBccDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText, File file,
+                                        String... Bcc) throws Exception {
+        return updateBccDraftWithFile(draft.getId(), toEmailAddress, subject, emailText, file, LIBRARY_OBJECT, Bcc);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @param Bcc:            blind carbon copy value
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateBccDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText, File file,
+                                        ReturnFormat format, String... Bcc) throws Exception {
+        return executeDraftUpdate(draft.getId(), createBccMessageWithFile(toEmailAddress, subject, Arrays.toString(Bcc),
+                emailText, file, TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
      * @param draftId:        identifier of the draft to update
      * @param toEmailAddress: recipient of the email message
      * @param subject:        subject of the email message
@@ -2490,6 +2959,54 @@ public class GmailDraftsManager extends GmailManager {
                                         ReturnFormat format, String... Bcc) throws Exception {
         return executeDraftUpdate(draftId, createBccMessageWithFile(toEmailAddress, subject, Arrays.toString(Bcc), emailText,
                 file, TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @param Cc:             carbon copy values in array of {@link String} format
+     * @param Bcc:            blind carbon copy values in array of {@link String} format
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText, File file,
+                                     String[] Cc, String[] Bcc) throws Exception {
+        return updateDraftWithFile(draft.getId(), toEmailAddress, subject, emailText, file, Cc, Bcc, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @param Cc:             carbon copy values in array of {@link String} format
+     * @param Bcc:            blind carbon copy values in array of {@link String} format
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText, File file,
+                                     String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCompleteMessageWithFile(toEmailAddress, subject,
+                Arrays.toString(Cc), emailText, Arrays.toString(Bcc), file, TEXT_PLAIN_MIME_TYPE), format);
     }
 
     /**
@@ -2536,6 +3053,57 @@ public class GmailDraftsManager extends GmailManager {
                                      String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createCompleteMessageWithFile(toEmailAddress, subject, Arrays.toString(Cc),
                 emailText, Arrays.toString(Bcc), file, TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param Cc:             carbon copy values in array of {@link String} format
+     * @param Bcc:            blind carbon copy values in array of {@link String} format
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText, File file,
+                                     String[] Cc, String[] Bcc, String mimeType) throws Exception {
+        return updateDraftWithFile(draft.getId(), toEmailAddress, subject, emailText, file, Cc, Bcc, mimeType,
+                LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param Cc:             carbon copy values in array of {@link String} format
+     * @param Bcc:            blind carbon copy values in array of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText, File file,
+                                     String[] Cc, String[] Bcc, String mimeType, ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCompleteMessageWithFile(toEmailAddress, subject, Arrays.toString(Cc),
+                emailText, Arrays.toString(Bcc), file, mimeType), format);
     }
 
     /**
@@ -2589,6 +3157,54 @@ public class GmailDraftsManager extends GmailManager {
     /**
      * Method to update a draft with a file as attachment
      *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
+     * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText, File file,
+                                     Collection<String> Cc, Collection<String> Bcc) throws Exception {
+        return updateDraftWithFile(draft.getId(), toEmailAddress, subject, emailText, file, Cc, Bcc, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
+     * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText, File file,
+                                     Collection<String> Cc, Collection<String> Bcc, ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCompleteMessageWithFile(toEmailAddress, subject, emailText,
+                Arrays.toString(Cc.toArray()), Arrays.toString(Bcc.toArray()), file, TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
      * @param draftId:        identifier of the draft to update
      * @param toEmailAddress: recipient of the email message
      * @param subject:        subject of the email message
@@ -2630,6 +3246,58 @@ public class GmailDraftsManager extends GmailManager {
                                      Collection<String> Cc, Collection<String> Bcc, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createCompleteMessageWithFile(toEmailAddress, subject, emailText,
                 Arrays.toString(Cc.toArray()), Arrays.toString(Bcc.toArray()), file, TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
+     * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText, File file,
+                                     Collection<String> Cc, Collection<String> Bcc, String mimeType) throws Exception {
+        return updateDraftWithFile(draft.getId(), toEmailAddress, subject, emailText, file, Cc, Bcc, mimeType,
+                LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a file as attachment
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param file:           attachment file to sent with draft
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
+     * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFile(Draft draft, String toEmailAddress, String subject, String emailText, File file,
+                                     Collection<String> Cc, Collection<String> Bcc, String mimeType,
+                                     ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCompleteMessageWithFile(toEmailAddress, subject, emailText,
+                Arrays.toString(Cc.toArray()), Arrays.toString(Bcc.toArray()), file, mimeType), format);
     }
 
     /**
@@ -2684,6 +3352,50 @@ public class GmailDraftsManager extends GmailManager {
     /**
      * Method to update a draft with a different files as attachments
      *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                      File[] files) throws Exception {
+        return updateDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                      File[] files, ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createMessageWithFiles(toEmailAddress, subject, emailText, files,
+                TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
      * @param draftId:        identifier of the draft to update
      * @param toEmailAddress: recipient of the email message
      * @param subject:        subject of the email message
@@ -2721,6 +3433,52 @@ public class GmailDraftsManager extends GmailManager {
                                       File[] files, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createMessageWithFiles(toEmailAddress, subject, emailText, files,
                 TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param Cc:             carbon copy value
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateCcDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                        File[] files, String... Cc) throws Exception {
+        return updateCcDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, LIBRARY_OBJECT, Cc);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @param Cc:             carbon copy value
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateCcDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                        File[] files, ReturnFormat format, String... Cc) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCcMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc),
+                emailText, files, TEXT_PLAIN_MIME_TYPE), format);
     }
 
     /**
@@ -2770,6 +3528,52 @@ public class GmailDraftsManager extends GmailManager {
     /**
      * Method to update a draft with a different files as attachments
      *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param Bcc:            blind carbon copy value
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateBccDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                         File[] files, String... Bcc) throws Exception {
+        return updateBccDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, LIBRARY_OBJECT, Bcc);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @param Bcc:            blind carbon copy value
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateBccDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                         File[] files, ReturnFormat format, String... Bcc) throws Exception {
+        return executeDraftUpdate(draft.getId(), createBccMessageWithFiles(toEmailAddress, subject, Arrays.toString(Bcc),
+                emailText, files, TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
      * @param draftId:        identifier of the draft to update
      * @param toEmailAddress: recipient of the email message
      * @param subject:        subject of the email message
@@ -2809,6 +3613,54 @@ public class GmailDraftsManager extends GmailManager {
                                          File[] files, ReturnFormat format, String... Bcc) throws Exception {
         return executeDraftUpdate(draftId, createBccMessageWithFiles(toEmailAddress, subject, Arrays.toString(Bcc), emailText,
                 files, TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param Cc:             carbon copy values in array of {@link String} format
+     * @param Bcc:            blind carbon copy values in array of {@link String} format
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                      File[] files, String[] Cc, String[] Bcc) throws Exception {
+        return updateDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, Cc, Bcc, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param Cc:             carbon copy values in array of {@link String} format
+     * @param Bcc:            blind carbon copy values in array of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText, File[] files,
+                                      String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCompletedMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc),
+                emailText, Arrays.toString(Bcc), files, TEXT_PLAIN_MIME_TYPE), format);
     }
 
     /**
@@ -2860,6 +3712,54 @@ public class GmailDraftsManager extends GmailManager {
     /**
      * Method to update a draft with a different files as attachments
      *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
+     * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText, File[] files,
+                                      Collection<String> Cc, Collection<String> Bcc) throws Exception {
+        return updateDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, Cc, Bcc, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
+     * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText, File[] files,
+                                      Collection<String> Cc, Collection<String> Bcc, ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCompletedMessageWithFiles(toEmailAddress, subject, emailText,
+                Arrays.toString(Cc.toArray()), Arrays.toString(Bcc.toArray()), files, TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
      * @param draftId:        identifier of the draft to update
      * @param toEmailAddress: recipient of the email message
      * @param subject:        subject of the email message
@@ -2906,6 +3806,52 @@ public class GmailDraftsManager extends GmailManager {
     /**
      * Method to update a draft with a different files as attachments
      *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText, File[] files,
+                                      String mimeType) throws Exception {
+        return updateDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText, File[] files,
+                                      String mimeType, ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createMessageWithFiles(toEmailAddress, subject, emailText, files,
+                mimeType), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
      * @param draftId:        identifier of the draft to update
      * @param toEmailAddress: recipient of the email message
      * @param subject:        subject of the email message
@@ -2945,6 +3891,56 @@ public class GmailDraftsManager extends GmailManager {
                                       String mimeType, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createMessageWithFiles(toEmailAddress, subject, emailText, files, mimeType),
                 format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param Cc:             carbon copy value
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateCcDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                        String mimeType, File[] files, String... Cc) throws Exception {
+        return updateCcDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT,
+                Cc);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @param Cc:             carbon copy value
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateCcDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                        File[] files, String mimeType, ReturnFormat format,
+                                        String... Cc) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCcMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc),
+                emailText, files, mimeType), format);
     }
 
     /**
@@ -2997,6 +3993,56 @@ public class GmailDraftsManager extends GmailManager {
     /**
      * Method to update a draft with a different files as attachments
      *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param Bcc:            blind carbon copy value
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateBccDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                         String mimeType, File[] files, String... Bcc) throws Exception {
+        return updateBccDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT,
+                Bcc);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @param Bcc:            blind carbon copy value
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateBccDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                         File[] files, String mimeType, ReturnFormat format,
+                                         String... Bcc) throws Exception {
+        return executeDraftUpdate(draft.getId(), createBccMessageWithFiles(toEmailAddress, subject, Arrays.toString(Bcc),
+                emailText, files, mimeType), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
      * @param draftId:        identifier of the draft to update
      * @param toEmailAddress: recipient of the email message
      * @param subject:        subject of the email message
@@ -3039,6 +4085,57 @@ public class GmailDraftsManager extends GmailManager {
                                          String... Bcc) throws Exception {
         return executeDraftUpdate(draftId, createBccMessageWithFiles(toEmailAddress, subject, Arrays.toString(Bcc),
                 emailText, files, mimeType), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param Cc:             carbon copy values in array of {@link String} format
+     * @param Bcc:            blind carbon copy values in array of {@link String} format
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText, File[] files,
+                                      String mimeType, String[] Cc, String[] Bcc) throws Exception {
+        return updateDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, mimeType, Cc, Bcc,
+                LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param Cc:             carbon copy values in array of {@link String} format
+     * @param Bcc:            blind carbon copy values in array of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText, File[] files,
+                                      String mimeType, String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCompletedMessageWithFiles(toEmailAddress, subject,
+                Arrays.toString(Cc), emailText, Arrays.toString(Bcc), files, mimeType), format);
     }
 
     /**
@@ -3087,6 +4184,58 @@ public class GmailDraftsManager extends GmailManager {
                                       String mimeType, String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createCompletedMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc),
                 emailText, Arrays.toString(Bcc), files, mimeType), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
+     * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText, File[] files,
+                                      String mimeType, Collection<String> Cc, Collection<String> Bcc) throws Exception {
+        return updateDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, mimeType, Cc, Bcc,
+                LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as array of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
+     * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                      File[] files, String mimeType, Collection<String> Cc, Collection<String> Bcc,
+                                      ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCompletedMessageWithFiles(toEmailAddress, subject, emailText,
+                Arrays.toString(Cc.toArray()), Arrays.toString(Bcc.toArray()), files, mimeType), format);
     }
 
     /**
@@ -3141,6 +4290,50 @@ public class GmailDraftsManager extends GmailManager {
     /**
      * Method to update a draft with a different files as attachments
      *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                      Collection<File> files) throws Exception {
+        return updateDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                      Collection<File> files, ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createMessageWithFiles(toEmailAddress, subject, emailText,
+                files.toArray(new File[0]), TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
      * @param draftId:        identifier of the draft to update
      * @param toEmailAddress: recipient of the email message
      * @param subject:        subject of the email message
@@ -3178,6 +4371,52 @@ public class GmailDraftsManager extends GmailManager {
                                       Collection<File> files, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createMessageWithFiles(toEmailAddress, subject, emailText,
                 files.toArray(new File[0]), TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param Cc:             carbon copy value
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateCcDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                        Collection<File> files, String... Cc) throws Exception {
+        return updateCcDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, LIBRARY_OBJECT, Cc);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @param Cc:             carbon copy value
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateCcDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                        Collection<File> files, ReturnFormat format, String... Cc) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCcMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc),
+                emailText, files.toArray(new File[0]), TEXT_PLAIN_MIME_TYPE), format);
     }
 
     /**
@@ -3227,6 +4466,52 @@ public class GmailDraftsManager extends GmailManager {
     /**
      * Method to update a draft with a different files as attachments
      *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param Bcc:            blind carbon copy value
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateBccDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                         Collection<File> files, String... Bcc) throws Exception {
+        return updateBccDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, LIBRARY_OBJECT, Bcc);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @param Bcc:            blind carbon copy value
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateBccDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                         Collection<File> files, ReturnFormat format, String... Bcc) throws Exception {
+        return executeDraftUpdate(draft.getId(), createBccMessageWithFiles(toEmailAddress, subject, Arrays.toString(Bcc),
+                emailText, files.toArray(new File[0]), TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
      * @param toEmailAddress: recipient of the email message
      * @param subject:        subject of the email message
      * @param emailText:      email content message
@@ -3265,6 +4550,56 @@ public class GmailDraftsManager extends GmailManager {
                                          Collection<File> files, ReturnFormat format, String... Bcc) throws Exception {
         return executeDraftUpdate(draftId, createBccMessageWithFiles(toEmailAddress, subject, Arrays.toString(Bcc),
                 emailText, files.toArray(new File[0]), TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param Cc:             carbon copy values in array of {@link String} format
+     * @param Bcc:            blind carbon copy values in array of {@link String} format
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                      Collection<File> files, String[] Cc, String[] Bcc) throws Exception {
+        return updateDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, Cc, Bcc, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param Cc:             carbon copy values in array of {@link String} format
+     * @param Bcc:            blind carbon copy values in array of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                      Collection<File> files, String[] Cc, String[] Bcc,
+                                      ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCompletedMessageWithFiles(toEmailAddress, subject,
+                        Arrays.toString(Cc), emailText, Arrays.toString(Bcc), files.toArray(new File[0]), TEXT_PLAIN_MIME_TYPE),
+                format);
     }
 
     /**
@@ -3312,6 +4647,57 @@ public class GmailDraftsManager extends GmailManager {
                                       ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createCompletedMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc),
                 emailText, Arrays.toString(Bcc), files.toArray(new File[0]), TEXT_PLAIN_MIME_TYPE), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
+     * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                      Collection<File> files, Collection<String> Cc,
+                                      Collection<String> Bcc) throws Exception {
+        return updateDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, Cc, Bcc, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
+     * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                      Collection<File> files, Collection<String> Cc, Collection<String> Bcc,
+                                      ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCompletedMessageWithFiles(toEmailAddress, subject, emailText,
+                Arrays.toString(Cc.toArray()), Arrays.toString(Bcc.toArray()), files.toArray(new File[0]),
+                TEXT_PLAIN_MIME_TYPE), format);
     }
 
     /**
@@ -3366,6 +4752,52 @@ public class GmailDraftsManager extends GmailManager {
     /**
      * Method to update a draft with a different files as attachments
      *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                      String mimeType, Collection<File> files) throws Exception {
+        return updateDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                      Collection<File> files, String mimeType, ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createMessageWithFiles(toEmailAddress, subject, emailText,
+                files.toArray(new File[0]), mimeType), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
      * @param draftId:        identifier of the draft to update
      * @param toEmailAddress: recipient of the email message
      * @param subject:        subject of the email message
@@ -3405,6 +4837,56 @@ public class GmailDraftsManager extends GmailManager {
                                       Collection<File> files, String mimeType, ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createMessageWithFiles(toEmailAddress, subject, emailText,
                 files.toArray(new File[0]), mimeType), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param Cc:             carbon copy value
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateCcDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                        String mimeType, Collection<File> files, String... Cc) throws Exception {
+        return updateCcDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT,
+                Cc);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @param Cc:             carbon copy value
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateCcDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                        Collection<File> files, String mimeType, ReturnFormat format,
+                                        String... Cc) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCcMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc),
+                emailText, files.toArray(new File[0]), mimeType), format);
     }
 
     /**
@@ -3451,6 +4933,56 @@ public class GmailDraftsManager extends GmailManager {
                                         Collection<File> files, String mimeType, ReturnFormat format,
                                         String... Cc) throws Exception {
         return executeDraftUpdate(draftId, createCcMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc),
+                emailText, files.toArray(new File[0]), mimeType), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param Bcc:            blind carbon copy value
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateBccDraftWithFiles(Draft draft, String toEmailAddress, String subject, String mimeType,
+                                         String emailText, Collection<File> files, String... Bcc) throws Exception {
+        return updateBccDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, mimeType, LIBRARY_OBJECT,
+                Bcc);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @param Bcc:            blind carbon copy value
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateBccDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                         Collection<File> files, String mimeType, ReturnFormat format,
+                                         String... Bcc) throws Exception {
+        return executeDraftUpdate(draft.getId(), createBccMessageWithFiles(toEmailAddress, subject, Arrays.toString(Bcc),
                 emailText, files.toArray(new File[0]), mimeType), format);
     }
 
@@ -3504,6 +5036,58 @@ public class GmailDraftsManager extends GmailManager {
     /**
      * Method to update a draft with a different files as attachments
      *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param Cc:             carbon copy values in array of {@link String} format
+     * @param Bcc:            blind carbon copy values in array of {@link String} format
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                      Collection<File> files, String mimeType, String[] Cc, String[] Bcc) throws Exception {
+        return updateDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, mimeType, Cc, Bcc,
+                LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param Cc:             carbon copy values in array of {@link String} format
+     * @param Bcc:            blind carbon copy values in array of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
+     * users.drafts.create</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                      Collection<File> files, String mimeType, String[] Cc, String[] Bcc,
+                                      ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCompletedMessageWithFiles(toEmailAddress, subject,
+                Arrays.toString(Cc), emailText, Arrays.toString(Bcc), files.toArray(new File[0]), mimeType), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
      * @param draftId:        identifier of the draft to update
      * @param toEmailAddress: recipient of the email message
      * @param subject:        subject of the email message
@@ -3548,6 +5132,60 @@ public class GmailDraftsManager extends GmailManager {
                                       ReturnFormat format) throws Exception {
         return executeDraftUpdate(draftId, createCompletedMessageWithFiles(toEmailAddress, subject, Arrays.toString(Cc),
                 emailText, Arrays.toString(Bcc), files.toArray(new File[0]), mimeType), format);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
+     * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
+     * @return draft response as {@link Draft} custom object
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public Draft updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                      Collection<File> files, String mimeType, Collection<String> Cc,
+                                      Collection<String> Bcc) throws Exception {
+        return updateDraftWithFiles(draft.getId(), toEmailAddress, subject, emailText, files, mimeType, Cc, Bcc,
+                LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to update a draft with a different files as attachments
+     *
+     * @param draft:          draft to update
+     * @param toEmailAddress: recipient of the email message
+     * @param subject:        subject of the email message
+     * @param emailText:      email content message
+     * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
+     * @param mimeType:       type of mime -> constants available at {@link GmailManager}
+     * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
+     * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return draft as {@code "format"} defines
+     * @throws Exception when request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
+     * users.drafts.update</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
+    public <T> T updateDraftWithFiles(Draft draft, String toEmailAddress, String subject, String emailText,
+                                      Collection<File> files, String mimeType, Collection<String> Cc,
+                                      Collection<String> Bcc, ReturnFormat format) throws Exception {
+        return executeDraftUpdate(draft.getId(), createCompletedMessageWithFiles(toEmailAddress, subject, emailText,
+                        Arrays.toString(Cc.toArray()), Arrays.toString(Bcc.toArray()), files.toArray(new File[0]), mimeType),
+                format);
     }
 
     /**
