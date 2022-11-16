@@ -147,11 +147,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param subject:        subject of the email message
      * @param emailText:      email content message
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraft(String toEmailAddress, String subject, String emailText) throws Exception {
         return createDraft(toEmailAddress, subject, emailText, LIBRARY_OBJECT);
@@ -165,11 +166,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraft(String toEmailAddress, String subject, String emailText, ReturnFormat format) throws Exception {
         return createDraft(createSimpleMessage(toEmailAddress, subject, emailText), format, true);
@@ -183,11 +185,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithCc(String toEmailAddress, String subject, String emailText, String... Cc) throws Exception {
         return createDraftWithCc(toEmailAddress, subject, emailText, LIBRARY_OBJECT, Cc);
@@ -202,11 +205,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithCc(String toEmailAddress, String subject, String emailText, ReturnFormat format,
                                    String... Cc) throws Exception {
@@ -221,11 +225,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithBcc(String toEmailAddress, String subject, String emailText, String... Bcc) throws Exception {
         return createDraftWithBcc(toEmailAddress, subject, emailText, LIBRARY_OBJECT, Bcc);
@@ -240,11 +245,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithBcc(String toEmailAddress, String subject, String emailText, ReturnFormat format,
                                     String... Bcc) throws Exception {
@@ -260,11 +266,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraft(String toEmailAddress, String subject, String emailText, String[] Cc,
                              String[] Bcc) throws Exception {
@@ -281,11 +288,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraft(String toEmailAddress, String subject, String emailText, String[] Cc, String[] Bcc,
                              ReturnFormat format) throws Exception {
@@ -302,11 +310,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraft(String toEmailAddress, String subject, String emailText, Collection<String> Cc,
                              Collection<String> Bcc) throws Exception {
@@ -323,11 +332,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraft(String toEmailAddress, String subject, String emailText, Collection<String> Cc,
                              Collection<String> Bcc, ReturnFormat format) throws Exception {
@@ -343,11 +353,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param file:           attachment file to sent with draft
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFile(String toEmailAddress, String subject, String emailText, File file) throws Exception {
         return createDraftWithFile(toEmailAddress, subject, emailText, file, LIBRARY_OBJECT);
@@ -363,11 +374,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param file:           attachment file to sent with draft
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      ReturnFormat format) throws Exception {
@@ -384,11 +396,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param file:           attachment file to sent with draft
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      String mimeType) throws Exception {
@@ -405,11 +418,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFile(String toEmailAddress, String subject, String emailText, File file, String mimeType,
                                      ReturnFormat format) throws Exception {
@@ -426,11 +440,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param file:           attachment file to sent with draft
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createCcDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                        String... Cc) throws Exception {
@@ -447,11 +462,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createCcDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                        ReturnFormat format, String... Cc) throws Exception {
@@ -469,11 +485,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createCcDraftWithFile(String toEmailAddress, String subject, String emailText, String mimeType,
                                        File file, String... Cc) throws Exception {
@@ -491,11 +508,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createCcDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                        String mimeType, ReturnFormat format, String... Cc) throws Exception {
@@ -512,11 +530,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param file:           attachment file to sent with draft
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createBccDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                         String... Bcc) throws Exception {
@@ -533,11 +552,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createBccDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                         ReturnFormat format, String... Bcc) throws Exception {
@@ -555,11 +575,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      String[] Cc, String[] Bcc) throws Exception {
@@ -577,11 +598,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
@@ -600,11 +622,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      String[] Cc, String[] Bcc, String mimeType) throws Exception {
@@ -623,11 +646,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      String[] Cc, String[] Bcc, String mimeType, ReturnFormat format) throws Exception {
@@ -645,11 +669,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      Collection<String> Cc, Collection<String> Bcc) throws Exception {
@@ -667,11 +692,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      Collection<String> Cc, Collection<String> Bcc, ReturnFormat format) throws Exception {
@@ -690,11 +716,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      Collection<String> Cc, Collection<String> Bcc, String mimeType) throws Exception {
@@ -713,11 +740,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFile(String toEmailAddress, String subject, String emailText, File file,
                                      Collection<String> Cc, Collection<String> Bcc, String mimeType,
@@ -734,11 +762,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText,
                                       File[] files) throws Exception {
@@ -754,11 +783,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       ReturnFormat format) throws Exception {
@@ -775,11 +805,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createCcDraftWithFiles(String toEmailAddress, String subject, String emailText,
                                         File[] files, String... Cc) throws Exception {
@@ -796,11 +827,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createCcDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                         ReturnFormat format, String... Cc) throws Exception {
@@ -817,11 +849,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createBccDraftWithFiles(String toEmailAddress, String subject, String emailText,
                                          File[] files, String... Bcc) throws Exception {
@@ -838,11 +871,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createBccDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                          ReturnFormat format, String... Bcc) throws Exception {
@@ -860,11 +894,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       String[] Cc, String[] Bcc) throws Exception {
@@ -882,11 +917,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
@@ -904,11 +940,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       Collection<String> Cc, Collection<String> Bcc) throws Exception {
@@ -926,11 +963,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       Collection<String> Cc, Collection<String> Bcc, ReturnFormat format) throws Exception {
@@ -947,11 +985,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType) throws Exception {
@@ -968,11 +1007,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, ReturnFormat format) throws Exception {
@@ -990,11 +1030,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createCcDraftWithFiles(String toEmailAddress, String subject, String emailText, String mimeType,
                                         File[] files, String... Cc) throws Exception {
@@ -1012,11 +1053,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createCcDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                         String mimeType, ReturnFormat format, String... Cc) throws Exception {
@@ -1034,11 +1076,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createBccDraftWithFiles(String toEmailAddress, String subject, String emailText, String mimeType,
                                          File[] files, String... Bcc) throws Exception {
@@ -1056,11 +1099,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createBccDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                          String mimeType, ReturnFormat format, String... Bcc) throws Exception {
@@ -1079,11 +1123,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, String[] Cc, String[] Bcc) throws Exception {
@@ -1102,11 +1147,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
@@ -1125,11 +1171,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, Collection<String> Cc, Collection<String> Bcc) throws Exception {
@@ -1148,11 +1195,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, Collection<String> Cc, Collection<String> Bcc,
@@ -1169,11 +1217,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText,
                                       Collection<File> files) throws Exception {
@@ -1189,11 +1238,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       ReturnFormat format) throws Exception {
@@ -1210,11 +1260,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createCcDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                         String... Cc) throws Exception {
@@ -1231,11 +1282,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createCcDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                         ReturnFormat format, String... Cc) throws Exception {
@@ -1252,11 +1304,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createBccDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                          String... Bcc) throws Exception {
@@ -1273,11 +1326,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createBccDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                          ReturnFormat format, String... Bcc) throws Exception {
@@ -1295,11 +1349,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       String[] Cc, String[] Bcc) throws Exception {
@@ -1317,11 +1372,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
@@ -1339,11 +1395,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       Collection<String> Cc, Collection<String> Bcc) throws Exception {
@@ -1361,11 +1418,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       Collection<String> Cc, Collection<String> Bcc, ReturnFormat format) throws Exception {
@@ -1382,11 +1440,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, String mimeType,
                                       Collection<File> files) throws Exception {
@@ -1403,11 +1462,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       String mimeType, ReturnFormat format) throws Exception {
@@ -1425,11 +1485,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createCcDraftWithFiles(String toEmailAddress, String subject, String emailText, String mimeType,
                                         Collection<File> files, String... Cc) throws Exception {
@@ -1447,11 +1508,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createCcDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                         String mimeType, ReturnFormat format, String... Cc) throws Exception {
@@ -1469,11 +1531,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createBccDraftWithFiles(String toEmailAddress, String subject, String mimeType, String emailText,
                                          Collection<File> files, String... Bcc) throws Exception {
@@ -1491,11 +1554,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createBccDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                          String mimeType, ReturnFormat format, String... Bcc) throws Exception {
@@ -1514,11 +1578,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       String mimeType, String[] Cc, String[] Bcc) throws Exception {
@@ -1537,11 +1602,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       String mimeType, String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
@@ -1560,11 +1626,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public Draft createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       String mimeType, Collection<String> Cc, Collection<String> Bcc) throws Exception {
@@ -1583,11 +1650,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts")
     public <T> T createDraftWithFiles(String toEmailAddress, String subject, String emailText, Collection<File> files,
                                       String mimeType, Collection<String> Cc, Collection<String> Bcc,
@@ -1653,6 +1721,7 @@ public class GmailDraftsManager extends GmailManager {
      *
      * @param draftId: identifier of the draft to get
      * @return draft requested as {@link Draft} custom object
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/get">
      * users.drafts.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1668,6 +1737,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param draftId: identifier of the draft to get
      * @param format:  return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/get">
      * users.drafts.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1682,6 +1752,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param draftId:        identifier of the draft to get
      * @param responseFormat: format to receive as response to create the {@link Draft} object -> constants available at {@link GmailManager}
      * @return draft requested as {@link Draft} custom object
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/get">
      * users.drafts.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1698,6 +1769,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param responseFormat: format to receive as response to create the {@link Draft} object -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/get">
      * users.drafts.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1715,6 +1787,7 @@ public class GmailDraftsManager extends GmailManager {
      *
      * @param includeSpamTrash: flag to include or not drafts from {@code "SPAM"} and {@code "THRASH"} in the results
      * @return drafts list requested as {@link Drafts} custom object
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list">
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1730,6 +1803,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param includeSpamTrash: flag to include or not drafts from {@code "SPAM"} and {@code "THRASH"} in the results
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return drafts list as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list">
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1745,10 +1819,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param includeSpamTrash: flag to include or not drafts from {@code "SPAM"} and {@code "THRASH"} in the results
      * @param maxResults:       maximum number of drafts to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @return drafts list requested as {@link Drafts} custom object
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list">
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public Drafts getDraftsList(boolean includeSpamTrash, int maxResults) throws IOException {
         return getDraftsList(includeSpamTrash, maxResults, LIBRARY_OBJECT);
@@ -1761,10 +1837,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param maxResults:       maximum number of drafts to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return drafts list as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list">
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public <T> T getDraftsList(boolean includeSpamTrash, int maxResults, ReturnFormat format) throws IOException {
         return returnDraftsList(drafts.list(userId).setIncludeSpamTrash(includeSpamTrash)
@@ -1778,10 +1856,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param includeSpamTrash: flag to include or not drafts from {@code "SPAM"} and {@code "THRASH"} in the results
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @return drafts list requested as {@link Drafts} custom object
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list">
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public Drafts getDraftsList(boolean includeSpamTrash, String pageToken) throws IOException {
         return getDraftsList(includeSpamTrash, pageToken, LIBRARY_OBJECT);
@@ -1794,10 +1874,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return drafts list as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list">
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public <T> T getDraftsList(boolean includeSpamTrash, String pageToken, ReturnFormat format) throws IOException {
         return returnDraftsList(drafts.list(userId)
@@ -1813,10 +1895,12 @@ public class GmailDraftsManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param includeSpamTrash: flag to include or not drafts from {@code "SPAM"} and {@code "THRASH"} in the results
      * @return drafts list requested as {@link Drafts} custom object
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list">
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public Drafts getDraftsList(String q, boolean includeSpamTrash) throws IOException {
         return getDraftsList(q, includeSpamTrash, LIBRARY_OBJECT);
@@ -1830,10 +1914,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param includeSpamTrash: flag to include or not drafts from {@code "SPAM"} and {@code "THRASH"} in the results
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return drafts list as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list">
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public <T> T getDraftsList(String q, boolean includeSpamTrash, ReturnFormat format) throws IOException {
         return returnDraftsList(drafts.list(userId)
@@ -1849,10 +1935,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param maxResults:       maximum number of drafts to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @return drafts list requested as {@link Drafts} custom object
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list">
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public Drafts getDraftsList(boolean includeSpamTrash, int maxResults, String pageToken) throws IOException {
         return getDraftsList(includeSpamTrash, maxResults, pageToken, LIBRARY_OBJECT);
@@ -1866,10 +1954,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return drafts list as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list">
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public <T> T getDraftsList(boolean includeSpamTrash, int maxResults, String pageToken,
                                ReturnFormat format) throws IOException {
@@ -1887,10 +1977,12 @@ public class GmailDraftsManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param maxResults:       maximum number of drafts to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @return drafts list requested as {@link Drafts} custom object
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list">
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public Drafts getDraftsList(boolean includeSpamTrash, String q, int maxResults) throws IOException {
         return getDraftsList(includeSpamTrash, q, maxResults, LIBRARY_OBJECT);
@@ -1905,10 +1997,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param maxResults:       maximum number of drafts to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return drafts list as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list">
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public <T> T getDraftsList(boolean includeSpamTrash, String q, int maxResults,
                                ReturnFormat format) throws IOException {
@@ -1926,10 +2020,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return drafts list requested as {@link Drafts} custom object
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list">
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public Drafts getDraftsList(boolean includeSpamTrash, String pageToken, String q) throws IOException {
         return getDraftsList(includeSpamTrash, pageToken, q, LIBRARY_OBJECT);
@@ -1944,10 +2040,12 @@ public class GmailDraftsManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return drafts list as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list">
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public <T> T getDraftsList(boolean includeSpamTrash, String pageToken, String q,
                                ReturnFormat format) throws IOException {
@@ -1966,10 +2064,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param q:                Only return draft messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return drafts list requested as {@link Drafts} custom object
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list">
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public Drafts getDraftsList(boolean includeSpamTrash, int maxResults, String pageToken,
                                 String q) throws IOException {
@@ -1986,10 +2086,12 @@ public class GmailDraftsManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return drafts list as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list">
      * users.drafts.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/drafts")
     public <T> T getDraftsList(boolean includeSpamTrash, int maxResults, String pageToken,
                                String q, ReturnFormat format) throws IOException {
@@ -2024,6 +2126,7 @@ public class GmailDraftsManager extends GmailManager {
      *
      * @param draft: draft to send
      * @return message of the response as {@link Message} custom object
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/send">
      * users.drafts.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2040,6 +2143,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param draft:  draft to send
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/send">
      * users.drafts.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2055,6 +2159,7 @@ public class GmailDraftsManager extends GmailManager {
      *
      * @param draftId: identifier ot the draft to send
      * @return message of the response as {@link Message} custom object
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/send">
      * users.drafts.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2070,6 +2175,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param draftId: identifier ot the draft to send
      * @param format:  return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/send">
      * users.drafts.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2088,7 +2194,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param subject:        subject of the email message
      * @param emailText:      email content message
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2108,7 +2214,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2128,11 +2234,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param subject:        subject of the email message
      * @param emailText:      email content message
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraft(String draftId, String toEmailAddress, String subject, String emailText) throws Exception {
         return updateDraft(draftId, toEmailAddress, subject, emailText, LIBRARY_OBJECT);
@@ -2147,11 +2254,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraft(String draftId, String toEmailAddress, String subject, String emailText,
                              ReturnFormat format) throws Exception {
@@ -2167,7 +2275,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2189,7 +2297,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2211,11 +2319,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithCc(String draftId, String toEmailAddress, String subject, String emailText,
                                    String... Cc) throws Exception {
@@ -2232,11 +2341,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithCc(String draftId, String toEmailAddress, String subject, String emailText,
                                    ReturnFormat format, String... Cc) throws Exception {
@@ -2253,7 +2363,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2275,7 +2385,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2297,11 +2407,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithBcc(String draftId, String toEmailAddress, String subject, String emailText,
                                     String... Bcc) throws Exception {
@@ -2318,11 +2429,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithBcc(String draftId, String toEmailAddress, String subject, String emailText,
                                     ReturnFormat format, String... Bcc) throws Exception {
@@ -2340,7 +2452,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2363,7 +2475,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2386,11 +2498,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraft(String draftId, String toEmailAddress, String subject, String emailText, String[] Cc,
                              String[] Bcc) throws Exception {
@@ -2408,11 +2521,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraft(String draftId, String toEmailAddress, String subject, String emailText, String[] Cc,
                              String[] Bcc, ReturnFormat format) throws Exception {
@@ -2430,7 +2544,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2453,7 +2567,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2476,11 +2590,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraft(String draftId, String toEmailAddress, String subject, String emailText,
                              Collection<String> Cc, Collection<String> Bcc) throws Exception {
@@ -2498,11 +2613,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraft(String draftId, String toEmailAddress, String subject, String emailText,
                              Collection<String> Cc, Collection<String> Bcc, ReturnFormat format) throws Exception {
@@ -2519,7 +2635,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param file:           attachment file to sent with draft
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2541,7 +2657,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param file:           attachment file to sent with draft
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2563,11 +2679,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param file:           attachment file to sent with draft
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText,
                                      File file) throws Exception {
@@ -2584,11 +2701,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param file:           attachment file to sent with draft
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      ReturnFormat format) throws Exception {
@@ -2606,7 +2724,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param file:           attachment file to sent with draft
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2629,7 +2747,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2652,11 +2770,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param file:           attachment file to sent with draft
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      String mimeType) throws Exception {
@@ -2674,11 +2793,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      String mimeType, ReturnFormat format) throws Exception {
@@ -2696,7 +2816,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param file:           attachment file to sent with draft
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2719,7 +2839,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2742,11 +2862,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param file:           attachment file to sent with draft
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateCcDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                        String... Cc) throws Exception {
@@ -2764,11 +2885,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateCcDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                        ReturnFormat format, String... Cc) throws Exception {
@@ -2787,7 +2909,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2812,7 +2934,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2836,11 +2958,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateCcDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText,
                                        String mimeType, File file, String... Cc) throws Exception {
@@ -2859,11 +2982,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateCcDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                        String mimeType, ReturnFormat format, String... Cc) throws Exception {
@@ -2881,7 +3005,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param file:           attachment file to sent with draft
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2904,7 +3028,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2927,11 +3051,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param file:           attachment file to sent with draft
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateBccDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                         String... Bcc) throws Exception {
@@ -2949,11 +3074,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateBccDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                         ReturnFormat format, String... Bcc) throws Exception {
@@ -2972,7 +3098,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2996,7 +3122,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3020,11 +3146,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      String[] Cc, String[] Bcc) throws Exception {
@@ -3043,11 +3170,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
@@ -3067,7 +3195,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3093,7 +3221,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3118,11 +3246,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      String[] Cc, String[] Bcc, String mimeType) throws Exception {
@@ -3142,11 +3271,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      String[] Cc, String[] Bcc, String mimeType, ReturnFormat format) throws Exception {
@@ -3165,7 +3295,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3189,7 +3319,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3213,11 +3343,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      Collection<String> Cc, Collection<String> Bcc) throws Exception {
@@ -3236,11 +3367,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      Collection<String> Cc, Collection<String> Bcc, ReturnFormat format) throws Exception {
@@ -3260,7 +3392,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3286,7 +3418,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3312,11 +3444,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      Collection<String> Cc, Collection<String> Bcc, String mimeType) throws Exception {
@@ -3336,11 +3469,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFile(String draftId, String toEmailAddress, String subject, String emailText, File file,
                                      Collection<String> Cc, Collection<String> Bcc, String mimeType,
@@ -3358,7 +3492,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3380,7 +3514,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3402,11 +3536,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       File[] files) throws Exception {
@@ -3423,11 +3558,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       File[] files, ReturnFormat format) throws Exception {
@@ -3445,7 +3581,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3468,7 +3604,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3491,11 +3627,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateCcDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                         File[] files, String... Cc) throws Exception {
@@ -3513,11 +3650,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateCcDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                         File[] files, ReturnFormat format, String... Cc) throws Exception {
@@ -3535,7 +3673,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3558,7 +3696,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3581,11 +3719,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateBccDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                          File[] files, String... Bcc) throws Exception {
@@ -3603,11 +3742,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateBccDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                          File[] files, ReturnFormat format, String... Bcc) throws Exception {
@@ -3626,7 +3766,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3650,7 +3790,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3674,11 +3814,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       File[] files, String[] Cc, String[] Bcc) throws Exception {
@@ -3697,11 +3838,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText, File[] files,
                                       String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
@@ -3720,7 +3862,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3744,7 +3886,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3768,11 +3910,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText, File[] files,
                                       Collection<String> Cc, Collection<String> Bcc) throws Exception {
@@ -3791,11 +3934,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText, File[] files,
                                       Collection<String> Cc, Collection<String> Bcc, ReturnFormat format) throws Exception {
@@ -3813,7 +3957,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3836,7 +3980,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3859,11 +4003,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as array of {@link File}
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType) throws Exception {
@@ -3881,11 +4026,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, ReturnFormat format) throws Exception {
@@ -3904,7 +4050,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3929,7 +4075,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3954,11 +4100,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateCcDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                         String mimeType, File[] files, String... Cc) throws Exception {
@@ -3977,11 +4124,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateCcDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                         File[] files, String mimeType, ReturnFormat format,
@@ -4001,7 +4149,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4026,7 +4174,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4051,11 +4199,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateBccDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                          String mimeType, File[] files, String... Bcc) throws Exception {
@@ -4074,7 +4223,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4099,7 +4248,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4125,7 +4274,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4150,11 +4299,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, String[] Cc, String[] Bcc) throws Exception {
@@ -4174,11 +4324,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, String[] Cc, String[] Bcc, ReturnFormat format) throws Exception {
@@ -4198,7 +4349,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4224,7 +4375,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4250,11 +4401,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText, File[] files,
                                       String mimeType, Collection<String> Cc, Collection<String> Bcc) throws Exception {
@@ -4274,11 +4426,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       File[] files, String mimeType, Collection<String> Cc, Collection<String> Bcc,
@@ -4296,7 +4449,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4318,7 +4471,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4340,11 +4493,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param emailText:      email content message
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files) throws Exception {
@@ -4361,11 +4515,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, ReturnFormat format) throws Exception {
@@ -4383,7 +4538,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4406,7 +4561,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4429,11 +4584,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateCcDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                         Collection<File> files, String... Cc) throws Exception {
@@ -4451,11 +4607,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateCcDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                         Collection<File> files, ReturnFormat format, String... Cc) throws Exception {
@@ -4473,7 +4630,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4496,7 +4653,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4518,11 +4675,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateBccDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                          Collection<File> files, String... Bcc) throws Exception {
@@ -4540,11 +4698,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateBccDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                          Collection<File> files, ReturnFormat format, String... Bcc) throws Exception {
@@ -4563,7 +4722,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4587,7 +4746,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4613,11 +4772,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, String[] Cc, String[] Bcc) throws Exception {
@@ -4636,11 +4796,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, String[] Cc, String[] Bcc,
@@ -4660,7 +4821,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4685,7 +4846,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4711,11 +4872,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, Collection<String> Cc,
@@ -4735,11 +4897,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, Collection<String> Cc, Collection<String> Bcc,
@@ -4759,7 +4922,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4782,7 +4945,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4805,11 +4968,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param files:          attachments files to sent with draft as {@link Collection} of {@link File}
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       String mimeType, Collection<File> files) throws Exception {
@@ -4827,11 +4991,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, String mimeType, ReturnFormat format) throws Exception {
@@ -4850,7 +5015,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4875,7 +5040,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4900,11 +5065,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Cc:             carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateCcDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                         String mimeType, Collection<File> files, String... Cc) throws Exception {
@@ -4923,11 +5089,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateCcDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                         Collection<File> files, String mimeType, ReturnFormat format,
@@ -4947,7 +5114,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4972,7 +5139,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4997,11 +5164,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Bcc:            blind carbon copy value
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateBccDraftWithFiles(String draftId, String toEmailAddress, String subject, String mimeType,
                                          String emailText, Collection<File> files, String... Bcc) throws Exception {
@@ -5020,11 +5188,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            blind carbon copy value
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateBccDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                          Collection<File> files, String mimeType, ReturnFormat format,
@@ -5045,7 +5214,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -5071,7 +5240,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -5097,11 +5266,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in array of {@link String} format
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, String mimeType, String[] Cc, String[] Bcc) throws Exception {
@@ -5121,11 +5291,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create">
      * users.drafts.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, String mimeType, String[] Cc, String[] Bcc,
@@ -5146,7 +5317,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -5173,7 +5344,7 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -5200,11 +5371,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Cc:             carbon copy values in {@link Collection} of {@link String} format
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @return draft response as {@link Draft} custom object
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public Draft updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, String mimeType, Collection<String> Cc,
@@ -5225,11 +5397,12 @@ public class GmailDraftsManager extends GmailManager {
      * @param Bcc:            blind carbon copy values in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return draft as {@code "format"} defines
-     * @throws Exception when request has been go wrong
+     * @throws Exception when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/update">
      * users.drafts.update</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/drafts/{id}")
     public <T> T updateDraftWithFiles(String draftId, String toEmailAddress, String subject, String emailText,
                                       Collection<File> files, String mimeType, Collection<String> Cc,

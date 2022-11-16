@@ -1,4 +1,4 @@
-**v1.0.0**
+**v1.0.1**
 
 This is a Java Based library useful to work with Google API services
 
@@ -23,7 +23,7 @@ allprojects {
 
 ```gradle
 dependencies {
-  implementation 'com.github.N7ghtm4r3:GoogleManager:1.0.0'
+  implementation 'com.github.N7ghtm4r3:GoogleManager:1.0.1'
 }
 ```
 
@@ -46,9 +46,9 @@ dependencies {
 ```xml
 
 <dependency>
-    <groupId>com.github.N7ghtm4r3</groupId>
-    <artifactId>GoogleManager</artifactId>
-    <version>1.0.0</version>
+  <groupId>com.github.N7ghtm4r3</groupId>
+  <artifactId>GoogleManager</artifactId>
+  <version>1.0.1</version>
 </dependency>
 ```
 

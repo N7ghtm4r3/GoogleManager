@@ -4,6 +4,7 @@ import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.*;
 import com.tecknobit.apimanager.annotations.RequestPath;
 import com.tecknobit.apimanager.annotations.Returner;
+import com.tecknobit.apimanager.annotations.WrappedRequest;
 import com.tecknobit.googlemanager.gmail.GmailManager;
 import com.tecknobit.googlemanager.gmail.messages.records.Messages;
 import com.tecknobit.googlemanager.gmail.records.Message;
@@ -257,6 +258,7 @@ public class GmailMessagesManager extends GmailManager {
      * users.messages.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}")
     public boolean deleteMessage(Message messageToDelete) {
         return deleteMessage(messageToDelete.getId());
@@ -288,7 +290,7 @@ public class GmailMessagesManager extends GmailManager {
      *
      * @param messageId: id of the message to get
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/get">
      * users.messages.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -304,7 +306,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageId: id of the message to get
      * @param format:    return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/get">
      * users.messages.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -320,7 +322,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageId:      id of the message to get
      * @param responseFormat: the format to return the message in -> constants available at {@link ResponseFormat}
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/get">
      * users.messages.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -337,7 +339,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param responseFormat: the format to return the message in -> constants available at {@link ResponseFormat}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/get">
      * users.messages.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -353,7 +355,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageId:       id of the message to get
      * @param metadataHeaders: when given and format is {@code "METADATA"}, only include headers specified in array of {@link String} format
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/get">
      * users.messages.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -370,7 +372,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param metadataHeaders: when given and format is {@code "METADATA"}, only include headers specified in array of {@link String} format
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/get">
      * users.messages.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -389,7 +391,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param metadataHeaders: when given and format is {@code "METADATA"}, only include headers specified in array of {@link String} format
      * @param responseFormat:  the format to return the message in -> constants available at {@link ResponseFormat}
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/get">
      * users.messages.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -407,7 +409,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param responseFormat:  the format to return the message in -> constants available at {@link ResponseFormat}
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/get">
      * users.messages.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -427,7 +429,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageId:       id of the message to get
      * @param metadataHeaders: when given and format is {@code "METADATA"}, only include headers specified in {@link Collection} of {@link String} format
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/get">
      * users.messages.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -444,7 +446,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param metadataHeaders: when given and format is {@code "METADATA"}, only include headers specified in {@link Collection} of {@link String} format
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/get">
      * users.messages.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -463,7 +465,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param metadataHeaders: when given and format is {@code "METADATA"}, only include headers specified in {@link Collection} of {@link String} format
      * @param responseFormat:  the format to return the message in -> constants available at {@link ResponseFormat}
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/get">
      * users.messages.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -482,7 +484,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param responseFormat:  the format to return the message in -> constants available at {@link ResponseFormat}
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/get">
      * users.messages.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -506,11 +508,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param processForCalendar: process calendar invites in the email and add any extracted meetings to the Google Calendar for this user
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import">
      * users.messages.import</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}")
     public Message importMessage(String toEmailAddress, String subject, String contentMessage, boolean neverMarkSpam,
                                  boolean processForCalendar, boolean deleted) throws Exception {
@@ -529,11 +532,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param format:             return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import">
      * users.messages.import</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/import")
     public <T> T importMessage(String toEmailAddress, String subject, String contentMessage, boolean neverMarkSpam,
                                boolean processForCalendar, boolean deleted, ReturnFormat format) throws Exception {
@@ -555,11 +559,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param internalDateSource: source for Gmail's internal date of the message -> constants available at {@link InternalDateSource}
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import">
      * users.messages.import</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/import")
     public Message importMessage(String toEmailAddress, String subject, String contentMessage, boolean neverMarkSpam,
                                  boolean processForCalendar, boolean deleted,
@@ -580,11 +585,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param internalDateSource: source for Gmail's internal date of the message -> constants available at {@link InternalDateSource}
      * @param format:             return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import">
      * users.messages.import</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/import")
     public <T> T importMessage(String toEmailAddress, String subject, String contentMessage, boolean neverMarkSpam,
                                boolean processForCalendar, boolean deleted, InternalDateSource internalDateSource,
@@ -609,11 +615,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param file:               attachment file
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import">
      * users.messages.import</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/import")
     public Message importMessageWithFile(String toEmailAddress, String subject, String contentMessage,
                                          boolean neverMarkSpam, boolean processForCalendar, boolean deleted,
@@ -635,11 +642,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:               attachment file
      * @param format:             return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import">
      * users.messages.import</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/import")
     public <T> T importMessageWithFile(String toEmailAddress, String subject, String contentMessage,
                                        boolean neverMarkSpam, boolean processForCalendar, boolean deleted, File file,
@@ -665,11 +673,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:               attachment file
      * @param internalDateSource: source for Gmail's internal date of the message -> constants available at {@link InternalDateSource}
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import">
      * users.messages.import</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/import")
     public Message importMessageWithFile(String toEmailAddress, String subject, String contentMessage, boolean neverMarkSpam,
                                          boolean processForCalendar, boolean deleted, File file,
@@ -692,11 +701,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param internalDateSource: source for Gmail's internal date of the message -> constants available at {@link InternalDateSource}
      * @param format:             return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import">
      * users.messages.import</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/import")
     public <T> T importMessageWithFile(String toEmailAddress, String subject, String contentMessage, boolean neverMarkSpam,
                                        boolean processForCalendar, boolean deleted, File file,
@@ -722,11 +732,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param files:              attachments files in array of {@link File} format
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import">
      * users.messages.import</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/import")
     public Message importMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean neverMarkSpam,
                                           boolean processForCalendar, boolean deleted, File[] files) throws Exception {
@@ -747,11 +758,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:              attachments files in array of {@link File} format
      * @param format:             return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import">
      * users.messages.import</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/import")
     public <T> T importMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean neverMarkSpam,
                                         boolean processForCalendar, boolean deleted, File[] files,
@@ -777,11 +789,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:              attachments files in array of {@link File} format
      * @param internalDateSource: source for Gmail's internal date of the message -> constants available at {@link InternalDateSource}
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import">
      * users.messages.import</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/import")
     public Message importMessageWithFiles(String toEmailAddress, String subject, String contentMessage,
                                           boolean neverMarkSpam, boolean processForCalendar, boolean deleted,
@@ -804,11 +817,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param internalDateSource: source for Gmail's internal date of the message -> constants available at {@link InternalDateSource}
      * @param format:             return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import">
      * users.messages.import</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/import")
     public <T> T importMessageWithFiles(String toEmailAddress, String subject, String contentMessage,
                                         boolean neverMarkSpam, boolean processForCalendar, boolean deleted, File[] files,
@@ -834,11 +848,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param files:              attachments files in {@link Collection} of {@link File} format
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import">
      * users.messages.import</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/import")
     public Message importMessageWithFiles(String toEmailAddress, String subject, String contentMessage,
                                           boolean neverMarkSpam, boolean processForCalendar, boolean deleted,
@@ -860,11 +875,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:              attachments files in {@link Collection} of {@link File} format
      * @param format:             return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import">
      * users.messages.import</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/import")
     public <T> T importMessageWithFiles(String toEmailAddress, String subject, String contentMessage,
                                         boolean neverMarkSpam, boolean processForCalendar, boolean deleted,
@@ -886,11 +902,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:              attachments files in {@link Collection} of {@link File} format
      * @param internalDateSource: source for Gmail's internal date of the message -> constants available at {@link InternalDateSource}
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import">
      * users.messages.import</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/import")
     public Message importMessageWithFiles(String toEmailAddress, String subject, String contentMessage,
                                           boolean neverMarkSpam, boolean processForCalendar, boolean deleted,
@@ -913,11 +930,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param internalDateSource: source for Gmail's internal date of the message -> constants available at {@link InternalDateSource}
      * @param format:             return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import">
      * users.messages.import</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/import")
     public <T> T importMessageWithFiles(String toEmailAddress, String subject, String contentMessage,
                                         boolean neverMarkSpam, boolean processForCalendar, boolean deleted,
@@ -936,11 +954,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param contentMessage: content message
      * @param deleted:        mark the email as permanently deleted (not TRASH) and only visible
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/insert">
      * users.messages.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages")
     public Message insertMessage(String toEmailAddress, String subject, String contentMessage,
                                  boolean deleted) throws Exception {
@@ -957,11 +976,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param deleted:        mark the email as permanently deleted (not TRASH) and only visible
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/insert">
      * users.messages.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages")
     public <T> T insertMessage(String toEmailAddress, String subject, String contentMessage, boolean deleted,
                                ReturnFormat format) throws Exception {
@@ -979,11 +999,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param deleted:            mark the email as permanently deleted (not TRASH) and only visible
      * @param internalDateSource: source for Gmail's internal date of the message -> constants available at {@link InternalDateSource}
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/insert">
      * users.messages.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages")
     public Message insertMessage(String toEmailAddress, String subject, String contentMessage,
                                  boolean deleted, InternalDateSource internalDateSource) throws Exception {
@@ -1001,11 +1022,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param internalDateSource: source for Gmail's internal date of the message -> constants available at {@link InternalDateSource}
      * @param format:             return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/insert">
      * users.messages.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages")
     public <T> T insertMessage(String toEmailAddress, String subject, String contentMessage, boolean deleted,
                                InternalDateSource internalDateSource, ReturnFormat format) throws Exception {
@@ -1023,11 +1045,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param deleted:        mark the email as permanently deleted (not TRASH) and only visible
      * @param file:           attachment file
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/insert">
      * users.messages.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages")
     public Message insertMessageWithFile(String toEmailAddress, String subject, String contentMessage,
                                          boolean deleted, File file) throws Exception {
@@ -1045,11 +1068,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:           attachment file
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/insert">
      * users.messages.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages")
     public <T> T insertMessageWithFile(String toEmailAddress, String subject, String contentMessage, boolean deleted,
                                        File file, ReturnFormat format) throws Exception {
@@ -1068,11 +1092,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:               attachment file
      * @param internalDateSource: source for Gmail's internal date of the message -> constants available at {@link InternalDateSource}
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/insert">
      * users.messages.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages")
     public Message insertMessageWithFile(String toEmailAddress, String subject, String contentMessage, boolean deleted,
                                          InternalDateSource internalDateSource, File file) throws Exception {
@@ -1092,11 +1117,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param internalDateSource: source for Gmail's internal date of the message -> constants available at {@link InternalDateSource}
      * @param format:             return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/insert">
      * users.messages.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages")
     public <T> T insertMessageWithFile(String toEmailAddress, String subject, String contentMessage, boolean deleted,
                                        InternalDateSource internalDateSource, File file, ReturnFormat format) throws Exception {
@@ -1115,11 +1141,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param deleted:        mark the email as permanently deleted (not TRASH) and only visible
      * @param files:          attachments files in array of {@link File} format
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/insert">
      * users.messages.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages")
     public Message insertMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean deleted,
                                           File[] files) throws Exception {
@@ -1137,11 +1164,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in array of {@link File} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/insert">
      * users.messages.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages")
     public <T> T insertMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean deleted,
                                         File[] files, ReturnFormat format) throws Exception {
@@ -1160,11 +1188,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param internalDateSource: source for Gmail's internal date of the message -> constants available at {@link InternalDateSource}
      * @param files:              attachments files in array of {@link File} format
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/insert">
      * users.messages.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages")
     public Message insertMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean deleted,
                                           InternalDateSource internalDateSource, File[] files) throws Exception {
@@ -1184,11 +1213,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:              attachments files in array of {@link File} format
      * @param format:             return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/insert">
      * users.messages.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages")
     public <T> T insertMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean deleted,
                                         InternalDateSource internalDateSource, File[] files,
@@ -1208,11 +1238,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param deleted:        mark the email as permanently deleted (not TRASH) and only visible
      * @param files:          attachments files in {@link Collection} of {@link File} format
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/insert">
      * users.messages.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages")
     public Message insertMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean deleted,
                                           Collection<File> files) throws Exception {
@@ -1231,11 +1262,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in {@link Collection} of {@link File} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/insert">
      * users.messages.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages")
     public <T> T insertMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean deleted,
                                         Collection<File> files, ReturnFormat format) throws Exception {
@@ -1253,11 +1285,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param internalDateSource: source for Gmail's internal date of the message -> constants available at {@link InternalDateSource}
      * @param files:              attachments files in {@link Collection} of {@link File} format
      * @return message requested as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/insert">
      * users.messages.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages")
     public Message insertMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean deleted,
                                           InternalDateSource internalDateSource, Collection<File> files) throws Exception {
@@ -1277,11 +1310,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:              attachments files in {@link Collection} of {@link File} format
      * @param format:             return type formatter -> {@link ReturnFormat}
      * @return message as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/insert">
      * users.messages.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages")
     public <T> T insertMessageWithFiles(String toEmailAddress, String subject, String contentMessage, boolean deleted,
                                         InternalDateSource internalDateSource, Collection<File> files,
@@ -1295,7 +1329,7 @@ public class GmailMessagesManager extends GmailManager {
      *
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1311,7 +1345,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1327,7 +1361,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param maxResults:       maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1344,11 +1378,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param maxResults:       maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, int maxResults, ReturnFormat format) throws IOException {
         return returnMessagesList(messages.list(userId).setIncludeSpamTrash(includeSpamTrash)
@@ -1361,11 +1396,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, String pageToken) throws IOException {
         return getMessagesList(includeSpamTrash, pageToken, LIBRARY_OBJECT);
@@ -1378,11 +1414,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, String pageToken, ReturnFormat format) throws IOException {
         return returnMessagesList(messages.list(userId).setIncludeSpamTrash(includeSpamTrash)
@@ -1396,11 +1433,12 @@ public class GmailMessagesManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(String q, boolean includeSpamTrash) throws IOException {
         return getMessagesList(q, includeSpamTrash, LIBRARY_OBJECT);
@@ -1414,11 +1452,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(String q, boolean includeSpamTrash, ReturnFormat format) throws IOException {
         return returnMessagesList(messages.list(userId).setIncludeSpamTrash(includeSpamTrash)
@@ -1431,11 +1470,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, String[] labelIds) throws IOException {
         return getMessagesList(includeSpamTrash, labelIds, LIBRARY_OBJECT);
@@ -1448,11 +1488,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, String[] labelIds, ReturnFormat format) throws IOException {
         return returnMessagesList(messages.list(userId).setIncludeSpamTrash(includeSpamTrash)
@@ -1465,11 +1506,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param includeSpamTrash: include messages from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, Collection<String> labelIds) throws IOException {
         return getMessagesList(includeSpamTrash, labelIds, LIBRARY_OBJECT);
@@ -1482,11 +1524,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, Collection<String> labelIds,
                                  ReturnFormat format) throws IOException {
@@ -1501,11 +1544,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param maxResults:       maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, int maxResults, String pageToken) throws IOException {
         return getMessagesList(includeSpamTrash, maxResults, pageToken, LIBRARY_OBJECT);
@@ -1519,11 +1563,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, int maxResults, String pageToken,
                                  ReturnFormat format) throws IOException {
@@ -1541,11 +1586,12 @@ public class GmailMessagesManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param maxResults:       maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, String q, int maxResults) throws IOException {
         return getMessagesList(includeSpamTrash, q, maxResults, LIBRARY_OBJECT);
@@ -1560,11 +1606,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param maxResults:       maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, String q, int maxResults,
                                  ReturnFormat format) throws IOException {
@@ -1581,11 +1628,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param maxResults:       maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, int maxResults, String[] labelIds) throws IOException {
         return getMessagesList(includeSpamTrash, maxResults, labelIds, LIBRARY_OBJECT);
@@ -1599,11 +1647,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, int maxResults, String[] labelIds,
                                  ReturnFormat format) throws IOException {
@@ -1619,11 +1668,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param maxResults:       maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, int maxResults,
                                     Collection<String> labelIds) throws IOException {
@@ -1638,11 +1688,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, int maxResults, Collection<String> labelIds,
                                  ReturnFormat format) throws IOException {
@@ -1659,11 +1710,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, int maxResults, String pageToken,
                                     String[] labelIds) throws IOException {
@@ -1679,11 +1731,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, int maxResults, String pageToken, String[] labelIds,
                                  ReturnFormat format) throws IOException {
@@ -1701,11 +1754,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, int maxResults, String pageToken,
                                     Collection<String> labelIds) throws IOException {
@@ -1721,11 +1775,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, int maxResults, String pageToken, Collection<String> labelIds,
                                  ReturnFormat format) throws IOException {
@@ -1744,11 +1799,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, int maxResults, String[] labelIds,
                                     String q) throws IOException {
@@ -1765,11 +1821,12 @@ public class GmailMessagesManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, int maxResults, String[] labelIds,
                                  String q, ReturnFormat format) throws IOException {
@@ -1788,11 +1845,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, int maxResults, Collection<String> labelIds,
                                     String q) throws IOException {
@@ -1809,11 +1867,12 @@ public class GmailMessagesManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, int maxResults, Collection<String> labelIds, String q,
                                  ReturnFormat format) throws IOException {
@@ -1831,11 +1890,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, String pageToken, String q) throws IOException {
         return getMessagesList(includeSpamTrash, pageToken, q, LIBRARY_OBJECT);
@@ -1850,11 +1910,12 @@ public class GmailMessagesManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, String pageToken, String q,
                                  ReturnFormat format) throws IOException {
@@ -1871,11 +1932,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, String pageToken, String[] labelIds) throws IOException {
         return getMessagesList(includeSpamTrash, pageToken, labelIds, LIBRARY_OBJECT);
@@ -1889,11 +1951,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, String pageToken, String[] labelIds,
                                  ReturnFormat format) throws IOException {
@@ -1909,11 +1972,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, String pageToken,
                                     Collection<String> labelIds) throws IOException {
@@ -1928,11 +1992,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, String pageToken, Collection<String> labelIds,
                                  ReturnFormat format) throws IOException {
@@ -1950,11 +2015,12 @@ public class GmailMessagesManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, String pageToken, String q,
                                     String[] labelIds) throws IOException {
@@ -1971,11 +2037,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, String pageToken, String q, String[] labelIds,
                                  ReturnFormat format) throws IOException {
@@ -1994,11 +2061,12 @@ public class GmailMessagesManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, String pageToken, String q,
                                     Collection<String> labelIds) throws IOException {
@@ -2015,11 +2083,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, String pageToken, String q, Collection<String> labelIds,
                                  ReturnFormat format) throws IOException {
@@ -2037,11 +2106,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, String[] labelIds, String q) throws IOException {
         return getMessagesList(includeSpamTrash, labelIds, q, LIBRARY_OBJECT);
@@ -2056,11 +2126,12 @@ public class GmailMessagesManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, String[] labelIds, String q,
                                  ReturnFormat format) throws IOException {
@@ -2077,11 +2148,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param q:                Only return messages matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, Collection<String> labelIds, String q) throws IOException {
         return getMessagesList(includeSpamTrash, labelIds, q, LIBRARY_OBJECT);
@@ -2096,11 +2168,12 @@ public class GmailMessagesManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, Collection<String> labelIds, String q,
                                  ReturnFormat format) throws IOException {
@@ -2119,11 +2192,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param labelIds:         only return messages with labels that match all the specified label IDs in array of {@link String} format
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, int maxResults, String pageToken, String q,
                                     String[] labelIds) throws IOException {
@@ -2141,11 +2215,12 @@ public class GmailMessagesManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, int maxResults, String pageToken, String q,
                                  String[] labelIds, ReturnFormat format) throws IOException {
@@ -2167,11 +2242,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param labelIds:         only return messages with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return messages list requested as {@link Messages} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public Messages getMessagesList(boolean includeSpamTrash, int maxResults, String pageToken, String q,
                                     Collection<String> labelIds) throws IOException {
@@ -2189,11 +2265,12 @@ public class GmailMessagesManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return messages list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list">
      * users.messages.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages")
     public <T> T getMessagesList(boolean includeSpamTrash, int maxResults, String pageToken, String q,
                                  Collection<String> labelIds, ReturnFormat format) throws IOException {
@@ -2227,14 +2304,50 @@ public class GmailMessagesManager extends GmailManager {
     /**
      * Method to modify only the add labels on the specified message
      *
-     * @param messageId:   the {@code "ID"} of the message to modify
+     * @param message:     the {@code "ID"} of the message to modify
      * @param addLabelIds: list of IDs of labels to add to this message. You can add up to 100 labels with each update in array of {@link String} format
      * @return message modified as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
      * users.messages.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
+    public Message modifyAddLabelsIds(Message message, String[] addLabelIds) throws IOException {
+        return modifyAddLabelsIds(message.getId(), addLabelIds, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to modify only the add labels on the specified message
+     *
+     * @param message:     the {@code "ID"} of the message to modify
+     * @param addLabelIds: list of IDs of labels to add to this message. You can add up to 100 labels with each update in array of {@link String} format
+     * @param format:      return type formatter -> {@link ReturnFormat}
+     * @return message modified as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
+     * users.messages.modify</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
+    public <T> T modifyAddLabelsIds(Message message, String[] addLabelIds, ReturnFormat format) throws IOException {
+        return modifyAddLabelsIds(message.getId(), addLabelIds, format);
+    }
+
+    /**
+     * Method to modify only the add labels on the specified message
+     *
+     * @param messageId:   the {@code "ID"} of the message to modify
+     * @param addLabelIds: list of IDs of labels to add to this message. You can add up to 100 labels with each update in array of {@link String} format
+     * @return message modified as {@link Message} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
+     * users.messages.modify</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
     public Message modifyAddLabelsIds(String messageId, String[] addLabelIds) throws IOException {
         return modifyAddLabelsIds(messageId, addLabelIds, LIBRARY_OBJECT);
@@ -2247,11 +2360,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param addLabelIds: list of IDs of labels to add to this message. You can add up to 100 labels with each update in array of {@link String} format
      * @param format:      return type formatter -> {@link ReturnFormat}
      * @return message modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
      * users.messages.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
     public <T> T modifyAddLabelsIds(String messageId, String[] addLabelIds, ReturnFormat format) throws IOException {
         return returnMessage(messages.modify(userId, messageId, new ModifyMessageRequest()
@@ -2261,14 +2375,50 @@ public class GmailMessagesManager extends GmailManager {
     /**
      * Method to modify only the add labels on the specified message
      *
-     * @param messageId:   the {@code "ID"} of the message to modify
+     * @param message:     the {@code "ID"} of the message to modify
      * @param addLabelIds: list of IDs of labels to add to this message. You can add up to 100 labels with each update in {@link Collection} of {@link String} format
      * @return message modified as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
      * users.messages.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
+    public Message modifyAddLabelsIds(Message message, Collection<String> addLabelIds) throws IOException {
+        return modifyAddLabelsIds(message.getId(), addLabelIds, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to modify only the add labels on the specified message
+     *
+     * @param message:     the {@code "ID"} of the message to modify
+     * @param addLabelIds: list of IDs of labels to add to this message. You can add up to 100 labels with each update in {@link Collection} of {@link String} format
+     * @param format:      return type formatter -> {@link ReturnFormat}
+     * @return message modified as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
+     * users.messages.modify</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
+    public <T> T modifyAddLabelsIds(Message message, Collection<String> addLabelIds, ReturnFormat format) throws IOException {
+        return modifyAddLabelsIds(message.getId(), addLabelIds, format);
+    }
+
+    /**
+     * Method to modify only the add labels on the specified message
+     *
+     * @param messageId:   the {@code "ID"} of the message to modify
+     * @param addLabelIds: list of IDs of labels to add to this message. You can add up to 100 labels with each update in {@link Collection} of {@link String} format
+     * @return message modified as {@link Message} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
+     * users.messages.modify</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
     public Message modifyAddLabelsIds(String messageId, Collection<String> addLabelIds) throws IOException {
         return modifyAddLabelsIds(messageId, addLabelIds, LIBRARY_OBJECT);
@@ -2281,11 +2431,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param addLabelIds: list of IDs of labels to add to this message. You can add up to 100 labels with each update in {@link Collection} of {@link String} format
      * @param format:      return type formatter -> {@link ReturnFormat}
      * @return message modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
      * users.messages.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
     public <T> T modifyAddLabelsIds(String messageId, Collection<String> addLabelIds, ReturnFormat format) throws IOException {
         return returnMessage(messages.modify(userId, messageId, new ModifyMessageRequest()
@@ -2295,14 +2446,50 @@ public class GmailMessagesManager extends GmailManager {
     /**
      * Method to modify only the remove labels on the specified message
      *
-     * @param messageId:      the {@code "ID"} of the message to modify
+     * @param message:        the message to modify
      * @param removeLabelIds: list IDs of labels to remove from this message. You can remove up to 100 labels with each update in array of {@link String} format
      * @return message modified as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
      * users.messages.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
+    public Message modifyRemoveLabelsIds(Message message, String[] removeLabelIds) throws IOException {
+        return modifyRemoveLabelsIds(message.getId(), removeLabelIds, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to modify only the remove labels on the specified message
+     *
+     * @param message:        the message to modify
+     * @param removeLabelIds: list IDs of labels to remove from this message. You can remove up to 100 labels with each update in array of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return message modified as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
+     * users.messages.modify</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
+    public <T> T modifyRemoveLabelsIds(Message message, String[] removeLabelIds, ReturnFormat format) throws IOException {
+        return modifyRemoveLabelsIds(message.getId(), removeLabelIds, format);
+    }
+
+    /**
+     * Method to modify only the remove labels on the specified message
+     *
+     * @param messageId:      the {@code "ID"} of the message to modify
+     * @param removeLabelIds: list IDs of labels to remove from this message. You can remove up to 100 labels with each update in array of {@link String} format
+     * @return message modified as {@link Message} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
+     * users.messages.modify</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
     public Message modifyRemoveLabelsIds(String messageId, String[] removeLabelIds) throws IOException {
         return modifyRemoveLabelsIds(messageId, removeLabelIds, LIBRARY_OBJECT);
@@ -2315,11 +2502,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param removeLabelIds: list IDs of labels to remove from this message. You can remove up to 100 labels with each update in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
      * users.messages.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
     public <T> T modifyRemoveLabelsIds(String messageId, String[] removeLabelIds, ReturnFormat format) throws IOException {
         return returnMessage(messages.modify(userId, messageId, new ModifyMessageRequest().setAddLabelIds(null)
@@ -2329,14 +2517,51 @@ public class GmailMessagesManager extends GmailManager {
     /**
      * Method to modify only the remove labels on the specified message
      *
-     * @param messageId:      the {@code "ID"} of the message to modify
+     * @param message:        the message to modify
      * @param removeLabelIds: list IDs of labels to remove from this message. You can remove up to 100 labels with each update in {@link Collection} of {@link String} format
      * @return message modified as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
      * users.messages.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
+    public Message modifyRemoveLabelsIds(Message message, Collection<String> removeLabelIds) throws IOException {
+        return modifyRemoveLabelsIds(message.getId(), removeLabelIds, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to modify only the remove labels on the specified message
+     *
+     * @param message:        the message to modify
+     * @param removeLabelIds: list IDs of labels to remove from this message. You can remove up to 100 labels with each update in {@link Collection} of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return message modified as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
+     * users.messages.modify</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
+    public <T> T modifyRemoveLabelsIds(Message message, Collection<String> removeLabelIds,
+                                       ReturnFormat format) throws IOException {
+        return modifyRemoveLabelsIds(message.getId(), removeLabelIds, format);
+    }
+
+    /**
+     * Method to modify only the remove labels on the specified message
+     *
+     * @param messageId:      the {@code "ID"} of the message to modify
+     * @param removeLabelIds: list IDs of labels to remove from this message. You can remove up to 100 labels with each update in {@link Collection} of {@link String} format
+     * @return message modified as {@link Message} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
+     * users.messages.modify</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
     public Message modifyRemoveLabelsIds(String messageId, Collection<String> removeLabelIds) throws IOException {
         return modifyRemoveLabelsIds(messageId, removeLabelIds, LIBRARY_OBJECT);
@@ -2349,11 +2574,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param removeLabelIds: list IDs of labels to remove from this message. You can remove up to 100 labels with each update in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
      * users.messages.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
     public <T> T modifyRemoveLabelsIds(String messageId, Collection<String> removeLabelIds, ReturnFormat format) throws IOException {
         return returnMessage(messages.modify(userId, messageId, new ModifyMessageRequest().setAddLabelIds(null)
@@ -2363,11 +2589,48 @@ public class GmailMessagesManager extends GmailManager {
     /**
      * Method to modify the labels on the specified message
      *
+     * @param message:        the message to modify
+     * @param addLabelIds:    list of IDs of labels to add to this message. You can add up to 100 labels with each update in array of {@link String} format
+     * @param removeLabelIds: list IDs of labels to remove from this message. You can remove up to 100 labels with each update in array of {@link String} format
+     * @return message modified as {@link Message} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
+     * users.messages.modify</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
+    public Message modify(Message message, String[] addLabelIds, String[] removeLabelIds) throws IOException {
+        return modify(message.getId(), addLabelIds, removeLabelIds, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to modify the labels on the specified message
+     *
+     * @param message:        the message to modify
+     * @param addLabelIds:    list of IDs of labels to add to this message. You can add up to 100 labels with each update in array of {@link String} format
+     * @param removeLabelIds: list IDs of labels to remove from this message. You can remove up to 100 labels with each update in array of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return message modified as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
+     * users.messages.modify</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
+    public <T> T modify(Message message, String[] addLabelIds, String[] removeLabelIds, ReturnFormat format) throws IOException {
+        return modify(message.getId(), addLabelIds, removeLabelIds, format);
+    }
+
+    /**
+     * Method to modify the labels on the specified message
+     *
      * @param messageId:      the {@code "ID"} of the message to modify
      * @param addLabelIds:    list of IDs of labels to add to this message. You can add up to 100 labels with each update in array of {@link String} format
      * @param removeLabelIds: list IDs of labels to remove from this message. You can remove up to 100 labels with each update in array of {@link String} format
      * @return message modified as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
      * users.messages.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2385,7 +2648,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param removeLabelIds: list IDs of labels to remove from this message. You can remove up to 100 labels with each update in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
      * users.messages.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2400,11 +2663,50 @@ public class GmailMessagesManager extends GmailManager {
     /**
      * Method to modify the labels on the specified message
      *
+     * @param message:        the message to modify
+     * @param addLabelIds:    list of IDs of labels to add to this message. You can add up to 100 labels with each update in {@link Collection} of {@link String} format
+     * @param removeLabelIds: list IDs of labels to remove from this message. You can remove up to 100 labels with each update in array of {@link String} format
+     * @return message modified as {@link Message} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
+     * users.messages.modify</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
+    public Message modify(Message message, Collection<String> addLabelIds,
+                          Collection<String> removeLabelIds) throws IOException {
+        return modify(message.getId(), addLabelIds, removeLabelIds, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to modify the labels on the specified message
+     *
+     * @param message:        the message to modify
+     * @param addLabelIds:    list of IDs of labels to add to this message. You can add up to 100 labels with each update in {@link Collection} of {@link String} format
+     * @param removeLabelIds: list IDs of labels to remove from this message. You can remove up to 100 labels with each update in {@link Collection} of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return message modified as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
+     * users.messages.modify</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/modify")
+    public <T> T modify(Message message, Collection<String> addLabelIds, Collection<String> removeLabelIds,
+                        ReturnFormat format) throws IOException {
+        return modify(message.getId(), addLabelIds, removeLabelIds, format);
+    }
+
+    /**
+     * Method to modify the labels on the specified message
+     *
      * @param messageId:      the {@code "ID"} of the message to modify
      * @param addLabelIds:    list of IDs of labels to add to this message. You can add up to 100 labels with each update in {@link Collection} of {@link String} format
      * @param removeLabelIds: list IDs of labels to remove from this message. You can remove up to 100 labels with each update in array of {@link String} format
      * @return message modified as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
      * users.messages.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2422,7 +2724,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param removeLabelIds: list IDs of labels to remove from this message. You can remove up to 100 labels with each update in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify">
      * users.messages.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2442,11 +2744,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param subject:        subject of the message
      * @param messageText:    content message
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message send(String toEmailAddress, String subject, String messageText) throws Exception {
         return send(toEmailAddress, subject, messageText, LIBRARY_OBJECT);
@@ -2460,11 +2763,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T send(String toEmailAddress, String subject, String messageText, ReturnFormat format) throws Exception {
         return returnMessage(messages.send(userId, createSimpleMessage(toEmailAddress, subject, messageText)).execute(),
@@ -2479,11 +2783,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param Cc:             carbon copy value
      * @param messageText:    content message
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendWithCc(String toEmailAddress, String subject, String Cc, String messageText) throws Exception {
         return sendWithCc(toEmailAddress, subject, Cc, messageText, LIBRARY_OBJECT);
@@ -2498,11 +2803,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendWithCc(String toEmailAddress, String subject, String Cc, String messageText,
                             ReturnFormat format) throws Exception {
@@ -2518,11 +2824,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param Cc:             multiple carbon copy value
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendWithMultipleCc(String toEmailAddress, String subject, String messageText,
                                       String... Cc) throws Exception {
@@ -2538,11 +2845,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             multiple carbon copy value
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendWithMultipleCc(String toEmailAddress, String subject, String messageText,
                                     ReturnFormat format, String... Cc) throws Exception {
@@ -2558,11 +2866,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param Bcc:            blind carbon copy value
      * @param messageText:    content message
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendWithBcc(String toEmailAddress, String subject, String Bcc, String messageText) throws Exception {
         return sendWithBcc(toEmailAddress, subject, Bcc, messageText, LIBRARY_OBJECT);
@@ -2577,11 +2886,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendWithBcc(String toEmailAddress, String subject, String Bcc, String messageText,
                              ReturnFormat format) throws Exception {
@@ -2597,11 +2907,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param Bcc:            multiple blind carbon copy value
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendWithMultipleBcc(String toEmailAddress, String subject, String messageText,
                                        String... Bcc) throws Exception {
@@ -2617,11 +2928,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            multiple blind carbon copy value
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendWithMultipleBcc(String toEmailAddress, String subject, String messageText,
                                      ReturnFormat format, String... Bcc) throws Exception {
@@ -2638,11 +2950,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param Bcc:            blind carbon copy value
      * @param messageText:    content message
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessage(String toEmailAddress, String subject, String Cc, String Bcc,
                                        String messageText) throws Exception {
@@ -2659,11 +2972,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessage(String toEmailAddress, String subject, String Cc, String Bcc, String messageText,
                                      ReturnFormat format) throws Exception {
@@ -2680,11 +2994,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param Bcc:            multiple blind carbon copy value in array of {@link String} format
      * @param messageText:    content message
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessage(String toEmailAddress, String subject, String[] Cc, String[] Bcc,
                                        String messageText) throws Exception {
@@ -2701,11 +3016,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessage(String toEmailAddress, String subject, String[] Cc, String[] Bcc, String messageText,
                                      ReturnFormat format) throws Exception {
@@ -2722,11 +3038,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param Bcc:            multiple blind carbon copy value in {@link Collection} of {@link String} format
      * @param messageText:    content message
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessage(String toEmailAddress, String subject, Collection<String> Cc,
                                        Collection<String> Bcc, String messageText) throws Exception {
@@ -2743,11 +3060,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessage(String toEmailAddress, String subject, Collection<String> Cc,
                                      Collection<String> Bcc, String messageText, ReturnFormat format) throws Exception {
@@ -2763,11 +3081,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param file:           attachment file
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendWithFile(String toEmailAddress, String subject, String messageText, File file) throws Exception {
         return sendWithFile(toEmailAddress, subject, messageText, file, LIBRARY_OBJECT);
@@ -2782,11 +3101,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:           attachment file
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendWithFile(String toEmailAddress, String subject, String messageText, File file,
                               ReturnFormat format) throws Exception {
@@ -2803,11 +3123,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param file:           attachment file
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCcWithFile(String toEmailAddress, String subject, String Cc, String messageText,
                                   File file) throws Exception {
@@ -2824,11 +3145,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:           attachment file
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCcWithFile(String toEmailAddress, String subject, String Cc, String messageText, File file,
                                 ReturnFormat format) throws Exception {
@@ -2845,11 +3167,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:           attachment file
      * @param Cc:             multiple carbon copy value
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendMultipleCcWithFile(String toEmailAddress, String subject, String messageText, File file,
                                           String... Cc) throws Exception {
@@ -2866,11 +3189,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             multiple carbon copy value
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendMultipleCcWithFile(String toEmailAddress, String subject, String messageText, File file,
                                         ReturnFormat format, String... Cc) throws Exception {
@@ -2887,11 +3211,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param file:           attachment file
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendBccWithFile(String toEmailAddress, String subject, String Bcc, String messageText,
                                    File file) throws Exception {
@@ -2908,11 +3233,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:           attachment file
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendBccWithFile(String toEmailAddress, String subject, String Bcc, String messageText, File file,
                                  ReturnFormat format) throws Exception {
@@ -2929,11 +3255,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:           attachment file
      * @param Bcc:            multiple blind carbon copy value
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendMultipleBccWithFile(String toEmailAddress, String subject, String messageText, File file,
                                            String... Bcc) throws Exception {
@@ -2950,11 +3277,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            multiple blind carbon copy value
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendMultipleBccWithFile(String toEmailAddress, String subject, String messageText, File file,
                                          ReturnFormat format, String... Bcc) throws Exception {
@@ -2972,11 +3300,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param file:           attachment file
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFile(String toEmailAddress, String subject, String Cc, String Bcc,
                                                String messageText, File file) throws Exception {
@@ -2994,11 +3323,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:           attachment file
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFile(String toEmailAddress, String subject, String Cc, String Bcc,
                                              String messageText, File file, ReturnFormat format) throws Exception {
@@ -3016,11 +3346,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param file:           attachment file
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFile(String toEmailAddress, String subject, String[] Cc, String[] Bcc,
                                                String messageText, File file) throws Exception {
@@ -3038,11 +3369,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:           attachment file
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFile(String toEmailAddress, String subject, String[] Cc, String[] Bcc,
                                              String messageText, File file, ReturnFormat format) throws Exception {
@@ -3060,11 +3392,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param file:           attachment file
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFile(String toEmailAddress, String subject, Collection<String> Cc,
                                                Collection<String> Bcc, String messageText, File file) throws Exception {
@@ -3082,11 +3415,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:           attachment file
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFile(String toEmailAddress, String subject, Collection<String> Cc,
                                              Collection<String> Bcc, String messageText, File file,
@@ -3105,11 +3439,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:           attachment file
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendWithFile(String toEmailAddress, String subject, String messageText, File file,
                                 String mimeType) throws Exception {
@@ -3126,11 +3461,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendWithFile(String toEmailAddress, String subject, String messageText, File file, String mimeType,
                               ReturnFormat format) throws Exception {
@@ -3148,11 +3484,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:           attachment file
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCcWithFile(String toEmailAddress, String subject, String Cc, String messageText,
                                   File file, String mimeType) throws Exception {
@@ -3170,11 +3507,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCcWithFile(String toEmailAddress, String subject, String Cc, String messageText, File file,
                                 String mimeType, ReturnFormat format) throws Exception {
@@ -3192,11 +3530,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Cc:             multiple carbon copy value
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendMultipleCcWithFile(String toEmailAddress, String subject, String messageText, File file,
                                           String mimeType, String... Cc) throws Exception {
@@ -3214,11 +3553,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             multiple carbon copy value
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendMultipleCcWithFile(String toEmailAddress, String subject, String messageText, File file,
                                         String mimeType, ReturnFormat format, String... Cc) throws Exception {
@@ -3236,11 +3576,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:           attachment file
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendBccWithFile(String toEmailAddress, String subject, String Bcc, String messageText,
                                    File file, String mimeType) throws Exception {
@@ -3258,11 +3599,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendBccWithFile(String toEmailAddress, String subject, String Bcc, String messageText, File file,
                                  String mimeType, ReturnFormat format) throws Exception {
@@ -3280,11 +3622,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Bcc:            multiple blind carbon copy value
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendMultipleBccWithFile(String toEmailAddress, String subject, String messageText, File file,
                                            String mimeType, String... Bcc) throws Exception {
@@ -3302,11 +3645,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            multiple blind carbon copy value
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendMultipleBccWithFile(String toEmailAddress, String subject, String messageText, File file,
                                          String mimeType, ReturnFormat format, String... Bcc) throws Exception {
@@ -3325,11 +3669,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:           attachment file
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFile(String toEmailAddress, String subject, String Cc, String Bcc,
                                                String messageText, File file, String mimeType) throws Exception {
@@ -3348,11 +3693,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFile(String toEmailAddress, String subject, String Cc, String Bcc, String messageText,
                                              File file, String mimeType, ReturnFormat format) throws Exception {
@@ -3371,11 +3717,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:           attachment file
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFile(String toEmailAddress, String subject, String[] Cc, String[] Bcc,
                                                String messageText, File file, String mimeType) throws Exception {
@@ -3394,11 +3741,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFile(String toEmailAddress, String subject, String[] Cc, String[] Bcc,
                                              String messageText, File file, String mimeType,
@@ -3418,11 +3766,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param file:           attachment file
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFile(String toEmailAddress, String subject, Collection<String> Cc,
                                                Collection<String> Bcc, String messageText, File file,
@@ -3442,11 +3791,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFile(String toEmailAddress, String subject, Collection<String> Cc,
                                              Collection<String> Bcc, String messageText, File file, String mimeType,
@@ -3464,11 +3814,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param files:          attachments files in array of {@link String} format
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendWithFiles(String toEmailAddress, String subject, String messageText, File[] files) throws Exception {
         return sendWithFiles(toEmailAddress, subject, messageText, files, LIBRARY_OBJECT);
@@ -3483,11 +3834,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendWithFiles(String toEmailAddress, String subject, String messageText, File[] files,
                                ReturnFormat format) throws Exception {
@@ -3504,11 +3856,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param files:          attachments files in array of {@link String} format
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCcWithFiles(String toEmailAddress, String subject, String Cc, String messageText,
                                    File[] files) throws Exception {
@@ -3525,11 +3878,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCcWithFiles(String toEmailAddress, String subject, String Cc, String messageText, File[] files,
                                  ReturnFormat format) throws Exception {
@@ -3546,11 +3900,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in array of {@link String} format
      * @param Cc:             multiple carbon copy value
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendMultipleCcWithFiles(String toEmailAddress, String subject, String messageText, File[] files,
                                            String... Cc) throws Exception {
@@ -3567,11 +3922,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             multiple carbon copy value
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendMultipleCcWithFiles(String toEmailAddress, String subject, String messageText, File[] files,
                                          ReturnFormat format, String... Cc) throws Exception {
@@ -3588,11 +3944,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param files:          attachments files in array of {@link String} format
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendBccWithFiles(String toEmailAddress, String subject, String Bcc, String messageText,
                                     File[] files) throws Exception {
@@ -3609,11 +3966,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendBccWithFiles(String toEmailAddress, String subject, String Bcc, String messageText, File[] files,
                                   ReturnFormat format) throws Exception {
@@ -3630,11 +3988,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in array of {@link String} format
      * @param Bcc:            multiple blind carbon copy value
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendMultipleBccWithFiles(String toEmailAddress, String subject, String messageText, File[] files,
                                             String... Bcc) throws Exception {
@@ -3651,11 +4010,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            multiple blind carbon copy value
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendMultipleBccWithFiles(String toEmailAddress, String subject, String messageText, File[] files,
                                           ReturnFormat format, String... Bcc) throws Exception {
@@ -3673,11 +4033,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param files:          attachments files in array of {@link String} format
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFiles(String toEmailAddress, String subject, String Cc, String Bcc,
                                                 String messageText, File[] files) throws Exception {
@@ -3695,11 +4056,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFiles(String toEmailAddress, String subject, String Cc, String Bcc,
                                               String messageText, File[] files, ReturnFormat format) throws Exception {
@@ -3717,11 +4079,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param files:          attachments files in array of {@link String} format
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFiles(String toEmailAddress, String subject, String[] Cc, String[] Bcc,
                                                 String messageText, File[] files) throws Exception {
@@ -3739,11 +4102,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFiles(String toEmailAddress, String subject, String[] Cc, String[] Bcc,
                                               String messageText, File[] files, ReturnFormat format) throws Exception {
@@ -3761,11 +4125,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param files:          attachments files in array of {@link String} format
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFiles(String toEmailAddress, String subject, Collection<String> Cc,
                                                 Collection<String> Bcc, String messageText, File[] files) throws Exception {
@@ -3783,11 +4148,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFiles(String toEmailAddress, String subject, Collection<String> Cc,
                                               Collection<String> Bcc, String messageText, File[] files,
@@ -3805,11 +4171,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param files:          attachments files in {@link Collection} of {@link File} format
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendWithFiles(String toEmailAddress, String subject, String messageText, Collection<File> files) throws Exception {
         return sendWithFiles(toEmailAddress, subject, messageText, files, LIBRARY_OBJECT);
@@ -3824,11 +4191,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in {@link Collection} of {@link File} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendWithFiles(String toEmailAddress, String subject, String messageText, Collection<File> files,
                                ReturnFormat format) throws Exception {
@@ -3845,11 +4213,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param files:          attachments files in {@link Collection} of {@link String} format
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCcWithFiles(String toEmailAddress, String subject, String Cc, String messageText,
                                    Collection<File> files) throws Exception {
@@ -3866,11 +4235,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCcWithFiles(String toEmailAddress, String subject, String Cc, String messageText,
                                  Collection<File> files, ReturnFormat format) throws Exception {
@@ -3887,11 +4257,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in {@link Collection} of {@link String} format
      * @param Cc:             multiple carbon copy value
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendMultipleCcWithFiles(String toEmailAddress, String subject, String messageText,
                                            Collection<File> files, String... Cc) throws Exception {
@@ -3908,11 +4279,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             multiple carbon copy value
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendMultipleCcWithFiles(String toEmailAddress, String subject, String messageText,
                                          Collection<File> files, ReturnFormat format, String... Cc) throws Exception {
@@ -3929,11 +4301,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param files:          attachments files in {@link Collection} of {@link String} format
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendBccWithFiles(String toEmailAddress, String subject, String Bcc, String messageText,
                                     Collection<File> files) throws Exception {
@@ -3950,11 +4323,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendBccWithFiles(String toEmailAddress, String subject, String Bcc, String messageText,
                                   Collection<File> files, ReturnFormat format) throws Exception {
@@ -3971,11 +4345,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in {@link Collection} of {@link String} format
      * @param Bcc:            multiple blind carbon copy value
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendMultipleBccWithFiles(String toEmailAddress, String subject, String messageText,
                                             Collection<File> files, String... Bcc) throws Exception {
@@ -3992,11 +4367,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            multiple blind carbon copy value
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendMultipleBccWithFiles(String toEmailAddress, String subject, String messageText,
                                           Collection<File> files, ReturnFormat format, String... Bcc) throws Exception {
@@ -4014,11 +4390,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param files:          attachments files in {@link Collection} of {@link String} format
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFiles(String toEmailAddress, String subject, String Cc, String Bcc,
                                                 String messageText, Collection<File> files) throws Exception {
@@ -4036,11 +4413,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFiles(String toEmailAddress, String subject, String Cc, String Bcc,
                                               String messageText, Collection<File> files, ReturnFormat format) throws Exception {
@@ -4058,11 +4436,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param files:          attachments files in {@link Collection} of {@link String} format
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFiles(String toEmailAddress, String subject, String[] Cc, String[] Bcc,
                                                 String messageText, Collection<File> files) throws Exception {
@@ -4080,11 +4459,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFiles(String toEmailAddress, String subject, String[] Cc, String[] Bcc,
                                               String messageText, Collection<File> files, ReturnFormat format) throws Exception {
@@ -4103,11 +4483,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageText:    content message
      * @param files:          attachments files in {@link Collection} of {@link String} format
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFiles(String toEmailAddress, String subject, Collection<String> Cc,
                                                 Collection<String> Bcc, String messageText,
@@ -4126,11 +4507,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFiles(String toEmailAddress, String subject, Collection<String> Cc,
                                               Collection<String> Bcc, String messageText, Collection<File> files,
@@ -4149,11 +4531,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in array of {@link String} format
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendWithFiles(String toEmailAddress, String subject, String messageText, File[] files,
                                  String mimeType) throws Exception {
@@ -4170,11 +4553,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendWithFiles(String toEmailAddress, String subject, String messageText, File[] files,
                                String mimeType, ReturnFormat format) throws Exception {
@@ -4192,11 +4576,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in array of {@link String} format
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCcWithFiles(String toEmailAddress, String subject, String Cc, String messageText,
                                    String mimeType, File[] files) throws Exception {
@@ -4214,11 +4599,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCcWithFiles(String toEmailAddress, String subject, String Cc, String messageText, File[] files,
                                  String mimeType, ReturnFormat format) throws Exception {
@@ -4236,11 +4622,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Cc:             multiple carbon copy value
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendMultipleCcWithFiles(String toEmailAddress, String subject, String messageText, File[] files,
                                            String mimeType, String... Cc) throws Exception {
@@ -4258,11 +4645,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             multiple carbon copy value
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendMultipleCcWithFiles(String toEmailAddress, String subject, String messageText, File[] files,
                                          String mimeType, ReturnFormat format, String... Cc) throws Exception {
@@ -4280,11 +4668,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in array of {@link String} format
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendBccWithFiles(String toEmailAddress, String subject, String Bcc, String messageText,
                                     File[] files, String mimeType) throws Exception {
@@ -4302,11 +4691,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendBccWithFiles(String toEmailAddress, String subject, String Bcc, String messageText, File[] files,
                                   String mimeType, ReturnFormat format) throws Exception {
@@ -4324,11 +4714,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Bcc:            multiple blind carbon copy value
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendMultipleBccWithFiles(String toEmailAddress, String subject, String messageText, File[] files,
                                             String mimeType, String... Bcc) throws Exception {
@@ -4346,11 +4737,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            multiple blind carbon copy value
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendMultipleBccWithFiles(String toEmailAddress, String subject, String messageText, File[] files,
                                           String mimeType, ReturnFormat format, String... Bcc) throws Exception {
@@ -4369,11 +4761,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in array of {@link String} format
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFiles(String toEmailAddress, String subject, String Cc, String Bcc,
                                                 String messageText, File[] files, String mimeType) throws Exception {
@@ -4393,11 +4786,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFiles(String toEmailAddress, String subject, String Cc, String Bcc, String messageText,
                                               File[] files, String mimeType, ReturnFormat format) throws Exception {
@@ -4416,11 +4810,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in array of {@link String} format
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFiles(String toEmailAddress, String subject, String[] Cc, String[] Bcc,
                                                 String messageText, File[] files, String mimeType) throws Exception {
@@ -4440,11 +4835,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFiles(String toEmailAddress, String subject, String[] Cc, String[] Bcc,
                                               String messageText, File[] files, String mimeType,
@@ -4464,11 +4860,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in array of {@link String} format
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFiles(String toEmailAddress, String subject, Collection<String> Cc,
                                                 Collection<String> Bcc, String messageText, File[] files,
@@ -4489,11 +4886,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFiles(String toEmailAddress, String subject, Collection<String> Cc,
                                               Collection<String> Bcc, String messageText, File[] files, String mimeType,
@@ -4512,11 +4910,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in {@link Collection} of {@link File} format
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendWithFiles(String toEmailAddress, String subject, String messageText, Collection<File> files,
                                  String mimeType) throws Exception {
@@ -4533,11 +4932,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendWithFiles(String toEmailAddress, String subject, String messageText, Collection<File> files,
                                String mimeType, ReturnFormat format) throws Exception {
@@ -4555,11 +4955,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in {@link Collection} of {@link String} format
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCcWithFiles(String toEmailAddress, String subject, String Cc, String messageText,
                                    Collection<File> files, String mimeType) throws Exception {
@@ -4577,11 +4978,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCcWithFiles(String toEmailAddress, String subject, String Cc, String messageText,
                                  Collection<File> files, String mimeType, ReturnFormat format) throws Exception {
@@ -4599,11 +5001,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Cc:             multiple carbon copy value
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendMultipleCcWithFiles(String toEmailAddress, String subject, String messageText,
                                            Collection<File> files, String mimeType, String... Cc) throws Exception {
@@ -4621,11 +5024,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Cc:             multiple carbon copy value
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendMultipleCcWithFiles(String toEmailAddress, String subject, String messageText, Collection<File> files,
                                          String mimeType, ReturnFormat format, String... Cc) throws Exception {
@@ -4643,11 +5047,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in {@link Collection} of {@link String} format
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendBccWithFiles(String toEmailAddress, String subject, String Bcc, String messageText,
                                     Collection<File> files, String mimeType) throws Exception {
@@ -4665,11 +5070,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendBccWithFiles(String toEmailAddress, String subject, String Bcc, String messageText,
                                   Collection<File> files, String mimeType, ReturnFormat format) throws Exception {
@@ -4687,11 +5093,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param Bcc:            multiple blind carbon copy value
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendMultipleBccWithFiles(String toEmailAddress, String subject, String messageText, Collection<File> files,
                                             String mimeType, String... Bcc) throws Exception {
@@ -4709,11 +5116,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @param Bcc:            multiple blind carbon copy value
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendMultipleBccWithFiles(String toEmailAddress, String subject, String messageText, Collection<File> files,
                                           String mimeType, ReturnFormat format, String... Bcc) throws Exception {
@@ -4732,11 +5140,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in {@link Collection} of {@link String} format
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFiles(String toEmailAddress, String subject, String Cc, String Bcc, String messageText,
                                                 Collection<File> files, String mimeType) throws Exception {
@@ -4755,11 +5164,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFiles(String toEmailAddress, String subject, String Cc, String Bcc, String messageText,
                                               Collection<File> files, String mimeType, ReturnFormat format) throws Exception {
@@ -4778,11 +5188,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in {@link Collection} of {@link String} format
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFiles(String toEmailAddress, String subject, String[] Cc, String[] Bcc,
                                                 String messageText, Collection<File> files, String mimeType) throws Exception {
@@ -4801,11 +5212,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFiles(String toEmailAddress, String subject, String[] Cc, String[] Bcc,
                                               String messageText, Collection<File> files, String mimeType,
@@ -4826,11 +5238,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param files:          attachments files in {@link Collection} of {@link String} format
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @return message sent as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public Message sendCompleteMessageWithFiles(String toEmailAddress, String subject, Collection<String> Cc,
                                                 Collection<String> Bcc, String messageText, Collection<File> files,
@@ -4850,11 +5263,12 @@ public class GmailMessagesManager extends GmailManager {
      * @param mimeType:       type of mime -> constants available at {@link GmailManager}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return message sent as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send">
      * users.messages.send</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "/gmail/v1/users/{userId}/messages/send")
     public <T> T sendCompleteMessageWithFiles(String toEmailAddress, String subject, Collection<String> Cc,
                                               Collection<String> Bcc, String messageText, Collection<File> files,
@@ -4867,9 +5281,42 @@ public class GmailMessagesManager extends GmailManager {
     /**
      * Method to move the specified message to the trash
      *
+     * @param message:the message to Trash
+     * @return message trashed as {@link Message} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/trash">
+     * users.messages.trash</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/trash")
+    public Message trash(Message message) throws IOException {
+        return trash(message, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to move the specified message to the trash
+     *
+     * @param message:the message to Trash
+     * @param format:     return type formatter -> {@link ReturnFormat}
+     * @return message trashed as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/trash">
+     * users.messages.trash</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/trash")
+    public <T> T trash(Message message, ReturnFormat format) throws IOException {
+        return returnMessage(messages.trash(userId, message.getId()).execute(), format);
+    }
+
+    /**
+     * Method to move the specified message to the trash
+     *
      * @param messageIdToTrash: the {@code "ID"} of the message to Trash
      * @return message trashed as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/trash">
      * users.messages.trash</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4885,7 +5332,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageIdToTrash: the {@code "ID"} of the message to Trash
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return message trashed as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/trash">
      * users.messages.trash</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4898,9 +5345,42 @@ public class GmailMessagesManager extends GmailManager {
     /**
      * Method to remove the specified message from the trash
      *
+     * @param message: the message to remove from Trash
+     * @return message untrashed as {@link Message} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/untrash">
+     * users.messages.untrash</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/untrash")
+    public Message untrash(Message message) throws IOException {
+        return untrash(message, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to remove the specified message from the trash
+     *
+     * @param message: the message to remove from Trash
+     * @param format:  return type formatter -> {@link ReturnFormat}
+     * @return message untrashed as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/untrash">
+     * users.messages.untrash</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}/untrash")
+    public <T> T untrash(Message message, ReturnFormat format) throws IOException {
+        return returnMessage(messages.untrash(userId, message.getId()).execute(), format);
+    }
+
+    /**
+     * Method to remove the specified message from the trash
+     *
      * @param messageIdToUntrash: the {@code "ID"} of the message to remove from Trash
      * @return message untrashed as {@link Message} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/untrash">
      * users.messages.untrash</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4916,7 +5396,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param messageIdToUntrash: the {@code "ID"} of the message to remove from Trash
      * @param format:             return type formatter -> {@link ReturnFormat}
      * @return message untrashed as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/untrash">
      * users.messages.untrash</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4929,10 +5409,45 @@ public class GmailMessagesManager extends GmailManager {
     /**
      * Method to get the specified message attachment
      *
+     * @param message:      the message containing the attachment
+     * @param attachmentId: the {@code "ID"} of the attachment
+     * @return specified message attachment as {@link MessageBody} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages.attachments/get">
+     * users.messages.attachments.get</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{messageId}/attachments/{id}")
+    public MessageBody getAttachment(Message message, String attachmentId) throws IOException {
+        return getAttachment(message.getId(), attachmentId, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get the specified message attachment
+     *
+     * @param message:      the message containing the attachment
+     * @param attachmentId: the {@code "ID"} of the attachment
+     * @param format:       return type formatter -> {@link ReturnFormat}
+     * @return specified message attachment as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages.attachments/get">
+     * users.messages.attachments.get</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{messageId}/attachments/{id}")
+    public <T> T getAttachment(Message message, String attachmentId, ReturnFormat format) throws IOException {
+        return getAttachment(message.getId(), attachmentId, format);
+    }
+
+    /**
+     * Method to get the specified message attachment
+     *
      * @param messageId:    the {@code "ID"} of the message containing the attachment
      * @param attachmentId: the {@code "ID"} of the attachment
      * @return specified message attachment as {@link MessageBody} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages.attachments/get">
      * users.messages.attachments.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4949,7 +5464,7 @@ public class GmailMessagesManager extends GmailManager {
      * @param attachmentId: the {@code "ID"} of the attachment
      * @param format:       return type formatter -> {@link ReturnFormat}
      * @return specified message attachment as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages.attachments/get">
      * users.messages.attachments.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library

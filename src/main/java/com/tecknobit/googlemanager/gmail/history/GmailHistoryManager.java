@@ -4,8 +4,10 @@ import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.ListHistoryResponse;
 import com.tecknobit.apimanager.annotations.RequestPath;
 import com.tecknobit.apimanager.annotations.Returner;
+import com.tecknobit.apimanager.annotations.WrappedRequest;
 import com.tecknobit.googlemanager.gmail.GmailManager;
 import com.tecknobit.googlemanager.gmail.history.records.HistoryList;
+import com.tecknobit.googlemanager.gmail.labels.records.Label;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -169,7 +171,7 @@ public class GmailHistoryManager extends GmailManager {
      *
      * @param startHistoryId: start history id to return history records after that specified
      * @return history list response as {@link HistoryList} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -185,7 +187,7 @@ public class GmailHistoryManager extends GmailManager {
      * @param startHistoryId: start history id to return history records after that specified
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -201,11 +203,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param startHistoryId: start history id to return history records after that specified
      * @param maxResults:     maximum number of history records to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @return history list response as {@link HistoryList} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, int maxResults) throws IOException {
         return getHistoryList(startHistoryId, maxResults, LIBRARY_OBJECT);
@@ -218,11 +221,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param maxResults:     maximum number of history records to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, int maxResults, ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
@@ -237,11 +241,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param startHistoryId: start history id to return history records after that specified
      * @param pageToken:      page token to retrieve a specific page of results in the list
      * @return history list response as {@link HistoryList} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, String pageToken) throws IOException {
         return getHistoryList(startHistoryId, pageToken, LIBRARY_OBJECT);
@@ -254,11 +259,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param pageToken:      page token to retrieve a specific page of results in the list
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, String pageToken, ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
@@ -270,14 +276,50 @@ public class GmailHistoryManager extends GmailManager {
     /**
      * Method to get a history list
      *
-     * @param labelId:        only return messages with a label matching the ID
+     * @param label:          only return messages with a label matching the ID
      * @param startHistoryId: start history id to return history records after that specified
      * @return history list response as {@link HistoryList} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
+    public HistoryList getHistoryList(Label label, long startHistoryId) throws IOException {
+        return getHistoryList(label.getId(), startHistoryId, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get a history list
+     *
+     * @param label:          only return messages with a label matching the ID
+     * @param startHistoryId: start history id to return history records after that specified
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return history list as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
+     * users.history.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
+    public <T> T getHistoryList(Label label, long startHistoryId, ReturnFormat format) throws IOException {
+        return getHistoryList(label.getId(), startHistoryId, format);
+    }
+
+    /**
+     * Method to get a history list
+     *
+     * @param labelId:        only return messages with a label matching the ID
+     * @param startHistoryId: start history id to return history records after that specified
+     * @return history list response as {@link HistoryList} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
+     * users.history.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(String labelId, long startHistoryId) throws IOException {
         return getHistoryList(labelId, startHistoryId, LIBRARY_OBJECT);
@@ -290,11 +332,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param startHistoryId: start history id to return history records after that specified
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(String labelId, long startHistoryId, ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
@@ -309,11 +352,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param startHistoryId: start history id to return history records after that specified
      * @param historyTypes:   history types to be returned by the function in array of {@link String} format
      * @return history list response as {@link HistoryList} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, String[] historyTypes) throws IOException {
         return getHistoryList(startHistoryId, historyTypes, LIBRARY_OBJECT);
@@ -326,11 +370,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param historyTypes:   history types to be returned by the function in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, String[] historyTypes, ReturnFormat format) throws IOException {
         ListHistoryResponse listHistoryResponse = history.list(userId).setStartHistoryId(valueOf(startHistoryId))
@@ -345,11 +390,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param startHistoryId: start history id to return history records after that specified
      * @param historyTypes:   history types to be returned by the function in {@link Collection} of {@link String} format
      * @return history list response as {@link HistoryList} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, Collection<String> historyTypes) throws IOException {
         return getHistoryList(startHistoryId, historyTypes, LIBRARY_OBJECT);
@@ -362,11 +408,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param historyTypes:   history types to be returned by the function in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, Collection<String> historyTypes,
                                 ReturnFormat format) throws IOException {
@@ -383,11 +430,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param maxResults:     maximum number of history records to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param pageToken:      page token to retrieve a specific page of results in the list
      * @return history list response as {@link HistoryList} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, int maxResults, String pageToken) throws IOException {
         return getHistoryList(startHistoryId, maxResults, pageToken, LIBRARY_OBJECT);
@@ -401,11 +449,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param pageToken:      page token to retrieve a specific page of results in the list
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, int maxResults, String pageToken,
                                 ReturnFormat format) throws IOException {
@@ -420,14 +469,53 @@ public class GmailHistoryManager extends GmailManager {
      * Method to get a history list
      *
      * @param startHistoryId: start history id to return history records after that specified
-     * @param labelId:        only return messages with a label matching the ID
+     * @param label:          only return messages with a label matching the ID
      * @param maxResults:     maximum number of history records to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @return history list response as {@link HistoryList} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
+    public HistoryList getHistoryList(long startHistoryId, Label label, int maxResults) throws IOException {
+        return getHistoryList(startHistoryId, label.getId(), maxResults, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get a history list
+     *
+     * @param startHistoryId: start history id to return history records after that specified
+     * @param label:          only return messages with a label matching the ID
+     * @param maxResults:     maximum number of history records to return. This field defaults to 100. The maximum allowed value for this field is 500
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return history list as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
+     * users.history.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
+    public <T> T getHistoryList(long startHistoryId, Label label, int maxResults,
+                                ReturnFormat format) throws IOException {
+        return getHistoryList(startHistoryId, label.getId(), maxResults, format);
+    }
+
+    /**
+     * Method to get a history list
+     *
+     * @param startHistoryId: start history id to return history records after that specified
+     * @param labelId:        only return messages with a label matching the ID
+     * @param maxResults:     maximum number of history records to return. This field defaults to 100. The maximum allowed value for this field is 500
+     * @return history list response as {@link HistoryList} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
+     * users.history.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, String labelId, int maxResults) throws IOException {
         return getHistoryList(startHistoryId, labelId, maxResults, LIBRARY_OBJECT);
@@ -441,11 +529,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param maxResults:     maximum number of history records to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, String labelId, int maxResults,
                                 ReturnFormat format) throws IOException {
@@ -463,11 +552,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param maxResults:     maximum number of history records to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param historyTypes:   history types to be returned by the function in array of {@link String} format
      * @return history list response as {@link HistoryList} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, int maxResults, String[] historyTypes) throws IOException {
         return getHistoryList(startHistoryId, maxResults, historyTypes, LIBRARY_OBJECT);
@@ -481,11 +571,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param historyTypes:   history types to be returned by the function in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, int maxResults, String[] historyTypes,
                                 ReturnFormat format) throws IOException {
@@ -503,11 +594,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param maxResults:     maximum number of history records to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param historyTypes:   history types to be returned by the function in {@link Collection} of {@link String} format
      * @return history list response as {@link HistoryList} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, int maxResults, Collection<String> historyTypes) throws IOException {
         return getHistoryList(startHistoryId, maxResults, historyTypes, LIBRARY_OBJECT);
@@ -521,11 +613,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param historyTypes:   history types to be returned by the function in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, int maxResults, Collection<String> historyTypes,
                                 ReturnFormat format) throws IOException {
@@ -541,13 +634,52 @@ public class GmailHistoryManager extends GmailManager {
      *
      * @param startHistoryId: start history id to return history records after that specified
      * @param pageToken:      page token to retrieve a specific page of results in the list
-     * @param labelId:        only return messages with a label matching the ID
+     * @param label:          only return messages with a label matching the ID
      * @return history list response as {@link HistoryList} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
+    public HistoryList getHistoryList(long startHistoryId, String pageToken, Label label) throws IOException {
+        return getHistoryList(startHistoryId, pageToken, label.getId(), LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get a history list
+     *
+     * @param startHistoryId: start history id to return history records after that specified
+     * @param pageToken:      page token to retrieve a specific page of results in the list
+     * @param label:          only return messages with a label matching the ID
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return history list as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
+     * users.history.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
+    public <T> T getHistoryList(long startHistoryId, String pageToken, Label label,
+                                ReturnFormat format) throws IOException {
+        return getHistoryList(startHistoryId, pageToken, label.getId(), format);
+    }
+
+    /**
+     * Method to get a history list
+     *
+     * @param startHistoryId: start history id to return history records after that specified
+     * @param pageToken:      page token to retrieve a specific page of results in the list
+     * @param labelId:        only return messages with a label matching the ID
+     * @return history list response as {@link HistoryList} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
+     * users.history.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, String pageToken, String labelId) throws IOException {
         return getHistoryList(startHistoryId, pageToken, labelId, LIBRARY_OBJECT);
@@ -561,11 +693,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param labelId:        only return messages with a label matching the ID
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, String pageToken, String labelId,
                                 ReturnFormat format) throws IOException {
@@ -583,11 +716,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param pageToken:      page token to retrieve a specific page of results in the list
      * @param historyTypes:   history types to be returned by the function in array of {@link String} format
      * @return history list response as {@link HistoryList} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, String pageToken, String[] historyTypes) throws IOException {
         return getHistoryList(startHistoryId, pageToken, historyTypes, LIBRARY_OBJECT);
@@ -601,11 +735,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param historyTypes:   history types to be returned by the function in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, String pageToken, String[] historyTypes,
                                 ReturnFormat format) throws IOException {
@@ -623,11 +758,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param pageToken:      page token to retrieve a specific page of results in the list
      * @param historyTypes:   history types to be returned by the function in {@link Collection} of {@link String} format
      * @return history list response as {@link HistoryList} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, String pageToken, Collection<String> historyTypes) throws IOException {
         return getHistoryList(startHistoryId, pageToken, historyTypes, LIBRARY_OBJECT);
@@ -641,11 +777,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param historyTypes:   history types to be returned by the function in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, String pageToken, Collection<String> historyTypes,
                                 ReturnFormat format) throws IOException {
@@ -659,15 +796,54 @@ public class GmailHistoryManager extends GmailManager {
     /**
      * Method to get a history list
      *
-     * @param labelId:        only return messages with a label matching the ID
+     * @param label:          only return messages with a label matching the ID
      * @param startHistoryId: start history id to return history records after that specified
      * @param historyTypes:   history types to be returned by the function in array of {@link String} format
      * @return history list response as {@link HistoryList} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
+    public HistoryList getHistoryList(Label label, long startHistoryId, String[] historyTypes) throws IOException {
+        return getHistoryList(label.getId(), startHistoryId, historyTypes, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get a history list
+     *
+     * @param label:          only return messages with a label matching the ID
+     * @param startHistoryId: start history id to return history records after that specified
+     * @param historyTypes:   history types to be returned by the function in array of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return history list as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
+     * users.history.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
+    public <T> T getHistoryList(Label label, long startHistoryId, String[] historyTypes,
+                                ReturnFormat format) throws IOException {
+        return getHistoryList(label.getId(), startHistoryId, historyTypes, format);
+    }
+
+    /**
+     * Method to get a history list
+     *
+     * @param labelId:        only return messages with a label matching the ID
+     * @param startHistoryId: start history id to return history records after that specified
+     * @param historyTypes:   history types to be returned by the function in array of {@link String} format
+     * @return history list response as {@link HistoryList} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
+     * users.history.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(String labelId, long startHistoryId, String[] historyTypes) throws IOException {
         return getHistoryList(labelId, startHistoryId, historyTypes, LIBRARY_OBJECT);
@@ -681,11 +857,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param historyTypes:   history types to be returned by the function in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(String labelId, long startHistoryId, String[] historyTypes,
                                 ReturnFormat format) throws IOException {
@@ -699,15 +876,54 @@ public class GmailHistoryManager extends GmailManager {
     /**
      * Method to get a history list
      *
-     * @param labelId:        only return messages with a label matching the ID
+     * @param label:          only return messages with a label matching the ID
      * @param startHistoryId: start history id to return history records after that specified
      * @param historyTypes:   history types to be returned by the function in {@link Collection} of {@link String} format
      * @return history list response as {@link HistoryList} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
+    public HistoryList getHistoryList(Label label, long startHistoryId, Collection<String> historyTypes) throws IOException {
+        return getHistoryList(label.getId(), startHistoryId, historyTypes, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get a history list
+     *
+     * @param label:          only return messages with a label matching the ID
+     * @param startHistoryId: start history id to return history records after that specified
+     * @param historyTypes:   history types to be returned by the function in {@link Collection} of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return history list as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
+     * users.history.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
+    public <T> T getHistoryList(Label label, long startHistoryId, Collection<String> historyTypes,
+                                ReturnFormat format) throws IOException {
+        return getHistoryList(label.getId(), startHistoryId, historyTypes, format);
+    }
+
+    /**
+     * Method to get a history list
+     *
+     * @param labelId:        only return messages with a label matching the ID
+     * @param startHistoryId: start history id to return history records after that specified
+     * @param historyTypes:   history types to be returned by the function in {@link Collection} of {@link String} format
+     * @return history list response as {@link HistoryList} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
+     * users.history.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(String labelId, long startHistoryId, Collection<String> historyTypes) throws IOException {
         return getHistoryList(labelId, startHistoryId, historyTypes, LIBRARY_OBJECT);
@@ -721,11 +937,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param historyTypes:   history types to be returned by the function in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(String labelId, long startHistoryId, Collection<String> historyTypes,
                                 ReturnFormat format) throws IOException {
@@ -742,14 +959,58 @@ public class GmailHistoryManager extends GmailManager {
      * @param startHistoryId: start history id to return history records after that specified
      * @param maxResults:     maximum number of history records to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param pageToken:      page token to retrieve a specific page of results in the list
-     * @param labelId:        only return messages with a label matching the ID
+     * @param label:          only return messages with a label matching the ID
      * @param historyTypes:   history types to be returned by the function in array of {@link String} format
      * @return history list response as {@link HistoryList} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
+    public HistoryList getHistoryList(long startHistoryId, int maxResults, String pageToken, Label label,
+                                      String[] historyTypes) throws IOException {
+        return getHistoryList(startHistoryId, maxResults, pageToken, label.getId(), historyTypes, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get a history list
+     *
+     * @param startHistoryId: start history id to return history records after that specified
+     * @param maxResults:     maximum number of history records to return. This field defaults to 100. The maximum allowed value for this field is 500
+     * @param pageToken:      page token to retrieve a specific page of results in the list
+     * @param label:          only return messages with a label matching the ID
+     * @param historyTypes:   history types to be returned by the function in array of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return history list as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
+     * users.history.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
+    public <T> T getHistoryList(long startHistoryId, int maxResults, String pageToken, Label label,
+                                String[] historyTypes, ReturnFormat format) throws IOException {
+        return getHistoryList(startHistoryId, maxResults, pageToken, label.getId(), historyTypes, format);
+    }
+
+    /**
+     * Method to get a history list
+     *
+     * @param startHistoryId: start history id to return history records after that specified
+     * @param maxResults:     maximum number of history records to return. This field defaults to 100. The maximum allowed value for this field is 500
+     * @param pageToken:      page token to retrieve a specific page of results in the list
+     * @param labelId:        only return messages with a label matching the ID
+     * @param historyTypes:   history types to be returned by the function in array of {@link String} format
+     * @return history list response as {@link HistoryList} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
+     * users.history.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, int maxResults, String pageToken, String labelId,
                                       String[] historyTypes) throws IOException {
@@ -766,11 +1027,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param historyTypes:   history types to be returned by the function in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, int maxResults, String pageToken, String labelId,
                                 String[] historyTypes, ReturnFormat format) throws IOException {
@@ -789,14 +1051,58 @@ public class GmailHistoryManager extends GmailManager {
      * @param startHistoryId: start history id to return history records after that specified
      * @param maxResults:     maximum number of history records to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param pageToken:      page token to retrieve a specific page of results in the list
-     * @param labelId:        only return messages with a label matching the ID
+     * @param label:          only return messages with a label matching the ID
      * @param historyTypes:   history types to be returned by the function in {@link Collection} of {@link String} format
      * @return history list response as {@link HistoryList} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
+    public HistoryList getHistoryList(long startHistoryId, int maxResults, String pageToken, Label label,
+                                      Collection<String> historyTypes) throws IOException {
+        return getHistoryList(startHistoryId, maxResults, pageToken, label.getId(), historyTypes, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get a history list
+     *
+     * @param startHistoryId: start history id to return history records after that specified
+     * @param maxResults:     maximum number of history records to return. This field defaults to 100. The maximum allowed value for this field is 500
+     * @param pageToken:      page token to retrieve a specific page of results in the list
+     * @param label:          only return messages with a label matching the ID
+     * @param historyTypes:   history types to be returned by the function in {@link Collection} of {@link String} format
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return history list as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
+     * users.history.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
+    public <T> T getHistoryList(long startHistoryId, int maxResults, String pageToken, Label label,
+                                Collection<String> historyTypes, ReturnFormat format) throws IOException {
+        return getHistoryList(startHistoryId, maxResults, pageToken, label.getId(), historyTypes, format);
+    }
+
+    /**
+     * Method to get a history list
+     *
+     * @param startHistoryId: start history id to return history records after that specified
+     * @param maxResults:     maximum number of history records to return. This field defaults to 100. The maximum allowed value for this field is 500
+     * @param pageToken:      page token to retrieve a specific page of results in the list
+     * @param labelId:        only return messages with a label matching the ID
+     * @param historyTypes:   history types to be returned by the function in {@link Collection} of {@link String} format
+     * @return history list response as {@link HistoryList} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
+     * users.history.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public HistoryList getHistoryList(long startHistoryId, int maxResults, String pageToken, String labelId,
                                       Collection<String> historyTypes) throws IOException {
@@ -813,11 +1119,12 @@ public class GmailHistoryManager extends GmailManager {
      * @param historyTypes:   history types to be returned by the function in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return history list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.history/list">
      * users.history.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/history")
     public <T> T getHistoryList(long startHistoryId, int maxResults, String pageToken, String labelId,
                                 Collection<String> historyTypes, ReturnFormat format) throws IOException {

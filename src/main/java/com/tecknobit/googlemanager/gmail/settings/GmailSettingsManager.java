@@ -4,6 +4,7 @@ import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.*;
 import com.tecknobit.apimanager.annotations.RequestPath;
 import com.tecknobit.apimanager.annotations.Returner;
+import com.tecknobit.apimanager.annotations.WrappedRequest;
 import com.tecknobit.apimanager.formatters.JsonHelper;
 import com.tecknobit.googlemanager.gmail.GmailManager;
 import com.tecknobit.googlemanager.gmail.settings.records.AutoForwarding;
@@ -221,7 +222,7 @@ public class GmailSettingsManager extends GmailManager {
      * Any params required
      *
      * @return auto-forwarding setting as {@link AutoForwarding} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/getAutoForwarding">
      * users.settings.getAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -236,7 +237,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return auto-forwarding setting as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/getAutoForwarding">
      * users.settings.getAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -251,7 +252,7 @@ public class GmailSettingsManager extends GmailManager {
      * Any params required
      *
      * @return {@code "IMAP"} settings as {@link ImapSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/getImap">
      * users.settings.getImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -266,7 +267,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return {@code "IMAP"} settings as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/getImap">
      * users.settings.getImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -281,7 +282,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return language settings as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/getLanguage">
      * users.settings.getLanguage</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -296,7 +297,7 @@ public class GmailSettingsManager extends GmailManager {
      * Any params required
      *
      * @return {@code "POP"} settings as {@link PopSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/getPop">
      * users.settings.getPop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -311,7 +312,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return {@code "POP"} settings as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/getPop">
      * users.settings.getPop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -326,7 +327,7 @@ public class GmailSettingsManager extends GmailManager {
      * Any params required
      *
      * @return vacation responder settings as {@link VacationSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/getVacation">
      * users.settings.getVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -341,7 +342,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/getVacation">
      * users.settings.getVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -359,11 +360,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param enabled: whether all incoming mail is automatically forwarded to another address
      * @return auto-forwarding setting updated as {@link AutoForwarding} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateAutoForwarding">
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public AutoForwarding updateAutoForwardingEnabled(boolean enabled) throws IOException {
         return updateAutoForwardingEnabled(enabled, LIBRARY_OBJECT);
@@ -378,11 +380,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param enabled: whether all incoming mail is automatically forwarded to another address
      * @param format:  return type formatter -> {@link ReturnFormat}
      * @return auto-forwarding setting updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateAutoForwarding">
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public <T> T updateAutoForwardingEnabled(boolean enabled, ReturnFormat format) throws IOException {
         AutoForwarding actualAutoForwarding = getAutoForwarding();
@@ -401,11 +404,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param emailAddress: email address to which all incoming messages are forwarded. This email address must be a verified member of the forwarding addresses
      * @return auto-forwarding setting updated as {@link AutoForwarding} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateAutoForwarding">
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public AutoForwarding updateAutoForwardingEmailAddress(String emailAddress) throws IOException {
         return updateAutoForwardingEmailAddress(emailAddress, LIBRARY_OBJECT);
@@ -420,11 +424,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param emailAddress: email address to which all incoming messages are forwarded. This email address must be a verified member of the forwarding addresses
      * @param format:       return type formatter -> {@link ReturnFormat}
      * @return auto-forwarding setting updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateAutoForwarding">
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public <T> T updateAutoForwardingEmailAddress(String emailAddress, ReturnFormat format) throws IOException {
         AutoForwarding actualAutoForwarding = getAutoForwarding();
@@ -440,11 +445,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param disposition: the state that a message should be left in after it has been forwarded
      * @return auto-forwarding setting updated as {@link AutoForwarding} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateAutoForwarding">
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public AutoForwarding updateAutoForwardingDisposition(Disposition disposition) throws IOException {
         return updateAutoForwardingDisposition(disposition, LIBRARY_OBJECT);
@@ -459,11 +465,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param disposition: the state that a message should be left in after it has been forwarded
      * @param format:      return type formatter -> {@link ReturnFormat}
      * @return auto-forwarding setting updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateAutoForwarding">
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public <T> T updateAutoForwardingDisposition(Disposition disposition, ReturnFormat format) throws IOException {
         AutoForwarding actualAutoForwarding = getAutoForwarding();
@@ -480,11 +487,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param enabled:      whether all incoming mail is automatically forwarded to another address
      * @param emailAddress: email address to which all incoming messages are forwarded. This email address must be a verified member of the forwarding addresses
      * @return auto-forwarding setting updated as {@link AutoForwarding} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateAutoForwarding">
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public AutoForwarding updateAutoForwarding(boolean enabled, String emailAddress) throws IOException {
         return updateAutoForwarding(enabled, emailAddress, LIBRARY_OBJECT);
@@ -500,11 +508,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param emailAddress: email address to which all incoming messages are forwarded. This email address must be a verified member of the forwarding addresses
      * @param format:       return type formatter -> {@link ReturnFormat}
      * @return auto-forwarding setting updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateAutoForwarding">
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public <T> T updateAutoForwarding(boolean enabled, String emailAddress, ReturnFormat format) throws IOException {
         AutoForwarding actualAutoForwarding = getAutoForwarding();
@@ -525,11 +534,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param enabled:     whether all incoming mail is automatically forwarded to another address
      * @param disposition: the state that a message should be left in after it has been forwarded
      * @return auto-forwarding setting updated as {@link AutoForwarding} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateAutoForwarding">
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public AutoForwarding updateAutoForwarding(boolean enabled, Disposition disposition) throws IOException {
         return updateAutoForwarding(enabled, disposition, LIBRARY_OBJECT);
@@ -545,11 +555,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param disposition: the state that a message should be left in after it has been forwarded
      * @param format:      return type formatter -> {@link ReturnFormat}
      * @return auto-forwarding setting updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateAutoForwarding">
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public <T> T updateAutoForwarding(boolean enabled, Disposition disposition, ReturnFormat format) throws IOException {
         AutoForwarding actualAutoForwarding = getAutoForwarding();
@@ -570,11 +581,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param emailAddress: email address to which all incoming messages are forwarded. This email address must be a verified member of the forwarding addresses
      * @param disposition:  the state that a message should be left in after it has been forwarded
      * @return auto-forwarding setting updated as {@link AutoForwarding} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateAutoForwarding">
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public AutoForwarding updateAutoForwarding(String emailAddress, Disposition disposition) throws IOException {
         return updateAutoForwarding(emailAddress, disposition, LIBRARY_OBJECT);
@@ -590,11 +602,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param disposition:  the state that a message should be left in after it has been forwarded
      * @param format:       return type formatter -> {@link ReturnFormat}
      * @return auto-forwarding setting updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateAutoForwarding">
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public <T> T updateAutoForwarding(String emailAddress, Disposition disposition, ReturnFormat format) throws IOException {
         AutoForwarding actualAutoForwarding = getAutoForwarding();
@@ -610,11 +623,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param autoForwardingUpdated: auto-forwarding settings for an account
      * @return auto-forwarding setting updated as {@link AutoForwarding} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateAutoForwarding">
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public AutoForwarding updateAutoForwarding(AutoForwarding autoForwardingUpdated) throws IOException {
         return updateAutoForwarding(autoForwardingUpdated, LIBRARY_OBJECT);
@@ -628,11 +642,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param autoForwardingUpdated: auto-forwarding settings for an account
      * @param format:                return type formatter -> {@link ReturnFormat}
      * @return auto-forwarding setting updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateAutoForwarding">
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public <T> T updateAutoForwarding(AutoForwarding autoForwardingUpdated, ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.AutoForwarding autoForwarding = new com.google.api.services.gmail.model.AutoForwarding();
@@ -651,13 +666,15 @@ public class GmailSettingsManager extends GmailManager {
      * @param emailAddress: email address to which all incoming messages are forwarded. This email address must be a verified member of the forwarding addresses
      * @param disposition:  the state that a message should be left in after it has been forwarded
      * @return auto-forwarding setting updated as {@link AutoForwarding} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateAutoForwarding">
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
-    public AutoForwarding updateAutoForwarding(boolean enabled, String emailAddress, Disposition disposition) throws IOException {
+    public AutoForwarding updateAutoForwarding(boolean enabled, String emailAddress,
+                                               Disposition disposition) throws IOException {
         return updateAutoForwarding(enabled, emailAddress, disposition, LIBRARY_OBJECT);
     }
 
@@ -671,11 +688,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param disposition:  the state that a message should be left in after it has been forwarded
      * @param format:       return type formatter -> {@link ReturnFormat}
      * @return auto-forwarding setting updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateAutoForwarding">
      * users.settings.updateAutoForwarding</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/autoForwarding")
     public <T> T updateAutoForwarding(boolean enabled, String emailAddress, Disposition disposition,
                                       ReturnFormat format) throws IOException {
@@ -712,11 +730,12 @@ public class GmailSettingsManager extends GmailManager {
      * Any params required
      *
      * @return {@code "IMAP"} settings updated as {@link ImapSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public ImapSettings enableImap() throws IOException {
         return enableImap(LIBRARY_OBJECT);
@@ -728,11 +747,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return {@code "IMAP"} settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public <T> T enableImap(ReturnFormat format) throws IOException {
         ImapSettings actualImap = getImap();
@@ -746,11 +766,12 @@ public class GmailSettingsManager extends GmailManager {
      * Any params required
      *
      * @return {@code "IMAP"} settings updated as {@link ImapSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public ImapSettings disableImap() throws IOException {
         return disableImap(LIBRARY_OBJECT);
@@ -762,11 +783,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return {@code "IMAP"} settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public <T> T disableImap(ReturnFormat format) throws IOException {
         ImapSettings actualImap = getImap();
@@ -780,11 +802,12 @@ public class GmailSettingsManager extends GmailManager {
      * Any params required
      *
      * @return {@code "IMAP"} settings updated as {@link ImapSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public ImapSettings enableImapAutoExpunge() throws IOException {
         return enableImapAutoExpunge(LIBRARY_OBJECT);
@@ -796,11 +819,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return {@code "IMAP"} settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public <T> T enableImapAutoExpunge(ReturnFormat format) throws IOException {
         ImapSettings actualImap = getImap();
@@ -814,11 +838,12 @@ public class GmailSettingsManager extends GmailManager {
      * Any params required
      *
      * @return {@code "IMAP"} settings updated as {@link ImapSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public ImapSettings disableImapAutoExpunge() throws IOException {
         return disableImapAutoExpunge(LIBRARY_OBJECT);
@@ -830,11 +855,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return {@code "IMAP"} settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public <T> T disableImapAutoExpunge(ReturnFormat format) throws IOException {
         ImapSettings actualImap = getImap();
@@ -848,11 +874,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param expungeBehavior: the action that will be executed on a message when it is marked as deleted and expunged from the last visible {@code "IMAP"} folder
      * @return {@code "IMAP"} settings updated as {@link ImapSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public ImapSettings updateImapExpungeBehavior(ExpungeBehavior expungeBehavior) throws IOException {
         return updateImapExpungeBehavior(expungeBehavior, LIBRARY_OBJECT);
@@ -865,11 +892,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param expungeBehavior: the action that will be executed on a message when it is marked as deleted and expunged from the last visible {@code "IMAP"} folder
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return {@code "IMAP"} settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public <T> T updateImapExpungeBehavior(ExpungeBehavior expungeBehavior, ReturnFormat format) throws IOException {
         ImapSettings actualImap = getImap();
@@ -883,11 +911,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param maxFolderSize: an optional limit on the number of messages that an {@code "IMAP"} folder may contain. Legal values are 0, 1000, 2000, 5000 or 10000. A value of zero is interpreted to mean that there is no limit
      * @return {@code "IMAP"} settings updated as {@link ImapSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public ImapSettings updateImapMaxFolderSize(int maxFolderSize) throws IOException {
         return updateImapMaxFolderSize(maxFolderSize, LIBRARY_OBJECT);
@@ -900,11 +929,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param maxFolderSize: an optional limit on the number of messages that an {@code "IMAP"} folder may contain. Legal values are 0, 1000, 2000, 5000 or 10000. A value of zero is interpreted to mean that there is no limit
      * @param format:        return type formatter -> {@link ReturnFormat}
      * @return {@code "IMAP"} settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public <T> T updateImapMaxFolderSize(int maxFolderSize, ReturnFormat format) throws IOException {
         ImapSettings actualImap = getImap();
@@ -918,7 +948,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param imapSettingsUpdated: {@code "IMAP"} settings to change
      * @return {@code "IMAP"} settings updated as {@link ImapSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -945,6 +975,7 @@ public class GmailSettingsManager extends GmailManager {
      * </ul>
      **/
     @SafeVarargs
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public final <T> ImapSettings updateImap(T... imapSettingsUpdated) throws IOException {
         return (ImapSettings) updateImap(LIBRARY_OBJECT, imapSettingsUpdated);
@@ -957,7 +988,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param imapSettingsUpdated: {@code "IMAP"} settings to change
      * @param format:              return type formatter -> {@link ReturnFormat}
      * @return {@code "IMAP"} settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -984,6 +1015,7 @@ public class GmailSettingsManager extends GmailManager {
      * </ul>
      **/
     @SafeVarargs
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public final <T> T updateImap(ReturnFormat format, T... imapSettingsUpdated) throws IOException {
         com.google.api.services.gmail.model.ImapSettings imapSettings = settings.getImap(userId).execute();
@@ -1005,7 +1037,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param imapSettingsUpdated: {@code "IMAP"} settings for an account
      * @return {@code "IMAP"} settings updated as {@link ImapSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1021,7 +1053,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param imapSettingsUpdated: {@code "IMAP"} settings for an account
      * @param format:              return type formatter -> {@link ReturnFormat}
      * @return {@code "IMAP"} settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1043,11 +1075,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param expungeBehavior: the action that will be executed on a message when it is marked as deleted and expunged from the last visible {@code "IMAP"} folder
      * @param maxFolderSize:   an optional limit on the number of messages that an {@code "IMAP"} folder may contain. Legal values are 0, 1000, 2000, 5000 or 10000. A value of zero is interpreted to mean that there is no limit
      * @return {@code "IMAP"} settings updated as {@link ImapSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public ImapSettings updateImap(boolean enable, boolean autoExpunge, ExpungeBehavior expungeBehavior,
                                    int maxFolderSize) throws IOException {
@@ -1063,11 +1096,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param maxFolderSize:   an optional limit on the number of messages that an {@code "IMAP"} folder may contain. Legal values are 0, 1000, 2000, 5000 or 10000. A value of zero is interpreted to mean that there is no limit
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return {@code "IMAP"} settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateImap">
      * users.settings.updateImap</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/imap")
     public <T> T updateImap(boolean enable, boolean autoExpunge, ExpungeBehavior expungeBehavior, int maxFolderSize,
                             ReturnFormat format) throws IOException {
@@ -1103,7 +1137,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param languageUpdated: Language settings for an account. These settings correspond to the <a href="https://support.google.com/mail/answer/17091">Language settings</a> feature in the web interface
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return language settings as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateLanguage">
      * users.settings.updateLanguage</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1139,11 +1173,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param accessWindow: the range of messages which are accessible via {@link "POP"}
      * @return {@code "POP"} settings updated as {@link PopSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updatePop">
      * users.settings.updatePop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public PopSettings updatePopAccessWindow(AccessWindow accessWindow) throws IOException {
         return updatePopAccessWindow(accessWindow, LIBRARY_OBJECT);
@@ -1156,11 +1191,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param accessWindow: the range of messages which are accessible via {@link "POP"}
      * @param format:       return type formatter -> {@link ReturnFormat}
      * @return {@code "POP"} settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updatePop">
      * users.settings.updatePop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public <T> T updatePopAccessWindow(AccessWindow accessWindow, ReturnFormat format) throws IOException {
         PopSettings actualPopSettings = getPopSettings();
@@ -1174,11 +1210,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param disposition: the action that will be executed on a message after it has been fetched via {@link "POP"}
      * @return {@code "POP"} settings updated as {@link PopSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updatePop">
      * users.settings.updatePop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public PopSettings updatePopDisposition(Disposition disposition) throws IOException {
         return updatePopDisposition(disposition, LIBRARY_OBJECT);
@@ -1191,11 +1228,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param disposition: the action that will be executed on a message after it has been fetched via {@link "POP"}
      * @param format:      return type formatter -> {@link ReturnFormat}
      * @return {@code "POP"} settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updatePop">
      * users.settings.updatePop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public <T> T updatePopDisposition(Disposition disposition, ReturnFormat format) throws IOException {
         PopSettings actualPopSettings = getPopSettings();
@@ -1208,11 +1246,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param popSettingsUpdated: {@code "POP"} settings for an account
      * @return {@code "POP"} settings updated as {@link PopSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updatePop">
      * users.settings.updatePop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public PopSettings updatePopSettings(PopSettings popSettingsUpdated) throws IOException {
         return updatePopSettings(popSettingsUpdated, LIBRARY_OBJECT);
@@ -1224,11 +1263,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param popSettingsUpdated: {@code "POP"} settings for an account
      * @param format:             return type formatter -> {@link ReturnFormat}
      * @return {@code "POP"} settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updatePop">
      * users.settings.updatePop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public <T> T updatePopSettings(PopSettings popSettingsUpdated, ReturnFormat format) throws IOException {
         return returnPopSettings(settings.updatePop(userId, new com.google.api.services.gmail.model.PopSettings()
@@ -1243,11 +1283,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param accessWindow: the range of messages which are accessible via {@link "POP"}
      * @param disposition:  the action that will be executed on a message after it has been fetched via {@link "POP"}
      * @return {@code "POP"} settings updated as {@link PopSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updatePop">
      * users.settings.updatePop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public PopSettings updatePopSettings(AccessWindow accessWindow, Disposition disposition) throws IOException {
         return updatePopSettings(accessWindow, disposition, LIBRARY_OBJECT);
@@ -1261,11 +1302,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param disposition:  the action that will be executed on a message after it has been fetched via {@link "POP"}
      * @param format:       return type formatter -> {@link ReturnFormat}
      * @return {@code "POP"} settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updatePop">
      * users.settings.updatePop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/pop")
     public <T> T updatePopSettings(AccessWindow accessWindow, Disposition disposition, ReturnFormat format) throws IOException {
         return returnPopSettings(settings.updatePop(userId, new com.google.api.services.gmail.model.PopSettings()
@@ -1299,11 +1341,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param responsePlainText: response body in plain text format. If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"}
      *                           are specified, {@code "responseBodyHtml"}  will be used
      * @return vacation responder settings updated as {@link VacationSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings enableVacationPlainTextAutoReply(String responseSubject, String responsePlainText) throws IOException {
         return enableVacationPlainTextAutoReply(responseSubject, responsePlainText, LIBRARY_OBJECT);
@@ -1318,11 +1361,12 @@ public class GmailSettingsManager extends GmailManager {
      *                           are specified, {@code "responseBodyHtml"}  will be used
      * @param format:            return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T enableVacationPlainTextAutoReply(String responseSubject, String responsePlainText,
                                                   ReturnFormat format) throws IOException {
@@ -1341,11 +1385,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param responseHtml:    response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      *                         If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"} are specified, {@code "responseBodyHtml"} will be used
      * @return vacation responder settings updated as {@link VacationSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings enableVacationHtmlAutoReply(String responseSubject, String responseHtml) throws IOException {
         return enableVacationHtmlAutoReply(responseSubject, responseHtml, LIBRARY_OBJECT);
@@ -1360,11 +1405,12 @@ public class GmailSettingsManager extends GmailManager {
      *                         If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"} are specified, {@code "responseBodyHtml"} will be used
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T enableVacationHtmlAutoReply(String responseSubject, String responseHtml, ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
@@ -1384,11 +1430,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param responseHtml:      response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      *                           If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"} are specified, {@code "responseBodyHtml"} will be used
      * @return vacation responder settings updated as {@link VacationSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings enableVacationAutoReply(String responseSubject, String responsePlainText,
                                                     String responseHtml) throws IOException {
@@ -1406,11 +1453,12 @@ public class GmailSettingsManager extends GmailManager {
      *                           If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"} are specified, {@code "responseBodyHtml"} will be used
      * @param format:            return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T enableVacationAutoReply(String responseSubject, String responsePlainText, String responseHtml,
                                          ReturnFormat format) throws IOException {
@@ -1428,11 +1476,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param responseSubject: optional text to prepend to the subject line in vacation responses. In order to enable auto-replies, either the response subject or the response body must be nonempty
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationResponseSubject(String responseSubject) throws IOException {
         return updateVacationResponseSubject(responseSubject, LIBRARY_OBJECT);
@@ -1445,11 +1494,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param responseSubject: optional text to prepend to the subject line in vacation responses. In order to enable auto-replies, either the response subject or the response body must be nonempty
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationResponseSubject(String responseSubject, ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
@@ -1464,11 +1514,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param responsePlainText: response body in plain text format. If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"}
      *                           are specified, {@code "responseBodyHtml"}  will be used
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationResponsePlainText(String responsePlainText) throws IOException {
         return updateVacationResponsePlainText(responsePlainText, LIBRARY_OBJECT);
@@ -1482,11 +1533,12 @@ public class GmailSettingsManager extends GmailManager {
      *                           are specified, {@code "responseBodyHtml"}  will be used
      * @param format:            return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationResponsePlainText(String responsePlainText, ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
@@ -1502,11 +1554,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param responsePlainText: response body in plain text format. If both {@code "responseBodyPlainText"} and {@code "responseBodyHtml"}
      *                           are specified, {@code "responseBodyHtml"}  will be used
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationResponsePlainText(String responseSubject, String responsePlainText) throws IOException {
         return updateVacationResponsePlainText(responseSubject, responsePlainText, LIBRARY_OBJECT);
@@ -1521,11 +1574,12 @@ public class GmailSettingsManager extends GmailManager {
      *                           are specified, {@code "responseBodyHtml"}  will be used
      * @param format:            return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationResponsePlainText(String responseSubject, String responsePlainText,
                                                  ReturnFormat format) throws IOException {
@@ -1541,11 +1595,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param responseHtml: response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationResponseHtml(String responseHtml) throws IOException {
         return updateVacationResponseHtml(responseHtml, LIBRARY_OBJECT);
@@ -1558,11 +1613,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param responseHtml: response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      * @param format:       return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationResponseHtml(String responseHtml, ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
@@ -1577,11 +1633,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param responseSubject: optional text to prepend to the subject line in vacation responses. In order to enable auto-replies, either the response subject or the response body must be nonempty
      * @param responseHtml:    response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationResponseHtml(String responseSubject, String responseHtml) throws IOException {
         return updateVacationResponseHtml(responseSubject, responseHtml, LIBRARY_OBJECT);
@@ -1595,11 +1652,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param responseHtml:    response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationResponseHtml(String responseSubject, String responseHtml, ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
@@ -1618,11 +1676,12 @@ public class GmailSettingsManager extends GmailManager {
      *                           are specified, {@code "responseBodyHtml"}  will be used
      * @param responseHtml:      response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationResponseDetails(String responseSubject, String responsePlainText,
                                                           String responseHtml) throws IOException {
@@ -1640,11 +1699,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param responseHtml:      response body in {@code "HTML"} format. {@code "Gmail"} will sanitize the {@code "HTML"} before storing it.
      * @param format:            return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationResponseDetails(String responseSubject, String responsePlainText, String responseHtml,
                                                ReturnFormat format) throws IOException {
@@ -1662,11 +1722,12 @@ public class GmailSettingsManager extends GmailManager {
      * Any params required
      *
      * @return vacation responder settings updated as {@link VacationSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings disableVacationAutoReply() throws IOException {
         return disableVacationAutoReply(LIBRARY_OBJECT);
@@ -1678,11 +1739,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T disableVacationAutoReply(ReturnFormat format) throws IOException {
         return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
@@ -1695,11 +1757,12 @@ public class GmailSettingsManager extends GmailManager {
      * Any params required
      *
      * @return vacation responder settings updated as {@link VacationSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings enableRestrictToContacts() throws IOException {
         return enableRestrictToContacts(LIBRARY_OBJECT);
@@ -1711,11 +1774,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T enableRestrictToContacts(ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
@@ -1729,11 +1793,12 @@ public class GmailSettingsManager extends GmailManager {
      * Any params required
      *
      * @return vacation responder settings updated as {@link VacationSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings disableRestrictToContacts() throws IOException {
         return disableRestrictToContacts(LIBRARY_OBJECT);
@@ -1745,11 +1810,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T disableRestrictToContacts(ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
@@ -1763,11 +1829,12 @@ public class GmailSettingsManager extends GmailManager {
      * Any params required
      *
      * @return vacation responder settings updated as {@link VacationSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings enableRestrictToDomain() throws IOException {
         return enableRestrictToDomain(LIBRARY_OBJECT);
@@ -1779,11 +1846,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T enableRestrictToDomain(ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
@@ -1797,11 +1865,12 @@ public class GmailSettingsManager extends GmailManager {
      * Any params required
      *
      * @return vacation responder settings updated as {@link VacationSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings disableRestrictToDomain() throws IOException {
         return disableRestrictToDomain(LIBRARY_OBJECT);
@@ -1813,11 +1882,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T disableRestrictToDomain(ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
@@ -1833,11 +1903,12 @@ public class GmailSettingsManager extends GmailManager {
      *                  {@code "Gmail"} will automatically reply only to messages that it receives after the start time.
      *                  If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @return vacation responder settings updated as {@link VacationSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationStartTime(long startTime) throws IOException {
         return updateVacationStartTime(startTime, LIBRARY_OBJECT);
@@ -1852,11 +1923,12 @@ public class GmailSettingsManager extends GmailManager {
      *                  If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @param format:   return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationStartTime(long startTime, ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
@@ -1872,11 +1944,12 @@ public class GmailSettingsManager extends GmailManager {
      *                 {@code "Gmail"} will automatically reply only to messages that it receives before the end time.
      *                 If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @return vacation responder settings updated as {@link VacationSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationEndTime(long endTime) throws IOException {
         return updateVacationEndTime(endTime, LIBRARY_OBJECT);
@@ -1891,11 +1964,12 @@ public class GmailSettingsManager extends GmailManager {
      *                 If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @param format:  return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationEndTime(long endTime, ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
@@ -1914,11 +1988,12 @@ public class GmailSettingsManager extends GmailManager {
      *                  {@code "Gmail"} will automatically reply only to messages that it receives before the end time.
      *                  If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @return vacation responder settings updated as {@link VacationSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationTime(long startTime, long endTime) throws IOException {
         return updateVacationTime(startTime, endTime, LIBRARY_OBJECT);
@@ -1936,11 +2011,12 @@ public class GmailSettingsManager extends GmailManager {
      *                  If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @param format:   return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationTime(long startTime, long endTime, ReturnFormat format) throws IOException {
         VacationSettings actualVacationSettings = getVacationSettings();
@@ -1954,11 +2030,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param vacationSettings: vacation auto-reply settings for an account. These settings correspond to the "Vacation responder" feature in the web interface
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public VacationSettings updateVacationSettings(VacationSettings vacationSettings) throws IOException {
         return updateVacationSettings(vacationSettings, LIBRARY_OBJECT);
@@ -1970,11 +2047,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param vacationSettings: vacation auto-reply settings for an account. These settings correspond to the "Vacation responder" feature in the web interface
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/vacation")
     public <T> T updateVacationSettings(VacationSettings vacationSettings, ReturnFormat format) throws IOException {
         return returnVacationSettings(settings.updateVacation(userId, new com.google.api.services.gmail.model.VacationSettings()
@@ -2007,7 +2085,7 @@ public class GmailSettingsManager extends GmailManager {
      *                                   {@code "Gmail"} will automatically reply only to messages that it receives before the end time.
      *                                   If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @return vacation responder settings updated as {@link VacationSettings} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2040,7 +2118,7 @@ public class GmailSettingsManager extends GmailManager {
      *                                   If both {@code "startTime"} and {@code "endTime"} are specified, {@code "startTime"} must precede {@code "endTime"}
      * @param format:                    return type formatter -> {@link ReturnFormat}
      * @return vacation responder settings updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings/updateVacation">
      * users.settings.updateVacation</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2089,11 +2167,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param delegate: Settings for a delegate. Delegates can read, send, and delete messages, as well as view and add contacts, for the delegator's account
      * @return delegate as {@link Delegate} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.delegates/create">
      * users.settings.delegates.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/delegates")
     public Delegate createDelegate(Delegate delegate) throws IOException {
         return createDelegate(delegate, LIBRARY_OBJECT);
@@ -2109,11 +2188,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param delegate: Settings for a delegate. Delegates can read, send, and delete messages, as well as view and add contacts, for the delegator's account
      * @param format:   return type formatter -> {@link ReturnFormat}
      * @return delegate as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.delegates/create">
      * users.settings.delegates.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/delegates")
     public <T> T createDelegate(Delegate delegate, ReturnFormat format) throws IOException {
         return returnDelegate(delegates.create(userId, new com.google.api.services.gmail.model.Delegate()
@@ -2131,7 +2211,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param delegateEmail:      the email address of the delegate
      * @param verificationStatus: indicates whether this address has been verified and can act as a delegate for the account. Read-only
      * @return delegate as {@link Delegate} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.delegates/create">
      * users.settings.delegates.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2152,7 +2232,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param verificationStatus: indicates whether this address has been verified and can act as a delegate for the account. Read-only
      * @param format:             return type formatter -> {@link ReturnFormat}
      * @return delegate as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.delegates/create">
      * users.settings.delegates.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2175,6 +2255,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.delegates.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/delegates")
     public boolean deleteDelegate(Delegate delegateToDelete) {
         return deleteDelegate(delegateToDelete.getDelegateEmail());
@@ -2302,7 +2383,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param filter: filter with details to create
      * @return filter created as {@link Filter} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/create">
      * users.settings.filters.create</a>
      * @implSpec you have to load {@code "filter"} with custom details, but if you don't need some details you must
@@ -2331,7 +2412,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param filter: filter with details to create
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return filter created as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/create">
      * users.settings.filters.create</a>
      * @implSpec you have to load {@code "filter"} with custom details, but if you don't need some details you must
@@ -2392,6 +2473,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.filters.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/filters/{id}")
     public boolean deleteFilter(Filter filterToDelete) {
         return deleteFilter(filterToDelete.getId());
@@ -2422,7 +2504,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param filterId: the {@code "ID"} of the filter to be fetched
      * @return filter requested as {@link Filter} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/get">
      * users.settings.filters.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2438,7 +2520,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param filterId: the {@code "ID"} of the filter to be fetched
      * @param format:   return type formatter -> {@link ReturnFormat}
      * @return filter requested as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/get">
      * users.settings.filters.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2472,7 +2554,7 @@ public class GmailSettingsManager extends GmailManager {
      * Any params required
      *
      * @return list of filters as {@link Collection} of {@link Filter} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/list">
      * users.settings.filters.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2487,7 +2569,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return list of filters as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/list">
      * users.settings.filters.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2509,7 +2591,7 @@ public class GmailSettingsManager extends GmailManager {
                 return (T) filters.toString();
         }
     }
-    
+
     /**
      * Method to create a forwarding address. If ownership verification is required, a message will be sent to the recipient
      * and the resource's verification status will be set to {@code "pending"}; otherwise, the resource will be created with verification status
@@ -2518,11 +2600,12 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param forwardingAddress: forwarding address to create
      * @return forwarding address created as {@link ForwardingAddress} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/create">
      * users.settings.forwardingAddresses.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/forwardingAddresses")
     public ForwardingAddress createForwardingAddress(ForwardingAddress forwardingAddress) throws IOException {
         return createForwardingAddress(forwardingAddress, LIBRARY_OBJECT);
@@ -2537,11 +2620,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param forwardingAddress: forwarding address to create
      * @param format:            return type formatter -> {@link ReturnFormat}
      * @return forwarding address created as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/create">
      * users.settings.forwardingAddresses.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/forwardingAddresses")
     public <T> T createForwardingAddress(ForwardingAddress forwardingAddress, ReturnFormat format) throws IOException {
         return returnForwardingAddress(forwardingAddresses.create(userId, new com.google.api.services.gmail.model.ForwardingAddress()
@@ -2557,7 +2641,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param forwardingEmail: an email address to which messages can be forwarded
      * @return forwarding address created as {@link ForwardingAddress} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/create">
      * users.settings.forwardingAddresses.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2576,7 +2660,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param forwardingEmail: an email address to which messages can be forwarded
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return forwarding address created as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/create">
      * users.settings.forwardingAddresses.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2597,6 +2681,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.forwardingAddresses.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/forwardingAddresses/{forwardingEmail}")
     public boolean deleteForwardingAddress(ForwardingAddress forwardingAddressToDelete) {
         return deleteForwardingAddress(forwardingAddressToDelete.getForwardingEmail());
@@ -2628,7 +2713,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param forwardingEmail: the forwarding address to be retrieved
      * @return forwarding address requested as {@link ForwardingAddress} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/get">
      * users.settings.forwardingAddresses.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2644,7 +2729,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param forwardingEmail: the forwarding address to be retrieved
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return forwarding address requested as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/get">
      * users.settings.forwardingAddresses.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2679,7 +2764,7 @@ public class GmailSettingsManager extends GmailManager {
      * Any params required
      *
      * @return list of forwarding addresses as {@link Collection} of {@link ForwardingAddress} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/list">
      * users.settings.forwardingAddresses.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2695,7 +2780,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return list of forwarding addresses as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.forwardingAddresses/list">
      * users.settings.forwardingAddresses.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2727,7 +2812,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param sendAsToCreate: send-as to create
      * @return send-as as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/create">
      * users.settings.sendAs.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2749,7 +2834,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param sendAsToCreate: send-as to create
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return send-as created as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/create">
      * users.settings.sendAs.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2788,6 +2873,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public boolean deleteSendAs(SendAs sendAsToDelete) {
         return deleteSendAs(sendAsToDelete.getSendAsEmail());
@@ -2819,7 +2905,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param sendAsEmailToGet: the send-as alias to be retrieved
      * @return send-as requested as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/get">
      * users.settings.sendAs.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2835,7 +2921,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param sendAsEmailToGet: the send-as alias to be retrieved
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return send-as requested as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/get">
      * users.settings.sendAs.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2851,7 +2937,7 @@ public class GmailSettingsManager extends GmailManager {
      * Any params required
      *
      * @return send-as list as {@link Collection} of {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/list">
      * users.settings.sendAs.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2867,7 +2953,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param format: return type formatter -> {@link ReturnFormat}
      * @return send-as list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/list">
      * users.settings.sendAs.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -2894,16 +2980,59 @@ public class GmailSettingsManager extends GmailManager {
      * Method to patch the specified send-as alias <br>
      * This method allows to change only {@code "displayName"} without change all {code "SendAs"} details
      *
-     * @param sendAsEmail:        the send-as alias to be updated
+     * @param sendAs:             the send-as alias to be updated
      * @param displayNameUpdated: a name that appears in the {@code "From:"} header for mail sent using this alias
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public SendAs changeSendAsDisplayName(SendAs sendAs, String displayNameUpdated) throws IOException {
+        return changeSendAsDisplayName(sendAs.getSendAsEmail(), displayNameUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "displayName"} without change all {code "SendAs"} details
+     *
+     * @param sendAs:             the send-as alias to be updated
+     * @param displayNameUpdated: a name that appears in the {@code "From:"} header for mail sent using this alias
+     * @param format:             return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public <T> T changeSendAsDisplayName(SendAs sendAs, String displayNameUpdated,
+                                         ReturnFormat format) throws IOException {
+        return changeSendAsDisplayName(sendAs.getSendAsEmail(), displayNameUpdated, format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "displayName"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:        the send-as alias to be updated
+     * @param displayNameUpdated: a name that appears in the {@code "From:"} header for mail sent using this alias
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSendAsDisplayName(String sendAsEmail, String displayNameUpdated) throws IOException {
         return changeSendAsDisplayName(sendAsEmail, displayNameUpdated, LIBRARY_OBJECT);
@@ -2917,13 +3046,14 @@ public class GmailSettingsManager extends GmailManager {
      * @param displayNameUpdated: a name that appears in the {@code "From:"} header for mail sent using this alias
      * @param format:             return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSendAsDisplayName(String sendAsEmail, String displayNameUpdated,
                                          ReturnFormat format) throws IOException {
@@ -2935,16 +3065,59 @@ public class GmailSettingsManager extends GmailManager {
      * Method to patch the specified send-as alias <br>
      * This method allows to change only {@code "replyToAddress"} without change all {code "SendAs"} details
      *
-     * @param sendAsEmail:           the send-as alias to be updated
+     * @param sendAs:                the send-as alias to be updated
      * @param replyToAddressUpdated: an optional email address that is included in a {@code "Reply-To:"} header for mail sent using this alias
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public SendAs changeSendAsReplyToAddress(SendAs sendAs, String replyToAddressUpdated) throws IOException {
+        return changeSendAsReplyToAddress(sendAs.getSendAsEmail(), replyToAddressUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "replyToAddress"} without change all {code "SendAs"} details
+     *
+     * @param sendAs:                the send-as alias to be updated
+     * @param replyToAddressUpdated: an optional email address that is included in a {@code "Reply-To:"} header for mail sent using this alias
+     * @param format:                return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public <T> T changeSendAsReplyToAddress(SendAs sendAs, String replyToAddressUpdated,
+                                            ReturnFormat format) throws IOException {
+        return changeSendAsReplyToAddress(sendAs.getSendAsEmail(), replyToAddressUpdated, format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "replyToAddress"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:           the send-as alias to be updated
+     * @param replyToAddressUpdated: an optional email address that is included in a {@code "Reply-To:"} header for mail sent using this alias
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSendAsReplyToAddress(String sendAsEmail, String replyToAddressUpdated) throws IOException {
         return changeSendAsReplyToAddress(sendAsEmail, replyToAddressUpdated, LIBRARY_OBJECT);
@@ -2958,13 +3131,14 @@ public class GmailSettingsManager extends GmailManager {
      * @param replyToAddressUpdated: an optional email address that is included in a {@code "Reply-To:"} header for mail sent using this alias
      * @param format:                return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSendAsReplyToAddress(String sendAsEmail, String replyToAddressUpdated,
                                             ReturnFormat format) throws IOException {
@@ -2976,16 +3150,58 @@ public class GmailSettingsManager extends GmailManager {
      * Method to patch the specified send-as alias <br>
      * This method allows to change only {@code "signature"} without change all {code "SendAs"} details
      *
-     * @param sendAsEmail:      the send-as alias to be updated
+     * @param sendAs:           the send-as alias to be updated
      * @param signatureUpdated: an optional {@code "HTML"} signature that is included in messages composed with this alias in the Gmail web UI
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public SendAs changeSendAsSignature(SendAs sendAs, String signatureUpdated) throws IOException {
+        return changeSendAsSignature(sendAs.getSendAsEmail(), signatureUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "signature"} without change all {code "SendAs"} details
+     *
+     * @param sendAs:           the send-as alias to be updated
+     * @param signatureUpdated: an optional {@code "HTML"} signature that is included in messages composed with this alias in the Gmail web UI
+     * @param format:           return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public <T> T changeSendAsSignature(SendAs sendAs, String signatureUpdated, ReturnFormat format) throws IOException {
+        return changeSendAsSignature(sendAs.getSendAsEmail(), signatureUpdated, format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "signature"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:      the send-as alias to be updated
+     * @param signatureUpdated: an optional {@code "HTML"} signature that is included in messages composed with this alias in the Gmail web UI
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSendAsSignature(String sendAsEmail, String signatureUpdated) throws IOException {
         return changeSendAsSignature(sendAsEmail, signatureUpdated, LIBRARY_OBJECT);
@@ -2999,13 +3215,14 @@ public class GmailSettingsManager extends GmailManager {
      * @param signatureUpdated: an optional {@code "HTML"} signature that is included in messages composed with this alias in the Gmail web UI
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSendAsSignature(String sendAsEmail, String signatureUpdated, ReturnFormat format) throws IOException {
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
@@ -3016,17 +3233,61 @@ public class GmailSettingsManager extends GmailManager {
      * Method to patch the specified send-as alias <br>
      * This method allows to change only {@code "default"} without change all {code "SendAs"} details
      *
-     * @param sendAsEmail:    the send-as alias to be updated
+     * @param sendAs:         the send-as alias to be updated
      * @param defaultUpdated: whether this address is selected as the default {@code "From:"} address in situations such as composing
      *                        a new message or sending a vacation auto-reply
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public SendAs changeSendAsDefault(SendAs sendAs, boolean defaultUpdated) throws IOException {
+        return changeSendAsDefault(sendAs.getSendAsEmail(), defaultUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "default"} without change all {code "SendAs"} details
+     *
+     * @param sendAs:         the send-as alias to be updated
+     * @param defaultUpdated: whether this address is selected as the default {@code "From:"} address in situations such as composing
+     *                        a new message or sending a vacation auto-reply
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public <T> T changeSendAsDefault(SendAs sendAs, boolean defaultUpdated, ReturnFormat format) throws IOException {
+        return changeSendAsDefault(sendAs.getSendAsEmail(), defaultUpdated, format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "default"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:    the send-as alias to be updated
+     * @param defaultUpdated: whether this address is selected as the default {@code "From:"} address in situations such as composing
+     *                        a new message or sending a vacation auto-reply
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSendAsDefault(String sendAsEmail, boolean defaultUpdated) throws IOException {
         return changeSendAsDefault(sendAsEmail, defaultUpdated, LIBRARY_OBJECT);
@@ -3041,13 +3302,14 @@ public class GmailSettingsManager extends GmailManager {
      *                        a new message or sending a vacation auto-reply
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSendAsDefault(String sendAsEmail, boolean defaultUpdated, ReturnFormat format) throws IOException {
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
@@ -3058,16 +3320,59 @@ public class GmailSettingsManager extends GmailManager {
      * Method to patch the specified send-as alias <br>
      * This method allows to change only {@code "default"} without change all {code "SendAs"} details
      *
-     * @param sendAsEmail:         the send-as alias to be updated
+     * @param sendAs:              the send-as alias to be updated
      * @param treatAsAliasUpdated: whether Gmail should treat this address as an alias for the user's primary email address
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public SendAs changeSendAsTreatAsAlias(SendAs sendAs, boolean treatAsAliasUpdated) throws IOException {
+        return changeSendAsTreatAsAlias(sendAs.getSendAsEmail(), treatAsAliasUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "default"} without change all {code "SendAs"} details
+     *
+     * @param sendAs:              the send-as alias to be updated
+     * @param treatAsAliasUpdated: whether Gmail should treat this address as an alias for the user's primary email address
+     * @param format:              return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public <T> T changeSendAsTreatAsAlias(SendAs sendAs, boolean treatAsAliasUpdated,
+                                          ReturnFormat format) throws IOException {
+        return changeSendAsTreatAsAlias(sendAs.getSendAsEmail(), treatAsAliasUpdated, format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "default"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param treatAsAliasUpdated: whether Gmail should treat this address as an alias for the user's primary email address
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSendAsTreatAsAlias(String sendAsEmail, boolean treatAsAliasUpdated) throws IOException {
         return changeSendAsTreatAsAlias(sendAsEmail, treatAsAliasUpdated, LIBRARY_OBJECT);
@@ -3081,13 +3386,14 @@ public class GmailSettingsManager extends GmailManager {
      * @param treatAsAliasUpdated: whether Gmail should treat this address as an alias for the user's primary email address
      * @param format:              return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSendAsTreatAsAlias(String sendAsEmail, boolean treatAsAliasUpdated,
                                           ReturnFormat format) throws IOException {
@@ -3097,18 +3403,60 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "host"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "host"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
-     * @param sendAsEmail: the send-as alias to be updated
+     * @param sendAs:      the send-as alias to be updated
      * @param hostUpdated: the hostname of the {@code "SMTP"} service
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public SendAs changeSmtpMsaHost(SendAs sendAs, String hostUpdated) throws IOException {
+        return changeSmtpMsaHost(sendAs.getSendAsEmail(), hostUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAs:      the send-as alias to be updated
+     * @param hostUpdated: the hostname of the {@code "SMTP"} service
+     * @param format:      return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public <T> T changeSmtpMsaHost(SendAs sendAs, String hostUpdated, ReturnFormat format) throws IOException {
+        return changeSmtpMsaHost(sendAs.getSendAsEmail(), hostUpdated, format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail: the send-as alias to be updated
+     * @param hostUpdated: the hostname of the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaHost(String sendAsEmail, String hostUpdated) throws IOException {
         return changeSmtpMsaHost(sendAsEmail, hostUpdated, LIBRARY_OBJECT);
@@ -3116,19 +3464,20 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "host"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "host"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
      * @param sendAsEmail: the send-as alias to be updated
      * @param hostUpdated: the hostname of the {@code "SMTP"} service
      * @param format:      return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaHost(String sendAsEmail, String hostUpdated, ReturnFormat format) throws IOException {
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
@@ -3137,18 +3486,60 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "port"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "port"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
-     * @param sendAsEmail: the send-as alias to be updated
+     * @param sendAs:      the send-as alias to be updated
      * @param portUpdated: the port of the {@code "SMTP"} service
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public SendAs changeSmtpMsaPort(SendAs sendAs, int portUpdated) throws IOException {
+        return changeSmtpMsaPort(sendAs.getSendAsEmail(), portUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "port"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAs:      the send-as alias to be updated
+     * @param portUpdated: the port of the {@code "SMTP"} service
+     * @param format:      return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public <T> T changeSmtpMsaPort(SendAs sendAs, int portUpdated, ReturnFormat format) throws IOException {
+        return changeSmtpMsaPort(sendAs.getSendAsEmail(), portUpdated, format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "port"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail: the send-as alias to be updated
+     * @param portUpdated: the port of the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaPort(String sendAsEmail, int portUpdated) throws IOException {
         return changeSmtpMsaPort(sendAsEmail, portUpdated, LIBRARY_OBJECT);
@@ -3156,19 +3547,20 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "port"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "port"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
      * @param sendAsEmail: the send-as alias to be updated
      * @param portUpdated: the port of the {@code "SMTP"} service
      * @param format:      return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaPort(String sendAsEmail, int portUpdated, ReturnFormat format) throws IOException {
         return returnSendAs(sendAs.patch(userId, sendAsEmail, new com.google.api.services.gmail.model.SendAs()
@@ -3177,12 +3569,12 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "username"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "username"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
-     * @param sendAsEmail:     the send-as alias to be updated
+     * @param sendAs:          the send-as alias to be updated
      * @param usernameUpdated: the username that will be used for authentication with the {@code "SMTP"} service
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
@@ -3190,6 +3582,50 @@ public class GmailSettingsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      * @see #currentUsername
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public SendAs changeSmtpMsaUsername(SendAs sendAs, String usernameUpdated) throws IOException {
+        return changeSmtpMsaUsername(sendAs.getSendAsEmail(), usernameUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "username"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAs:          the send-as alias to be updated
+     * @param usernameUpdated: the username that will be used for authentication with the {@code "SMTP"} service
+     * @param format:          return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public <T> T changeSmtpMsaUsername(SendAs sendAs, String usernameUpdated, ReturnFormat format) throws IOException {
+        return changeSmtpMsaUsername(sendAs.getSendAsEmail(), usernameUpdated, format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "username"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:     the send-as alias to be updated
+     * @param usernameUpdated: the username that will be used for authentication with the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaUsername(String sendAsEmail, String usernameUpdated) throws IOException {
         return changeSmtpMsaUsername(sendAsEmail, usernameUpdated, LIBRARY_OBJECT);
@@ -3197,13 +3633,13 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "username"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "username"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
      * @param sendAsEmail:     the send-as alias to be updated
      * @param usernameUpdated: the username that will be used for authentication with the {@code "SMTP"} service
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
@@ -3211,6 +3647,7 @@ public class GmailSettingsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      * @see #currentUsername
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaUsername(String sendAsEmail, String usernameUpdated, ReturnFormat format) throws IOException {
         currentUsername = usernameUpdated;
@@ -3220,12 +3657,12 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "password"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "password"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
-     * @param sendAsEmail:     the send-as alias to be updated
+     * @param sendAs:          the send-as alias to be updated
      * @param passwordUpdated: the password that will be used for authentication with the {@code "SMTP"} service
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
@@ -3233,6 +3670,50 @@ public class GmailSettingsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      * @see #currentPassword
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public SendAs changeSmtpMsaPassword(SendAs sendAs, String passwordUpdated) throws IOException {
+        return changeSmtpMsaPassword(sendAs.getSendAsEmail(), passwordUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "password"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAs:          the send-as alias to be updated
+     * @param passwordUpdated: the password that will be used for authentication with the {@code "SMTP"} service
+     * @param format:          return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentPassword
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public <T> T changeSmtpMsaPassword(SendAs sendAs, String passwordUpdated, ReturnFormat format) throws IOException {
+        return changeSmtpMsaPassword(sendAs.getSendAsEmail(), passwordUpdated, format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "password"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:     the send-as alias to be updated
+     * @param passwordUpdated: the password that will be used for authentication with the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentPassword
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaPassword(String sendAsEmail, String passwordUpdated) throws IOException {
         return changeSmtpMsaPassword(sendAsEmail, passwordUpdated, LIBRARY_OBJECT);
@@ -3240,13 +3721,13 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "password"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "password"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
      * @param sendAsEmail:     the send-as alias to be updated
      * @param passwordUpdated: the password that will be used for authentication with the {@code "SMTP"} service
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
@@ -3254,6 +3735,7 @@ public class GmailSettingsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      * @see #currentPassword
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaPassword(String sendAsEmail, String passwordUpdated, ReturnFormat format) throws IOException {
         currentPassword = passwordUpdated;
@@ -3263,18 +3745,61 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "securityMode"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "securityMode"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
-     * @param sendAsEmail:         the send-as alias to be updated
+     * @param sendAs:              the send-as alias to be updated
      * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public SendAs changeSmtpMsaSecurityMode(SendAs sendAs, SecurityMode securityModeUpdated) throws IOException {
+        return changeSmtpMsaSecurityMode(sendAs.getSendAsEmail(), securityModeUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "securityMode"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAs:              the send-as alias to be updated
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @param format:              return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public <T> T changeSmtpMsaSecurityMode(SendAs sendAs, SecurityMode securityModeUpdated,
+                                           ReturnFormat format) throws IOException {
+        return changeSmtpMsaSecurityMode(sendAs.getSendAsEmail(), securityModeUpdated, format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "securityMode"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaSecurityMode(String sendAsEmail, SecurityMode securityModeUpdated) throws IOException {
         return changeSmtpMsaSecurityMode(sendAsEmail, securityModeUpdated, LIBRARY_OBJECT);
@@ -3282,19 +3807,20 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "securityMode"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "securityMode"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
      * @param sendAsEmail:         the send-as alias to be updated
      * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
      * @param format:              return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaSecurityMode(String sendAsEmail, SecurityMode securityModeUpdated,
                                            ReturnFormat format) throws IOException {
@@ -3304,19 +3830,64 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "host"} and {@code "port"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "host"} and {@code "port"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
-     * @param sendAsEmail: the send-as alias to be updated
+     * @param sendAs:      the send-as alias to be updated
      * @param hostUpdated: the hostname of the {@code "SMTP"} service
      * @param portUpdated: the port of the {@code "SMTP"} service
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public SendAs changeSmtpMsaDomainDetails(SendAs sendAs, String hostUpdated, int portUpdated) throws IOException {
+        return changeSmtpMsaDomainDetails(sendAs.getSendAsEmail(), hostUpdated, portUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"} and {@code "port"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAs:      the send-as alias to be updated
+     * @param hostUpdated: the hostname of the {@code "SMTP"} service
+     * @param portUpdated: the port of the {@code "SMTP"} service
+     * @param format:      return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public <T> T changeSmtpMsaDomainDetails(SendAs sendAs, String hostUpdated, int portUpdated,
+                                            ReturnFormat format) throws IOException {
+        return changeSmtpMsaDomainDetails(sendAs.getSendAsEmail(), hostUpdated, portUpdated, format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"} and {@code "port"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail: the send-as alias to be updated
+     * @param hostUpdated: the hostname of the {@code "SMTP"} service
+     * @param portUpdated: the port of the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated, int portUpdated) throws IOException {
         return changeSmtpMsaDomainDetails(sendAsEmail, hostUpdated, portUpdated, LIBRARY_OBJECT);
@@ -3324,20 +3895,21 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "host"} and {@code "port"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "host"} and {@code "port"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
      * @param sendAsEmail: the send-as alias to be updated
      * @param hostUpdated: the hostname of the {@code "SMTP"} service
      * @param portUpdated: the port of the {@code "SMTP"} service
      * @param format:      return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated, int portUpdated,
                                             ReturnFormat format) throws IOException {
@@ -3347,19 +3919,65 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "host"} and {@code "securityMode"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "host"} and {@code "securityMode"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
-     * @param sendAsEmail:         the send-as alias to be updated
+     * @param sendAs:              the send-as alias to be updated
      * @param hostUpdated:         the hostname of the {@code "SMTP"} service
      * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public SendAs changeSmtpMsaDomainDetails(SendAs sendAs, String hostUpdated,
+                                             SecurityMode securityModeUpdated) throws IOException {
+        return changeSmtpMsaDomainDetails(sendAs.getSendAsEmail(), hostUpdated, securityModeUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"} and {@code "securityMode"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAs:              the send-as alias to be updated
+     * @param hostUpdated:         the hostname of the {@code "SMTP"} service
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @param format:              return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public <T> T changeSmtpMsaDomainDetails(SendAs sendAs, String hostUpdated, SecurityMode securityModeUpdated,
+                                            ReturnFormat format) throws IOException {
+        return changeSmtpMsaDomainDetails(sendAs.getSendAsEmail(), hostUpdated, securityModeUpdated, format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"} and {@code "securityMode"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param hostUpdated:         the hostname of the {@code "SMTP"} service
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated,
                                              SecurityMode securityModeUpdated) throws IOException {
@@ -3368,20 +3986,21 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "host"} and {@code "securityMode"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "host"} and {@code "securityMode"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
      * @param sendAsEmail:         the send-as alias to be updated
      * @param hostUpdated:         the hostname of the {@code "SMTP"} service
      * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
      * @param format:              return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated, SecurityMode securityModeUpdated,
                                             ReturnFormat format) throws IOException {
@@ -3392,19 +4011,65 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "host"} and {@code "securityMode"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "host"} and {@code "securityMode"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
-     * @param sendAsEmail:         the send-as alias to be updated
+     * @param sendAs:              the send-as alias to be updated
      * @param portUpdated:         the port of the {@code "SMTP"} service
      * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public SendAs changeSmtpMsaDomainDetails(SendAs sendAs, int portUpdated,
+                                             SecurityMode securityModeUpdated) throws IOException {
+        return changeSmtpMsaDomainDetails(sendAs.getSendAsEmail(), portUpdated, securityModeUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"} and {@code "securityMode"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAs:              the send-as alias to be updated
+     * @param portUpdated:         the port of the {@code "SMTP"} service
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @param format:              return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public <T> T changeSmtpMsaDomainDetails(SendAs sendAs, int portUpdated, SecurityMode securityModeUpdated,
+                                            ReturnFormat format) throws IOException {
+        return changeSmtpMsaDomainDetails(sendAs.getSendAsEmail(), portUpdated, securityModeUpdated, format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"} and {@code "securityMode"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param portUpdated:         the port of the {@code "SMTP"} service
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaDomainDetails(String sendAsEmail, int portUpdated,
                                              SecurityMode securityModeUpdated) throws IOException {
@@ -3413,20 +4078,21 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "host"} and {@code "securityMode"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "host"} and {@code "securityMode"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
      * @param sendAsEmail:         the send-as alias to be updated
      * @param portUpdated:         the port of the {@code "SMTP"} service
      * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
      * @param format:              return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaDomainDetails(String sendAsEmail, int portUpdated, SecurityMode securityModeUpdated,
                                             ReturnFormat format) throws IOException {
@@ -3437,20 +4103,69 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "host"}, {@code "port"} and {@code "securityMode"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "host"}, {@code "port"} and {@code "securityMode"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
-     * @param sendAsEmail:         the send-as alias to be updated
+     * @param sendAs:              the send-as alias to be updated
      * @param hostUpdated:         the hostname of the {@code "SMTP"} service
      * @param portUpdated:         the port of the {@code "SMTP"} service
      * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public SendAs changeSmtpMsaDomainDetails(SendAs sendAs, String hostUpdated, int portUpdated,
+                                             SecurityMode securityModeUpdated) throws IOException {
+        return changeSmtpMsaDomainDetails(sendAs.getSendAsEmail(), hostUpdated, portUpdated, securityModeUpdated,
+                LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"}, {@code "port"} and {@code "securityMode"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAs:              the send-as alias to be updated
+     * @param hostUpdated:         the hostname of the {@code "SMTP"} service
+     * @param portUpdated:         the port of the {@code "SMTP"} service
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @param format:              return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public <T> T changeSmtpMsaDomainDetails(SendAs sendAs, String hostUpdated, int portUpdated,
+                                            SecurityMode securityModeUpdated, ReturnFormat format) throws IOException {
+        return changeSmtpMsaDomainDetails(sendAs.getSendAsEmail(), hostUpdated, portUpdated, securityModeUpdated, format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "host"}, {@code "port"} and {@code "securityMode"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param hostUpdated:         the hostname of the {@code "SMTP"} service
+     * @param portUpdated:         the port of the {@code "SMTP"} service
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated, int portUpdated,
                                              SecurityMode securityModeUpdated) throws IOException {
@@ -3459,7 +4174,7 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "host"}, {@code "port"} and {@code "securityMode"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "host"}, {@code "port"} and {@code "securityMode"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
      * @param sendAsEmail:         the send-as alias to be updated
      * @param hostUpdated:         the hostname of the {@code "SMTP"} service
@@ -3467,13 +4182,14 @@ public class GmailSettingsManager extends GmailManager {
      * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
      * @param format:              return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
      * update method</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaDomainDetails(String sendAsEmail, String hostUpdated, int portUpdated,
                                             SecurityMode securityModeUpdated, ReturnFormat format) throws IOException {
@@ -3484,13 +4200,13 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "username"} and {@code "password"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "username"} and {@code "password"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
-     * @param sendAsEmail:     the send-as alias to be updated
+     * @param sendAs:          the send-as alias to be updated
      * @param usernameUpdated: the username that will be used for authentication with the {@code "SMTP"} service
      * @param passwordUpdated: the password that will be used for authentication with the {@code "SMTP"} service
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
@@ -3499,6 +4215,56 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public SendAs changeSmtpMsaCredentials(SendAs sendAs, String usernameUpdated,
+                                           String passwordUpdated) throws IOException {
+        return changeSmtpMsaCredentials(sendAs.getSendAsEmail(), usernameUpdated, passwordUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "username"} and {@code "password"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAs:          the send-as alias to be updated
+     * @param usernameUpdated: the username that will be used for authentication with the {@code "SMTP"} service
+     * @param passwordUpdated: the password that will be used for authentication with the {@code "SMTP"} service
+     * @param format:          return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public <T> T changeSmtpMsaCredentials(SendAs sendAs, String usernameUpdated, String passwordUpdated,
+                                          ReturnFormat format) throws IOException {
+        return changeSmtpMsaCredentials(sendAs.getSendAsEmail(), usernameUpdated, passwordUpdated, format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "username"} and {@code "password"} of {@link SmtpMsa} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:     the send-as alias to be updated
+     * @param usernameUpdated: the username that will be used for authentication with the {@code "SMTP"} service
+     * @param passwordUpdated: the password that will be used for authentication with the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsaCredentials(String sendAsEmail, String usernameUpdated,
                                            String passwordUpdated) throws IOException {
@@ -3507,14 +4273,14 @@ public class GmailSettingsManager extends GmailManager {
 
     /**
      * Method to patch the specified send-as alias <br>
-     * This method allows to change only {@code "username"} and {@code "password"} of {@link com.tecknobit.googlemanager.gmail.settings.records.SendAs.SmtpMsa} without change all {code "SendAs"} details
+     * This method allows to change only {@code "username"} and {@code "password"} of {@link SmtpMsa} without change all {code "SendAs"} details
      *
      * @param sendAsEmail:     the send-as alias to be updated
      * @param usernameUpdated: the username that will be used for authentication with the {@code "SMTP"} service
      * @param passwordUpdated: the password that will be used for authentication with the {@code "SMTP"} service
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
@@ -3523,6 +4289,7 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsaCredentials(String sendAsEmail, String usernameUpdated, String passwordUpdated,
                                           ReturnFormat format) throws IOException {
@@ -3536,10 +4303,10 @@ public class GmailSettingsManager extends GmailManager {
      * Method to patch the specified send-as alias <br>
      * This method allows to change only {@code "smtpMsa"} without change all {code "SendAs"} details
      *
-     * @param sendAsEmail:    the send-as alias to be updated
+     * @param sendAs:         the send-as alias to be updated
      * @param smtpMsaUpdated: the smtpMsa updated
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
@@ -3548,6 +4315,52 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public SendAs changeSmtpMsa(SendAs sendAs, SendAs.SmtpMsa smtpMsaUpdated) throws IOException {
+        return changeSmtpMsa(sendAs.getSendAsEmail(), smtpMsaUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "smtpMsa"} without change all {code "SendAs"} details
+     *
+     * @param sendAs:         the send-as alias to be updated
+     * @param smtpMsaUpdated: the smtpMsa updated
+     * @param format:         return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public <T> T changeSmtpMsa(SendAs sendAs, SendAs.SmtpMsa smtpMsaUpdated, ReturnFormat format) throws IOException {
+        return changeSmtpMsa(sendAs.getSendAsEmail(), smtpMsaUpdated, format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "smtpMsa"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:    the send-as alias to be updated
+     * @param smtpMsaUpdated: the smtpMsa updated
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsa(String sendAsEmail, SendAs.SmtpMsa smtpMsaUpdated) throws IOException {
         return changeSmtpMsa(sendAsEmail, smtpMsaUpdated, LIBRARY_OBJECT);
@@ -3561,7 +4374,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param smtpMsaUpdated: the smtpMsa updated
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
@@ -3570,6 +4383,7 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsa(String sendAsEmail, SendAs.SmtpMsa smtpMsaUpdated, ReturnFormat format) throws IOException {
         currentUsername = smtpMsaUpdated.getUsername();
@@ -3584,14 +4398,14 @@ public class GmailSettingsManager extends GmailManager {
      * Method to patch the specified send-as alias <br>
      * This method allows to change only {@code "smtpMsa"} without change all {code "SendAs"} details
      *
-     * @param sendAsEmail:         the send-as alias to be updated
+     * @param sendAs:              the send-as alias to be updated
      * @param hostUpdated:         the hostname of the {@code "SMTP"} service {@code "Required"}
      * @param portUpdated:         the port of the {@code "SMTP"} service {@code "Required"}
      * @param usernameUpdated:     the username that will be used for authentication with the {@code "SMTP"} service
      * @param passwordUpdated:     the password that will be used for authentication with the {@code "SMTP"} service
      * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
@@ -3600,6 +4414,65 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public SendAs changeSmtpMsa(SendAs sendAs, String hostUpdated, int portUpdated, String usernameUpdated,
+                                String passwordUpdated, SecurityMode securityModeUpdated) throws IOException {
+        return changeSmtpMsa(sendAs.getSendAsEmail(), hostUpdated, portUpdated, usernameUpdated, passwordUpdated,
+                securityModeUpdated, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "smtpMsa"} without change all {code "SendAs"} details
+     *
+     * @param sendAs:              the send-as alias to be updated
+     * @param hostUpdated:         the hostname of the {@code "SMTP"} service {@code "Required"}
+     * @param portUpdated:         the port of the {@code "SMTP"} service {@code "Required"}
+     * @param usernameUpdated:     the username that will be used for authentication with the {@code "SMTP"} service
+     * @param passwordUpdated:     the password that will be used for authentication with the {@code "SMTP"} service
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @param format:              return type formatter -> {@link ReturnFormat}
+     * @return send-as updated as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
+    public <T> T changeSmtpMsa(SendAs sendAs, String hostUpdated, int portUpdated, String usernameUpdated,
+                               String passwordUpdated, SecurityMode securityModeUpdated,
+                               ReturnFormat format) throws IOException {
+        return changeSmtpMsa(sendAs.getSendAsEmail(), hostUpdated, portUpdated, usernameUpdated, passwordUpdated,
+                securityModeUpdated, format);
+    }
+
+    /**
+     * Method to patch the specified send-as alias <br>
+     * This method allows to change only {@code "smtpMsa"} without change all {code "SendAs"} details
+     *
+     * @param sendAsEmail:         the send-as alias to be updated
+     * @param hostUpdated:         the hostname of the {@code "SMTP"} service {@code "Required"}
+     * @param portUpdated:         the port of the {@code "SMTP"} service {@code "Required"}
+     * @param usernameUpdated:     the username that will be used for authentication with the {@code "SMTP"} service
+     * @param passwordUpdated:     the password that will be used for authentication with the {@code "SMTP"} service
+     * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
+     * @return send-as updated as {@link SendAs} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
+     * users.settings.sendAs.patch</a>
+     * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
+     * update method</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     * @see #currentUsername
+     * @see #currentPassword
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSmtpMsa(String sendAsEmail, String hostUpdated, int portUpdated, String usernameUpdated,
                                 String passwordUpdated, SecurityMode securityModeUpdated) throws IOException {
@@ -3619,7 +4492,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param securityModeUpdated: the protocol that will be used to secure communication with the {@code "SMTP"} service
      * @param format:              return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
@@ -3628,6 +4501,7 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSmtpMsa(String sendAsEmail, String hostUpdated, int portUpdated, String usernameUpdated,
                                String passwordUpdated, SecurityMode securityModeUpdated,
@@ -3644,7 +4518,7 @@ public class GmailSettingsManager extends GmailManager {
      *
      * @param sendAsUpdated: the send-as updated
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
@@ -3653,6 +4527,7 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public SendAs changeSendAs(SendAs sendAsUpdated) throws IOException {
         return changeSendAs(sendAsUpdated, LIBRARY_OBJECT);
@@ -3664,7 +4539,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param sendAsUpdated: the send-as updated
      * @param format:        return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
@@ -3673,6 +4548,7 @@ public class GmailSettingsManager extends GmailManager {
      * @see #currentUsername
      * @see #currentPassword
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}")
     public <T> T changeSendAs(SendAs sendAsUpdated, ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.SendAs gSendAs = new com.google.api.services.gmail.model.SendAs()
@@ -3710,7 +4586,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param passwordUpdated:       the password that will be used for authentication with the {@code "SMTP"} service
      * @param securityModeUpdated:   the protocol that will be used to secure communication with the {@code "SMTP"} service
      * @return send-as updated as {@link SendAs} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
@@ -3746,7 +4622,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param securityModeUpdated:   the protocol that will be used to secure communication with the {@code "SMTP"} service
      * @param format:                return type formatter -> {@link ReturnFormat}
      * @return send-as updated as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/patch">
      * users.settings.sendAs.patch</a>
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs/update">
@@ -3807,6 +4683,7 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.verify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/verify")
     public boolean verifySendAs(SendAs sendAsToVerify) {
         return verifySendAs(sendAsToVerify.getSendAsEmail());
@@ -3836,6 +4713,22 @@ public class GmailSettingsManager extends GmailManager {
     /**
      * Method to delete the specified {@code "S/MIME"} config for the specified send-as alias
      *
+     * @param sendAs:            the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param smimeInfoToDelete: smime-info to delete
+     * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/delete">
+     * users.settings.sendAs.smimeInfo.delete</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}")
+    public boolean deleteSmimeInfo(SendAs sendAs, SmimeInfo smimeInfoToDelete) {
+        return deleteSmimeInfo(sendAs.getSendAsEmail(), smimeInfoToDelete.getId());
+    }
+
+    /**
+     * Method to delete the specified {@code "S/MIME"} config for the specified send-as alias
+     *
      * @param sendAsEmail:       the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @param smimeInfoToDelete: smime-info to delete
      * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
@@ -3843,9 +4736,26 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.smimeInfo.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}")
     public boolean deleteSmimeInfo(String sendAsEmail, SmimeInfo smimeInfoToDelete) {
         return deleteSmimeInfo(sendAsEmail, smimeInfoToDelete.getId());
+    }
+
+    /**
+     * Method to delete the specified {@code "S/MIME"} config for the specified send-as alias
+     *
+     * @param sendAs:              the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param idSmimeInfoToDelete: the immutable {@code "ID"} for the SmimeInfo
+     * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/delete">
+     * users.settings.sendAs.smimeInfo.delete</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}")
+    public boolean deleteSmimeInfo(SendAs sendAs, String idSmimeInfoToDelete) {
+        return deleteSmimeInfo(sendAs.getSendAsEmail(), idSmimeInfoToDelete);
     }
 
     /**
@@ -3872,10 +4782,45 @@ public class GmailSettingsManager extends GmailManager {
     /**
      * Method to get the specified {@code "S/MIME"} config for the specified send-as alias
      *
+     * @param sendAs:           the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param idSmimeInfoToGet: the immutable {@code "ID"} for the SmimeInfo
+     * @return smime-info requested as {@link SmimeInfo} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/get">
+     * users.settings.sendAs.smimeInfo.get</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}")
+    public SmimeInfo getSmimeInfo(SendAs sendAs, String idSmimeInfoToGet) throws IOException {
+        return getSmimeInfo(sendAs.getSendAsEmail(), idSmimeInfoToGet, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get the specified {@code "S/MIME"} config for the specified send-as alias
+     *
+     * @param sendAs:           the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param idSmimeInfoToGet: the immutable {@code "ID"} for the SmimeInfo
+     * @param format:           return type formatter -> {@link ReturnFormat}
+     * @return smime-info requested as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/get">
+     * users.settings.sendAs.smimeInfo.get</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}")
+    public <T> T getSmimeInfo(SendAs sendAs, String idSmimeInfoToGet, ReturnFormat format) throws IOException {
+        return getSmimeInfo(sendAs.getSendAsEmail(), idSmimeInfoToGet, format);
+    }
+
+    /**
+     * Method to get the specified {@code "S/MIME"} config for the specified send-as alias
+     *
      * @param sendAsEmail:      the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @param idSmimeInfoToGet: the immutable {@code "ID"} for the SmimeInfo
      * @return smime-info requested as {@link SmimeInfo} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/get">
      * users.settings.sendAs.smimeInfo.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3892,7 +4837,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param idSmimeInfoToGet: the immutable {@code "ID"} for the SmimeInfo
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return smime-info requested as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/get">
      * users.settings.sendAs.smimeInfo.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -3912,11 +4857,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param encryptedKeyPassword: encrypted key password, when key is encrypted
      * @param pem:                  {@code "PEM"} formatted {@code "X509"} concatenated certificate string (standard base64 encoding).
      * @return smime-info requested as {@link SmimeInfo} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/insert">
      * users.settings.sendAs.smimeInfo.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
     public SmimeInfo insertSmimeInfo(String sendAsEmail, String issuerCn, boolean isDefault, long expiration,
                                      String encryptedKeyPassword, String pem) throws IOException {
@@ -3935,11 +4881,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param pem:                  {@code "PEM"} formatted {@code "X509"} concatenated certificate string (standard base64 encoding).
      * @param format:               return type formatter -> {@link ReturnFormat}
      * @return smime-info inserted as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/insert">
      * users.settings.sendAs.smimeInfo.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
     public <T> T insertSmimeInfo(String sendAsEmail, String issuerCn, boolean isDefault, long expiration,
                                  String encryptedKeyPassword, String pem, ReturnFormat format) throws IOException {
@@ -3960,11 +4907,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param expiration:           when the certificate expires (in milliseconds since epoch)
      * @param encryptedKeyPassword: encrypted key password, when key is encrypted
      * @return smime-info requested as {@link SmimeInfo} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/insert">
      * users.settings.sendAs.smimeInfo.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
     public SmimeInfo insertSmimeInfo(String sendAsEmail, String pkcs12, String issuerCn, boolean isDefault, long expiration,
                                      String encryptedKeyPassword) throws IOException {
@@ -3986,11 +4934,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param encryptedKeyPassword: encrypted key password, when key is encrypted
      * @param format:               return type formatter -> {@link ReturnFormat}
      * @return smime-info inserted as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/insert">
      * users.settings.sendAs.smimeInfo.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
     public <T> T insertSmimeInfo(String sendAsEmail, String pkcs12, String issuerCn, boolean isDefault, long expiration,
                                  String encryptedKeyPassword, ReturnFormat format) throws IOException {
@@ -4001,14 +4950,50 @@ public class GmailSettingsManager extends GmailManager {
     /**
      * Method to insert (upload) the given {@code "S/MIME"} config for the specified send-as alias. Note that pkcs12 format is required for the key
      *
-     * @param sendAsEmail:       the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param sendAs:            the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @param smimeInfoToInsert: smime-info to insert
      * @return smime-info requested as {@link SmimeInfo} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/insert">
      * users.settings.sendAs.smimeInfo.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
+    public SmimeInfo insertSmimeInfo(SendAs sendAs, SmimeInfo smimeInfoToInsert) throws IOException {
+        return insertSmimeInfo(sendAs.getSendAsEmail(), smimeInfoToInsert, LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to insert (upload) the given {@code "S/MIME"} config for the specified send-as alias. Note that pkcs12 format is required for the key
+     *
+     * @param sendAs:            the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param smimeInfoToInsert: smime-info to insert
+     * @param format:            return type formatter -> {@link ReturnFormat}
+     * @return smime-info inserted as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/insert">
+     * users.settings.sendAs.smimeInfo.insert</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
+    public <T> T insertSmimeInfo(SendAs sendAs, SmimeInfo smimeInfoToInsert, ReturnFormat format) throws IOException {
+        return insertSmimeInfo(sendAs.getSendAsEmail(), smimeInfoToInsert, format);
+    }
+
+    /**
+     * Method to insert (upload) the given {@code "S/MIME"} config for the specified send-as alias. Note that pkcs12 format is required for the key
+     *
+     * @param sendAsEmail:       the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param smimeInfoToInsert: smime-info to insert
+     * @return smime-info requested as {@link SmimeInfo} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/insert">
+     * users.settings.sendAs.smimeInfo.insert</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
     public SmimeInfo insertSmimeInfo(String sendAsEmail, SmimeInfo smimeInfoToInsert) throws IOException {
         return insertSmimeInfo(sendAsEmail, smimeInfoToInsert, LIBRARY_OBJECT);
@@ -4021,11 +5006,12 @@ public class GmailSettingsManager extends GmailManager {
      * @param smimeInfoToInsert: smime-info to insert
      * @param format:            return type formatter -> {@link ReturnFormat}
      * @return smime-info inserted as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/insert">
      * users.settings.sendAs.smimeInfo.insert</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
     public <T> T insertSmimeInfo(String sendAsEmail, SmimeInfo smimeInfoToInsert, ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.SmimeInfo gSmimeInfo = new com.google.api.services.gmail.model.SmimeInfo();
@@ -4062,9 +5048,42 @@ public class GmailSettingsManager extends GmailManager {
     /**
      * Method to get a list of {@code "S/MIME"} configs for the specified send-as alias
      *
+     * @param sendAs: the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @return smime-info list as {@link Collection} of {@link SmimeInfo} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/list">
+     * users.settings.sendAs.smimeInfo.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
+    public Collection<SmimeInfo> getSmimeInfoList(SendAs sendAs) throws IOException {
+        return getSmimeInfoList(sendAs.getSendAsEmail(), LIBRARY_OBJECT);
+    }
+
+    /**
+     * Method to get a list of {@code "S/MIME"} configs for the specified send-as alias
+     *
+     * @param sendAs: the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param format: return type formatter -> {@link ReturnFormat}
+     * @return smime-info list as {@code "format"} defines
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/list">
+     * users.settings.sendAs.smimeInfo.list</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo")
+    public <T> T getSmimeInfoList(SendAs sendAs, ReturnFormat format) throws IOException {
+        return getSmimeInfoList(sendAs.getSendAsEmail(), format);
+    }
+
+    /**
+     * Method to get a list of {@code "S/MIME"} configs for the specified send-as alias
+     *
      * @param sendAsEmail: the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @return smime-info list as {@link Collection} of {@link SmimeInfo} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/list">
      * users.settings.sendAs.smimeInfo.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4080,7 +5099,7 @@ public class GmailSettingsManager extends GmailManager {
      * @param sendAsEmail: the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @param format:      return type formatter -> {@link ReturnFormat}
      * @return smime-info list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/list">
      * users.settings.sendAs.smimeInfo.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -4106,6 +5125,22 @@ public class GmailSettingsManager extends GmailManager {
     /**
      * Method to set the default {@code "S/MIME"} config for the specified send-as alias
      *
+     * @param sendAs:           the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param defaultSmimeInfo: smime-info to set default
+     * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/setDefault">
+     * users.settings.sendAs.smimeInfo.setDefault</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}/setDefault")
+    public boolean setDefaultSmimeInfo(SendAs sendAs, SmimeInfo defaultSmimeInfo) {
+        return setDefaultSmimeInfo(sendAs.getSendAsEmail(), defaultSmimeInfo.getId());
+    }
+
+    /**
+     * Method to set the default {@code "S/MIME"} config for the specified send-as alias
+     *
      * @param sendAsEmail:      the email address that appears in the {@code "From:"} header for mail sent using this alias
      * @param defaultSmimeInfo: smime-info to set default
      * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
@@ -4113,9 +5148,26 @@ public class GmailSettingsManager extends GmailManager {
      * users.settings.sendAs.smimeInfo.setDefault</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}/setDefault")
     public boolean setDefaultSmimeInfo(String sendAsEmail, SmimeInfo defaultSmimeInfo) {
         return setDefaultSmimeInfo(sendAsEmail, defaultSmimeInfo.getId());
+    }
+
+    /**
+     * Method to set the default {@code "S/MIME"} config for the specified send-as alias
+     *
+     * @param sendAs:             the email address that appears in the {@code "From:"} header for mail sent using this alias
+     * @param idDefaultSmimeInfo: the immutable {@code "ID"} for the SmimeInfo
+     * @return result of the operation -> {@code "true"} is successful, {@code "false"} if not successful
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.settings.sendAs.smimeInfo/setDefault">
+     * users.settings.sendAs.smimeInfo.setDefault</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @WrappedRequest
+    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}/setDefault")
+    public boolean setDefaultSmimeInfo(SendAs sendAs, String idDefaultSmimeInfo) {
+        return setDefaultSmimeInfo(sendAs.getSendAsEmail(), idDefaultSmimeInfo);
     }
 
     /**

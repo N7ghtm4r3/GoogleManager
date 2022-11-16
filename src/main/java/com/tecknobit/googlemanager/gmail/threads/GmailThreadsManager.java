@@ -184,7 +184,7 @@ public class GmailThreadsManager extends GmailManager {
      *
      * @param threadIdToGet: the {@code "ID"} of the message containing the attachment
      * @return thread requested as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/get">
      * users.threads.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -200,7 +200,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param threadIdToGet: the {@code "ID"} of the message containing the attachment
      * @param format:        return type formatter -> {@link ReturnFormat}
      * @return thread requested as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/get">
      * users.threads.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -216,7 +216,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param threadIdToGet:  the {@code "ID"} of the message containing the attachment
      * @param responseFormat: the format to return the thread in -> constants available at {@link ResponseFormat}
      * @return thread requested as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/get">
      * users.threads.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -233,7 +233,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param responseFormat: the format to return the thread in -> constants available at {@link ResponseFormat}
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return thread requested as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/get">
      * users.threads.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -249,7 +249,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param threadIdToGet:   the {@code "ID"} of the message containing the attachment
      * @param metadataHeaders: when given and format is {@code "METADATA"}, only include headers specified in array of {@link String} format
      * @return thread requested as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/get">
      * users.threads.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -266,7 +266,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param metadataHeaders: when given and format is {@code "METADATA"}, only include headers specified in array of {@link String} format
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return thread requested as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/get">
      * users.threads.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -283,7 +283,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param threadIdToGet:   the {@code "ID"} of the message containing the attachment
      * @param metadataHeaders: when given and format is {@code "METADATA"}, only include headers specified in {@link Collection} of {@link String} format
      * @return thread requested as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/get">
      * users.threads.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -300,7 +300,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param metadataHeaders: when given and format is {@code "METADATA"}, only include headers specified in {@link Collection} of {@link String} format
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return thread requested as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/get">
      * users.threads.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -316,7 +316,7 @@ public class GmailThreadsManager extends GmailManager {
      *
      * @param includeSpamTrash: include threads from {@code "SPAM"} and {@code "TRASH"} in the results
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -332,7 +332,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param includeSpamTrash: include threads from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -348,11 +348,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param includeSpamTrash: include threads from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param maxResults:       maximum number of threads to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, int maxResults) throws IOException {
         return getThreadsList(includeSpamTrash, maxResults, LIBRARY_OBJECT);
@@ -365,11 +366,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param maxResults:       maximum number of threads to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, int maxResults, ReturnFormat format) throws IOException {
         return getThreadsList(threads.list(userId).setIncludeSpamTrash(includeSpamTrash)
@@ -382,11 +384,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param includeSpamTrash: include threads from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, String pageToken) throws IOException {
         return getThreadsList(includeSpamTrash, pageToken, LIBRARY_OBJECT);
@@ -399,11 +402,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, String pageToken, ReturnFormat format) throws IOException {
         return getThreadsList(threads.list(userId).setIncludeSpamTrash(includeSpamTrash)
@@ -417,11 +421,12 @@ public class GmailThreadsManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param includeSpamTrash: include threads from {@code "SPAM"} and {@code "TRASH"} in the results
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(String q, boolean includeSpamTrash) throws IOException {
         return getThreadsList(q, includeSpamTrash, LIBRARY_OBJECT);
@@ -435,11 +440,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param includeSpamTrash: include threads from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(String q, boolean includeSpamTrash, ReturnFormat format) throws IOException {
         return getThreadsList(threads.list(userId).setIncludeSpamTrash(includeSpamTrash)
@@ -452,11 +458,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param includeSpamTrash: include threads from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param labelIds:         only return threads with labels that match all the specified label IDs in array of {@link String} format
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, String[] labelIds) throws IOException {
         return getThreadsList(includeSpamTrash, labelIds, LIBRARY_OBJECT);
@@ -469,11 +476,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param labelIds:         only return threads with labels that match all the specified label IDs in array of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, String[] labelIds, ReturnFormat format) throws IOException {
         return getThreadsList(threads.list(userId).setIncludeSpamTrash(includeSpamTrash)
@@ -486,11 +494,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param includeSpamTrash: include threads from {@code "SPAM"} and {@code "TRASH"} in the results
      * @param labelIds:         only return threads with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, Collection<String> labelIds) throws IOException {
         return getThreadsList(includeSpamTrash, labelIds, LIBRARY_OBJECT);
@@ -503,11 +512,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param labelIds:         only return threads with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, Collection<String> labelIds,
                                 ReturnFormat format) throws IOException {
@@ -522,11 +532,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param maxResults:       maximum number of threads to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, int maxResults, String pageToken) throws IOException {
         return getThreadsList(includeSpamTrash, maxResults, pageToken, LIBRARY_OBJECT);
@@ -540,11 +551,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, int maxResults, String pageToken,
                                 ReturnFormat format) throws IOException {
@@ -562,11 +574,12 @@ public class GmailThreadsManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param maxResults:       maximum number of threads to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, String q, int maxResults) throws IOException {
         return getThreadsList(includeSpamTrash, q, maxResults, LIBRARY_OBJECT);
@@ -581,11 +594,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param maxResults:       maximum number of threads to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, String q, int maxResults,
                                 ReturnFormat format) throws IOException {
@@ -602,11 +616,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param maxResults:       maximum number of threads to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param labelIds:         only return threads with labels that match all the specified label IDs in array of {@link String} format
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, int maxResults, String[] labelIds) throws IOException {
         return getThreadsList(includeSpamTrash, maxResults, labelIds, LIBRARY_OBJECT);
@@ -620,11 +635,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param labelIds:         only return threads with labels that match all the specified label IDs in array of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, int maxResults, String[] labelIds,
                                 ReturnFormat format) throws IOException {
@@ -640,11 +656,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param maxResults:       maximum number of threads to return. This field defaults to 100. The maximum allowed value for this field is 500
      * @param labelIds:         only return threads with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, int maxResults,
                                        Collection<String> labelIds) throws IOException {
@@ -659,11 +676,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param labelIds:         only return threads with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, int maxResults, Collection<String> labelIds,
                                 ReturnFormat format) throws IOException {
@@ -680,11 +698,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @param labelIds:         only return threads with labels that match all the specified label IDs in array of {@link String} format
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, int maxResults, String pageToken,
                                        String[] labelIds) throws IOException {
@@ -700,11 +719,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param labelIds:         only return threads with labels that match all the specified label IDs in array of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, int maxResults, String pageToken, String[] labelIds,
                                 ReturnFormat format) throws IOException {
@@ -722,11 +742,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @param labelIds:         only return threads with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, int maxResults, String pageToken,
                                        Collection<String> labelIds) throws IOException {
@@ -742,11 +763,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param labelIds:         only return threads with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, int maxResults, String pageToken, Collection<String> labelIds,
                                 ReturnFormat format) throws IOException {
@@ -765,11 +787,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param q:                Only return draft threads matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, int maxResults, String[] labelIds,
                                        String q) throws IOException {
@@ -786,11 +809,12 @@ public class GmailThreadsManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, int maxResults, String[] labelIds,
                                 String q, ReturnFormat format) throws IOException {
@@ -809,11 +833,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param q:                Only return draft threads matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, int maxResults, Collection<String> labelIds,
                                        String q) throws IOException {
@@ -830,11 +855,12 @@ public class GmailThreadsManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, int maxResults, Collection<String> labelIds, String q,
                                 ReturnFormat format) throws IOException {
@@ -852,11 +878,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param q:                Only return draft threads matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, String pageToken, String q) throws IOException {
         return getThreadsList(includeSpamTrash, pageToken, q, LIBRARY_OBJECT);
@@ -871,11 +898,12 @@ public class GmailThreadsManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, String pageToken, String q,
                                 ReturnFormat format) throws IOException {
@@ -892,11 +920,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @param labelIds:         only return threads with labels that match all the specified label IDs in array of {@link String} format
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, String pageToken, String[] labelIds) throws IOException {
         return getThreadsList(includeSpamTrash, pageToken, labelIds, LIBRARY_OBJECT);
@@ -910,11 +939,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param labelIds:         only return threads with labels that match all the specified label IDs in array of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, String pageToken, String[] labelIds,
                                 ReturnFormat format) throws IOException {
@@ -930,11 +960,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param pageToken:        page token to retrieve a specific page of results in the list
      * @param labelIds:         only return threads with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, String pageToken,
                                        Collection<String> labelIds) throws IOException {
@@ -949,11 +980,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param labelIds:         only return threads with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, String pageToken, Collection<String> labelIds,
                                 ReturnFormat format) throws IOException {
@@ -971,11 +1003,12 @@ public class GmailThreadsManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param labelIds:         only return threads with labels that match all the specified label IDs in array of {@link String} format
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, String pageToken, String q,
                                        String[] labelIds) throws IOException {
@@ -992,11 +1025,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param labelIds:         only return threads with labels that match all the specified label IDs in array of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, String pageToken, String q, String[] labelIds,
                                 ReturnFormat format) throws IOException {
@@ -1015,11 +1049,12 @@ public class GmailThreadsManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param labelIds:         only return threads with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, String pageToken, String q,
                                        Collection<String> labelIds) throws IOException {
@@ -1036,11 +1071,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param labelIds:         only return threads with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, String pageToken, String q, Collection<String> labelIds,
                                 ReturnFormat format) throws IOException {
@@ -1058,11 +1094,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param q:                Only return draft threads matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, String[] labelIds, String q) throws IOException {
         return getThreadsList(includeSpamTrash, labelIds, q, LIBRARY_OBJECT);
@@ -1077,11 +1114,12 @@ public class GmailThreadsManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, String[] labelIds, String q,
                                 ReturnFormat format) throws IOException {
@@ -1098,11 +1136,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param q:                Only return draft threads matching the specified query. Supports the same query format as the Gmail
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, Collection<String> labelIds, String q) throws IOException {
         return getThreadsList(includeSpamTrash, labelIds, q, LIBRARY_OBJECT);
@@ -1117,11 +1156,12 @@ public class GmailThreadsManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, Collection<String> labelIds, String q,
                                 ReturnFormat format) throws IOException {
@@ -1140,11 +1180,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param labelIds:         only return threads with labels that match all the specified label IDs in array of {@link String} format
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, int maxResults, String pageToken, String q,
                                        String[] labelIds) throws IOException {
@@ -1162,11 +1203,12 @@ public class GmailThreadsManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, int maxResults, String pageToken, String q,
                                 String[] labelIds, ReturnFormat format) throws IOException {
@@ -1188,11 +1230,12 @@ public class GmailThreadsManager extends GmailManager {
      * @param labelIds:         only return threads with labels that match all the specified label IDs in {@link Collection} of {@link String} format
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @return threads list requested as {@link GmailThreads} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public GmailThreads getThreadsList(boolean includeSpamTrash, int maxResults, String pageToken, String q,
                                        Collection<String> labelIds) throws IOException {
@@ -1210,11 +1253,12 @@ public class GmailThreadsManager extends GmailManager {
      *                          search box. For example, "from:someuser@example.com rfc822msgid:<somemsgid@example.com> is:unread"
      * @param format:           return type formatter -> {@link ReturnFormat}
      * @return threads list as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list">
      * users.threads.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @WrappedRequest
     @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/threads")
     public <T> T getThreadsList(boolean includeSpamTrash, int maxResults, String pageToken, String q,
                                 Collection<String> labelIds, ReturnFormat format) throws IOException {
@@ -1251,7 +1295,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param thread:      the thread to modify
      * @param addLabelIds: list of IDs of labels to add to this thread. You can add up to 100 labels with each update in array of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1269,7 +1313,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param addLabelIds: list of IDs of labels to add to this thread. You can add up to 100 labels with each update in array of {@link String} format
      * @param format:      return type formatter -> {@link ReturnFormat}
      * @return thread modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1287,7 +1331,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param threadId:    the {@code "ID"} of the thread to modify
      * @param addLabelIds: list of IDs of labels to add to this thread. You can add up to 100 labels with each update in array of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1304,7 +1348,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param addLabelIds: list of IDs of labels to add to this thread. You can add up to 100 labels with each update in array of {@link String} format
      * @param format:      return type formatter -> {@link ReturnFormat}
      * @return thread modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1321,7 +1365,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param thread:      the thread to modify
      * @param addLabelIds: list of IDs of labels to add to this thread. You can add up to 100 labels with each update in {@link Collection} of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1339,7 +1383,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param addLabelIds: list of IDs of labels to add to this thread. You can add up to 100 labels with each update in {@link Collection} of {@link String} format
      * @param format:      return type formatter -> {@link ReturnFormat}
      * @return thread modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1357,7 +1401,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param threadId:    the {@code "ID"} of the thread to modify
      * @param addLabelIds: list of IDs of labels to add to this thread. You can add up to 100 labels with each update in {@link Collection} of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1374,7 +1418,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param addLabelIds: list of IDs of labels to add to this thread. You can add up to 100 labels with each update in {@link Collection} of {@link String} format
      * @param format:      return type formatter -> {@link ReturnFormat}
      * @return thread modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1391,7 +1435,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param thread:         the thread to modify
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in array of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1409,7 +1453,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return thread modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1427,7 +1471,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param threadId:       the {@code "ID"} of the thread to modify
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in array of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1444,7 +1488,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return thread modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1461,7 +1505,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param thread:         the thread to modify
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in {@link Collection} of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1479,7 +1523,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return thread modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1497,7 +1541,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param threadId:       the {@code "ID"} of the thread to modify
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in {@link Collection} of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1514,7 +1558,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return thread modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1532,7 +1576,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param addLabelIds:    list of IDs of labels to add to this thread. You can add up to 100 labels with each update in array of {@link String} format
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in array of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1551,7 +1595,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return thread modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1572,7 +1616,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param addLabelIds:    list of IDs of labels to add to this thread. You can add up to 100 labels with each update in array of {@link String} format
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in array of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1590,7 +1634,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in array of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return thread modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1609,7 +1653,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param addLabelIds:    list of IDs of labels to add to this thread. You can add up to 100 labels with each update in {@link Collection} of {@link String} format
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in array of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1629,7 +1673,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return thread modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1650,7 +1694,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param addLabelIds:    list of IDs of labels to add to this thread. You can add up to 100 labels with each update in {@link Collection} of {@link String} format
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in array of {@link String} format
      * @return thread modified as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1668,7 +1712,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param removeLabelIds: list IDs of labels to remove from this thread. You can remove up to 100 labels with each update in {@link Collection} of {@link String} format
      * @param format:         return type formatter -> {@link ReturnFormat}
      * @return thread modified as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify">
      * users.threads.modify</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1686,7 +1730,7 @@ public class GmailThreadsManager extends GmailManager {
      *
      * @param threadToTrash: thread to Trash
      * @return thread trashed as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/trash">
      * users.threads.trash</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1703,7 +1747,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param threadToTrash: thread to Trash
      * @param format:        return type formatter -> {@link ReturnFormat}
      * @return thread trashed as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/trash">
      * users.threads.trash</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1719,7 +1763,7 @@ public class GmailThreadsManager extends GmailManager {
      *
      * @param threadIdToTrash: the {@code "ID"} of the thread to Trash
      * @return thread trashed as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/trash">
      * users.threads.trash</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1735,7 +1779,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param threadIdToTrash: the {@code "ID"} of the thread to Trash
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return thread trashed as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/trash">
      * users.threads.trash</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1750,7 +1794,7 @@ public class GmailThreadsManager extends GmailManager {
      *
      * @param threadToUntrash: thread to remove from Trash
      * @return thread untrashed as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/untrash">
      * users.threads.untrash</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1767,7 +1811,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param threadToUntrash: thread to remove from Trash
      * @param format:          return type formatter -> {@link ReturnFormat}
      * @return thread untrashed as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/untrash">
      * users.threads.untrash</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1783,7 +1827,7 @@ public class GmailThreadsManager extends GmailManager {
      *
      * @param threadIdToUntrash: the {@code "ID"} of the thread to remove from Trash
      * @return thread untrashed as {@link GmailThread} custom object
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/untrash">
      * users.threads.untrash</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
@@ -1799,7 +1843,7 @@ public class GmailThreadsManager extends GmailManager {
      * @param threadIdToUntrash: the {@code "ID"} of the thread to remove from Trash
      * @param format:            return type formatter -> {@link ReturnFormat}
      * @return thread untrashed as {@code "format"} defines
-     * @throws IOException when request has been go wrong
+     * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.threads/untrash">
      * users.threads.untrash</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
