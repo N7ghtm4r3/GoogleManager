@@ -4,6 +4,7 @@ import com.google.api.services.gmail.model.WatchRequest;
 import com.google.api.services.gmail.model.WatchResponse;
 import com.tecknobit.apimanager.annotations.RequestPath;
 import com.tecknobit.apimanager.annotations.Returner;
+import com.tecknobit.apimanager.annotations.Wrapper;
 import com.tecknobit.googlemanager.gmail.GmailManager;
 import com.tecknobit.googlemanager.gmail.users.records.Profile;
 import com.tecknobit.googlemanager.gmail.users.records.PushNotificationWatch;
@@ -12,6 +13,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Collection;
 
+import static com.tecknobit.apimanager.apis.APIRequest.RequestMethod.GET;
+import static com.tecknobit.apimanager.apis.APIRequest.RequestMethod.POST;
 import static com.tecknobit.googlemanager.GoogleManager.ReturnFormat.LIBRARY_OBJECT;
 import static java.util.Arrays.asList;
 
@@ -141,7 +144,8 @@ public class GmailUsersManager extends GmailManager {
      * users.getProfile</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/profile")
+    @Wrapper
+    @RequestPath(method = GET, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/profile")
     public Profile getProfile() throws IOException {
         return getProfile(LIBRARY_OBJECT);
     }
@@ -157,7 +161,7 @@ public class GmailUsersManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     @Returner
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/profile")
+    @RequestPath(method = GET, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/profile")
     public <T> T getProfile(ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.Profile profile = gmail.getProfile(userId).execute();
         switch (format) {
@@ -183,7 +187,7 @@ public class GmailUsersManager extends GmailManager {
      * users.stop</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/stop")
+    @RequestPath(method = POST, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/stop")
     public boolean stop() {
         try {
             gmail.stop(userId);
@@ -206,7 +210,8 @@ public class GmailUsersManager extends GmailManager {
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users/watch">
      * users.watch</a>
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/watch")
+    @Wrapper
+    @RequestPath(method = POST, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/watch")
     public PushNotificationWatch watch(String[] labelIds, String labelFilterAction, String topicName) throws IOException {
         return watch(labelIds, labelFilterAction, topicName, LIBRARY_OBJECT);
     }
@@ -224,7 +229,7 @@ public class GmailUsersManager extends GmailManager {
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users/watch">
      * users.watch</a>
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/watch")
+    @RequestPath(method = POST, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/watch")
     public <T> T watch(String[] labelIds, String labelFilterAction, String topicName,
                        ReturnFormat format) throws IOException {
         return watch(asList(labelIds), labelFilterAction, topicName, format);
@@ -242,7 +247,8 @@ public class GmailUsersManager extends GmailManager {
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users/watch">
      * users.watch</a>
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/watch")
+    @Wrapper
+    @RequestPath(method = POST, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/watch")
     public PushNotificationWatch watch(Collection<String> labelIds, String labelFilterAction,
                                        String topicName) throws IOException {
         return watch(labelIds, labelFilterAction, topicName, LIBRARY_OBJECT);
@@ -262,7 +268,7 @@ public class GmailUsersManager extends GmailManager {
      * users.watch</a>
      **/
     @Returner
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/watch")
+    @RequestPath(method = POST, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/watch")
     public <T> T watch(Collection<String> labelIds, String labelFilterAction, String topicName,
                        ReturnFormat format) throws IOException {
         WatchRequest watchRequest = new WatchRequest();

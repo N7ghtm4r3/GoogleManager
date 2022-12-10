@@ -6,6 +6,7 @@ import com.google.api.services.gmail.model.ListLabelsResponse;
 import com.tecknobit.apimanager.annotations.RequestPath;
 import com.tecknobit.apimanager.annotations.Returner;
 import com.tecknobit.apimanager.annotations.WrappedRequest;
+import com.tecknobit.apimanager.annotations.Wrapper;
 import com.tecknobit.googlemanager.gmail.GmailManager;
 import com.tecknobit.googlemanager.gmail.labels.records.Label;
 import com.tecknobit.googlemanager.gmail.labels.records.Label.LabelListVisibility;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static com.tecknobit.apimanager.apis.APIRequest.RequestMethod.*;
 import static com.tecknobit.googlemanager.GoogleManager.ReturnFormat.LIBRARY_OBJECT;
 import static com.tecknobit.googlemanager.gmail.labels.records.Label.LabelColor.AllowedColor;
 
@@ -144,24 +146,6 @@ public class GmailLabelsManager extends GmailManager {
     /**
      * Method to create a new label
      *
-     * @param name:                  the display name of the label
-     * @param messageListVisibility: the visibility of messages with this label in the message list in the{@code " Gmail web interface"}
-     * @param labelListVisibility:   the visibility of the label in the label list in the{@code " Gmail web interface"}
-     * @return label created as {@link Label} custom object
-     * @throws IOException when the request has been go wrong
-     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/create">
-     * users.labels.create</a>
-     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
-     **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
-    public Label createLabel(String name, MessageListVisibility messageListVisibility,
-                             LabelListVisibility labelListVisibility) throws IOException {
-        return createLabel(name, messageListVisibility, labelListVisibility, LIBRARY_OBJECT);
-    }
-
-    /**
-     * Method to create a new label
-     *
      * @param label: label filled with detail to create a new one
      * @return label created as {@link Label} custom object
      * @throws IOException when the request has been go wrong
@@ -169,7 +153,9 @@ public class GmailLabelsManager extends GmailManager {
      * users.labels.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
+    @Wrapper
+    @WrappedRequest
+    @RequestPath(method = POST, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
     public Label createLabel(Label label) throws IOException {
         return createLabel(label.getName(), label.getMessageListVisibility(), label.getLabelListVisibility(),
                 LIBRARY_OBJECT);
@@ -186,9 +172,29 @@ public class GmailLabelsManager extends GmailManager {
      * users.labels.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
+    @WrappedRequest
+    @RequestPath(method = POST, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
     public <T> T createLabel(Label label, ReturnFormat format) throws IOException {
         return createLabel(label.getName(), label.getMessageListVisibility(), label.getLabelListVisibility(), format);
+    }
+
+    /**
+     * Method to create a new label
+     *
+     * @param name:                  the display name of the label
+     * @param messageListVisibility: the visibility of messages with this label in the message list in the{@code " Gmail web interface"}
+     * @param labelListVisibility:   the visibility of the label in the label list in the{@code " Gmail web interface"}
+     * @return label created as {@link Label} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/create">
+     * users.labels.create</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @Wrapper
+    @RequestPath(method = POST, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
+    public Label createLabel(String name, MessageListVisibility messageListVisibility,
+                             LabelListVisibility labelListVisibility) throws IOException {
+        return createLabel(name, messageListVisibility, labelListVisibility, LIBRARY_OBJECT);
     }
 
     /**
@@ -204,33 +210,11 @@ public class GmailLabelsManager extends GmailManager {
      * users.labels.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
+    @RequestPath(method = POST, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
     public <T> T createLabel(String name, MessageListVisibility messageListVisibility,
                              LabelListVisibility labelListVisibility, ReturnFormat format) throws IOException {
         return returnLabel(labels.create(userId, assembleLabel(name, messageListVisibility, labelListVisibility)).execute(),
                 format);
-    }
-
-    /**
-     * Method to create a new label with custom colors
-     *
-     * @param name:                  the display name of the label
-     * @param messageListVisibility: the visibility of messages with this label in the message list in the{@code " Gmail web interface"}
-     * @param labelListVisibility:   the visibility of the label in the label list in the{@code " Gmail web interface"}
-     * @param textColor:             the text color of the label -> available at {@link AllowedColor}
-     * @param backgroundColor:       the background color of the label -> available at {@link AllowedColor}
-     * @return label created as {@link Label} custom object
-     * @throws IOException when the request has been go wrong
-     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/create">
-     * users.labels.create</a>
-     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
-     **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
-    public Label createColouredLabel(String name, MessageListVisibility messageListVisibility,
-                                     LabelListVisibility labelListVisibility, AllowedColor textColor,
-                                     AllowedColor backgroundColor) throws IOException {
-        return createColouredLabel(name, messageListVisibility, labelListVisibility, textColor, backgroundColor,
-                LIBRARY_OBJECT);
     }
 
     /**
@@ -243,8 +227,9 @@ public class GmailLabelsManager extends GmailManager {
      * users.labels.create</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @Wrapper
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
+    @RequestPath(method = POST, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
     public Label createColouredLabel(Label label) throws IOException {
         Label.LabelColor color = label.getColor();
         return createColouredLabel(label.getName(), label.getMessageListVisibility(), label.getLabelListVisibility(),
@@ -263,11 +248,34 @@ public class GmailLabelsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
+    @RequestPath(method = POST, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
     public <T> T createColouredLabel(Label label, ReturnFormat format) throws IOException {
         Label.LabelColor color = label.getColor();
         return createColouredLabel(label.getName(), label.getMessageListVisibility(), label.getLabelListVisibility(),
                 color.getTextColor(), color.getBackgroundColor(), format);
+    }
+
+    /**
+     * Method to create a new label with custom colors
+     *
+     * @param name:                  the display name of the label
+     * @param messageListVisibility: the visibility of messages with this label in the message list in the{@code " Gmail web interface"}
+     * @param labelListVisibility:   the visibility of the label in the label list in the{@code " Gmail web interface"}
+     * @param textColor:             the text color of the label -> available at {@link AllowedColor}
+     * @param backgroundColor:       the background color of the label -> available at {@link AllowedColor}
+     * @return label created as {@link Label} custom object
+     * @throws IOException when the request has been go wrong
+     * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/create">
+     * users.labels.create</a>
+     * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
+     **/
+    @Wrapper
+    @RequestPath(method = POST, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
+    public Label createColouredLabel(String name, MessageListVisibility messageListVisibility,
+                                     LabelListVisibility labelListVisibility, AllowedColor textColor,
+                                     AllowedColor backgroundColor) throws IOException {
+        return createColouredLabel(name, messageListVisibility, labelListVisibility, textColor, backgroundColor,
+                LIBRARY_OBJECT);
     }
 
     /**
@@ -286,7 +294,7 @@ public class GmailLabelsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     @Returner
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
+    @RequestPath(method = POST, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
     public <T> T createColouredLabel(String name, MessageListVisibility messageListVisibility,
                                      LabelListVisibility labelListVisibility, AllowedColor textColor,
                                      AllowedColor backgroundColor, ReturnFormat format) throws IOException {
@@ -323,8 +331,9 @@ public class GmailLabelsManager extends GmailManager {
      * users.labels.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
+    @Wrapper
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = DELETE, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public boolean deleteLabel(Label labelToDelete) {
         return deleteLabel(labelToDelete.getId());
     }
@@ -338,7 +347,7 @@ public class GmailLabelsManager extends GmailManager {
      * users.labels.delete</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = DELETE, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public boolean deleteLabel(String labelId) {
         try {
             labels.delete(userId, labelId).execute();
@@ -359,7 +368,8 @@ public class GmailLabelsManager extends GmailManager {
      * users.labels.get</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @Wrapper
+    @RequestPath(method = GET, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public Label getLabel(String labelId) throws IOException {
         return getLabel(labelId, LIBRARY_OBJECT);
     }
@@ -376,7 +386,7 @@ public class GmailLabelsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     @Returner
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = GET, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public <T> T getLabel(String labelId, ReturnFormat format) throws IOException {
         return returnLabel(labels.get(userId, labelId).execute(), format);
     }
@@ -391,7 +401,8 @@ public class GmailLabelsManager extends GmailManager {
      * users.labels.list</a>
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
+    @Wrapper
+    @RequestPath(method = GET, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
     public Collection<Label> getLabelsList() throws IOException {
         return getLabelsList(LIBRARY_OBJECT);
     }
@@ -407,7 +418,7 @@ public class GmailLabelsManager extends GmailManager {
      * @apiNote {@code "userId"} indicated by official documentation is {@link #userId} instantiated by this library
      **/
     @Returner
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
+    @RequestPath(method = GET, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels")
     public <T> T getLabelsList(ReturnFormat format) throws IOException {
         ListLabelsResponse list = labels.list(userId).execute();
         switch (format) {
@@ -436,8 +447,9 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
+    @Wrapper
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public Label changeLabelName(Label label, String name) throws IOException {
         return changeLabelName(label.getId(), name, LIBRARY_OBJECT);
     }
@@ -457,7 +469,7 @@ public class GmailLabelsManager extends GmailManager {
      * update method</a>
      **/
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public <T> T changeLabelName(Label label, String name, ReturnFormat format) throws IOException {
         return changeLabelName(label.getId(), name, format);
     }
@@ -475,7 +487,8 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @Wrapper
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public Label changeLabelName(String labelId, String name) throws IOException {
         return changeLabelName(labelId, name, LIBRARY_OBJECT);
     }
@@ -494,7 +507,7 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public <T> T changeLabelName(String labelId, String name, ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.Label label = new com.google.api.services.gmail.model.Label();
         label.setName(name);
@@ -514,8 +527,9 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
+    @Wrapper
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public Label changeLabelMessageListVisibility(Label label, MessageListVisibility messageListVisibility) throws IOException {
         return changeLabelMessageListVisibility(label.getId(), messageListVisibility, LIBRARY_OBJECT);
     }
@@ -535,7 +549,7 @@ public class GmailLabelsManager extends GmailManager {
      * update method</a>
      **/
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public <T> T changeLabelMessageListVisibility(Label label, MessageListVisibility messageListVisibility,
                                                   ReturnFormat format) throws IOException {
         return changeLabelMessageListVisibility(label.getId(), messageListVisibility, format);
@@ -554,7 +568,8 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @Wrapper
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public Label changeLabelMessageListVisibility(String labelId, MessageListVisibility messageListVisibility) throws IOException {
         return changeLabelMessageListVisibility(labelId, messageListVisibility, LIBRARY_OBJECT);
     }
@@ -573,7 +588,7 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public <T> T changeLabelMessageListVisibility(String labelId, MessageListVisibility messageListVisibility,
                                                   ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.Label label = new com.google.api.services.gmail.model.Label();
@@ -594,8 +609,9 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
+    @Wrapper
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public Label changeLabelLabelListVisibility(Label label, LabelListVisibility labelListVisibility) throws IOException {
         return changeLabelLabelListVisibility(label.getId(), labelListVisibility, LIBRARY_OBJECT);
     }
@@ -615,7 +631,7 @@ public class GmailLabelsManager extends GmailManager {
      * update method</a>
      **/
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public <T> T changeLabelLabelListVisibility(Label label, LabelListVisibility labelListVisibility,
                                                 ReturnFormat format) throws IOException {
         return changeLabelLabelListVisibility(label.getId(), labelListVisibility, format);
@@ -634,7 +650,8 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @Wrapper
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public Label changeLabelLabelListVisibility(String labelId, LabelListVisibility labelListVisibility) throws IOException {
         return changeLabelLabelListVisibility(labelId, labelListVisibility, LIBRARY_OBJECT);
     }
@@ -653,7 +670,7 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public <T> T changeLabelLabelListVisibility(String labelId, LabelListVisibility labelListVisibility,
                                                 ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.Label label = new com.google.api.services.gmail.model.Label();
@@ -674,8 +691,9 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
+    @Wrapper
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public Label changeLabelTextColor(Label label, AllowedColor textColor) throws IOException {
         return changeLabelTextColor(label.getId(), textColor, LIBRARY_OBJECT);
     }
@@ -695,7 +713,7 @@ public class GmailLabelsManager extends GmailManager {
      * update method</a>
      **/
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public <T> T changeLabelTextColor(Label label, AllowedColor textColor, ReturnFormat format) throws IOException {
         return changeLabelTextColor(label.getId(), textColor, format);
     }
@@ -713,7 +731,8 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @Wrapper
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public Label changeLabelTextColor(String labelId, AllowedColor textColor) throws IOException {
         return changeLabelTextColor(labelId, textColor, LIBRARY_OBJECT);
     }
@@ -732,7 +751,7 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public <T> T changeLabelTextColor(String labelId, AllowedColor textColor, ReturnFormat format) throws IOException {
         String actualBackgroundColor = getLabel(labelId).getColor().getBackgroundColorHex();
         com.google.api.services.gmail.model.Label label = new com.google.api.services.gmail.model.Label();
@@ -753,8 +772,9 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
+    @Wrapper
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public Label changeLabelBackgroundColor(Label label, AllowedColor backgroundColor) throws IOException {
         return changeLabelBackgroundColor(label.getId(), backgroundColor, LIBRARY_OBJECT);
     }
@@ -774,7 +794,7 @@ public class GmailLabelsManager extends GmailManager {
      * update method</a>
      **/
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public <T> T changeLabelBackgroundColor(Label label, AllowedColor backgroundColor, ReturnFormat format) throws IOException {
         return changeLabelBackgroundColor(label.getId(), backgroundColor, format);
     }
@@ -792,7 +812,8 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @Wrapper
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public Label changeLabelBackgroundColor(String labelId, AllowedColor backgroundColor) throws IOException {
         return changeLabelBackgroundColor(labelId, backgroundColor, LIBRARY_OBJECT);
     }
@@ -811,7 +832,7 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public <T> T changeLabelBackgroundColor(String labelId, AllowedColor backgroundColor, ReturnFormat format) throws IOException {
         String actualTextColor = getLabel(labelId).getColor().getTextColorHex();
         com.google.api.services.gmail.model.Label label = new com.google.api.services.gmail.model.Label();
@@ -833,8 +854,9 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
+    @Wrapper
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public Label changeLabelColor(Label label, AllowedColor textColor, AllowedColor backgroundColor) throws IOException {
         return changeLabelColor(label.getId(), textColor, backgroundColor, LIBRARY_OBJECT);
     }
@@ -855,7 +877,7 @@ public class GmailLabelsManager extends GmailManager {
      * update method</a>
      **/
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public <T> T changeLabelColor(Label label, AllowedColor textColor, AllowedColor backgroundColor,
                                   ReturnFormat format) throws IOException {
         return changeLabelColor(label.getId(), textColor, backgroundColor, format);
@@ -875,7 +897,8 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @Wrapper
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public Label changeLabelColor(String labelId, AllowedColor textColor, AllowedColor backgroundColor) throws IOException {
         return changeLabelColor(labelId, textColor, backgroundColor, LIBRARY_OBJECT);
     }
@@ -895,7 +918,7 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public <T> T changeLabelColor(String labelId, AllowedColor textColor, AllowedColor backgroundColor,
                                   ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.Label label = new com.google.api.services.gmail.model.Label();
@@ -916,8 +939,9 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
+    @Wrapper
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public Label changeLabelColor(Label label, Label.LabelColor labelColor) throws IOException {
         return changeLabelColor(label.getId(), labelColor, LIBRARY_OBJECT);
     }
@@ -937,7 +961,7 @@ public class GmailLabelsManager extends GmailManager {
      * update method</a>
      **/
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public <T> T changeLabelColor(Label label, Label.LabelColor labelColor, ReturnFormat format) throws IOException {
         return changeLabelColor(label.getId(), labelColor, format);
     }
@@ -955,7 +979,8 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @Wrapper
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public Label changeLabelColor(String labelId, Label.LabelColor labelColor) throws IOException {
         return changeLabelColor(labelId, labelColor, LIBRARY_OBJECT);
     }
@@ -974,7 +999,7 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public <T> T changeLabelColor(String labelId, Label.LabelColor labelColor, ReturnFormat format) throws IOException {
         com.google.api.services.gmail.model.Label label = new com.google.api.services.gmail.model.Label();
         label.setColor(new LabelColor().setTextColor(labelColor.getTextColorHex())
@@ -989,14 +1014,13 @@ public class GmailLabelsManager extends GmailManager {
      * @param changes: new details for the label -> keys accepted ({@link String} for name, {@link MessageListVisibility}
      *                 for message list visibility, {@link LabelListVisibility} for label list visibility and {@link Label.LabelColor}
      *                 for text and background colors) <br>
-     *                 <pre>
-     *                                                 {@code
-     *                                                 //To keep one of the colors unchanged you need to instantiate Label.LabelColor like this:
-     *                                                 Label.LabelColor newTextColor = new Label.LabelColor(AllowedColor.#new_text_color, null); //Background color will be not modified
-     *                                                 //OR
-     *                                                 Label.LabelColor newBackgroundColor = new Label.LabelColor(null, AllowedColor.#new_background_color); //Text color will be not modified
-     *                                                 }
-     *                                                 </pre>
+     * <pre>
+     * {@code
+     * //To keep one of the colors unchanged you need to instantiate Label.LabelColor like this:
+     * Label.LabelColor newTextColor = new Label.LabelColor(AllowedColor.#new_text_color, null); //Background color will be not modified
+     * //OR
+     * Label.LabelColor newBackgroundColor = new Label.LabelColor(null, AllowedColor.#new_background_color); //Text color will be not modified
+     * </pre>
      * @return label modified as {@link Label} custom object
      * @throws IOException when the request has been go wrong
      * @implNote see the official documentation at: <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/patch">
@@ -1005,9 +1029,10 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
+    @Wrapper
     @SafeVarargs
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public final <T> Label changeLabel(Label label, T... changes) throws IOException {
         return (Label) changeLabel(label.getId(), LIBRARY_OBJECT, changes);
     }
@@ -1019,14 +1044,13 @@ public class GmailLabelsManager extends GmailManager {
      * @param changes: new details for the label -> keys accepted ({@link String} for name, {@link MessageListVisibility}
      *                 for message list visibility, {@link LabelListVisibility} for label list visibility and {@link Label.LabelColor}
      *                 for text and background colors) <br>
-     *                 <pre>
-     *                                                 {@code
-     *                                                 //To keep one of the colors unchanged you need to instantiate Label.LabelColor like this:
-     *                                                 Label.LabelColor newTextColor = new Label.LabelColor(AllowedColor.#new_text_color, null); //Background color will be not modified
-     *                                                 //OR
-     *                                                 Label.LabelColor newBackgroundColor = new Label.LabelColor(null, AllowedColor.#new_background_color); //Text color will be not modified
-     *                                                 }
-     *                                                 </pre>
+     * <pre>
+     * {@code
+     * //To keep one of the colors unchanged you need to instantiate Label.LabelColor like this:
+     * Label.LabelColor newTextColor = new Label.LabelColor(AllowedColor.#new_text_color, null); //Background color will be not modified
+     * //OR
+     * Label.LabelColor newBackgroundColor = new Label.LabelColor(null, AllowedColor.#new_background_color); //Text color will be not modified
+     * </pre>
      * @param format:  return type formatter -> {@link ReturnFormat}
      * @return label modified as {@code "format"} defines
      * @throws IOException when the request has been go wrong
@@ -1038,7 +1062,7 @@ public class GmailLabelsManager extends GmailManager {
      **/
     @SafeVarargs
     @WrappedRequest
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public final <T> T changeLabel(Label label, ReturnFormat format, T... changes) throws IOException {
         return changeLabel(label.getId(), format, changes);
     }
@@ -1050,13 +1074,13 @@ public class GmailLabelsManager extends GmailManager {
      * @param changes: new details for the label -> keys accepted ({@link String} for name, {@link MessageListVisibility}
      *                 for message list visibility, {@link LabelListVisibility} for label list visibility and {@link Label.LabelColor}
      *                 for text and background colors) <br>
-     *                 <pre>
-     *                                 {@code
-     *                                 //To keep one of the colors unchanged you need to instantiate Label.LabelColor like this:
-     *                                 Label.LabelColor newTextColor = new Label.LabelColor(AllowedColor.#new_text_color, null); //Background color will be not modified
-     *                                 //OR
-     *                                 Label.LabelColor newBackgroundColor = new Label.LabelColor(null, AllowedColor.#new_background_color); //Text color will be not modified
-     *                                 }
+     * <pre>
+     * {@code
+     * //To keep one of the colors unchanged you need to instantiate Label.LabelColor like this:
+     * Label.LabelColor newTextColor = new Label.LabelColor(AllowedColor.#new_text_color, null); //Background color will be not modified
+     * //OR
+     * Label.LabelColor newBackgroundColor = new Label.LabelColor(null, AllowedColor.#new_background_color); //Text color will be not modified
+     * </pre>
      *                                 </pre>
      * @return label modified as {@link Label} custom object
      * @throws IOException when the request has been go wrong
@@ -1066,8 +1090,9 @@ public class GmailLabelsManager extends GmailManager {
      * @implSpec this method substitutes the equivalent <a href="https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update">
      * update method</a>
      **/
+    @Wrapper
     @SafeVarargs
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public final <T> Label changeLabel(String labelId, T... changes) throws IOException {
         return (Label) changeLabel(labelId, LIBRARY_OBJECT, changes);
     }
@@ -1079,14 +1104,13 @@ public class GmailLabelsManager extends GmailManager {
      * @param changes: new details for the label -> keys accepted ({@link String} for name, {@link MessageListVisibility}
      *                 for message list visibility, {@link LabelListVisibility} for label list visibility and {@link Label.LabelColor}
      *                 for text and background colors) <br>
-     *                 <pre>
-     *                 {@code
-     *                 //To keep one of the colors unchanged you need to instantiate Label.LabelColor like this:
-     *                 Label.LabelColor newTextColor = new Label.LabelColor(AllowedColor.#new_text_color, null); //Background color will be not modified
-     *                 //OR
-     *                 Label.LabelColor newBackgroundColor = new Label.LabelColor(null, AllowedColor.#new_background_color); //Text color will be not modified
-     *                 }
-     *                 </pre>
+     * <pre>
+     * {@code
+     * //To keep one of the colors unchanged you need to instantiate Label.LabelColor like this:
+     * Label.LabelColor newTextColor = new Label.LabelColor(AllowedColor.#new_text_color, null); //Background color will be not modified
+     * //OR
+     * Label.LabelColor newBackgroundColor = new Label.LabelColor(null, AllowedColor.#new_background_color); //Text color will be not modified
+     * </pre>
      * @param format:  return type formatter -> {@link ReturnFormat}
      * @return label modified as {@code "format"} defines
      * @throws IOException when the request has been go wrong
@@ -1097,7 +1121,7 @@ public class GmailLabelsManager extends GmailManager {
      * update method</a>
      **/
     @SafeVarargs
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
+    @RequestPath(method = PUT, path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     public final <T> T changeLabel(String labelId, ReturnFormat format, T... changes) throws IOException {
         com.google.api.services.gmail.model.Label label = new com.google.api.services.gmail.model.Label();
         for (T change : changes) {
@@ -1130,7 +1154,6 @@ public class GmailLabelsManager extends GmailManager {
      * @return label modified as {@code "format"} defines
      **/
     @Returner
-    @RequestPath(path = "https://gmail.googleapis.com/gmail/v1/users/{userId}/labels/{id}")
     private <T> T changeLabel(String labelId, com.google.api.services.gmail.model.Label label,
                               ReturnFormat format) throws IOException {
         return returnLabel(labels.patch(userId, labelId, label).execute(), format);
